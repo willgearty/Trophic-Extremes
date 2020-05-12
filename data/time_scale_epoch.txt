@@ -1,0 +1,41 @@
+interval_name	age_bottom	age_mid	age_top	period
+Holocene	0.0117	0.006	0	Quaternary
+Pleistocene	2.588	1.300	0.0117	Quaternary
+Pliocene	5.333	3.961	2.588	Neogene
+Miocene	23.03	14.182	5.333	Neogene
+Oligocene	33.9	28.465	23.03	Paleogene
+Eocene	56	44.950	33.9	Paleogene
+Paleocene	66	61.000	56	Paleogene
+Late Cretaceous	100.5	83.250	66	Cretaceous
+Early Cretaceous	145	122.750	100.5	Cretaceous
+Late Jurassic	163.5	154.250	145	Jurassic
+Middle Jurassic	174.1	168.800	163.5	Jurassic
+Early Jurassic	201.3	187.700	174.1	Jurassic
+Late Triassic	235	218.150	201.3	Triassic
+Middle Triassic	247.2	241.100	235	Triassic
+Early Triassic	252.2	249.700	247.2	Triassic
+Lopingian	259.9	256.050	252.2	Permian
+Guadalupian	272.3	266.100	259.9	Permian
+Cisuralian	298.9	285.600	272.3	Permian
+Pennsylvanian	323.2	311.050	298.9	Carboniferous
+Mississippian	358.8	341.000	323.2	Carboniferous
+Late Devonian	382.7	370.750	358.8	Devonian
+Middle Devonian	393.3	388.000	382.7	Devonian
+Early Devonian	419.2	406.250	393.3	Devonian
+Pridoli	423	421.100	419.2	Silurian
+Late Silurian	427.4	423.300	419.2	Silurian
+Ludlow	427.4	425.200	423	Silurian
+Middle Silurian	433.4	430.400	427.4	Silurian
+Wenlock	433.4	430.400	427.4	Silurian
+Early Silurian	443.3	438.350	433.4	Silurian
+Llandovery	443.4	438.400	433.4	Silurian
+Late Ordovician	458.4	450.850	443.3	Ordovician
+Middle Ordovician	470	464.200	458.4	Ordovician
+Early Ordovician	485.4	477.700	470	Ordovician
+Furongian	497	491.200	485.4	Cambrian
+Late Cambrian	497	491.250	485.5	Cambrian
+Middle Cambrian	509	503.000	497	Cambrian
+Series 3	509	503.000	497	Cambrian
+Series 2	521	515.000	509	Cambrian
+Early Cambrian	541	525.000	509	Cambrian
+Terreneuvian	541	531.000	521	Cambrian
