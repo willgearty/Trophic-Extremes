@@ -210,23 +210,37 @@ ggplot(data = diet_bootstrap, aes(x = age_bin, y = mean, color = factor(diet, le
 ggsave("../figures/Mammal Diets Bootstrap Boxplots.pdf", device = "pdf", width = 20, height = 20)
 
 #pull out sample size=20
-ggplot(data = subset(diet_bootstrap, sample==20), aes(x = age_bin, y = mean, color = factor(diet, levels = c("herbivore", "omnivore", "carnivore")))) +
-  geom_boxplot(position = position_dodge(preserve = "single", width = .85)) +
-  scale_x_discrete(name = "Time (Ma)", labels = gsub(" ","\n", rev(time_scale$name))) +
-  scale_y_continuous(name = "ln Mass (g)", lim = c(2,12)) +
-  theme_classic(base_size = 24) +
-  theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
-  scale_color_manual(limits = c("herbivore", "omnivore", "carnivore"), values = colors3, name = "Diet") +
-  annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = 1.5, ymax = 2.5) +
-  annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = 1.5, ymax = 2.5) +
-  annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = 1.5, ymax = 2.5) +
-  annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = 1.5, ymax = 2.5) +
-  annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = 1.5, ymax = 2.5) +
-  annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = 1.5, ymax = 2.5) +
-  annotation_custom(phylopics[[7]], 6.55, 7.45, ymin = 1.5, ymax = 2.5) +
-  annotation_custom(phylopics[[8]], 7.55, 8.45, ymin = 1.5, ymax = 2.5) +
-  annotation_custom(phylopics[[9]], 8.55, 9.45, ymin = 1.5, ymax = 2.5)
-ggsave("../figures/Mammal Diets Bootstrap Boxplots-20 Sample.pdf", device = "pdf", width = 20, height = 20)
+diet_bootstrap$age_bin_num = as.numeric(diet_bootstrap$age_bin)
+(gg <- ggplot(data = subset(diet_bootstrap, sample==20), aes(x = age_bin_num, y = mean, fill = factor(diet, levels = c("herbivore", "omnivore", "carnivore")), group = interaction(age_bin, factor(diet, levels = c("herbivore", "omnivore", "carnivore"))))) +
+    annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = 0, ymax = 15, fill = rep_len(c("grey90", "white"), length.out = 9)) +
+    geom_boxplot(position = position_dodge(preserve = "single", width = .85), color = "black") +
+    scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
+    scale_y_continuous(name = "ln Mass (g)", breaks = seq(3, 11, 2)) +
+    coord_cartesian(ylim = c(2,11.5)) +
+    theme_classic(base_size = 24) +
+    theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
+          panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
+          legend.position = c(.5,.96), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
+    scale_fill_manual(name = NULL, limits = c("herbivore", "omnivore", "carnivore"), values = colors3) +
+    annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = 1.5, ymax = 2.5) +
+    annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = 1.5, ymax = 2.5) +
+    annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = 1.5, ymax = 2.5) +
+    annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = 1.5, ymax = 2.5) +
+    annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = 1.5, ymax = 2.5) +
+    annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = 1.5, ymax = 2.5) +
+    annotation_custom(phylopics[[7]], 6.55, 7.45, ymin = 1.5, ymax = 2.5) +
+    annotation_custom(phylopics[[8]], 7.55, 8.45, ymin = 1.5, ymax = 2.5) +
+    annotation_custom(phylopics[[9]], 8.55, 9.45, ymin = 1.5, ymax = 2.5))
+discrete_periods <- periods
+discrete_periods$max_age[1:4] <- c(2, 4, 7, 9)
+discrete_periods$min_age[1:4] <- c(0, 2, 4, 7)
+discrete_epochs <- epochs
+discrete_epochs$max_age[1:9] <- 1:9
+discrete_epochs$min_age[1:9] <- 0:8
+discrete_epochs$name[8:9] <- c("Early\nCretaceous", "Early\nCretaceous")
+(geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(9, 0), dat = discrete_periods, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
+                         dat = discrete_epochs, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
+ggsave("../figures/Mammal Diets Bootstrap Boxplots-20 Sample.pdf", geo_plot, device = "pdf", width = 12, height = 12)
 
 #calculate means, sds, weighted means, and weighted variances for each age bin*diet combination
 bootstrap_means <- diet_bootstrap %>%
