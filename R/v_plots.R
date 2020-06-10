@@ -43,8 +43,9 @@ v_data <-
                                diet_5cat == 5 ~ 4)) %>% 
   # Add diet labels
   left_join(., diet_cat_key) %>% 
-  mutate(diet_factor = factor(diet_5cat), 
-         biome_factor = factor(biome))
+  mutate(diet_abbr = factor(diet_abbr, levels = diet_cat_key$diet_abbr)) %>% 
+  # Remove species missing diet category
+  drop_na(diet_abbr)
 
 terr_mammals <- filter(v_data, realm == "terrestrial", class == "Mammalia")
 terr_birds   <- filter(v_data, realm == "terrestrial", class == "Aves")
