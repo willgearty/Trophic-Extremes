@@ -71,6 +71,7 @@ terr_mammals %>%
     facet_wrap(~ biome_label) +
     boxplot_theme() +
     labs(x = "Diet category", y = expression(Log[10]~median~body~mass))
+ggsave('../figures/V_plots_terrestrial_mammals.pdf')
 
 # Terrestrial bird body size ~ diet plot
 terr_birds %>% 
@@ -79,7 +80,7 @@ terr_birds %>%
     facet_wrap( ~ biome_label) +
     boxplot_theme() +
     labs(x = "Diet category", y = expression(Log[10]~median~body~mass))
-
+ggsave('../figures/V_plots_terrestrial_birds.pdf')
 
 #-------------------------------------------------------------------------------
 # Calculated means
