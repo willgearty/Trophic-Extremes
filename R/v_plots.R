@@ -9,13 +9,14 @@ biome_traits <-
   # Make sure that biome ids are numeric
   mutate(biome = as.numeric(biome))
 # Create lookup for biome ids
-biome_key <- tibble(biome = 1:14, biome_name = c("Tropical & Subtropical Moist Broadleaf Forests", "Tropical & Subtropical Dry Broadleaf Forests", "Tropical & Subtropical Coniferous Forests", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Boreal Forests/Taiga", "Tropical & Subtropical Grasslands, Savannas & Shrublands", "Temperate Grasslands, Savannas & Shrublands", "Flooded Grasslands & Savannas", "Montane Grasslands & Shrublands", "Tundra", "Mediterranean Forests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Mangroves"))
+biome_key <- tibble(biome = 1:14, biome_name = c("Tropical & Subtropical Moist Broadleaf Forests", "Tropical & Subtropical Dry Broadleaf Forests", "Tropical & Subtropical Coniferous Forests", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Boreal Forests/Taiga", "Tropical & Subtropical Grasslands, Savannas & Shrublands", "Temperate Grasslands, Savannas & Shrublands", "Flooded Grasslands & Savannas", "Montane Grasslands & Shrublands", "Tundra", "Mediterranean Forests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Mangroves"), 
+  biome_label = c("Tropical & Subtropical\nMoist Broadleaf Forests", "Tropical & Subtropical\nDry Broadleaf Forests", "Tropical & Subtropical\nConiferous Forests", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Boreal Forests/Taiga", "Tropical & Subtropical \nGrasslands, Savannas & Shrublands", "Temperate\nGrasslands, Savannas & Shrublands", "Flooded Grasslands & Savannas", "Montane Grasslands & Shrublands", "Tundra", "Mediterranean\nForests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Mangroves"))
 
 # Master biome data
 biomes <- 
   left_join(biome_traits, biome_key) %>% 
   # We only need the biome information for now
-  select(binomial, class, biome, biome_name, body_mass_median) %>% 
+  select(binomial, class, biome, biome_name, biome_label, body_mass_median) %>% 
   # Clarify that body_mass_median in this dataframe is actually log10 body mass
   rename(log10_body_mass_median = body_mass_median)
 
