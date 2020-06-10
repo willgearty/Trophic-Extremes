@@ -1,5 +1,6 @@
 library(tidyverse)
 library(nlme)
+library(broom.mixed)  # get tidy tables from gls model objects
 
 # Prepare V trait data
 # ------------------------------------------------------------------------------
@@ -88,14 +89,17 @@ ggsave('../figures/V_plots_terrestrial_birds.pdf')
 
 # gls model for the different body mass ~ diet category across space
 mammal_gls <- 
-  gls(log10_body_mass_median ~ diet_factor - 1, 
-      weights = varIdent(form = ~ 1 | diet_factor), 
-      data = terr_mammals %>% drop_na(diet_factor, biome_factor))
-
+  gls(log10_body_mass_median ~ diet_name - 1, 
+      weights = varIdent(form = ~ 1 | diet_name), 
+      data = terr_mammals %>% drop_na(diet_name, biome_name))
 summary(mammal_gls)
 
+broom.mixed::tidy(mammal_gls)
+
 bird_gls <- 
-  gls(log10_body_mass_median ~ diet_factor - 1, 
-      weights = varIdent(form = ~ 1 | diet_factor), 
-      data = terr_birds %>% drop_na(diet_factor, biome_factor))
+  gls(log10_body_mass_median ~ diet_name - 1, 
+      weights = varIdent(form = ~ 1 | diet_name), 
+      data = terr_birds %>% drop_na(diet_name, biome_name))
 summary(bird_gls)
+
+broom.mixed::tidy(bird_gls)
