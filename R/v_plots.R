@@ -53,26 +53,31 @@ terr_birds   <- filter(v_data, realm == "terrestrial", class == "Aves")
 #-------------------------------------------------------------------------------
 # Figures 3 & 4
 #-------------------------------------------------------------------------------
+boxplot_theme <- function(base_size = 16) {
+  theme_minimal(base_size = base_size) + 
+  theme(axis.line = element_line(colour = "black", size = 0.5, lineend = "butt"), 
+        panel.grid = element_blank(), 
+        axis.title.y = element_text(angle = 90, vjust = 2),
+        axis.title.x = element_text(vjust = -5),
+        strip.background = element_rect(fill = "grey90", colour = "white"),
+        plot.margin = unit(c(10, 5, 10, 5), "mm")
+  )
+}
 
 # Terrestrial mammal body size ~ diet plot
 terr_mammals %>% 
   ggplot(., aes(x = diet_abbr, y = log10_body_mass_median, group = diet_abbr)) +
     geom_boxplot(outlier.shape = NA) +
-    facet_wrap( ~ biome_name) +
-    theme(axis.text.x = element_text(angle = 50, size = 9, vjust = 0.5))+
-    theme(panel.background = element_rect(fill = 'white'))+
-    theme(axis.line = element_line(colour = "black", size = 0.5, linetype = 1, lineend = "butt")) +
-    xlab("Diet category") +
-    ylab(ylab(expression(Log[10]~median~body~mass)))
+    facet_wrap(~ biome_label) +
+    boxplot_theme() +
+    labs(x = "Diet category", y = expression(Log[10]~median~body~mass))
 
 # Terrestrial bird body size ~ diet plot
 terr_birds %>% 
   ggplot(., aes(diet_abbr, log10_body_mass_median, group = diet_abbr))+
     geom_boxplot(outlier.shape = NA) +
-    facet_wrap( ~ biome_name) +
-    theme(axis.text.x = element_text(angle = 50, size = 9, vjust = 0.5))+
-    theme(panel.background = element_rect(fill = 'white'))+
-    theme(axis.line = element_line(colour = "black", size = 0.5, linetype = 1, lineend = "butt")) +
+    facet_wrap( ~ biome_label) +
+    boxplot_theme() +
     labs(x = "Diet category", y = expression(Log[10]~median~body~mass))
 
 
