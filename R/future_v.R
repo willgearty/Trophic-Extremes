@@ -83,7 +83,7 @@ pres_df <- pres %>%
 # prep for extinction models
 
 # gl <- read.csv("eco_dist_paper_traits.csv", header = TRUE, stringsAsFactors = FALSE) %>% 
-#   dplyr::rename(binomial = ï..binomial) %>% 
+#   dplyr::rename(binomial = Ã¯..binomial) %>% 
 #   dplyr::select(-class)
 # 
 # gl_pres <- dplyr::left_join(mam_pres, gl) %>% 
@@ -100,7 +100,10 @@ pres_df <- pres %>%
 #https://github.com/tobiashofmann88/iucn_extinction_simulator
 
 # import output from anaconda
-ext_mam <- read.delim("..data/te_all_species.txt", header = FALSE, stringsAsFactors = FALSE) 
+#ext_mam <- read.delim("..data/te_all_species.txt", header = FALSE, stringsAsFactors = FALSE) 
+
+# read heavily compressed version of above
+ext_mam <- readRDS("..data/ext_mam.rds")
 
 # names of extinct mammals per run
 ext_names <- lapply(2:ncol(ext_mam), function(x) {
