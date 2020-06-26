@@ -1,0 +1,208 @@
+Ref_ID	Full Reference			
+Ref_1	"Nowak R.M. (1999). Walker's mammals of the world. Sixth edition edn. The Johns Hopkins University Press, Baltimore, Maryland"			
+Ref_2	Genus Average			
+Ref_3	Family Average			
+Ref_4	" Afrotheria Specialist Group (Tenrec Section), Jenkins, P. & Goodman, S. (2008). Hemicentetes nigriceps. In: IUCN 2008. IUCN Red List of Threatened Species. Downloaded on 29 December 2008"			
+Ref_5	" Kirkpatrick, R. C., Long, Y. C., Zhong, T., and Xiao, L. (1998). ""Social organization and range use in the Yunnan snub-nosed monkey Rhinopithecus bieti"". International Journal of Primatology 19: 13–51"			
+Ref_6	" Macdonald, D.W. (2006) The Encyclopedia of Mammals. Oxford University Press, Oxford."			
+Ref_7	" Martin, J. K., Handasyde K.A. et al. (2004). ""Aspects of the ecology of the bobuck T. caninus in the Strathbogie Ranges, Victoria"". in R. L. Goldingay and S. M. Jackson.The biology of Australian possums and gliders. Sydney: Chipping Norton, Surrey Beatty"			
+Ref_8	" Rowe, N. (1996). The Pictorial Guide to the Living Primates. Pogonias Press, Rhode Island. ISBN 0-9648825-0-7"			
+Ref_9	"Albignac, R. 1972. The Carnivora of Madagascar. Pp. 667–682 in Battistini, R. & Richard-Vindard, G. (eds.). Biogeography and Ecology in Madagascar. The Hague: W. Junk B.B., Publishers."			
+Ref_10	Alfred JRB. 1992. The hoolock gibbon: Hylobates hoolock. Prim Rep 34:65-9			
+Ref_11	"Andrainarivo, C., Andriaholinirina, V.N., Feistner, A., Felix, T., Ganzhorn, J., Garbutt, N., Golden, C., Konstant, B., Louis Jr., E., Meyers, D., Mittermeier, R.A., Perieras, A., Princee, F., Rabarivola, J.C., Rakotosamimanana, B., Rasamimanana, H., Rats"			
+Ref_12	"Ankel-Simons, Friderun (2007). Primate Anatomy : An Introduction (3rd ed.). Durham, North Carolina: Department of Biological Anthropology and Anatomy, Duke University. pp. 55–56. ISBN 0-12-372576-3."			
+Ref_13	"Bearder, S. K., L. Ambrose, C. Harcourt, P. Honess, A. Perkin, S. Pullen, E. Pimley and N. Svoboda. 2003. Species-typical patterns of infant care, sleeping site use and social cohesion among nocturnal primates in Africa. Folia Primatol. 74: 337–354."			
+Ref_14	"Bearder, S.K. 1987. Lorises, Bushbabies, and Tarsiers: Diverse Societies in Solitary Foragers. In Primate Societies. eds. B.B. Smuts, D.L. Cheney, R.M. Seyfart, R.W. Wrangham, and T.T. Struhsaker. University of Chicago Press."			
+Ref_15	"Berkman, P. 2001. Science into Policy : Global Lessons from Antarctica. Burlington, MA: Academic Press!"			
+Ref_16	"Berta, A., J. Sumich, K. Kovacs. 2006. Marine Mammals: Evolutionary Biology. Burlington, MA: American Press.! Burns, J. 2008. Encyclopedia of Marine Mammals. Pp. 533-541 in W Perrin, B Wursig, J Thewissen, eds. Harbor Seal and Spotted Seal, Vol. 1, 2 Edit"			
+Ref_17	"Best, R., V. da Silva. 1989. Amazon River Dolphin, Boto, Inia geoffrensis (de Blainville, 1817). Pp. 1-23 in S Ridgway, R Harrison, eds. Handbook of Marine Mammals: River Dolphins and the Larger Toothed Whales. London: Academic Press.! Best, R., V. da Sil"			
+Ref_18	"Bonner, W. 1990. The Natural History of Seals. New York, NY: Facts On File, Inc.! Le Boeuf, B., D. Crocker, D. Costa, S. Blackwell, P. Webb. 2000. Foraging ecology of northern elephant seals. Ecological Monographs, 70 (3): 353-382."			
+Ref_19	"Boonratana, R. and X.C. Le. 1998. Preliminary observations on the ecology and behaviour of the tonkin snub-nosed monkey in Northern Vietnam. The Natural History of the Doucs and Snub-nosed monkeys. Singapore. 207-215."			
+Ref_20	"Boyd, I., M. Stanfield. Oct. 1998. Circumstantial evidence for the presence of monk seals in the West Indies. Oryx, 32: 310-316.! Macdonald, D. 1984. The Encyclopedia of Mammals. Barns & Noble Books, Spain: Andromeda Oxford Limited."			
+Ref_21	"Brito, D. and da Fonseca, G. A. B. 2006. Evaluation of minimum viable population size and conservation status of the long-furred woolly mouse opossum Micoureus paraguayanus: an endemic."			
+Ref_22	"Caldecott, J.O., Blouch, R.A. and Macdonald, A.A. (1993) The bearded pig (Sus barbatus). In: Oliver, W.L.R. (Ed) Pigs, peccaries, and hippos: status survey and conservation action plan. International Union for the Conservation of Nature, Gland, Switzerlan"			
+Ref_23	"Catzeflis, F. & Silva, C. 2008. Marmosops pinheiroi. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 12 May 2010."			
+Ref_24	"Chandrasekar-Rao A. 1994. Distribution and ecology of Hong Kong small mammals, with special reference to seasonality. M.Phil. Thesis, University of Hong Kong, Hong Kong"			
+Ref_25	"Crockett CM, Wilson WL. 1980. The ecological separation of Macaca nemestrina and M. fascicularis in Sumatra. In: Lindburg DG, editor. The macaques: studies in ecology, behavior and evolution. New York: Van Nostrand Reinhold. p 148-81."			
+Ref_26	"Cummings, W. 1985. Right whales. New York: Academic Press.! Reeves, R., R. Brownell. 1982. Baleen Whales. Pp. 415-445 in J Chapman, G Feldhamer, eds. Wild Mammals of North America. Baltimore and London: Johns Hopkins University Press.! Slijper, E. 1979. W"			
+Ref_27	"Defler, T.R., Rodriguez, J.V. and Hernández-Camacho, J.I. (2003) Conservation priorities for Colombian primates. Primate Conservation, 19: 10-18."			
+Ref_28	"Dehn, L., G. Sheffield, E. Follmann, L. Duffy, D. Thomas, T. O'Hara. 2007. Feeding ecology of phocid seals and some walrus in the Alaskan and Canadian arctic as determined by stomach contents and stable isotope analysis. Polar Biology, 30/2: 167-181.! Low"			
+Ref_29	"Duckworth, J.W., Samba Kumar, N., Chiranjibi Prasad Pokheral, Sagar Baral, H. & Timmins, R.J. 2008. Rucervus duvaucelii. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 31 May 2010."			
+Ref_30	"Duckworth, J.W., Steinmetz, R. & MacKinnon, J. 2008. Capricornis sumatraensis. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on31 May 2010."			
+Ref_31	"Duckworth, J.W., Steinmetz, R. & Pattanavibool, A. 2008. Capricornis milneedwardsii. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on31 May 2010."			
+Ref_32	"Duckworth, J.W., Steinmetz, R. & Rattanawat Chaiyarat 2008. Naemorhedus griseus. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on31 May 2010."			
+Ref_33	"Elephant Seal. Pp. unknown in P Lagasse, ed. Columbia Encyclopedia, Vol. 1, sixth Edition. New York: Columbia University Press. 1983. Elephant Seals. Pp. 1130-1132 in R Nowak, J Paradiso, eds. Walker's Mammals of the World, Vol. 2, 4 Edition. Baltimore an"			
+Ref_34	"Emmons L.H. & F. Feer. 1997. Neotropical Rain Forest Mammals, a Field Guide. 2da ed. The 
+University of Chicago Press. 281 pp"			
+Ref_35	Ferrari et al.  AMERICAN JOURNAL OF PHYSICAL ANTHROPOLOGY 90:487-493 (1993)			
+Ref_36	"Fidimalala B. RalainasoloI, Jonah H. RatsimbazafyII and
+Nancy J. Stevens. Behavior and diet of the Critically Endangered
+Eulemur cinereiceps in Manombo forest,
+southeast Madagascar. Madagascar Conservation and Development. Vol 3. Issue 1. 2008. p.38"			
+Ref_37	Field Guide to Australian Mammals. Jones and Parish.			
+Ref_38	"Finley, K. 1983. Summer diet of the bearded seal (Erignathus barbatus) in the Canadian High Arctic. Artic, 36.1: 82-89!  Lowry, L., K. Frost, J. Burns. 1980. Feeding of Bearded Seals in the Bering and Chukchi Seas. Artic, 33.2: 330-342! Reeves, R., B. Ste"			
+Ref_39	"Fiona L. Agmen 1*, Hazel M. Chapman 1 and Musa Bawuro. Seed dispersal by tantalus monkeys (Chlorocebus tantalus tantalus) in a Nigerian montane forest. African Journal of Ecology. 2009."			
+Ref_40	"Garbutt, N. 1999. Mammals of Madagascar. New Haven and London: Yale University Press."			
+Ref_41	"Garbutt, Nick (2007). Mammals of Madagascar, A Complete Guide. p. 189–191."			
+Ref_42	"Gardner, A. 1971. Notes on the little spotted cat, Felis tigrina oncilla (Thomas) in Costa Rica. Journal of Mammalogy, 52: 464-465"			
+Ref_43	"Gaskin, D.E. 1982. The ecology of whales and dolphins. Heinemann, London, Exeter and New Hampshire.! Nowak, R.M. 1991. Walker's Mammals of the world, Fifth edition. John Hopkins University Press, Boston."			
+Ref_44	"Geissmann, T., Xuan Dang, N., Lormée, N. and Momberg F. 2000. Vietnam primate conservation status review 2000 - Part 1: Gibbons. Status report. Fauna and Flora International, Indochina Programme, Hanoi, Vietnam."			
+Ref_45	"Groves C. Mammal Species of the World. A Taxonomic and Geographic Reference. 3rd edition , Johns Hopkins University Press, 2005. 124 ISBN 0801882214"			
+Ref_46	"Hanni, K., D. Long, R. Jones, P. Pyle, L. Morgan. May 1997. Sightings and strandings of Guadalupe fur seals in Central and Northern California, 1988-1995.. Journal of Mammalogy, 78(2): 684-690."			
+Ref_47	"Harp Seals. Pp. 429-430 in D Kleiman, V Geist, M McDade, eds. Grzimek’s Animal Life Encyclopedia, Vol. Volume 14: Mammals III, Second Edition. Farmington Hills, MI: Gale Group, Inc.! Novak, R. 1999. Pagophilus groenlandicus. Pp. 887-888 in Walker’s Mammal"			
+Ref_48	"Hart, J., Groves, C.P. & Ehardt, C. 2008. Lophocebus aterrimus. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on27 May 2010."			
+Ref_49	"Haug, T., K. Nilssen, L. Lindblom, U. Lindstrom. 2007. Diets of hooded seals (Cystophora cristata) in coastal waters and drift ice waters along the east coast of Greenland. Marine Biology Research, Vol. 3 Issue 3: 123-133."			
+Ref_50	Hemingway CA. 1998. Selectivity and variability in the diet of Milne-Edwards' sifakas (Propithecus diadema edwardsi): implications for folivory and seed-eating. Int J Primatol 19(2): 355-77.			
+Ref_51	"Hoang Minh Duc & G. S. Baxter & Manda J. Page. Diet of Pygathrix nigripes in Southern Vietnam. International Journal of Primatology. 2009. 30, 15-28"			
+Ref_52	"Hume, I.D. (1999). Marsupial nutrition. Cambridge: Cambridge University Press."			
+Ref_53	"International Whaling Commission, Scientific Committee on Sei and Bryde's Whales. December 1974. Cambridge."			
+Ref_54	IUCN Redlist  www.iucnredlist.org			
+Ref_55	IUCN SSC Antelope Specialist Group 2008. Gazella gazella. In: IUCN 2013. IUCN Red List of Threatened Species. Version 2013.1. <www.iucnredlist.org>. Downloaded on 29 September 2013.			
+Ref_56	"Jefferson, T., S. Leatherwood, M. Webber. 1994. Marine Mammals of the World. Rome, Italy: Food and Agriculture Organization of the United Nations."			
+Ref_57	"Johnson, S. E. 2002. Ecology and speciation in brown lemurs: white-collared lemurs (Eulemur albocollaris) and hybrids (Eulemur albocollaris x Eulemur fulvus rufus) in southeastern Madagascar. Ph. D. thesis, University of Texas, Austin."			
+Ref_58	"Jones, K., J. Bielby, M. Cardillo, S. A. Fritz, J. O'Dell, C. D. L. Orme, K. Safi et al. 2009. PanTHERIA: a species-level database of life history, ecology, and geography of extant and recently extinct mammals. Ecology 90:2648"			
+Ref_59	"Keirulff, M.C.M., Mendes, S.L. & Rylands, A.B. 2008. Cebus nigritus. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on26 May 2010."			
+Ref_60	"King, J. 1983. Seals of the World. Ithaca, New York: Comstock Publishing Associates."			
+Ref_61	"Kingdon, J. (1997) The Kingdon Field Guide to African Mammals. Academic Press, London."			
+Ref_62	"Kingswood, S. C. and Blank, D. A. 1996. Gazella subgutturosa. Mammalian Species 518: 1-10."			
+Ref_63	"Klages, N., V. Cockcroft. 1990. Feeding behaviour of a captive crabeater seal. Polar Biology, 10: 403-404! Kooyman, G. 1981. Crabeater Seal Lobodon carcinophagus. Pp. vol 2: 221-235 in S Ridgeway, R Harrison, eds. Handbook of Marine Mammals. London: Acade"			
+Ref_64	"Konishi, , Tamura, Zenitani, Bando, Kato, Walloe. 2008. Decline in energy storage in the Antarctic minke whale (Balaenoptera bonaerensis) in the Southern Ocean. Polar Biology, 31(12): 1509-1520.! Ichii, T., H. Kato. 1991. Food and daily food consumption o"			
+Ref_65	"Leary, T., Seri, L., Flannery, T., Wright, D., Hamilton, S., Helgen, K., Singadan, R., Menzies, J., Allison, A., James, R., Aplin, K., Salas, L. & Dickman, C. 2008. Zaglossus attenboroughi. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010."			
+Ref_66	"Leighton, D. 1987. Gibbons: Territoriality and monogamy. In: B. Smuts, D. Cheney, R. Seyfarth, R. Wrangham and T. Struhsaker (eds), Primate societies, pp. 135-145. University of Chicago Press, Chicago, USA and London, UK."			
+Ref_67	"Li YM. 2006. Seasonal variation of diet and food availability in a group of Sichuan snub-nosed monkeys in Shennongjia Nature Reserve, China. Am J Primatol 68(3):217-33."			
+Ref_68	"Lowry, L.F., K.J. Frost, and J.J. Burns. 1980. Variability in the diet of ringed seals, Phoca hispida, in Alaska. Canadian Journal of Fish and Aquatic Sciences, 37(12): 2254-2261."			
+Ref_69	"Mallon & Kingswood. 2001. Antelopes - Global Survey and Regional Action Plans, Part 4: North Africa, the Middle East, and Asia. IUCN, Gland, Switzerland
+
+Read more: http://www.animalinfo.org/refm.htm#ixzz1BtqSdTsI"			
+Ref_70	"Mammals of Australia. 2008. 3rd ed. Eds Ronald Strahan, Steve van Dyck. New Holland Publishing"			
+Ref_71	"Marsh, C. 1981. Diet choice among Red colobus (*Colobus badius rufomitratus*) on the Tana River, Kenya. Folia Primatologica, 35: 147-178."			
+Ref_72	"Mauffrey, J & F. Catzeflis. 2003. Ecological and isotopic discrimination of syntopic rodents in a neotropical rain forest of French Guiana. Journal of Tropical Ecology. 19, p 209-214"			
+Ref_73	"McGraw WS, Zuberbühler K, Noë R. 2007. The monkeys of the Ta• Forest: an African primate community. Cambridge(UK):Cambridge U Pr."			
+Ref_74	"Medway L. 1978. The wild mammals of Malaya (Peninsular Malaysia) and Singapore. Oxford University Press, Kuala Lumpur."			
+Ref_75	"Mittermeier, Russell, et al. (2006). Lemurs of Madagascar. 2nd ed.. Colombia: Conservation International"			
+Ref_76	"Molur, S., Singh, M. & Kumar, A. 2008. Semnopithecus priam. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on27 May 2010."			
+Ref_77	"Moreno, P. 2004. Ganges and Indus dolphins (Platanistidae). Pp. 13-17 in M Hutchins, D Kleiman, V Geist, M McDade, eds. Grzimek's Animal Life Encyclopedia, Vol. Volume 15: Mammals IV, Second Edition Edition. Detroit: Thompson Gale."			
+Ref_78	"Nadler, T., Momberg, F., Dang, N.X. and Lormée, N. (2003) Vietnam Primate Conservation Status Review 2002. Part 2: Leaf Monkeys. Fauna & Flora International - Vietnam Program and Frankfurt Zoological Society, Hanoi, Vietnam"			
+Ref_79	"Nekaris, K. A. I. and Jayewardene, J. 2004. Distribution of slender lorises in four ecological zones in Sri Lanka. Journal of Zoology (London) 262: 1-12."			
+Ref_80	"O'Brien TG, Kinnaird MF. 1997. Behavior, diet, and movements of the Sulawesi crested black macaque (Macaca nigra). Int J Primatol 18(3): 321-51."			
+Ref_81	"Oritsland, T. 1977. Food Consumption of Seals in the Antarctic Pack Ice. Pp. 749-768 in G Llano, ed. Adaptation within Antarctic Ecosystems. Washington, D.C.: Smithsonian Institution! Skinner, J. 1984. Research on the Ross Seal, *Ommatophoca rossii*, in t"			
+Ref_82	"Pages, E. 1980. Ethoecology of Microcebus coquereli during the dry season. In Nocturnal Malagasy Primates: Ecology, Physiology, and Behavior. eds. P. Charles-Dominique, H.M. Cooper, A. Hladik, C.M. Hladik, E. Pages, G.F. Pariente, A. Petter-Rousseaux, and"			
+Ref_83	Peetz. A. 2001. Ecology and social organisation of the bearded saki Chiropotes satanas chiropotes (Primates: Pitheciinae) in Venezuela. Ecotropical Monographs 1: 170 pp.			
+Ref_84	"Postanowicz, R. ""Bay Cat (Felis badia), Lioncrusher"" (On-line) http://www.lioncrusher.com/felidae/bay_cat.htm"			
+Ref_85	"Queiroz, H.L. 1992. A New Species of Capuchin Monkey, Genus Cebus Erxleben, 1777 (Cebidae Primates) from Eastern Brazilian Amazonia. Goeldiana, Zoologia Vol. 15, 1-13."			
+Ref_86	"Redford, K., J. Eisenberg . 1992. Mammals of the Neotropics. Chicago: University of Chicago Press"			
+Ref_87	"Reeves, R., B. Stewart, P. Clapham, J. Powell. 2002. Guide to Marine Mammals of the World. New York: Chanticlear Press."			
+Ref_88	"Reeves, R., R. Brownell Jr.. 1989. Susu. Pp. 69-99 in S Ridgway, S Harrison, eds. Handbook of Marine Mammals, Vol. 4, 1 Edition. London: Academic Press."			
+Ref_89	"Rodriguez, A. & Incháustegui, S. 2008. Erophylla bombifrons. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 17 June 2010."			
+Ref_90	"Rosevear, D. 1974. The Carnivores of West Africa. London: Trustees of the British Museum (Natural History)."			
+Ref_91	"Rylands, A.B. & Mittermeier, R.A. 2008. Saguinus niger. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 25 May 2010."			
+Ref_92	"Rylands, A.B. 1982. The Behaviour and Ecology of Three Species of Marmosets and Tamarins (Callitrichidae, Primates) in Brazil. Unpublished Ph.D. thesis, University of Cambridge, Cambridge."			
+Ref_93	"Rylands, A.B., Mittermeier, R.A. & Wallace, R.B. 2008. Mico melanurus. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 26 May 2010."			
+Ref_94	"Siex, K. S. 2003. Effects of population compression on the demography, ecology, and behavior of the Zanzibar red colobus monkey (Procolobus kirkii). Duke University, Durham, NC, USA."			
+Ref_95	"Slijper, E. 1979. Whales. Ithaca, N.Y.: Cornell University Press.! Evans, P. 1987. The Natural History of Whales and Dolphins. New York, N.Y.: Facts on File Publications."			
+Ref_96	"Stephen R. Humphrey, Humphrey, James R. Bain. Endangered animals of Thailand."			
+Ref_97	"Stevenson, P. & Link, A. 2008. Lagothrix lugens. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 26 May 2010."			
+Ref_98	"Stirling, I. 1971. Leptonychotes weddelli. Mammalian Species. No. 6. The American Society of Mammalogists."			
+Ref_99	"Strum SC. 1981. Processes and products of change: baboon predatory behavior at Gilgil , Kenya. In: Harding RSO, Teleki G, editors. Omnivorous primates: gathering and hunting in human evolution. New York : Columbia Univ Pr. p 255-302."			
+Ref_100	"Suzette A. Stephens 3,2 Leonardo A. Salas 4 Ellen S. Dierenfeld 5. Bark Consumption by the Painted Ringtail (Pseudochirulus forbesi larvatus) in Papua New Guinea1. Biotropica. 2006"			
+Ref_101	"Tan, C. L. 1999. Group composition, home range size, and diet in three sympatric bamboo lemur species (genusHapalemur) in Ranomafana National Park, Madagascar. International Journal of Primatology 20: 547–566. "			
+Ref_102	"Timmins, R.J. & Duckworth, J.W. 2008. Moschus cupreus. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 31 May 2010."			
+Ref_103	"Timmins, R.J. & Duckworth, J.W. 2008. Moschus leucogaster. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 31 May 2010."			
+Ref_104	"Timmins, R.J. & Duckworth, J.W. 2008. Rucervus eldii. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 31 May 2010."			
+Ref_105	"Timmins, R.J., Duckworth, J.W. & Zaw, T. 2008. Muntiacus putaoensis. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 31 May 2010."			
+Ref_106	"Timmins, R.J., Robichaud, W.G., Long, B., Hedges, S., Steinmetz, R., Abramov, A., Do Tuoc & Mallon, D.P. 2008. Pseudoryx nghetinhensis. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 31 May 2010."			
+Ref_107	"Veiga, L. M., Silva Jr. J. S., Ferrari, S. F. & Rylands, A. B. 2008. Chiropotes utahickae. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 26 May 2010."			
+Ref_108	"Veiga, L.M. 2008. Callicebus baptista. In: IUCN 2010. IUCN Red List of Threatened Species. Version 2010.1. <www.iucnredlist.org>. Downloaded on 26 May 2010."			
+Ref_109	"Wahungu GM. 1998. Diet and habitat overlap in two sympatric primate species, the Tana crested mangabeyCercocebus galeritus and yellow baboon Papio cynocephalus. Afr J Ecol 36(2): 159-73."			
+Ref_110	Wilson & Mittermier. Handbook of the mammals of the world. Lynx edition Vol 1. 2009			
+Ref_111	"Wilson, V.J. (2005) Duikers of Africa: Masters of the African Forest Floor. Zimbi Books, Pretoria, South Africa."			
+Ref_112	"Woods M, McDonald RA, Harris S. (2003). ""Predation of wildlife by domestic cats Felis catus in Great Britain"".Mammal Review 23 (2): 174–188. doi:10.1046/j.1365-2907.2003.00017 (inactive 2009-09-06)."			
+Ref_113	"Wooley, P. 1982. Observations on the feeding and reproductive status of captive feather-tailed possums, Distoechurus pennatus. Australian Mammal Society."			
+Ref_114	"Yom-Tov, Y., H. Mendelssohn, C. Groves. 1995. Gazella dorcas. Mammalian Species, 491: 1-6."			
+Ref_115	"Reeves RR, Stewart BS, Clapham PJ, Powell JA (2011) The National Audubon Society Guide to Marine Mammals of the World.  Knopf publishing. "			
+Ref_116	"Tyack  PL,  Johnson M, Aguilar Soto N, Sturlese A,  Madsen PT (2006). Extreme diving of beaked whales. The Journal of Experimental Biology 209:4238-4253."			
+Ref_117	"Smith, F.A., S.K. Lyons, S.K.M. Ernest, K.E. Jones, D.M. Kaufman, T. Dayan, P.A. Marquet, J.H. Brown and J.P. Haskell. 2003. Body mass of late Quaternary mammals. Ecology 84:3402 (updated version obtained from senior author)."			
+Ref_118	Reference lost			
+Ref_119	Reference lost			
+Ref_120	"Kennedy, K. 1999. ""Cercopithecus diana"" (On-line), Animal Diversity Web. Accessed July 12, 2007 at http://animaldiversity.ummz.umich.edu/site/accounts/information/Cercopithecus_diana.html."			
+Ref_121	"Kreutzer, J. 2003. ""Mustela sibirica"" (On-line), Animal Diversity Web. Accessed July 12, 2007 at http://animaldiversity.ummz.umich.edu/site/accounts/information/Mustela_sibirica.html."			
+Ref_122	"Hakkinen, K. 2001. ""Spilogale gracilis"" (On-line), Animal Diversity Web. Accessed July 12, 2007 at http://animaldiversity.ummz.umich.edu/site/accounts/information/Spilogale_gracilis.html."			
+Ref_123	"Schlimme, K. 2003. ""Neovison vison"" (On-line), Animal Diversity Web. Accessed July 13, 2007 at http://animaldiversity.ummz.umich.edu/site/accounts/information/Neovison_vison.html."			
+Ref_124	"Schroeder, H. 2004. ""Prionailurus iriomotensis"" (On-line), Animal Diversity Web. Accessed July 13, 2007 at http://animaldiversity.ummz.umich.edu/site/accounts/information/Prionailurus_iriomotensis.html."			
+Ref_125	"Wheeler, S. and P. Myers. 2004. ""Petaurista leucogenys"" (On-line), Animal Diversity Web. Accessed July 16, 2007 at http://animaldiversity.ummz.umich.edu/site/accounts/information/Petaurista_leucogenys.html."			
+Ref_126	"""Eisenberg""; additional details lost"			
+Ref_127	"Hershkovitz, P. Titis, New World Monkeys of the genus Callicebus (Cebidae, Platyrrhini): A Preliminary Taxonomic Review Fieldiana Zoology No. 55 : i-v, 1-109 : 1990"			
+Ref_128	"Reid, F.  A Field Guide to the Mammals of Central America and Southeast Mexico. Oxford University Press. New York"			
+Ref_129	"Garbutt, N. Mammals of Madagascar. 1999. Pica Press. Sussex."			
+Ref_130	"Menkhorst, P., Knight, F. A Field Guide  to the Mammals of Australia 2004 Oxford Univeristy Press. New York"			
+Ref_131	"Flannery, T.F.; C.P. Groves (1998). ""A revision of the genus Zaglossus (Monotremata, Tachyglossidae), with description of new species and subspecies"". Mammalia 62 (3): 387-390"			
+Ref_132	"Voss, R. S., Tarifa, T., Yensen, E. 2004 An Introduction to Marmosops (Marsupialia:Didelphidae), with the Description of a New Species from Bolivia and Notes on the Taxonomy and Distribution of Other Bolivian Forms. American Museum Novitates. 3466:40"			
+Ref_134	Reference lost			
+Ref_135	"Lunde, D.P, Musser, G.G., Son N.T. 2003. A survey of small mammals from Mt. Tay Con Linh II, Vietnam, with the description of a new species of Chodsigoa (Insectivora: Soricidae). Mammal Study. 28:31-46"			
+Ref_136	"Bonaccorso, F. Bats of Papua New Guinea. 1998. Conservation International. Washington D.C."			
+Ref_137	"Ruedi, M. Taxonomic revision of shrews of the genus Crocidura from the Sunda Shelf and Sulawesi with description of two new species (Mammalia: Soricidae). Zoological Journal of the Linnean Society (1995), 115: 211–265."			
+Ref_138	"Cotterill, F. A new species of horseshoe bat (Microchiroptera: Rhinolophidae) from south-central Africa: with comments on its af®nities and evolution, and the characterization of rhinolophid species J. Zool., Lond. (2002) 256, 165±179"			
+Ref_139	"Vilela, J. F., De Oliviera, J. A., Bonvicino, C. R. Taxonomic status of Brucepattersonius albinasus
+(Rodentia: Sigmodontinae) Zootaxa 1199: 61–68 (2006)"			
+Ref_140	"Rickart, E. A., Heaney, L.R., Tabaranza, B. R. REVIEW OF BULLIMUS (MURIDAE: MURINAE) AND
+DESCRIPTION OF A NEW SPECIES FROM
+CAMIGUIN ISLAND, PHILIPPINES. Journal of Mammalogy, 83(2):421–436, 2002"			
+Ref_141	"van Roosmalen, Marc G.M.; van Roosmalen, Tomas; Mittermeier, Russell A."			
+Ref_142	"Mullin, Sarah K.; Taylor, Peter J.; Pillay, Neville
+Skull size and shape of Dasymys (Rodentia, Muridae) from sub-Saharan Africa.
+Mammalia 68 (2-3) : 185-220 : 2004"			
+Ref_143	"Hershkovitz, Philip
+Report on some sigmodontine rodents collected in southeastern Brazil with descriptions of a new genus and six new species.
+Bonner Zoologische Beitraege 47 (3-4) : 193-256 : September 1998"			
+Ref_144	"Dieterlen, F.; Heim de Balsac, H.
+Zur Okologie und Taxonomie der Spitzmause.
+Saugetierkundliche Mitteilungen 27 (4) : 241-287 : 1979"			
+Ref_145	"Dieterlen, F., Zweiter Fund von Dendromus Kahuziensis (Dendromurinae: Cricetidae: Rodentia) und weitere Dendromus-Fange im Kiru-Hochland oberhalb 2000m. 1976. Stuttgarten Beitrage Zur Naturkunde. Serie A Biologie. 1-5."			
+Ref_146	"???????, ?. ?., ???????, ?.?., ???????, ?.?., ??????????, ?. ?. ??????? ?. ?. ??????? ?.?. ??????? ?.?. ?????????? ?. ?.?? 1995 Mockba ""Hayka"""			
+Ref_147	"Hutterer, R., Yalden, D. W. Two new species of shrews from a relic forest in the Bale Mountains, Ethiopia. Vertebrates in the Tropics. Proceedings of the International Symposium on Vertebrate Biogeogrpahy and Systematics in the tropics. Bonn. 1990. Alexan"			
+Ref_148	"Alberico, M. A new species of pocket gopher (Rodentia: Geomyidae) from South America and its biogeographic significance. Vertebrates in the Tropics. Proceedings of the International Symposium on Vertebrate Biogeogrpahy and Systematics in the tropics. Bonn"			
+Ref_149	"Bonvicino, C. R., Lima, J. F. S., Almeida, F.C. A new species of Calomys Waterhouse (Rodentia, Sigmodontinae)from the Cerrado of Central Brazil. Rev. Bras. Zool. vol.20 no.2 Curitiba June 2003"			
+Ref_150	"Nechvatal, N. 2000. ""Chilonatalus micropus"" (On-line), Animal Diversity Web. Accessed September 19, 2007 at http://animaldiversity.ummz.umich.edu/site/accounts/information/Chilonatalus_micropus.html."			
+Ref_151	"Emmons, Louise H.
+A new genus and species of abrocomid rodent from Peru (Rodentia: Abrocomidae).
+American Museum Novitates 3279 : 1-14 : December 8 1999"			
+Ref_152	"Benda, P. First record of Crocidua dhofarensis Hutterer et Harrison, 1988 (Mammalia : Soricidae) in Yemen. Casopis Narodniho Muzea Rada Prirodovedna. 2006. 175(1-2): 27-30."			
+Ref_153	"Cherem, J. Description of a new species of the genus Cavia Pallas, 1766 (Mammalia - Caviidae) of the Moleques do Sul islands, Santa Catarina, southern Brazil. Biotemas. 1999. 12(1):95-117."			
+Ref_154	"Silva Junior, J. On a new species of bare-eared marmoset, genus Callithrix, Erxleben, 1777 from central Amazonia, Brazil (Primates, Callitrichidae). Goeldiana Zoologia. 1998. 21:1-29."			
+Ref_155	Reference lost			
+Ref_156	"de Oliveira, J. (2002). A new species of sigmodontine rodent from the Atlantic forest of eastern Brazil. Acta theriologica, 47(3), 307-322."			
+Ref_157	"Musser, G. (1994). New records of Tarsomys echinatus Musser & Heaney 1992 and Limnomys sibuanus Mearns 1905 from Mindanao, southern Philippines (Mammalia: Rodentia: Muridae). Senckenbergiana biologica, 73(1-2), 33-38."			
+Ref_158	"Rickart, E. (2003). A new species of Limnomys (Rodentia: Muridae: Murinae) from Mindanao Island, Philippines. Journal of Mammalogy, 84(4), 1443-1455."			
+Ref_159	"Camacho Perez, A. (1994). Mesocapromys angelcabrerai (Varona, 1979) endemic small hutia of Cuba. Ciencias biológicas, 26, 1-12."			
+Ref_160	"Simmons, N. (1998). The mammals of Paracou, French Guiana: a Neotropical lowland rainforest fauna. Part 1. Bats. Bulletin of the American Museum of Natural History, 237, 1-219."			
+Ref_161	"Simmons, N. (1996). A new species of Micronycteris (Chiroptera: Phyllostomidae) from northeastern Brazil, with comments on phylogenetic relationships. American Museum Novitates, 3158, 1-34."			
+Ref_163	"Dowler, R. (2000). Rediscovery of rodents (genus Nesoryzomys) considered to be extinct in the Galapagos Islands. Oryx, 34(2), 109-117."			
+Ref_164	"Wolff, J. (1985). Why are aquatic small mammals so large?. Oikos, 45(3), 365-373."			
+Ref_165	"Fooden, J. (1963). A revision of the woolly monkeys (genus Lagothrix). Journal of Mammalogy, 44, 213-247."			
+Ref_166	"Breed, W. (2000). Body mass, testes mass, and sperm size in murine rodents. Journal of Mammalogy, 81(3), 758-768."			
+Ref_167	"Kitchener, D. (1991). Paulamys sp. cf. P. naso (Musser, 1981) (Rodentia: Muridae) from Flores Island, Nusa Tenggara, Indonesia - description from a modern specimen and a consideration of its phylogenetic affinities. Records of the Western Australian Museu"			
+Ref_168	"D'Elia, G. (2006). New data of the long-clawed mouse Pearsonomys annectens (Cricetidae, Sigmodontinae) and additional comments on the distinctiveness of Pearsonomys. Mammalian Biology, 71(1), 39-51."			
+Ref_169	"Mancina, C. (2000). Notes on the natural history of Phyllops falcatus (Gray, 1839) (Phyllostomidae: Stenodermatinae) in Cuba. Chiroptera neotropical, 6(1-2), 123-125."			
+Ref_170	"Galaz, J. (1999). [Platalina genovensium (Thomas, 1928), a new chiropteran for the fauna of Chile (Phyllostomatidae: Glossophaginae).]. Noticiario mensual, 337, 6-12."			
+Ref_171	"Braun, J. (1995). A new genus and species of phyllotine rodent (Rodentia: Muridae: Sigmodontinae: Phyllotini) from South America. Journal of Mammalogy, 76(2), 504-521."			
+Ref_172	"Barquez, R. (2006). [Tapecomys primus (Rodentia: Cricetidae), new genus and species for Argentina.]. Mastozoología neotropical, 13(1), 117-121."			
+Ref_173	"Musser, G. (1992). Philippine rodents: definitions of Tarsomys and Limnomys plus a preliminary assessment of phylogenetic patterns among native Philippine murines (Murinae, Muridae). Bulletin of the American Museum of Natural History, , 1-138."			
+Ref_174	"Davis, W. (1970). Tomopeas ravus Miller (Chiroptera). Journal of Mammalogy, 51"			
+Ref_175	"Brito, D. (2003). Minimum viable population and conservation status of the Atlantic Forest spiny rat Trinomys eliasi. Biological conservation, 113(1), 153-158."			
+Ref_176	"Benda, P. First record of Crocidua dhofarensis Hutterer et Harrison, 1988 (Mammalia : Soricidae) in Yemen. Casopis Narodniho Muzea Rada Prirodovedna. 2006. 175(1-2): 27-30."			
+Ref_177	"Baker, R. J., Solari, S., Hoffmann, F. G. A new central american species from the Carollia Brevicauda complex. Occasional Papers, Museum of Texas Tech Univeristy. 217:1-12."			
+Ref_178	"Jetz, W.; Freckleton, R.P. : Grave extinction risk of data-deficient species inferred from phylogenetic, spatial and environmental information. J. Applied Ecology (revision in review)"			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
