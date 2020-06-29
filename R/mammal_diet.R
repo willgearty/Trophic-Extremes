@@ -274,8 +274,8 @@ ggsave("../figures/Mammal Diets Bootstrap Means.pdf", device = "pdf", width = 10
 #Pull out sample=20
 (gg <- ggplot(data = subset(bootstrap_means, sample==20), aes(x = age_bin_num, y = avg, color = diet, group = interaction(age_bin, diet))) +
     annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = 0, ymax = 15, fill = rep_len(c("grey90", "white"), length.out = 9)) +
-    geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15)) +
-    geom_errorbar(aes(ymin = avg - 1.96*stddev, ymax = avg + 1.96*stddev), position = position_dodge2(preserve = "single", width = .95, padding = .15)) +
+    geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 3) +
+    geom_errorbar(aes(ymin = avg - 1.96*stddev, ymax = avg + 1.96*stddev), position = position_dodge2(preserve = "single", width = .95, padding = .15), size = 1.75) +
     scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
     scale_y_continuous(name = "ln Mass (g)", breaks = seq(3, 11, 2)) +
     coord_cartesian(ylim = c(2,12)) +
@@ -319,8 +319,8 @@ ggsave("../figures/Mammal Diets Bootstrap Meta Means.pdf", device = "pdf", width
 bootstrap_means$age_bin_num <- as.numeric(bootstrap_means$age_bin)
 (gg <- ggplot(data = subset(bootstrap_means, sample==20), aes(x = age_bin_num, y = wtd_mean, color = diet, group = interaction(age_bin, diet))) +
     annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = 0, ymax = 15, fill = rep_len(c("grey90", "white"), length.out = 9)) +
-    geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15)) +
-    geom_errorbar(aes(ymin = wtd_mean - 1.96 * sqrt(wtd_var), ymax = wtd_mean + 1.96 * sqrt(wtd_var)), position = position_dodge2(preserve = "single", width = .95, padding = .15)) +
+    geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 3) +
+    geom_errorbar(aes(ymin = wtd_mean - 1.96 * sqrt(wtd_var), ymax = wtd_mean + 1.96 * sqrt(wtd_var)), position = position_dodge2(preserve = "single", width = .95, padding = .15), size = 1.75) +
     scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
     scale_y_continuous(name = "ln Mass (g)", breaks = seq(3, 11, 2)) +
     coord_cartesian(ylim = c(2,12)) +
