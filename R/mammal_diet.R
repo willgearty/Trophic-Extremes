@@ -19,8 +19,11 @@ foss_mamm_diet_clean <- subset(foss_mamm_diet, !is.na(Recoded_Diet) & !is.na(FAD
 #remove aquatic and amphibious species
 foss_mamm_diet_clean <- subset(foss_mamm_diet_clean, !(PBDB.life.habit %in% c("aquatic", "amphibious")))
 
-#order
-foss_mamm_diet_clean$Recoded_Diet <- factor(foss_mamm_diet_clean$Recoded_Diet, levels = c("herbivore", "omnivore", "insectivore", "carnivore"))
+#remove insectivores (because of sampling biases)
+foss_mamm_diet_clean <- subset(foss_mamm_diet_clean, Recoded_Diet != "insectivore")
+
+#order recoded diet
+foss_mamm_diet_clean$Recoded_Diet <- factor(foss_mamm_diet_clean$Recoded_Diet, levels = c("herbivore", "omnivore", "carnivore"))
 
 #settings
 n_subsets <- 100 #number of replicates for bootstrap analyses
@@ -31,7 +34,7 @@ colors8a <- c(rgb(0,0,0), rgb(230/255, 159/255, 0/255), rgb(86/255, 180/255, 233
 #Black, Honolulu Blue, Summer Sky, Barbie Pink, Ocean Green, Bamboo, Gamboge, Paris Daisy
 colors8b <- c(rgb(0,0,0), rgb(34/255, 113/255, 178/255), rgb(61/255, 183/255, 233/255), rgb(247/255, 72/255, 165/255), rgb(53/255, 155/255, 115/255), rgb(213/255, 94/255, 0/255), rgb(230/255, 159/255, 0/255), rgb(240/255, 230/255, 66/255))
 #Bluish green, Orange, Reddish purple
-colors3 <- setNames(c(rgb(0/255, 158/255, 115/255), rgb(230/255, 159/255, 0/255), rgb(204/255,121/255,167/255)), c("herbivore","omnivore","carnivore"))
+colors3 <- setNames(colors8b[c(5, 2, 6)], c("herbivore","omnivore","carnivore"))
 colors4 <- setNames(colors8b[c(5, 2, 8, 6)], c("herbivore", "omnivore", "insectivore", "carnivore"))
 
 #phylopics
@@ -210,7 +213,7 @@ for(k in 1:length(subset_sizes)){
   }
 }
 
-diet_bootstrap$diet <- factor(diet_bootstrap$diet, levels = c("herbivore", "omnivore", "insectivore", "carnivore"))
+diet_bootstrap$diet <- factor(diet_bootstrap$diet, levels = c("herbivore", "omnivore", "carnivore"))
 
 ggplot(data = diet_bootstrap, aes(x = age_bin, y = mean, color = diet)) +
   geom_boxplot(position = position_dodge(preserve = "single")) +
@@ -218,7 +221,7 @@ ggplot(data = diet_bootstrap, aes(x = age_bin, y = mean, color = diet)) +
   scale_y_continuous(name = "ln Mass (g)", lim = c(0,15)) +
   theme_classic(base_size = 16) +
   theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
-  scale_color_manual(values = colors4, name = "Diet") +
+  scale_color_manual(values = colors3, name = "Diet") +
   facet_wrap(~sample)
 ggsave("../figures/Mammal Diets Bootstrap Boxplots.pdf", device = "pdf", width = 20, height = 20)
 
@@ -234,7 +237,7 @@ diet_bootstrap$age_bin_num <- as.numeric(diet_bootstrap$age_bin)
     theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
           panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
           legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
-    scale_fill_manual(name = NULL, values = colors4) +
+    scale_fill_manual(name = NULL, values = colors3) +
     annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = 1.5, ymax = 2.5) +
     annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = 1.5, ymax = 2.5) +
     annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = 1.5, ymax = 2.5) +
@@ -258,7 +261,7 @@ ggsave("../figures/Mammal Diets Bootstrap Boxplots-20 Sample.pdf", geo_plot, dev
 #calculate means, sds, weighted means, and weighted variances for each age bin*diet combination
 bootstrap_means <- diet_bootstrap %>%
   group_by(age_bin, diet, sample) %>% filter(n >= 5) %>%
-  summarise(stddev = sd(mean, na.rm = TRUE), avg = mean(mean), wtd_mean = wtd.mean(mean, 1/sd^2), wtd_var = wtd.var(mean, 1/sd^2))
+  summarise(stddev = sd(mean, na.rm = TRUE), avg = mean(mean), wtd_mean = wtd.mean(mean, 1/sd^2), wtd_var = wtd.var(mean, 1/sd^2), n_sp = unique(n))
 
 #Means and standard deviations
 ggplot(data = bootstrap_means, aes(x = age_bin, y = avg, color = diet, group = sample)) +
@@ -268,14 +271,16 @@ ggplot(data = bootstrap_means, aes(x = age_bin, y = avg, color = diet, group = s
   scale_y_continuous(name = "ln Mass (g)", lim = c(0,15)) +
   theme_classic(base_size = 16) +
   theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
-  scale_color_manual(values = colors4, name = "Diet")
+  scale_color_manual(values = colors3, name = "Diet")
 ggsave("../figures/Mammal Diets Bootstrap Means.pdf", device = "pdf", width = 10, height = 10)
 
 #Pull out sample=20
+bootstrap_means$age_bin_num <- as.numeric(bootstrap_means$age_bin)
 (gg <- ggplot(data = subset(bootstrap_means, sample==20), aes(x = age_bin_num, y = avg, color = diet, group = interaction(age_bin, diet))) +
     annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = 0, ymax = 15, fill = rep_len(c("grey90", "white"), length.out = 9)) +
-    geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 3) +
+    geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 3.5) +
     geom_errorbar(aes(ymin = avg - 1.96*stddev, ymax = avg + 1.96*stddev), position = position_dodge2(preserve = "single", width = .95, padding = .15), size = 1.75) +
+    geom_text(aes(label = n_sp, y = avg + 1.96*stddev + .2), position = position_dodge2(preserve = "single", width = .95, padding = .15), size = 5, show.legend = FALSE) +
     scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
     scale_y_continuous(name = "ln Mass (g)", breaks = seq(3, 11, 2)) +
     coord_cartesian(ylim = c(2,12)) +
@@ -434,3 +439,42 @@ ggplot(data = bootstrap_means, aes(x = age_bin, y = means, color = diet, shape =
   theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
   scale_color_manual(limits = c("herbivore", "omnivore", "carnivore"), values = colors3, name = "Diet") +
   facet_wrap(~sample)
+
+#data for table/figure####
+#using rob's data
+Atraits <- readRDS("../data/v_trait.rds")
+mam_pres <- Atraits %>% 
+  dplyr::mutate(diet_plant = diet_fruit + diet_nect + diet_seed + diet_planto) %>% 
+  dplyr::mutate(diet_vert = diet_vend + diet_vect + diet_vfish + diet_vunk + diet_scav) %>%   
+  dplyr::filter(realm == "terrestrial" & class == "Mammalia") %>% 
+  dplyr::filter(!is.na(diet_plant)) %>% 
+  dplyr::mutate(body_mass_median = log(body_mass_median)) %>% 
+  dplyr::select(binomial, body_mass_median, diet_plant, diet_vert, diet_inv)
+
+phylacine <- readRDS("../data/v_phylacine_trait.rds")
+
+phylacine <- phylacine %>%
+  dplyr::mutate(body_mass_median = log(mass)) %>% 
+  dplyr::select(binomial, body_mass_median, diet_plant, diet_vert, diet_inv)
+
+pleis <- dplyr::bind_rows(mam_pres, phylacine)
+
+pleis <- pleis %>%
+  # omnivores
+  dplyr::mutate(omnivore = apply(dplyr::select(pleis, diet_plant, diet_vert, diet_inv), 1, max)) %>%
+  dplyr::mutate(diet_5cat = ifelse(omnivore <=50, 4, max.col(dplyr::select(., diet_plant:diet_inv))))
+pleis$diet_5cat = plyr::mapvalues(pleis$diet_5cat, 
+                                  from = c("1", "2", "3", "4"), 
+                                  to = c("Herbivore", "Carnivore", "Invertivore", "Omnivore"))
+
+pleis <- dplyr::mutate(pleis, diet_5cat = factor(diet_5cat, levels = c("Herbivore", "Omnivore", "Invertivore", "Carnivore")))
+
+pleis <- pleis %>%
+  mutate(time = ifelse(binomial %in% mam_pres$binomial, "Modern", "Pleistocene"))
+
+pleis %>%
+  group_by(diet_5cat, time) %>% summarise(min = min(body_mass_median, na.rm = TRUE), which_min = binomial[which.min(body_mass_median)], max = max(body_mass_median, na.rm = TRUE), which_max = binomial[which.max(body_mass_median)])
+
+#using Kate's data####
+foss_mamm_diet_clean %>% filter(LAD <= 2.588 & FAD >= 0.0117) %>%
+  group_by(Recoded_Diet) %>% summarise(min = min(lnMass_g, na.rm = TRUE), which_min = Genus_species[which.min(lnMass_g)], max = max(lnMass_g, na.rm = TRUE), which_max = Genus_species[which.max(lnMass_g)])
