@@ -94,7 +94,18 @@ mammal_gls <-
       data = terr_mammals %>% drop_na(diet_name, biome_name))
 summary(mammal_gls)
 
-broom.mixed::tidy(mammal_gls)
+mammal_gls_df <- 
+  broom.mixed::tidy(mammal_gls) %>% 
+  mutate(term = str_replace(term, "diet_name", ""), 
+         lower_ci = estimate - 1.96 * std.error,
+         upper_ci = estimate + 1.96 * std.error) %>% 
+  mutate(term = factor(term, levels = diet_cat_key$diet_name))
+
+ggplot(data = mammal_gls_df, aes(x = term, y = estimate)) + 
+  geom_pointrange(aes(ymin = lower_ci, ymax = upper_ci)) + 
+  boxplot_theme() + 
+  labs(x = "Diet category", y = "Estimate")
+ggsave('../figures/V_plots_terrestrial_mammals_GLS_estimates.pdf')
 
 bird_gls <- 
   gls(log10_body_mass_median ~ diet_name - 1, 
@@ -103,3 +114,16 @@ bird_gls <-
 summary(bird_gls)
 
 broom.mixed::tidy(bird_gls)
+
+bird_gls_df <- 
+  broom.mixed::tidy(bird_gls) %>% 
+  mutate(term = str_replace(term, "diet_name", ""), 
+         lower_ci = estimate - 1.96 * std.error,
+         upper_ci = estimate + 1.96 * std.error) %>% 
+  mutate(term = factor(term, levels = diet_cat_key$diet_name))
+
+ggplot(data = bird_gls_df, aes(x = term, y = estimate)) + 
+  geom_pointrange(aes(ymin = lower_ci, ymax = upper_ci)) + 
+  boxplot_theme() + 
+  labs(x = "Diet category", y = "Estimate")
+ggsave('../figures/V_plots_terrestrial_birds_GLS_estimates.pdf')
