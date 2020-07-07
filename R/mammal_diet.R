@@ -471,6 +471,52 @@ dat <- subset(dat, !(Time.of.extinction..LP.125.75..EP.30.50..TP.15.10..Holocene
 dat$bin = "Future"
 mom_data_per_bin <- rbind(mom_data_per_bin, dat)
 
-mom_data_per_bin %>%
+mom_stats <- mom_data_per_bin %>%
   group_by(Recoded_Diet, bin) %>%
   summarise(min = min(lnMass_g, na.rm = TRUE), which_min = Genus_species[which.min(lnMass_g)], max = max(lnMass_g, na.rm = TRUE), which_max = Genus_species[which.max(lnMass_g)])
+
+mom_stats$diet_num <- as.numeric(factor(mom_stats$Recoded_Diet, levels = c("carnivore", "insectivore", "omnivore", "herbivore")))
+
+box_colors <- setNames(rep("white", length(interaction(mom_stats$Recoded_Diet, mom_stats$bin))),
+                       interaction(mom_stats$Recoded_Diet, mom_stats$bin))
+box_colors[grepl("Modern", names(box_colors))] <- "grey60"
+box_colors[grepl("Future", names(box_colors)) & grepl("carnivore", names(box_colors))] <- colors4["carnivore"]
+box_colors[grepl("Future", names(box_colors)) & grepl("insectivore", names(box_colors))] <- colors4["insectivore"]
+box_colors[grepl("Future", names(box_colors)) & grepl("omnivore", names(box_colors))] <- colors4["omnivore"]
+box_colors[grepl("Future", names(box_colors)) & grepl("herbivore", names(box_colors))] <- colors4["herbivore"]
+
+diet_stats <- mom_stats %>%
+  group_by(Recoded_Diet, diet_num) %>%
+  summarise(minimum = min(min), maximum = max(max), avg = (max(max) + min(min))/2,
+            extant_max = max(max[bin == "Modern"]), future_max = max(max[bin == "Future"])) %>%
+  mutate(Recoded_Diet = paste0(stringr::str_to_sentence(Recoded_Diet), "s"))
+diet_stats$min_mech <- c("Larger\nThan Prey", "Metabolic\nPhysiology",
+                         "Digestive\nPhysiology", "Digestive\nPhysiology")[diet_stats$diet_num]
+diet_stats$max_mech <- c("Hunting\nTradeoffs", "Resource\nAvailability",
+                         "Resource\nAvailability", "Resource\nAvailability")[diet_stats$diet_num]
+
+ggplot(mom_stats) +
+  geom_segment(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
+               aes(x = minimum, xend = minimum, y = 0, yend = 4.7), size = 2.5, linetype = "11") +
+  geom_segment(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
+               aes(x = maximum, xend = maximum, y = 0, yend = 4.7), size = 2.5, linetype = "11") +
+  geom_rect(aes(xmin = min, xmax = max, ymin = diet_num - .4, ymax = diet_num + .4,
+                fill = interaction(Recoded_Diet, bin)), show.legend = FALSE, color = "black", size = 2) +
+  geom_text(data = diet_stats, aes(x = avg, y = diet_num, label = Recoded_Diet),
+            color = "black", size = 10) +
+  geom_text(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
+            aes(x = (maximum + extant_max) / 2, y = diet_num), label = "extinct", angle = 90) +
+  geom_text(data = subset(diet_stats, Recoded_Diet %in% c("Carnivores", "Herbivores")),
+            aes(x = (extant_max + future_max) / 2, y = diet_num), label = "endangered", angle = 90) +
+  geom_text(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
+            aes(x = minimum, y = 5.2, label = min_mech), angle = 90, size = 7, lineheight = .8) +
+  geom_text(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
+            aes(x = maximum, y = 5.2, label = max_mech), angle = 90, size = 7, lineheight = .8) +
+  scale_x_continuous(name = "ln Mass (g)") +
+  scale_y_continuous(name = NULL, expand = c(0,0)) +
+  coord_cartesian(ylim = c(.4, 6)) +
+  scale_fill_manual(values = box_colors) +
+  theme_classic(base_size = 24) +
+  theme(axis.line.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(),
+        axis.text.x = element_text(color = "black"))
+ggsave("../figures/Mammal Diets Mechanisms.pdf", width = 14, height = 9)
