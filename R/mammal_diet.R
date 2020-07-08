@@ -8,7 +8,8 @@ library(Hmisc)
 library(magrittr)
 
 #North American Cenozoic mammals
-lyons_diet <- read.csv("../data/Lyons_BS_diet.csv", stringsAsFactors = FALSE) %>%
+lyons_diet <- read.csv("../data/Lyons_BS_diet.csv", stringsAsFactors = FALSE)
+lyons_diet_clean <- lyons_diet %>%
   filter(!is.na(Recoded_Diet), !is.na(FAD), !is.na(LAD),
          !(PBDB.life.habit %in% c("aquatic", "amphibious"))) %>%
   select(Order, Genus_species, FAD, LAD, Recoded_Diet, lnMass_g) %>%
@@ -33,15 +34,31 @@ mom_data_NA <- mom_data %>%
   select(Genus_species, Order, FAD, LAD, Recoded_Diet, lnMass_g, Continent) %>%
   filter(Continent == "NA")
 
-NA_mamm_diet <- rbind(lyons_diet, mom_data_NA)
-archaic_orders <- read.csv("../data/ArchaicOrders.csv", stringsAsFactors = FALSE)[["Order"]]
-NA_mamm_diet$archaic <- factor(NA_mamm_diet$Order %in% archaic_orders)
+#Combine two datasets and clean
+NA_mamm_diet <- rbind(cbind(lyons_diet_clean, source = "lyons"), cbind(mom_data_NA, source = "mom")) %>%
+  #Rename out-of-date orders
+  mutate(Order = revalue(Order, c("Soricomorpha" = "Eulipotyphla",
+                                  "Lipotyphla" = "Eulipotyphla",
+                                  "Hicanodonta" = "Cingulata",
+                                  "Xenarthra" = "Pilosa"))) %>%
+  #Summarise duplicates
+  group_by(Order, Genus_species, Continent) %>%
+  summarise(FAD = max(FAD), LAD = min(LAD), lnMass_g = mean(lnMass_g),
+            Recoded_Diet = ifelse("mom" %in% source, Recoded_Diet[source == "mom"], Recoded_Diet[source == "lyons"]),
+            sources = paste(source, collapse = ", "), .groups = "drop") %>%
+  #order recoded diet
+  mutate(Recoded_Diet = factor(Recoded_Diet, levels = c("herbivore", "omnivore", "insectivore", "carnivore")))
 
+#Categorize orders as archaic or modern
+archaic_orders <- NA_mamm_diet %>%
+  group_by(Order) %>%
+  summarise(archaic = !any(LAD < 5)) %>% filter(archaic)
+NA_mamm_diet <- NA_mamm_diet %>%
+  mutate(archaic = factor(Order %in% archaic_orders$Order))
+
+#Get relevant subset of time scale
 time_scale <- subset(epochs, max_age < 150)
 time_scale$name <- factor(time_scale$name, levels = rev(time_scale$name))
-
-#order recoded diet
-NA_mamm_diet$Recoded_Diet <- factor(NA_mamm_diet$Recoded_Diet, levels = c("herbivore", "omnivore", "insectivore", "carnivore"))
 
 #settings
 n_subsets <- 100 #number of replicates for bootstrap analyses
@@ -321,7 +338,7 @@ bootstrap_means$age_bin_num <- as.numeric(bootstrap_means$age_bin)
     annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = 0, ymax = 15, fill = rep_len(c("grey90", "white"), length.out = 9)) +
     geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 3.5) +
     geom_errorbar(aes(ymin = avg - 1.96*stddev, ymax = avg + 1.96*stddev), position = position_dodge2(preserve = "single", width = .95, padding = .15), size = 1.75) +
-    geom_text(aes(label = n_sp, y = avg + 1.96*stddev + .2), position = position_dodge2(preserve = "single", width = .95, padding = .15), size = 5, show.legend = FALSE) +
+    geom_text(aes(label = n_sp, y = avg + 1.96*stddev + .2), position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 5, show.legend = FALSE) +
     scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
     scale_y_continuous(name = "ln Mass (g)", breaks = seq(3, 11, 2)) +
     coord_cartesian(ylim = c(2,12)) +
