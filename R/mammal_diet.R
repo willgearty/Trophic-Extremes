@@ -496,7 +496,7 @@ mom_stats$diet_num <- as.numeric(factor(mom_stats$Recoded_Diet, levels = c("carn
 
 box_colors <- setNames(rep("white", length(interaction(mom_stats$Recoded_Diet, mom_stats$bin))),
                        interaction(mom_stats$Recoded_Diet, mom_stats$bin))
-box_colors[grepl("Modern", names(box_colors))] <- "grey60"
+box_colors[grepl("Modern", names(box_colors))] <- "grey80"
 box_colors[grepl("Future", names(box_colors)) & grepl("carnivore", names(box_colors))] <- colors4["carnivore"]
 box_colors[grepl("Future", names(box_colors)) & grepl("insectivore", names(box_colors))] <- colors4["insectivore"]
 box_colors[grepl("Future", names(box_colors)) & grepl("omnivore", names(box_colors))] <- colors4["omnivore"]
@@ -505,34 +505,39 @@ box_colors[grepl("Future", names(box_colors)) & grepl("herbivore", names(box_col
 diet_stats <- mom_stats %>%
   group_by(Recoded_Diet, diet_num) %>%
   summarise(minimum = min(min), maximum = max(max), avg = (max(max) + min(min))/2,
-            extant_max = max(max[bin == "Modern"]), future_max = max(max[bin == "Future"])) %>%
-  mutate(Recoded_Diet = paste0(stringr::str_to_sentence(Recoded_Diet), "s"))
-diet_stats$min_mech <- c("Larger\nThan Prey", "Metabolic\nPhysiology",
-                         "Digestive\nPhysiology", "Digestive\nPhysiology")[diet_stats$diet_num]
-diet_stats$max_mech <- c("Hunting\nTradeoffs", "Resource\nAvailability",
-                         "Resource\nAvailability", "Resource\nAvailability")[diet_stats$diet_num]
+            extant_max = max(max[bin == "Modern"]), future_max = max(max[bin == "Future"]), .groups = "drop")
+diet_stats$min_mech <- c("Larger\nThan Prey", "Metabolic\nPhysiology\n",
+                         "Plant Digestive\nPhysiology", "Plant Digestive\nPhysiology")[diet_stats$diet_num]
+diet_stats$max_mech <- c("Hunting\nTradeoffs", "High Quality\nPlant and Insect\nAvailability",
+                         "High Quality\nPlant\nAvailability", "Low Quality\nPlant\nAvailability")[diet_stats$diet_num]
 
 ggplot(mom_stats) +
-  geom_segment(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
-               aes(x = minimum, xend = minimum, y = 0, yend = 4.7), size = 2.5, linetype = "11") +
-  geom_segment(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
-               aes(x = maximum, xend = maximum, y = 0, yend = 4.7), size = 2.5, linetype = "11") +
+  geom_segment(data = subset(diet_stats, Recoded_Diet != "omnivore"), show.legend = FALSE,
+               aes(x = minimum, xend = minimum, y = 0, yend = 4.7, color = Recoded_Diet), size = 2.5, linetype = "11") +
+  geom_segment(data = subset(diet_stats, Recoded_Diet != "omnivore"), show.legend = FALSE,
+               aes(x = maximum, xend = maximum, y = 0, yend = 4.7, color = Recoded_Diet), size = 2.5, linetype = "11") +
   geom_rect(aes(xmin = min, xmax = max, ymin = diet_num - .4, ymax = diet_num + .4,
-                fill = interaction(Recoded_Diet, bin)), show.legend = FALSE, color = "black", size = 2) +
-  geom_text(data = diet_stats, aes(x = avg, y = diet_num, label = Recoded_Diet),
+                fill = interaction(Recoded_Diet, bin)), show.legend = FALSE, color = "black", size = 1.25) +
+  geom_text(data = diet_stats, aes(x = avg, y = diet_num, label = paste0(stringr::str_to_sentence(Recoded_Diet), "s")),
             color = "black", size = 10) +
-  geom_text(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
-            aes(x = (maximum + extant_max) / 2, y = diet_num), label = "extinct", angle = 90) +
-  geom_text(data = subset(diet_stats, Recoded_Diet %in% c("Carnivores", "Herbivores")),
-            aes(x = (extant_max + future_max) / 2, y = diet_num), label = "endangered", angle = 90) +
-  geom_text(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
-            aes(x = minimum, y = 5.2, label = min_mech), angle = 90, size = 7, lineheight = .8) +
-  geom_text(data = subset(diet_stats, Recoded_Diet != "Omnivores"),
-            aes(x = maximum, y = 5.2, label = max_mech), angle = 90, size = 7, lineheight = .8) +
+  geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
+            aes(x = (maximum + extant_max) / 2, y = diet_num), label = "extinct", angle = 60, size = 5) +
+  geom_text(data = subset(diet_stats, Recoded_Diet %in% c("carnivore", "herbivore")),
+            aes(x = (extant_max + future_max) / 2, y = diet_num), label = "endangered", angle = 60, size = 5) +
+  geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
+            aes(x = minimum + .25, y = 5.2, label = min_mech), angle = 60, size = 6.5, lineheight = .9) +
+  geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
+            aes(x = maximum + .25, y = 5.2, label = max_mech), angle = 60, size = 6.5, lineheight = .9) +
+  annotate("segment", x = c(11, 5), xend = c(5, 11), y = c(4.6, 5), yend = c(4.6, 5), size = 2.5, linetype = "11") +
+  annotate("segment", x = c(5.01, 10.99), xend = c(5, 11), y = c(4.6, 5), yend = c(4.6, 5), size = 2.5,
+           arrow = arrow(length = unit(0.02, "npc"), type = "closed")) +
+  annotate("text", x = 8, y = c(4.75, 5.25), size = 6.5, lineheight = .9,
+           label = c("Lower Extinction Risk", "Higher Feeding Efficiency\nStarvation Resistance")) +
   scale_x_continuous(name = "ln Mass (g)") +
   scale_y_continuous(name = NULL, expand = c(0,0)) +
-  coord_cartesian(ylim = c(.4, 6)) +
+  coord_cartesian(ylim = c(.4, 5.75)) +
   scale_fill_manual(values = box_colors) +
+  scale_color_manual(values = colors4) +
   theme_classic(base_size = 24) +
   theme(axis.line.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(),
         axis.text.x = element_text(color = "black"))
