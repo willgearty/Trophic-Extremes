@@ -7,6 +7,14 @@ library(deeptime)
 library(Hmisc)
 library(magrittr)
 
+#Color palettes
+#Black, Orange, Sky Blue, Bluish green, Yellow, Blue, Vermilion, Reddish purple
+colors8a <- c(rgb(0,0,0), rgb(230/255, 159/255, 0/255), rgb(86/255, 180/255, 233/255), rgb(0/255, 158/255, 115/255), rgb(240/255,228/255,66/255), rgb(0/255, 114/255, 178/255), rgb(213/255, 94/255, 0/255), rgb(204/255, 121/255, 167/255))
+#Black, Honolulu Blue, Summer Sky, Barbie Pink, Ocean Green, Bamboo, Gamboge, Paris Daisy
+colors8b <- c(rgb(0,0,0), rgb(34/255, 113/255, 178/255), rgb(61/255, 183/255, 233/255), rgb(247/255, 72/255, 165/255), rgb(53/255, 155/255, 115/255), rgb(213/255, 94/255, 0/255), rgb(230/255, 159/255, 0/255), rgb(240/255, 230/255, 66/255))
+colors12 <- c("#9F0162", "#009F81", "#FF5AAF", "#00FCCF", "#8400CD", "#008DF9",
+              "#00C2F9", "#FFB2FD", "#A40122", "#E20134", "#FF6E3A", "#FFC33B")
+
 #North American Cenozoic mammals
 lyons_diet <- read.csv("../data/Lyons_BS_diet.csv", stringsAsFactors = FALSE)
 lyons_diet_clean <- lyons_diet %>%
@@ -64,13 +72,9 @@ time_scale$name <- factor(time_scale$name, levels = rev(time_scale$name))
 n_subsets <- 100 #number of replicates for bootstrap analyses
 subset_sizes <- seq(5,100,5) #sample sizes to use for bootstrap analyses
 
-#Black, Orange, Sky Blue, Bluish green, Yellow, Blue, Vermilion, Reddish purple
-colors8a <- c(rgb(0,0,0), rgb(230/255, 159/255, 0/255), rgb(86/255, 180/255, 233/255), rgb(0/255, 158/255, 115/255), rgb(240/255,228/255,66/255), rgb(0/255, 114/255, 178/255), rgb(213/255, 94/255, 0/255), rgb(204/255, 121/255, 167/255))
-#Black, Honolulu Blue, Summer Sky, Barbie Pink, Ocean Green, Bamboo, Gamboge, Paris Daisy
-colors8b <- c(rgb(0,0,0), rgb(34/255, 113/255, 178/255), rgb(61/255, 183/255, 233/255), rgb(247/255, 72/255, 165/255), rgb(53/255, 155/255, 115/255), rgb(213/255, 94/255, 0/255), rgb(230/255, 159/255, 0/255), rgb(240/255, 230/255, 66/255))
 #Bluish green, Orange, Reddish purple
 colors3 <- setNames(colors8b[c(5, 2, 6)], c("herbivore","omnivore","carnivore"))
-colors4 <- setNames(colors8b[c(5, 2, 8, 6)], c("herbivore", "omnivore", "insectivore", "carnivore"))
+colors4 <- setNames(c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), c("herbivore", "omnivore", "insectivore", "carnivore"))
 
 #phylopics
 uuids <- c("Early Cretaceous" = "c579200d-9773-4fe7-a4e1-274fdd5f4507", #Multituberculata
@@ -187,7 +191,7 @@ discrete_periods$min_age[1:4] <- c(0, 2, 4, 7)
 discrete_epochs <- epochs
 discrete_epochs$max_age[1:9] <- 1:9
 discrete_epochs$min_age[1:9] <- 0:8
-discrete_epochs$name[8:9] <- c("Early\nCretaceous", "Early\nCretaceous")
+discrete_epochs$name[8:9] <- c("Late\nCretaceous", "Early\nCretaceous")
 (geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(9, 0), dat = discrete_periods, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
                          dat = discrete_epochs, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
 ggsave("../figures/Mammal Diets Boxplots.pdf", geo_plot, width = 12, height = 12)
@@ -311,7 +315,7 @@ discrete_periods$min_age[1:4] <- c(0, 2, 4, 7)
 discrete_epochs <- epochs
 discrete_epochs$max_age[1:9] <- 1:9
 discrete_epochs$min_age[1:9] <- 0:8
-discrete_epochs$name[8:9] <- c("Early\nCretaceous", "Early\nCretaceous")
+discrete_epochs$name[8:9] <- c("Late\nCretaceous", "Early\nCretaceous")
 (geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(9, 0), dat = discrete_periods, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
                          dat = discrete_epochs, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
 ggsave("../figures/Mammal Diets Bootstrap Boxplots-20 Sample.pdf", geo_plot, device = "pdf", width = 12, height = 12)
@@ -362,7 +366,7 @@ discrete_periods$min_age[1:4] <- c(0, 2, 4, 7)
 discrete_epochs <- epochs
 discrete_epochs$max_age[1:9] <- 1:9
 discrete_epochs$min_age[1:9] <- 0:8
-discrete_epochs$name[8:9] <- c("Early\nCretaceous", "Early\nCretaceous")
+discrete_epochs$name[8:9] <- c("Late\nCretaceous", "Early\nCretaceous")
 (geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(9, 0), dat = discrete_periods, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
                          dat = discrete_epochs, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
 ggsave("../figures/Mammal Diets Bootstrap Means-20 Sample.pdf", geo_plot, device = "pdf", width = 12, height = 12)
@@ -407,7 +411,7 @@ discrete_periods$min_age[1:4] <- c(0, 2, 4, 7)
 discrete_epochs <- epochs
 discrete_epochs$max_age[1:9] <- 1:9
 discrete_epochs$min_age[1:9] <- 0:8
-discrete_epochs$name[8:9] <- c("Early\nCretaceous", "Early\nCretaceous")
+discrete_epochs$name[8:9] <- c("Late\nCretaceous", "Early\nCretaceous")
 (geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(9, 0), dat = discrete_periods, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
                          dat = discrete_epochs, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
 ggsave("../figures/Mammal Diets Bootstrap Meta Means-20 Sample.pdf", geo_plot, device = "pdf", width = 12, height = 12)
@@ -511,6 +515,28 @@ diet_stats$min_mech <- c("Larger\nThan Prey", "Metabolic\nPhysiology\n",
 diet_stats$max_mech <- c("Hunting\nTradeoffs", "High Quality\nPlant and Insect\nAvailability",
                          "High Quality\nPlant\nAvailability", "Low Quality\nPlant\nAvailability")[diet_stats$diet_num]
 
+#phylopics
+uuids2 <- c("Smallest Carnivore" = "20b6096e-2d6d-43c4-acda-fd74f0f91d48", #Mustela nivalis
+           "Largest Carnivore" = "8d4b7834-9dd3-4f5a-84a7-99fa159a112a", #Arctodus simus
+           "Smallest Insectivore" = "822c549b-b29b-47eb-9fe3-dc5bbb0abccb", #Soricidae
+           "Largest Insectivore" = "cad2eeb5-7827-4b3d-b406-e20864a71637", #Pampatherium
+           "Smallest Omnivore" = "81930c02-5f26-43f7-9c19-e9831e780e53", #Sigmodontinae
+           "Largest Omnivore" = "0cd82109-bb1c-4e08-ab11-c845d8a82eba", #Ursus arctos
+           "Smallest Herbivore" = "f98f3e0f-abc8-4e8f-a812-67bfe312a276", #Glyptotherium
+           "Largest Herbivore" = "43d2a4af-991c-4236-8455-f62271ab73e7" #Mammuthus
+)
+
+phylopics2 <- lapply(uuids2, getPhyloPic)
+
+#make them all face to the right
+phylopics2[[2]] <- flip(phylopics2[[2]], horizontal = TRUE)
+phylopics2[[3]] <- flip(phylopics2[[3]], horizontal = TRUE)
+phylopics2[[5]] <- flip(phylopics2[[5]], horizontal = TRUE)
+phylopics2[[6]] <- flip(phylopics2[[6]], horizontal = TRUE)
+phylopics2[[8]] <- flip(phylopics2[[8]], horizontal = TRUE)
+
+phylopics2 <- lapply(phylopics2, pictureGrob)
+
 ggplot(mom_stats) +
   geom_segment(data = subset(diet_stats, Recoded_Diet != "omnivore"), show.legend = FALSE,
                aes(x = minimum, xend = minimum, y = 0, yend = 4.7, color = Recoded_Diet), size = 2.5, linetype = "11") +
@@ -525,20 +551,30 @@ ggplot(mom_stats) +
   geom_text(data = subset(diet_stats, Recoded_Diet %in% c("carnivore", "herbivore")),
             aes(x = (extant_max + future_max) / 2, y = diet_num), label = "endangered", angle = 60, size = 5) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
-            aes(x = minimum + .25, y = 5.2, label = min_mech), angle = 60, size = 6.5, lineheight = .9) +
+            aes(x = minimum + .25, y = 5.2, label = min_mech, color = Recoded_Diet),
+            angle = 60, size = 6.5, lineheight = .9, show.legend = FALSE) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
-            aes(x = maximum + .25, y = 5.2, label = max_mech), angle = 60, size = 6.5, lineheight = .9) +
+            aes(x = maximum + .25, y = 5.2, label = max_mech, color = Recoded_Diet),
+            angle = 60, size = 6.5, lineheight = .9, show.legend = FALSE) +
   annotate("segment", x = c(11, 5), xend = c(5, 11), y = c(4.6, 5), yend = c(4.6, 5), size = 2.5, linetype = "11") +
   annotate("segment", x = c(5.01, 10.99), xend = c(5, 11), y = c(4.6, 5), yend = c(4.6, 5), size = 2.5,
            arrow = arrow(length = unit(0.02, "npc"), type = "closed")) +
   annotate("text", x = 8, y = c(4.75, 5.25), size = 6.5, lineheight = .9,
            label = c("Lower Extinction Risk", "Higher Feeding Efficiency\nStarvation Resistance")) +
-  scale_x_continuous(name = "ln Mass (g)") +
+  scale_x_continuous(name = "ln Mass (g)", limits = c(-0.5, 17)) +
   scale_y_continuous(name = NULL, expand = c(0,0)) +
   coord_cartesian(ylim = c(.4, 5.75)) +
   scale_fill_manual(values = box_colors) +
   scale_color_manual(values = colors4) +
   theme_classic(base_size = 24) +
   theme(axis.line.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(),
-        axis.text.x = element_text(color = "black"))
+        axis.text.x = element_text(color = "black")) +
+  annotation_custom(phylopics2[[1]], 2.2, 3.7, ymin = 0.7, ymax = 1.3) + #3.85
+  annotation_custom(phylopics2[[2]], 13.65, 15.15, ymin = 0.7, ymax = 1.3) + #13.5
+  annotation_custom(phylopics2[[3]], -1.09, .41, ymin = 1.7, ymax = 2.3) + #0.560
+  annotation_custom(phylopics2[[4]], 12.35, 13.85, ymin = 1.7, ymax = 2.3) + #12.2
+  annotation_custom(phylopics2[[5]], -0.1, 1.4, ymin = 2.7, ymax = 3.3) + #1.55
+  annotation_custom(phylopics2[[6]], 12.45, 13.95, ymin = 2.7, ymax = 3.3) + #12.3
+  annotation_custom(phylopics2[[7]], -0.28, 1.22, ymin = 3.7, ymax = 4.3) + #1.37
+  annotation_custom(phylopics2[[8]], 16.35, 17.85, ymin = 3.7, ymax = 4.3)   #16.2
 ggsave("../figures/Mammal Diets Mechanisms.pdf", width = 14, height = 9)
