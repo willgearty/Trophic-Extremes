@@ -549,7 +549,7 @@ ggplot(mom_stats) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
             aes(x = (maximum + extant_max) / 2, y = diet_num), label = "extinct", angle = 60, size = 5) +
   geom_text(data = subset(diet_stats, Recoded_Diet %in% c("carnivore", "herbivore")),
-            aes(x = (extant_max + future_max) / 2, y = diet_num), label = "endangered", angle = 60, size = 5) +
+            aes(x = (extant_max + future_max) / 2, y = diet_num), label = "threatened", angle = 60, size = 5) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
             aes(x = minimum + .25, y = 5.2, label = min_mech, color = Recoded_Diet),
             angle = 60, size = 6.5, lineheight = .9, show.legend = FALSE) +
