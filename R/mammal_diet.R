@@ -1,6 +1,7 @@
 #load and clean data####
 library(plyr)
 library(dplyr)
+library(tidyr)
 library(ggplot2)
 library(viridis)
 library(deeptime)
@@ -242,12 +243,13 @@ n_diets <- length(diets)
 
 diet_bootstrap <- data.frame(age_bin = rep(time_scale$name, each = n_subsets * n_diets, times = length(subset_sizes)),
                              diet = rep(diets, times = n_subsets * n_bins * length(subset_sizes)), sample = rep(subset_sizes, each = n_bins * n_diets * n_subsets),
-                             mean = NA, sd = NA, n = NA)
+                             avg = NA, med = NA, min = NA, max = NA,
+                             fifth = NA, ninetyfifth = NA, stddev = NA, species = NA)
 
-diet_differences <- data.frame(age_bin = rep(time_scale$name, each = n_subsets * n_diets, times = length(subset_sizes)),
-                                 sample = rep(subset_sizes, each = n_bins * n_diets * n_subsets), diet1 = rep(diets[c(1,1,2)], times = n_subsets * n_diets * length(subset_sizes)), 
-                                 diet2 = rep(diets[c(2,3,3)], times = n_subsets * n_diets * length(subset_sizes)), difference = NA, p = NA)
-diet_differences$diets <- paste0(diet_differences$diet1, "-", diet_differences$diet2)
+# diet_differences <- data.frame(age_bin = rep(time_scale$name, each = n_subsets * n_diets, times = length(subset_sizes)),
+#                                  sample = rep(subset_sizes, each = n_bins * n_diets * n_subsets), diet1 = rep(diets[c(1,1,2)], times = n_subsets * n_diets * length(subset_sizes)), 
+#                                  diet2 = rep(diets[c(2,3,3)], times = n_subsets * n_diets * length(subset_sizes)), difference = NA, p = NA)
+# diet_differences$diets <- paste0(diet_differences$diet1, "-", diet_differences$diet2)
 
 idx <- 1
 pb <- txtProgressBar(min = 1, max = length(subset_sizes) * n_bins * n_subsets * n_diets, style = 3)
@@ -259,16 +261,26 @@ for(k in 1:length(subset_sizes)){
       setTxtProgressBar(pb, idx)
       samp <- dat %>% group_by(Recoded_Diet) %>% sample_n(subset_size, replace = TRUE)
       means <- aggregate(. ~ Recoded_Diet, samp[,c("lnMass_g", "Recoded_Diet")], mean)
+      diet_bootstrap$avg[idx:(idx + n_diets - 1)] <- means$lnMass_g[match(diets, means$Recoded_Diet)]
+      medians <- aggregate(. ~ Recoded_Diet, samp[,c("lnMass_g", "Recoded_Diet")], median)
+      diet_bootstrap$med[idx:(idx + n_diets - 1)] <- medians$lnMass_g[match(diets, medians$Recoded_Diet)]
+      mins <- aggregate(. ~ Recoded_Diet, samp[,c("lnMass_g", "Recoded_Diet")], min)
+      diet_bootstrap$min[idx:(idx + n_diets - 1)] <- mins$lnMass_g[match(diets, mins$Recoded_Diet)]
+      maxes <- aggregate(. ~ Recoded_Diet, samp[,c("lnMass_g", "Recoded_Diet")], max)
+      diet_bootstrap$max[idx:(idx + n_diets - 1)] <- maxes$lnMass_g[match(diets, maxes$Recoded_Diet)]
+      fifths <- aggregate(. ~ Recoded_Diet, samp[,c("lnMass_g", "Recoded_Diet")], quantile, 0.05)
+      diet_bootstrap$fifth[idx:(idx + n_diets - 1)] <- fifths$lnMass_g[match(diets, fifths$Recoded_Diet)]
+      ninetyfifths <- aggregate(. ~ Recoded_Diet, samp[,c("lnMass_g", "Recoded_Diet")], quantile, 0.95)
+      diet_bootstrap$ninetyfifth[idx:(idx + n_diets - 1)] <- ninetyfifths$lnMass_g[match(diets, ninetyfifths$Recoded_Diet)]
       sds <- aggregate(. ~ Recoded_Diet, samp[,c("lnMass_g", "Recoded_Diet")], sd)
+      diet_bootstrap$stddev[idx:(idx + n_diets - 1)] <- sds$lnMass_g[match(diets, sds$Recoded_Diet)]
       ns <- dat %>% group_by(Recoded_Diet) %>% summarise(n = length(Recoded_Diet), .groups = 'drop')
-      diet_bootstrap$mean[idx:(idx + n_diets - 1)] <- means$lnMass_g[match(diets, means$Recoded_Diet)]
-      diet_bootstrap$sd[idx:(idx + n_diets - 1)] <- sds$lnMass_g[match(diets, sds$Recoded_Diet)]
-      diet_bootstrap$n[idx:(idx + n_diets - 1)] <- ns$n[match(diets, sds$Recoded_Diet)]
-
-      diffs <- outer(setNames(means$lnMass_g, means$Recoded_Diet),setNames(means$lnMass_g, means$Recoded_Diet),'-')
-      diet_differences$difference[idx:(idx + n_diets - 1)] <- sapply(1:n_diets, function(x) diffs[match(as.character(diet_differences$diet2[x]), rownames(diffs)),match(as.character(diet_differences$diet1[x]), colnames(diffs))])
-      pw <- pairwise.wilcox.test(samp$lnMass_g, samp$Recoded_Diet)$p.value
-      diet_differences$p[idx:(idx + n_diets - 1)] <- sapply(1:n_diets, function(x) pw[match(as.character(diet_differences$diet2[x]), rownames(pw)),match(as.character(diet_differences$diet1[x]), colnames(pw))])
+      diet_bootstrap$species[idx:(idx + n_diets - 1)] <- ns$n[match(diets, ns$Recoded_Diet)]
+      
+      # diffs <- outer(setNames(means$lnMass_g, means$Recoded_Diet),setNames(means$lnMass_g, means$Recoded_Diet),'-')
+      # diet_differences$difference[idx:(idx + n_diets - 1)] <- sapply(1:n_diets, function(x) diffs[match(as.character(diet_differences$diet2[x]), rownames(diffs)),match(as.character(diet_differences$diet1[x]), colnames(diffs))])
+      # pw <- pairwise.wilcox.test(samp$lnMass_g, samp$Recoded_Diet)$p.value
+      # diet_differences$p[idx:(idx + n_diets - 1)] <- sapply(1:n_diets, function(x) pw[match(as.character(diet_differences$diet2[x]), rownames(pw)),match(as.character(diet_differences$diet1[x]), colnames(pw))])
 
       idx <- idx + n_diets
     }
@@ -277,7 +289,7 @@ for(k in 1:length(subset_sizes)){
 
 diet_bootstrap$diet <- factor(diet_bootstrap$diet, levels = c("herbivore", "omnivore", "insectivore", "carnivore"))
 
-ggplot(data = diet_bootstrap, aes(x = age_bin, y = mean, color = diet)) +
+ggplot(data = diet_bootstrap, aes(x = age_bin, y = avg, color = diet)) +
   geom_boxplot(position = position_dodge(preserve = "single")) +
   scale_x_discrete(name = "Time (Ma)", labels = gsub(" ","\n", rev(time_scale$name))) +
   scale_y_continuous(name = "ln Mass (g)", lim = c(0,15)) +
@@ -289,7 +301,7 @@ ggsave("../figures/Mammal Diets Bootstrap Boxplots.pdf", device = "pdf", width =
 
 #pull out sample size=20
 diet_bootstrap$age_bin_num <- as.numeric(diet_bootstrap$age_bin)
-(gg <- ggplot(data = subset(diet_bootstrap, sample==20 & n >= 5 & diet != "insectivore"), aes(x = age_bin_num, y = mean, fill = diet, group = interaction(age_bin, diet))) +
+(gg <- ggplot(data = subset(diet_bootstrap, sample==20 & species >= 5 & diet != "insectivore"), aes(x = age_bin_num, y = avg, fill = diet, group = interaction(age_bin, diet))) +
     annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = 0, ymax = 15, fill = rep_len(c("grey90", "white"), length.out = 9)) +
     geom_boxplot(position = position_dodge2(preserve = "single", width = .95, padding = .15), color = "black") +
     scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
@@ -322,13 +334,13 @@ ggsave("../figures/Mammal Diets Bootstrap Boxplots-20 Sample.pdf", geo_plot, dev
 
 #calculate means, sds, weighted means, and weighted variances for each age bin*diet combination
 bootstrap_means <- diet_bootstrap %>%
-  group_by(age_bin, diet, sample) %>% filter(n >= 5) %>%
-  summarise(stddev = sd(mean, na.rm = TRUE), avg = mean(mean), wtd_mean = wtd.mean(mean, 1/sd^2), wtd_var = wtd.var(mean, 1/sd^2), n_sp = unique(n))
+  group_by(age_bin, diet, sample) %>% filter(species >= 5) %>%
+  summarise(raw_sd = sd(avg, na.rm = TRUE), raw_mean = mean(avg), wtd_mean = wtd.mean(avg, 1/stddev^2), wtd_var = wtd.var(avg, 1/stddev^2), n_sp = unique(species))
 
 #Means and standard deviations
-ggplot(data = subset(bootstrap_means, diet != "insectivore"), aes(x = age_bin, y = avg, color = diet, group = sample)) +
+ggplot(data = subset(bootstrap_means, diet != "insectivore"), aes(x = age_bin, y = raw_mean, color = diet, group = sample)) +
   geom_point(position = position_dodge(width = .9)) +
-  geom_errorbar(aes(ymin = avg - 1.96*stddev, ymax = avg + 1.96*stddev), position = position_dodge(width = .9)) +
+  geom_errorbar(aes(ymin = raw_mean - 1.96*raw_sd, ymax = raw_mean + 1.96*raw_sd), position = position_dodge(width = .9)) +
   scale_x_discrete(name = "Time (Ma)", labels = gsub(" ","\n", rev(time_scale$name))) +
   scale_y_continuous(name = "ln Mass (g)", lim = c(0,15)) +
   theme_classic(base_size = 16) +
@@ -338,11 +350,11 @@ ggsave("../figures/Mammal Diets Bootstrap Means.pdf", device = "pdf", width = 10
 
 #Pull out sample=20
 bootstrap_means$age_bin_num <- as.numeric(bootstrap_means$age_bin)
-(gg <- ggplot(data = subset(bootstrap_means, sample==20 & diet != "insectivore"), aes(x = age_bin_num, y = avg, color = diet, group = interaction(age_bin, diet))) +
+(gg <- ggplot(data = subset(bootstrap_means, sample==20 & diet != "insectivore"), aes(x = age_bin_num, y = raw_mean, color = diet, group = interaction(age_bin, diet))) +
     annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = 0, ymax = 15, fill = rep_len(c("grey90", "white"), length.out = 9)) +
     geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 3.5) +
-    geom_errorbar(aes(ymin = avg - 1.96*stddev, ymax = avg + 1.96*stddev), position = position_dodge2(preserve = "single", width = .95, padding = .15), size = 1.75) +
-    geom_text(aes(label = n_sp, y = avg + 1.96*stddev + .2), position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 5, show.legend = FALSE) +
+    geom_errorbar(aes(ymin = raw_mean - 1.96*raw_sd, ymax = raw_mean + 1.96*raw_sd), position = position_dodge2(preserve = "single", width = .95, padding = .15), size = 1.75) +
+    geom_text(aes(label = n_sp, y = raw_mean + 1.96*raw_sd + .2), position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 5, show.legend = FALSE) +
     scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
     scale_y_continuous(name = "ln Mass (g)", breaks = seq(3, 11, 2)) +
     coord_cartesian(ylim = c(2,12)) +
@@ -416,27 +428,27 @@ discrete_epochs$name[8:9] <- c("Late\nCretaceous", "Early\nCretaceous")
                          dat = discrete_epochs, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
 ggsave("../figures/Mammal Diets Bootstrap Meta Means-20 Sample.pdf", geo_plot, device = "pdf", width = 12, height = 12)
 
-ggplot(data = diet_differences, aes(x = age_bin, y = difference, color = diets)) +
-  geom_hline(yintercept = 0, color = "grey60") +
-  geom_boxplot(position = position_dodge(preserve = "single")) +
-  scale_x_discrete(name = "Time (Ma)", labels = gsub(" ","\n", rev(time_scale$name))) +
-  scale_y_continuous(name = "Difference in Average Mass (ln g)") +
-  theme_classic(base_size = 16) +
-  theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
-  scale_color_manual(values = unname(colors3)) +
-  facet_wrap(~sample)
-ggsave("../figures/Mammal Diets Bootstrap Differences.pdf", device = "pdf", width = 20, height = 20)
-
-ggplot(data = diet_differences, aes(x = age_bin, y = p, color = diets)) +
-  geom_hline(yintercept = 0.05, color = "grey60") +
-  geom_boxplot(position = position_dodge(preserve = "single")) +
-  scale_x_discrete(name = "Time (Ma)", labels = gsub(" ","\n", rev(time_scale$name))) +
-  scale_y_continuous(name = "Difference in Average Mass (ln g)", lim = c(0,1)) +
-  theme_classic(base_size = 16) +
-  theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
-  scale_color_manual(values = unname(colors3)) +
-  facet_wrap(~sample)
-ggsave("../figures/Mammal Diets Bootstrap P-values.pdf", device = "pdf", width = 20, height = 20)
+# ggplot(data = diet_differences, aes(x = age_bin, y = difference, color = diets)) +
+#   geom_hline(yintercept = 0, color = "grey60") +
+#   geom_boxplot(position = position_dodge(preserve = "single")) +
+#   scale_x_discrete(name = "Time (Ma)", labels = gsub(" ","\n", rev(time_scale$name))) +
+#   scale_y_continuous(name = "Difference in Average Mass (ln g)") +
+#   theme_classic(base_size = 16) +
+#   theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
+#   scale_color_manual(values = unname(colors3)) +
+#   facet_wrap(~sample)
+# ggsave("../figures/Mammal Diets Bootstrap Differences.pdf", device = "pdf", width = 20, height = 20)
+# 
+# ggplot(data = diet_differences, aes(x = age_bin, y = p, color = diets)) +
+#   geom_hline(yintercept = 0.05, color = "grey60") +
+#   geom_boxplot(position = position_dodge(preserve = "single")) +
+#   scale_x_discrete(name = "Time (Ma)", labels = gsub(" ","\n", rev(time_scale$name))) +
+#   scale_y_continuous(name = "Difference in Average Mass (ln g)", lim = c(0,1)) +
+#   theme_classic(base_size = 16) +
+#   theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
+#   scale_color_manual(values = unname(colors3)) +
+#   facet_wrap(~sample)
+# ggsave("../figures/Mammal Diets Bootstrap P-values.pdf", device = "pdf", width = 20, height = 20)
 
 #data for table/figure####
 #using rob's data####
@@ -578,3 +590,90 @@ ggplot(mom_stats) +
   annotation_custom(phylopics2[[7]], -0.28, 1.22, ymin = 3.7, ymax = 4.3) + #1.37
   annotation_custom(phylopics2[[8]], 16.35, 17.85, ymin = 3.7, ymax = 4.3)   #16.2
 ggsave("../figures/Mammal Diets Mechanisms.pdf", width = 14, height = 9)
+
+#Rates plot####
+#calculate differences between fossil epochs
+samp_20 <- diet_bootstrap %>%
+  filter(sample == 20) %>%
+  mutate(boot = rep(1:n_subsets, each = n_diets, times = n_bins))
+
+#convert to wide (move all time bins for a diet*boot to single row)???
+#maybe select only medians for now
+med_wide <- samp_20 %>%
+  select(age_bin, diet, med, boot) %>%
+  pivot_wider(names_from = age_bin, values_from = med)
+
+med_long <- med_wide %>% 
+  #calculate rates of change
+  mutate(eoc_diff = (Eocene - Paleocene) / 10000000, olig_diff = (Oligocene - Eocene) / 22100000,
+         mio_diff = (Miocene - Oligocene) / 10870000, plio_diff = (Pliocene - Miocene) / 17697000,
+         plei_diff = (Pleistocene - Pliocene) / 2745000, holo_diff = (Holocene - Pleistocene) / 2576300) %>%
+  #convert to long
+  pivot_longer(cols = eoc_diff:holo_diff, names_to = "time", values_to = "diff") %>%
+  select(run = boot, diet, time, diff)
+
+#read in future projections data
+fut_diff <- readRDS("../data/fut_diff.rds")
+
+# wide to long
+fut_diff2 <- fut_diff %>% 
+  # rates
+  mutate(mod_diff = (pres - pleis) / 126000) %>%
+  mutate(fut_100_diff = (fut_100 - pres) / 100) %>%
+  mutate(fut_300_diff = (fut_300 - fut_100) / 200) %>%
+  mutate(fut_500_diff = (fut_500 - fut_300) / 200)
+
+fut_diff_long <- fut_diff2 %>%
+  pivot_longer(cols = mod_diff:fut_500_diff, names_to = "time", values_to = "diff") %>%
+  select(run, diet = diet_5cat, time, diff)
+
+#combine fossil and future rates
+all_diffs <- rbind(med_long, fut_diff_long) %>%
+  mutate(time = factor(gsub("_diff", "", time),
+                       levels = c("eoc", "olig", "mio", "plio", "plei", "holo",
+                                  "mod", "fut_100", "fut_300", "fut_500")),
+         time_num = as.numeric(time))
+
+# non-parametric confidence interval
+all_diffs_ci <- all_diffs %>%
+  group_by(diet, time, time_num) %>%
+  summarise(med = median(diff), low = quantile(diff, 0.025), upp = quantile(diff, 0.975))
+  
+
+(gg <- ggplot(all_diffs_ci, aes(x = time_num, color = diet, group = interaction(time, diet))) +
+  annotate("rect", xmin = seq(0.5, 9.5, 1), xmax = seq(1.5, 10.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 10)) +
+  geom_point(aes(y = med), position = position_dodge2(preserve = "single", width = .9, padding = .15)) +
+  geom_errorbar(aes(ymin = low, ymax = upp), position = position_dodge2(preserve = "single", width = .95, padding = .15)) +
+  scale_x_continuous(name = "Time Period", limits = c(0.5, 10.5), labels = NULL, breaks = NULL, expand = c(0,0)) +
+  scale_y_continuous(name = "Rate of Median Mass Change (ln g/year)") +
+  coord_cartesian(ylim = c(-0.0015, 0.0015)) +
+  theme_classic(base_size = 24) +
+  theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
+        panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
+        legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
+  scale_color_manual(name = NULL, values = colors4)# +
+  # annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = 1.5, ymax = 2.5) +
+  # annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = 1.5, ymax = 2.5) +
+  # annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = 1.5, ymax = 2.5) +
+  # annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = 1.5, ymax = 2.5) +
+  # annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = 1.5, ymax = 2.5) +
+  # annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = 1.5, ymax = 2.5) +
+  # annotation_custom(phylopics[[7]], 6.55, 7.45, ymin = 1.5, ymax = 2.5) +
+  # annotation_custom(phylopics[[8]], 7.55, 8.45, ymin = 1.5, ymax = 2.5) +
+  # annotation_custom(phylopics[[9]], 8.55, 9.45, ymin = 1.5, ymax = 2.5)
+  )
+periods_with_future <- rbind(data.frame(name = c("Future"),
+                                        max_age = c(0), min_age = c(0.000005),
+                                        abbr = NA, color = c("#0079FA")),
+                             periods[1:3,])
+periods_with_future$max_age <- c(3, 5, 7, 10)
+periods_with_future$min_age <- c(0, 3, 5, 7)
+epochs_with_future <- rbind(data.frame(name = c("500 Years", "300 Years", "100 Years"),
+                                       max_age = c(0.000003, 0.000001, 0), min_age = c(0.000005, 0.000003, 0.000001),
+                                       abbr = NA, color = c("#00E5F8", "#00C2F9", "#009FFA")),
+                            epochs[1:7,])
+epochs_with_future$max_age <- 1:10
+epochs_with_future$min_age <- 0:9
+(geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(10,0), dat = periods_with_future, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
+                         dat = epochs_with_future, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
+ggsave("../figures/Mammal Diets Rates.pdf", geo_plot, width = 12, height = 12)
