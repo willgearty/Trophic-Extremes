@@ -605,9 +605,9 @@ med_wide <- samp_20 %>%
 
 med_long <- med_wide %>% 
   #calculate rates of change
-  mutate(eoc_diff = (Eocene - Paleocene) / 10000000, olig_diff = (Oligocene - Eocene) / 22100000,
-         mio_diff = (Miocene - Oligocene) / 10870000, plio_diff = (Pliocene - Miocene) / 17697000,
-         plei_diff = (Pleistocene - Pliocene) / 2745000, holo_diff = (Holocene - Pleistocene) / 2576300) %>%
+  mutate(eoc_diff = Eocene - Paleocene, olig_diff = Oligocene - Eocene,
+         mio_diff = Miocene - Oligocene, plio_diff = Pliocene - Miocene,
+         plei_diff = Pleistocene - Pliocene, holo_diff = Holocene - Pleistocene) %>%
   #convert to long
   pivot_longer(cols = eoc_diff:holo_diff, names_to = "time", values_to = "diff") %>%
   select(run = boot, diet, time, diff)
@@ -618,35 +618,57 @@ fut_diff <- readRDS("../data/fut_diff.rds")
 # wide to long
 fut_diff2 <- fut_diff %>% 
   # rates
-  mutate(mod_diff = (pres - pleis) / 126000) %>%
-  mutate(fut_100_diff = (fut_100 - pres) / 100) %>%
-  mutate(fut_300_diff = (fut_300 - fut_100) / 200) %>%
-  mutate(fut_500_diff = (fut_500 - fut_300) / 200)
+  mutate(mod_diff = pres - pleis, fut_100_diff = fut_100 - pres,
+         fut_300_diff = fut_300 - fut_100, fut_500_diff = fut_500 - fut_300)
 
 fut_diff_long <- fut_diff2 %>%
   pivot_longer(cols = mod_diff:fut_500_diff, names_to = "time", values_to = "diff") %>%
   select(run, diet = diet_5cat, time, diff)
+
+bin_lengths <- data.frame(time = c("eoc", "olig", "mio", "plio", "plei", "holo",
+                                   "mod", "fut_100", "fut_300", "fut_500"),
+                          length = c(16.05000, 16.48500, 14.28350, 10.22100, 2.66065, 0.00585,
+                                     .126, .0001, .0002, .0002))
 
 #combine fossil and future rates
 all_diffs <- rbind(med_long, fut_diff_long) %>%
   mutate(time = factor(gsub("_diff", "", time),
                        levels = c("eoc", "olig", "mio", "plio", "plei", "holo",
                                   "mod", "fut_100", "fut_300", "fut_500")),
-         time_num = as.numeric(time))
+         time_num = as.numeric(time)) %>%
+  merge(bin_lengths)
 
 # non-parametric confidence interval
 all_diffs_ci <- all_diffs %>%
-  group_by(diet, time, time_num) %>%
+  group_by(diet, time, time_num, length) %>%
   summarise(med = median(diff), low = quantile(diff, 0.025), upp = quantile(diff, 0.975))
-  
 
+fit <- lm(log10(abs(diff/length)) ~ length, data = subset(all_diffs, diff != 0))
+
+#plot rates against bin lengths
+ggplot(all_diffs_ci, aes(x = length, y = abs(med/length))) +
+  #geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15)) +
+  #geom_errorbar(aes(ymin = abs(low/length), ymax = abs(upp/length)),
+  #              position = position_dodge2(preserve = "single", width = .95, padding = .15)) +
+  geom_smooth(formula = "y ~ x", method = "lm", color = "black") +
+  geom_text(aes(label = time, color = diet)) +
+  scale_x_continuous(trans = "log10") +
+  scale_y_continuous(trans = "log10") +
+  theme_classic(base_size = 24) +
+  theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
+        panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
+        legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
+  scale_color_manual(name = NULL, values = colors4)
+ggsave("../figures/Mammal Diets Rates.pdf", width = 12, height = 12)
+
+#plot differences through time
 (gg <- ggplot(all_diffs_ci, aes(x = time_num, color = diet, group = interaction(time, diet))) +
   annotate("rect", xmin = seq(0.5, 9.5, 1), xmax = seq(1.5, 10.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 10)) +
   geom_point(aes(y = med), position = position_dodge2(preserve = "single", width = .9, padding = .15)) +
   geom_errorbar(aes(ymin = low, ymax = upp), position = position_dodge2(preserve = "single", width = .95, padding = .15)) +
   scale_x_continuous(name = "Time Period", limits = c(0.5, 10.5), labels = NULL, breaks = NULL, expand = c(0,0)) +
-  scale_y_continuous(name = "Rate of Median Mass Change (ln g/year)") +
-  coord_cartesian(ylim = c(-0.0015, 0.0015)) +
+  scale_y_continuous(name = "Median Mass Change (ln g)") +
+  #coord_cartesian(ylim = c(-0.0015, 0.0015)) +
   theme_classic(base_size = 24) +
   theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
         panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
@@ -676,4 +698,4 @@ epochs_with_future$max_age <- 1:10
 epochs_with_future$min_age <- 0:9
 (geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(10,0), dat = periods_with_future, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
                          dat = epochs_with_future, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
-ggsave("../figures/Mammal Diets Rates.pdf", geo_plot, width = 12, height = 12)
+ggsave("../figures/Mammal Diets Differences Through Time.pdf", geo_plot, width = 12, height = 12)
