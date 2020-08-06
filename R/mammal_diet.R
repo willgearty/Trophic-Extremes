@@ -800,15 +800,16 @@ ggplot(diet_diffs_by_cont) +
   scale_color_discrete(name = "time", labels = c("Modern - Pleistocene", "Future - Modern")) +
   facet_wrap(~Recoded_Diet, ncol = 1)
 
-#lengths of extinctions preliminarily based on https://science.sciencemag.org/content/306/5693/70.full
+#lengths of extinctions coarsely based on https://www.annualreviews.org/doi/full/10.1146/annurev.ecolsys.34.011802.132415
+#which is based on https://science.sciencemag.org/content/306/5693/70.full
 #future projections arbitrarily 1000 years away
 diet_diffs_by_cont <- diet_diffs_by_cont %>%
   mutate(length = case_when(time == "future" ~ 500,
-                            Continent == "AF" ~ 40000,
+                            Continent == "AF" ~ 11500,
                             Continent == "AUS" ~ 40000,
-                            Continent == "EA" ~ 40000,
-                            Continent == "NA" ~ 1500,
-                            Continent == "SA" ~ 5000),
+                            Continent == "EA" ~ 38500,
+                            Continent == "NA" ~ 2000,
+                            Continent == "SA" ~ 6500),
          rate = diff / length, corr_rate = rate - min(rate))
 
 c <- trunc(log10(min(diet_diffs_by_cont$corr_rate[diet_diffs_by_cont$corr_rate > 0], na.rm = TRUE)))
@@ -827,7 +828,7 @@ library(ggrepel)
 ggplot(diet_diffs_by_cont, aes(x = length, y = rate)) +
   geom_point(aes(color = time), size = 3) +
   geom_text_repel(aes(label = Continent, color = time), size = 10, show.legend = FALSE) +
-  geom_quantile(data = subset(diet_diffs_by_cont, time == "pleis"), quantiles = c(.025,.975)) +
+  geom_quantile(data = subset(diet_diffs_by_cont, time == "pleis"), quantiles = c(.025,.975), color = "black", linetype = "dashed") +
   scale_x_continuous(name = "Length of Extinction", trans = "log10") +
   scale_y_continuous(name = "Rate of Change of Median Size (ln g/yr)") +
   theme_classic(base_size = 24) +
