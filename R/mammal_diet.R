@@ -1,12 +1,9 @@
 #load and clean data####
 library(plyr)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
+library(tidyverse)
 library(viridis)
 library(deeptime)
 library(Hmisc)
-library(magrittr)
 
 #Color palettes
 #Black, Orange, Sky Blue, Bluish green, Yellow, Blue, Vermilion, Reddish purple
@@ -506,7 +503,9 @@ mom_data_per_bin <- rbind(mom_data_per_bin, dat)
 
 mom_stats <- mom_data_per_bin %>%
   group_by(Recoded_Diet, bin) %>%
-  summarise(min = min(lnMass_g, na.rm = TRUE), which_min = Genus_species[which.min(lnMass_g)], max = max(lnMass_g, na.rm = TRUE), which_max = Genus_species[which.max(lnMass_g)])
+  summarise(min_size = min(lnMass_g, na.rm = TRUE), which_min = Genus_species[which.min(lnMass_g)],
+            max_size = max(lnMass_g, na.rm = TRUE), which_max = Genus_species[which.max(lnMass_g)],
+            med_size = median(lnMass_g, na.rm = TRUE))
 
 mom_stats$diet_num <- as.numeric(factor(mom_stats$Recoded_Diet, levels = c("carnivore", "insectivore", "omnivore", "herbivore")))
 
@@ -520,8 +519,9 @@ box_colors[grepl("Future", names(box_colors)) & grepl("herbivore", names(box_col
 
 diet_stats <- mom_stats %>%
   group_by(Recoded_Diet, diet_num) %>%
-  summarise(minimum = min(min), maximum = max(max), avg = (max(max) + min(min))/2,
-            extant_max = max(max[bin == "Modern"]), future_max = max(max[bin == "Future"]), .groups = "drop")
+  summarise(minimum = min(min_size), maximum = max(max_size), avg = (max(max_size) + min(min_size))/2,
+            med = max(med_size), extant_med = max(med_size[bin == "Modern"]), future_med = max(med_size[bin == "Future"]),
+            extant_max = max(max_size[bin == "Modern"]), future_max = max(max_size[bin == "Future"]), .groups = "drop")
 diet_stats$min_mech <- c("Larger\nThan Prey", "Metabolic\nPhysiology\n",
                          "Plant Digestive\nPhysiology", "Plant Digestive\nPhysiology")[diet_stats$diet_num]
 diet_stats$max_mech <- c("Hunting\nTradeoffs", "High Quality\nPlant and Insect\nAvailability",
@@ -554,8 +554,10 @@ ggplot(mom_stats) +
                aes(x = minimum, xend = minimum, y = 0, yend = 4.7, color = Recoded_Diet), size = 2.5, linetype = "11") +
   geom_segment(data = subset(diet_stats, Recoded_Diet != "omnivore"), show.legend = FALSE,
                aes(x = maximum, xend = maximum, y = 0, yend = 4.7, color = Recoded_Diet), size = 2.5, linetype = "11") +
-  geom_rect(aes(xmin = min, xmax = max, ymin = diet_num - .4, ymax = diet_num + .4,
+  geom_rect(aes(xmin = min_size, xmax = max_size, ymin = diet_num - .4, ymax = diet_num + .4,
                 fill = interaction(Recoded_Diet, bin)), show.legend = FALSE, color = "black", size = 1.25) +
+  geom_segment(aes(x = med_size, xend = med_size, y = diet_num - .4, yend = diet_num + .4,
+                linetype = bin), show.legend = FALSE, color = "black", size = 1.25) +
   geom_text(data = diet_stats, aes(x = avg, y = diet_num, label = paste0(stringr::str_to_sentence(Recoded_Diet), "s")),
             color = "black", size = 10) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
@@ -627,7 +629,7 @@ fut_diff_long <- fut_diff2 %>%
 
 bin_lengths <- data.frame(time = c("eoc", "olig", "mio", "plio", "plei", "holo",
                                    "mod", "fut_100", "fut_300", "fut_500"),
-                          length = c(16.05000, 16.48500, 14.28350, 10.22100, 2.66065, 0.00585,
+                          length = c(16.05000, 16.48500, 14.28350, 10.22100, 2.66065, 1.29400,
                                      .126, .0001, .0002, .0002))
 
 #combine fossil and future rates
@@ -636,30 +638,99 @@ all_diffs <- rbind(med_long, fut_diff_long) %>%
                        levels = c("eoc", "olig", "mio", "plio", "plei", "holo",
                                   "mod", "fut_100", "fut_300", "fut_500")),
          time_num = as.numeric(time)) %>%
-  merge(bin_lengths)
+  merge(bin_lengths) %>%
+  mutate(rate = diff/length, abs_rate = abs(rate), corr_rate = rate - min(rate),
+         log_length = log10(length))
+
+#https://www.umass.edu/landeco/teaching/multivariate/readings/McCune.and.Grace.2002.chapter9.pdf
+#log transformation that preserves zeros
+c <- trunc(log10(min(all_diffs$corr_rate[all_diffs$corr_rate > 0], na.rm = TRUE)))
+all_diffs$log_corr_rate <- log10(all_diffs$corr_rate + 10^c) - c
 
 # non-parametric confidence interval
 all_diffs_ci <- all_diffs %>%
   group_by(diet, time, time_num, length) %>%
   summarise(med = median(diff), low = quantile(diff, 0.025), upp = quantile(diff, 0.975))
 
-fit <- lm(log10(abs(diff/length)) ~ length, data = subset(all_diffs, diff != 0))
-
 #plot rates against bin lengths
-ggplot(all_diffs_ci, aes(x = length, y = abs(med/length))) +
-  #geom_point(position = position_dodge2(preserve = "single", width = .9, padding = .15)) +
-  #geom_errorbar(aes(ymin = abs(low/length), ymax = abs(upp/length)),
-  #              position = position_dodge2(preserve = "single", width = .95, padding = .15)) +
-  geom_smooth(formula = "y ~ x", method = "lm", color = "black") +
-  geom_text(aes(label = time, color = diet)) +
+ggplot(all_diffs, aes(x = length, y = log_corr_rate)) +
+  geom_point(aes(color = diet)) +
+  geom_quantile(data = subset(all_diffs, !(time %in% c("fut_100", "fut_300", "fut_500"))), quantiles = c(.025,.975)) +
   scale_x_continuous(trans = "log10") +
-  scale_y_continuous(trans = "log10") +
+  scale_y_continuous(name = "Adjusted Log Rates") +
   theme_classic(base_size = 24) +
   theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
         panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
         legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
   scale_color_manual(name = NULL, values = colors4)
 ggsave("../figures/Mammal Diets Rates.pdf", width = 12, height = 12)
+
+#linear regression
+fit <- lm(log_corr_rate ~ log_length, data = all_diffs)
+all_diffs$residual_mean <- fit$residuals
+
+#quantile regression
+library(quantreg)
+fit_2.5 <- rq(log_corr_rate ~ log_length, tau = 0.025,
+              data = subset(all_diffs, !(time %in% c("fut_100", "fut_300", "fut_500"))))
+fit_97.5 <- rq(log_corr_rate ~ log_length, tau = 0.975,
+               data = subset(all_diffs, !(time %in% c("fut_100", "fut_300", "fut_500"))))
+pred_2.5 <- cbind.data.frame(log_length = unique(all_diffs$log_length),
+                  predict(fit_2.5, data.frame(log_length = unique(all_diffs$log_length)), interval = "confidence"))
+pred_97.5 <- cbind.data.frame(log_length = unique(all_diffs$log_length),
+                   predict(fit_97.5, data.frame(log_length = unique(all_diffs$log_length)), interval = "confidence"))
+
+all_diffs <- all_diffs %>%
+  mutate(residual_2.5 = log_corr_rate - pred_2.5$fit[match(log_length, pred_2.5$log_length)],
+         residual_97.5 = log_corr_rate - pred_97.5$fit[match(log_length, pred_97.5$log_length)]) %>%
+  mutate(corr_resid = case_when(residual_2.5 < 0 ~ residual_2.5, residual_97.5 > 0 ~ residual_97.5, TRUE ~ 0),
+         corr_res_disc = case_when(residual_2.5 < 0 ~ "less", residual_97.5 > 0 ~ "greater", TRUE ~ "expected"))
+
+ggplot(all_diffs, aes(x = corr_resid, y = after_stat(density))) +
+  geom_histogram() +
+  facet_wrap(~diet + time, nrow = 4)
+
+periods_with_future <- rbind(data.frame(name = c("Future"),
+                                        max_age = c(0), min_age = c(0.000005),
+                                        abbr = NA, color = c("#0079FA")),
+                             periods[1:3,])
+periods_with_future$max_age <- c(10.5, 7.5, 5.5, 3.5)
+periods_with_future$min_age <- c(7.5, 5.5, 3.5, 0.5)
+epochs_with_future <- rbind(data.frame(name = c("500 Years", "300 Years", "100 Years"),
+                                       max_age = c(0.000003, 0.000001, 0), min_age = c(0.000005, 0.000003, 0.000001),
+                                       abbr = NA, color = c("#00E5F8", "#00C2F9", "#009FFA")),
+                            epochs[1:7,])
+epochs_with_future$max_age <- seq(10.5, 1.5, -1)
+epochs_with_future$min_age <- seq(9.5, 0.5, -1)
+gg <- ggplot(all_diffs, aes(x = time_num, fill = corr_res_disc)) +
+  geom_bar(position = position_fill(), width = .99, color = "black") +
+  scale_x_continuous(name = "Time Period", expand = FALSE, breaks = seq(0.5, 10.5, 1)) +
+  scale_y_continuous(name = "Percentage of Replicates") +
+  scale_fill_manual(NULL, values = c("grey80", "red", "blue"),
+                    labels = c("expected change", "change > 95th percentile", "change < 5th percentile")) +
+  coord_geo(pos = list("bottom", "bottom"), dat = list(epochs_with_future, periods_with_future),
+            xlim = c(0.5, 10.5), abbrv = FALSE, lwd = .75, size = list(5,6), skip = NULL) +
+  facet_wrap(~diet, nrow = 4) +
+  theme_classic(base_size = 24) +
+  theme(axis.text.y = element_text(color = "black"), axis.ticks.y = element_line(color = "black", size = .75),
+        axis.ticks.x = element_blank(), axis.text.x = element_blank(),
+        panel.border = element_rect(color = "black", fill = NA, size = 1.5),
+        legend.position = "top", legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA))
+ggsave("../figures/Mammal Diets Rates vs Expected.pdf", gg, width = 12, height = 12)
+
+#calculate percentage of points outside of quantiles for each diet/time
+#or calculate distance beyond quantiles?
+
+#plot residuals through time
+ggplot(all_diffs, aes(x = time_num, y = residual_2.5, fill = diet, group = interaction(time, diet))) +
+  annotate("rect", xmin = seq(0.5, 9.5, 1), xmax = seq(1.5, 10.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 10)) +
+  geom_boxplot(position = position_dodge2(preserve = "single", width = .95, padding = .15)) +
+  scale_fill_manual(name = NULL, values = colors4) +
+  scale_x_continuous(name = "Time Period", limits = c(0.5, 10.5), labels = NULL, breaks = NULL, expand = c(0,0)) +
+  theme_classic(base_size = 24) +
+  theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
+        panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
+        legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA))
 
 #plot differences through time
 (gg <- ggplot(all_diffs_ci, aes(x = time_num, color = diet, group = interaction(time, diet))) +
@@ -699,3 +770,70 @@ epochs_with_future$min_age <- 0:9
 (geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(10,0), dat = periods_with_future, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
                          dat = epochs_with_future, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
 ggsave("../figures/Mammal Diets Differences Through Time.pdf", geo_plot, width = 12, height = 12)
+
+#mom stats by continent####
+mom_stats_by_cont <- mom_data_per_bin %>%
+  group_by(Recoded_Diet, bin, Continent) %>%
+  summarise(min_size = min(lnMass_g, na.rm = TRUE), which_min = Genus_species[which.min(lnMass_g)],
+            max_size = max(lnMass_g, na.rm = TRUE), which_max = Genus_species[which.max(lnMass_g)],
+            med_size = median(lnMass_g, na.rm = TRUE))
+
+diet_stats_by_cont <- mom_stats_by_cont %>%
+  filter(Continent != "Insular") %>%
+  group_by(Recoded_Diet, Continent) %>%
+  summarise(minimum = min(min_size), maximum = max(max_size), avg = (max(max_size) + min(min_size))/2,
+            med = max(med_size), extant_med = max(med_size[bin == "Modern"]), future_med = max(med_size[bin == "Future"]),
+            extant_max = max(max_size[bin == "Modern"]), future_max = max(max_size[bin == "Future"]), .groups = "drop") %>%
+  mutate(diff_pleis = extant_med - med, diff_future = future_med - extant_med,
+         Recoded_Diet = factor(Recoded_Diet, levels = c("carnivore", "insectivore", "omnivore", "herbivore")))
+
+diet_diffs_by_cont <- diet_stats_by_cont %>%
+  select(Recoded_Diet, Continent, diff_pleis, diff_future) %>%
+  pivot_longer(cols = diff_pleis:diff_future, names_to = "time", values_to = "diff", names_prefix = "diff_") %>%
+  mutate(time = factor(time, levels = c("pleis", "future")))
+
+#raw differences in medians
+ggplot(diet_diffs_by_cont) +
+  geom_point(aes(x = Continent, y = diff, color = time), position = position_dodge(width = .5)) +
+  scale_x_discrete() +
+  scale_y_continuous() +
+  scale_color_discrete(name = "time", labels = c("Modern - Pleistocene", "Future - Modern")) +
+  facet_wrap(~Recoded_Diet, ncol = 1)
+
+#lengths of extinctions preliminarily based on https://science.sciencemag.org/content/306/5693/70.full
+#future projections arbitrarily 1000 years away
+diet_diffs_by_cont <- diet_diffs_by_cont %>%
+  mutate(length = case_when(time == "future" ~ 500,
+                            Continent == "AF" ~ 40000,
+                            Continent == "AUS" ~ 40000,
+                            Continent == "EA" ~ 40000,
+                            Continent == "NA" ~ 1500,
+                            Continent == "SA" ~ 5000),
+         rate = diff / length, corr_rate = rate - min(rate))
+
+c <- trunc(log10(min(diet_diffs_by_cont$corr_rate[diet_diffs_by_cont$corr_rate > 0], na.rm = TRUE)))
+diet_diffs_by_cont$log_corr_rate <- log10(diet_diffs_by_cont$corr_rate + 10^c) - c
+
+#log corrected rates
+ggplot(diet_diffs_by_cont) +
+  geom_point(aes(x = Continent, y = rate, color = time), position = position_dodge(width = .5)) +
+  scale_x_discrete() +
+  scale_y_continuous() +
+  scale_color_discrete(name = "time", labels = c("Modern - Pleistocene", "Future - Modern")) +
+  facet_wrap(~Recoded_Diet, ncol = 1)
+
+#plot rates against length
+library(ggrepel)
+ggplot(diet_diffs_by_cont, aes(x = length, y = rate)) +
+  geom_point(aes(color = time), size = 3) +
+  geom_text_repel(aes(label = Continent, color = time), size = 10, show.legend = FALSE) +
+  geom_quantile(data = subset(diet_diffs_by_cont, time == "pleis"), quantiles = c(.025,.975)) +
+  scale_x_continuous(name = "Length of Extinction", trans = "log10") +
+  scale_y_continuous(name = "Rate of Change of Median Size (ln g/yr)") +
+  theme_classic(base_size = 24) +
+  theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
+        panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
+        legend.position = "top", legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
+  scale_color_viridis(name = NULL, begin = .25, end = .75, discrete = TRUE, labels = c("Pleistocene", "Future")) +
+  facet_wrap(~Recoded_Diet)
+ggsave("../figures/Mammal Diets Pleistocene vs Future Rates.pdf", width = 12, height = 12)
