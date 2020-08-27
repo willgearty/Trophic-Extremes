@@ -1,0 +1,17 @@
+"Recoded_Diet","bin","min_size","which_min","max_size","which_max","med_size"
+"carnivore","Pleistocene",3.84801767545223,"Mustela nivalis",13.4870064909922,"Arctodus simus",8.31522354943119
+"carnivore","Holocene",3.84801767545223,"Mustela nivalis",13.4870064909922,"Arctodus simus",8.26144508873154
+"carnivore","Modern",3.84801767545223,"Mustela nivalis",11.9988270493687,"Panthera tigris",8.0864025829865
+"carnivore","Future",3.84801767545223,"Mustela nivalis",11.0508887355316,"Crocuta crocuta",8.03863532821678
+"herbivore","Pleistocene",1.36609165380237,"Salpingotulus michaelis",16.1950566920944,"Mammuthus columbi",5.80513496891649
+"herbivore","Holocene",1.36609165380237,"Salpingotulus michaelis",16.1950566920944,"Mammuthus columbi",5.63479317459144
+"herbivore","Modern",1.36609165380237,"Salpingotulus michaelis",15.1866999807287,"Loxodonta africana",5.52146091786225
+"herbivore","Future",1.36609165380237,"Salpingotulus michaelis",13.710144264512,"Giraffa camelopardalis",5.09834087451536
+"insectivore","Pleistocene",0.559615787935423,"Suncus remyi",12.2060726455302,"Pampatherium typum",2.91777073208428
+"insectivore","Holocene",0.559615787935423,"Suncus remyi",12.2060726455302,"Pampatherium typum",2.90959616308351
+"insectivore","Modern",0.559615787935423,"Suncus remyi",10.8657148380461,"Orycteropus afer",2.90142159408275
+"insectivore","Future",0.559615787935423,"Suncus remyi",10.8657148380461,"Orycteropus afer",2.77258872223978
+"omnivore","Pleistocene",1.54756250871601,"Neusticomys oyapocki",12.3086292338553,"Ursus arctos",4.36586662328406
+"omnivore","Holocene",1.54756250871601,"Neusticomys oyapocki",12.3086292338553,"Ursus arctos",4.36586662328406
+"omnivore","Modern",1.54756250871601,"Neusticomys oyapocki",12.3086292338553,"Ursus arctos",4.36586662328406
+"omnivore","Future",1.54756250871601,"Neusticomys oyapocki",12.3086292338553,"Ursus arctos",4.26267987704132

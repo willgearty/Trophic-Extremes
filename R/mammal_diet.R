@@ -617,6 +617,7 @@ mom_stats <- mom_data_per_bin %>%
   summarise(min_size = min(lnMass_g, na.rm = TRUE), which_min = Genus_species[which.min(lnMass_g)],
             max_size = max(lnMass_g, na.rm = TRUE), which_max = Genus_species[which.max(lnMass_g)],
             med_size = median(lnMass_g, na.rm = TRUE))
+write.csv(mom_stats, "../tables/mom_stats.csv", row.names = FALSE)
 
 mom_stats$diet_num <- as.numeric(factor(mom_stats$Recoded_Diet, levels = c("carnivore", "insectivore", "omnivore", "herbivore")))
 
@@ -645,7 +646,7 @@ uuids2 <- c("Smallest Carnivore" = "20b6096e-2d6d-43c4-acda-fd74f0f91d48", #Must
            "Largest Insectivore" = "cad2eeb5-7827-4b3d-b406-e20864a71637", #Pampatherium
            "Smallest Omnivore" = "81930c02-5f26-43f7-9c19-e9831e780e53", #Sigmodontinae
            "Largest Omnivore" = "0cd82109-bb1c-4e08-ab11-c845d8a82eba", #Ursus arctos
-           "Smallest Herbivore" = "f98f3e0f-abc8-4e8f-a812-67bfe312a276", #Glyptotherium
+           "Smallest Herbivore" = "92989e35-4e68-4a2d-b3a2-191ba9da671a", #Mus
            "Largest Herbivore" = "43d2a4af-991c-4236-8455-f62271ab73e7" #Mammuthus
 )
 
@@ -656,6 +657,12 @@ phylopics2[[2]] <- flip(phylopics2[[2]], horizontal = TRUE)
 phylopics2[[3]] <- flip(phylopics2[[3]], horizontal = TRUE)
 phylopics2[[5]] <- flip(phylopics2[[5]], horizontal = TRUE)
 phylopics2[[6]] <- flip(phylopics2[[6]], horizontal = TRUE)
+#make the mouse black
+phylopics2[[7]]@paths <- lapply(phylopics2[[7]]@paths,
+                                function(x) {
+                                  x@rgb <- "#000000"
+                                  return(x)
+                                })
 phylopics2[[8]] <- flip(phylopics2[[8]], horizontal = TRUE)
 
 phylopics2 <- lapply(phylopics2, pictureGrob)
@@ -667,8 +674,8 @@ ggplot(mom_stats) +
                aes(x = maximum, xend = maximum, y = 0, yend = 4.7, color = Recoded_Diet), size = 2.5, linetype = "11") +
   geom_rect(aes(xmin = min_size, xmax = max_size, ymin = diet_num - .4, ymax = diet_num + .4,
                 fill = interaction(Recoded_Diet, bin)), show.legend = FALSE, color = "black", size = 1.25) +
-  geom_segment(aes(x = med_size, xend = med_size, y = diet_num - .4, yend = diet_num + .4,
-                linetype = bin), show.legend = FALSE, color = "black", size = 1.25) +
+  #geom_segment(aes(x = med_size, xend = med_size, y = diet_num - .4, yend = diet_num + .4,
+  #              linetype = bin), show.legend = FALSE, color = "black", size = 1.25) +
   geom_text(data = diet_stats, aes(x = avg, y = diet_num, label = paste0(stringr::str_to_sentence(Recoded_Diet), "s")),
             color = "black", size = 10) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
