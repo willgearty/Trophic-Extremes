@@ -159,26 +159,30 @@ ggplot(NA_mamm_per_bin, aes(x = bin, y = lnMass_g, fill = Recoded_Diet)) +
 ggsave("../figures/Mammal Diets Violins.pdf", device = "pdf", width = 10, height = 10)
 
 NA_mamm_per_bin$bin_num <- as.numeric(NA_mamm_per_bin$bin)
+sample_size <- NA_mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(n() >= 5, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore")) %>%
+  summarise(num = n())
 (gg <- ggplot(NA_mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(n() >= 5, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
     annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 9)) +
     geom_boxplot(position = position_dodge2(preserve = "single", width = .95, padding = .15)) +
+    geom_text(data = sample_size, aes(label = num, y = c(0,-.75,.75,0)[as.numeric(Recoded_Diet)], color = Recoded_Diet), position = position_dodge2(preserve = "single", width = .9, padding = .15), size = 6, show.legend = FALSE) +
     scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
-    scale_y_continuous(name = "ln Mass (g)", breaks = seq(1, 17, 2)) +
-    coord_cartesian(ylim = c(0,17)) +
+    scale_y_continuous(name = "Mass (kg)", breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)), labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
+    coord_cartesian(ylim = c(-1.5,17)) +
     scale_fill_manual(values = colors4, name = NULL) +
+    scale_color_manual(values = colors4, name = NULL) +
     theme_classic(base_size = 24) +
     theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),
           panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
           legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
-    annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = -.75, ymax = .25) +
-    annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = -.75, ymax = .25) +
-    annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = -.75, ymax = .25) +
-    annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = -.75, ymax = .25) +
-    annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = -.75, ymax = .25) +
-    annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = -.75, ymax = .25) +
-    annotation_custom(phylopics[[7]], 6.55, 7.45, ymin = -.75, ymax = .25) +
-    annotation_custom(phylopics[[8]], 7.55, 8.45, ymin = -.75, ymax = .25) +
-    annotation_custom(phylopics[[9]], 8.55, 9.45, ymin = -.75, ymax = .25))
+    annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = -2.25, ymax = -1.25) +
+    annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = -2.25, ymax = -1.25) +
+    annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = -2.25, ymax = -1.25) +
+    annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = -2.25, ymax = -1.25) +
+    annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = -2.25, ymax = -1.25) +
+    annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = -2.25, ymax = -1.25) +
+    annotation_custom(phylopics[[7]], 6.55, 7.45, ymin = -2.25, ymax = -1.25) +
+    annotation_custom(phylopics[[8]], 7.55, 8.45, ymin = -2.25, ymax = -1.25) +
+    annotation_custom(phylopics[[9]], 8.55, 9.45, ymin = -2.25, ymax = -1.25))
 discrete_periods <- periods
 discrete_periods$max_age[1:4] <- c(2, 4, 7, 9)
 discrete_periods$min_age[1:4] <- c(0, 2, 4, 7)
@@ -188,7 +192,7 @@ discrete_epochs$min_age[1:9] <- 0:8
 discrete_epochs$name[8:9] <- c("Late\nCretaceous", "Early\nCretaceous")
 (geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(9, 0), dat = discrete_periods, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
                          dat = discrete_epochs, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
-ggsave("../figures/Mammal Diets Boxplots.pdf", geo_plot, width = 12, height = 12)
+ggsave("../figures/Mammal Diets Boxplots.pdf", geo_plot, width = 12, height = 10)
 
 #diets and archaic separate
 NA_mamm_per_bin %>% group_by(archaic, bin, Recoded_Diet) %>% filter(n() >= 5) %>%
@@ -619,7 +623,7 @@ mom_stats <- mom_data_per_bin %>%
             med_size = median(lnMass_g, na.rm = TRUE))
 write.csv(mom_stats, "../tables/mom_stats.csv", row.names = FALSE)
 
-mom_stats$diet_num <- as.numeric(factor(mom_stats$Recoded_Diet, levels = c("carnivore", "insectivore", "omnivore", "herbivore")))
+mom_stats$diet_num <- as.numeric(factor(mom_stats$Recoded_Diet, levels = c("herbivore", "omnivore", "insectivore", "carnivore")))
 
 box_colors <- setNames(rep("white", length(interaction(mom_stats$Recoded_Diet, mom_stats$bin))),
                        interaction(mom_stats$Recoded_Diet, mom_stats$bin))
@@ -634,10 +638,10 @@ diet_stats <- mom_stats %>%
   summarise(minimum = min(min_size), maximum = max(max_size), avg = (max(max_size) + min(min_size))/2,
             med = max(med_size), extant_med = max(med_size[bin == "Modern"]), future_med = max(med_size[bin == "Future"]),
             extant_max = max(max_size[bin == "Modern"]), future_max = max(max_size[bin == "Future"]), .groups = "drop")
-diet_stats$min_mech <- c("Larger\nThan Prey", "Metabolic\nPhysiology\n",
-                         "Plant Digestive\nPhysiology", "Plant Digestive\nPhysiology")[diet_stats$diet_num]
-diet_stats$max_mech <- c("Hunting\nTradeoffs", "High Quality\nPlant and Insect\nAvailability",
-                         "High Quality\nPlant\nAvailability", "Low Quality\nPlant\nAvailability")[diet_stats$diet_num]
+diet_stats$min_mech <- c("Plant Digestive\nPhysiology", "Plant Digestive\nPhysiology",
+                         "Metabolic\nPhysiology", "Larger\nThan Prey")[diet_stats$diet_num]
+diet_stats$max_mech <- c("Low Quality\nPlant\nAvailability", "High Quality\nPlant\nAvailability",
+                         "High Quality\nPlant and Insect\nAvailability", "Hunting\nTradeoffs")[diet_stats$diet_num]
 
 #phylopics
 uuids2 <- c("Smallest Carnivore" = "20b6096e-2d6d-43c4-acda-fd74f0f91d48", #Mustela nivalis
@@ -677,39 +681,39 @@ ggplot(mom_stats) +
   #geom_segment(aes(x = med_size, xend = med_size, y = diet_num - .4, yend = diet_num + .4,
   #              linetype = bin), show.legend = FALSE, color = "black", size = 1.25) +
   geom_text(data = diet_stats, aes(x = avg, y = diet_num, label = paste0(stringr::str_to_sentence(Recoded_Diet), "s")),
-            color = "black", size = 10) +
+            color = "black", size = 12, angle = 90) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
-            aes(x = (maximum + extant_max) / 2, y = diet_num), label = "extinct", angle = 60, size = 5) +
+            aes(x = (maximum + extant_max) / 2, y = diet_num), label = "extinct", angle = 30, size = 5) +
   geom_text(data = subset(diet_stats, Recoded_Diet %in% c("carnivore", "herbivore")),
-            aes(x = (extant_max + future_max) / 2, y = diet_num), label = "threatened", angle = 60, size = 5) +
+            aes(x = (extant_max + future_max) / 2, y = diet_num), label = "threatened", angle = 30, size = 5) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
-            aes(x = minimum + .25, y = 5.2, label = min_mech, color = Recoded_Diet),
-            angle = 60, size = 6.5, lineheight = .9, show.legend = FALSE) +
+            aes(x = minimum, y = 5.4, label = min_mech, color = Recoded_Diet),
+            angle = 0, size = 6.5, lineheight = .9, show.legend = FALSE) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
-            aes(x = maximum + .25, y = 5.2, label = max_mech, color = Recoded_Diet),
-            angle = 60, size = 6.5, lineheight = .9, show.legend = FALSE) +
-  annotate("segment", x = c(11, 5), xend = c(5, 11), y = c(4.6, 5), yend = c(4.6, 5), size = 2.5, linetype = "11") +
-  annotate("segment", x = c(5.01, 10.99), xend = c(5, 11), y = c(4.6, 5), yend = c(4.6, 5), size = 2.5,
+            aes(x = maximum, y = 5.4, label = max_mech, color = Recoded_Diet),
+            angle = 0, size = 6.5, lineheight = .9, show.legend = FALSE) +
+  annotate("segment", x = c(11, 5), xend = c(5, 11), y = c(5, 5.5), yend = c(5, 5.5), size = 2.5, linetype = "11") +
+  annotate("segment", x = c(5.01, 10.99), xend = c(5, 11), y = c(5, 5.5), yend = c(5, 5.5), size = 2.5,
            arrow = arrow(length = unit(0.02, "npc"), type = "closed")) +
-  annotate("text", x = 8, y = c(4.75, 5.25), size = 6.5, lineheight = .9,
-           label = c("Lower Extinction Risk", "Higher Feeding Efficiency\nStarvation Resistance")) +
-  scale_x_continuous(name = "ln Mass (g)", limits = c(-0.5, 17)) +
+  annotate("text", x = 8, y = c(5.15, 5.75), size = 6.5, lineheight = .9, angle = 90,
+           label = c("Lower Extinction Risk", "Higher Feeding Efficiency &\nStarvation Resistance")) +
+  scale_x_continuous(name = "Mass (kg)", limits = c(0, 17), breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)), labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
   scale_y_continuous(name = NULL, expand = c(0,0)) +
-  coord_cartesian(ylim = c(.4, 5.75)) +
+  coord_flip(ylim = c(.4, 6.1)) +
   scale_fill_manual(values = box_colors) +
   scale_color_manual(values = colors4) +
   theme_classic(base_size = 24) +
-  theme(axis.line.y = element_blank(), axis.text.y = element_blank(), axis.ticks.y = element_blank(),
-        axis.text.x = element_text(color = "black")) +
-  annotation_custom(phylopics2[[1]], 2.2, 3.7, ymin = 0.7, ymax = 1.3) + #3.85
-  annotation_custom(phylopics2[[2]], 13.65, 15.15, ymin = 0.7, ymax = 1.3) + #13.5
-  annotation_custom(phylopics2[[3]], -1.09, .41, ymin = 1.7, ymax = 2.3) + #0.560
-  annotation_custom(phylopics2[[4]], 12.35, 13.85, ymin = 1.7, ymax = 2.3) + #12.2
-  annotation_custom(phylopics2[[5]], -0.1, 1.4, ymin = 2.7, ymax = 3.3) + #1.55
-  annotation_custom(phylopics2[[6]], 12.45, 13.95, ymin = 2.7, ymax = 3.3) + #12.3
-  annotation_custom(phylopics2[[7]], -0.28, 1.22, ymin = 3.7, ymax = 4.3) + #1.37
-  annotation_custom(phylopics2[[8]], 16.35, 17.85, ymin = 3.7, ymax = 4.3)   #16.2
-ggsave("../figures/Mammal Diets Mechanisms.pdf", width = 14, height = 9)
+  theme(axis.line.x = element_blank(), axis.text.x = element_blank(), axis.ticks.x = element_blank(),
+        axis.text.y = element_text(color = "black")) +
+  annotation_custom(phylopics2[[1]], 3.1, 3.7, ymin = 3.8, ymax = 4.2) + #3.85
+  annotation_custom(phylopics2[[2]], 13.25, 14.75, ymin = 3.7, ymax = 4.3) + #13.5
+  annotation_custom(phylopics2[[3]], -0.19, .41, ymin = 2.8, ymax = 3.2) + #0.560
+  annotation_custom(phylopics2[[4]], 11.85, 13.35, ymin = 2.6, ymax = 3.4) + #12.2
+  annotation_custom(phylopics2[[5]], .7, 1.4, ymin = 1.8, ymax = 2.2) + #1.55
+  annotation_custom(phylopics2[[6]], 12.05, 13.55, ymin = 1.7, ymax = 2.3) + #12.3
+  annotation_custom(phylopics2[[7]], 0.62, 1.22, ymin = 0.8, ymax = 1.2) + #1.37
+  annotation_custom(phylopics2[[8]], 15.95, 17.45, ymin = 0.6, ymax = 1.4)   #16.2
+ggsave("../figures/Mammal Diets Mechanisms.pdf", width = 10, height = 13)
 
 #Rates plot####
 #calculate differences between fossil epochs
