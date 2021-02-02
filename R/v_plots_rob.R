@@ -31,7 +31,7 @@ biomes <-
 
 # Prepare diet labels
 diet_cat_key <- tibble(diet_5cat = c(1, 2, 3, 4), 
-                       diet_name = c('herbivore', 'omnivore', 'insectivore', 'carnivore'), 
+                       diet_name = c('herbivore', 'omnivore', 'invertivore', 'carnivore'), 
                        diet_abbr = c('H', 'O', 'I', 'C'))
 
 v_traits_orig <- 
