@@ -719,13 +719,13 @@ ggsave("../figures/Mammal Diets Mechanisms.pdf", width = 10, height = 13)
 #calculate differences between fossil epochs
 samp_20 <- diet_subsample %>%
   filter(sample == 20) %>%
-  mutate(boot = rep(1:n_subsets, each = n_diets, times = n_bins))
+  mutate(boot = rep(1:n_subsets, each = n()/n_subsets))
 
 #convert to wide (move all time bins for a diet*boot to single row)???
 #maybe select only medians for now
 med_wide <- samp_20 %>%
-  select(age_bin, diet, med, boot) %>%
-  pivot_wider(names_from = age_bin, values_from = med)
+  select(bin, Recoded_Diet, y50, boot) %>%
+  pivot_wider(names_from = bin, values_from = y50)
 
 med_long <- med_wide %>% 
   #calculate rates of change
@@ -734,7 +734,7 @@ med_long <- med_wide %>%
          plei_diff = Pleistocene - Pliocene, holo_diff = Holocene - Pleistocene) %>%
   #convert to long
   pivot_longer(cols = eoc_diff:holo_diff, names_to = "time", values_to = "diff") %>%
-  select(run = boot, diet, time, diff)
+  select(run = boot, diet = Recoded_Diet, time, diff)
 
 #read in future projections data
 fut_diff <- readRDS("../data/fut_diff.rds")
@@ -951,7 +951,7 @@ ggplot(diet_diffs_by_cont, aes(x = length, y = rate)) +
   geom_point(aes(color = time), size = 3) +
   geom_text_repel(aes(label = Continent, color = time), size = 10, show.legend = FALSE) +
   geom_quantile(data = subset(diet_diffs_by_cont, time == "pleis"), quantiles = c(.025,.975), color = "black", linetype = "dashed") +
-  scale_x_continuous(name = "Length of Extinction", trans = "log10") +
+  scale_x_continuous(name = "Length of Extinction Event (yr)", trans = "log10") +
   scale_y_continuous(name = "Rate of Change of Median Size (ln g/yr)") +
   theme_classic(base_size = 24) +
   theme(axis.text = element_text(color = "black"), axis.ticks = element_line(color = "black", size = .75),

@@ -4,7 +4,8 @@
 #### Set up ####
 
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, cowplot, gtable, lemon)
+pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon)
+pacman::p_load_gh("willgearty/deeptime")
 
 
 # Will's colour scheme
@@ -14,7 +15,7 @@ colors4 <- setNames(c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), c("herbivore"
 
 # Prep biome and trait data
 biome_traits <- 
-  readRDS("amanda_biome_traits.rds") %>% 
+  readRDS("../data/amanda_biome_traits.rds") %>% 
   # Make sure that biome ids are numeric
   mutate(biome = as.numeric(biome))
 
@@ -26,11 +27,7 @@ biome_key <- tibble(biome = 1:14, biome_name = c("Tropical & Subtropical Moist B
 biomes <- 
   left_join(biome_traits, biome_key) %>% 
   # We only need the biome information for now
-  select(binomial, class, biome, biome_name, biome_label, body_mass_median) %>% 
-  # Clarify that body_mass_median in this dataframe is actually log10 body mass
-  mutate(body_mass_median = 10 ^ body_mass_median) %>% 
-  # to match Will's plot
-  mutate(ln_body_mass_median = log(body_mass_median))
+  select(binomial, biome, biome_name, biome_label)
 
 # Prepare diet labels
 diet_cat_key <- tibble(diet_5cat = c(1, 2, 3, 4), 
@@ -38,11 +35,13 @@ diet_cat_key <- tibble(diet_5cat = c(1, 2, 3, 4),
                        diet_abbr = c('H', 'O', 'I', 'C'))
 
 v_traits_orig <- 
-  readRDS("v_trait.rds") %>% 
+  readRDS("../data/v_trait.rds") %>% 
   as_tibble()  %>% # easier to manage
   dplyr::mutate(diet_plant = diet_fruit + diet_nect + diet_seed + diet_planto) %>% 
   dplyr::mutate(diet_vert = diet_vend + diet_vect + diet_vfish + diet_vunk + diet_scav) %>% 
-  select(binomial, realm, diet_plant, diet_inv, diet_vert, body_mass_median)
+  select(binomial, class, realm, diet_plant, diet_inv, diet_vert, body_mass_median) %>%
+  # to match Will's plot
+  mutate(ln_body_mass_median = log(body_mass_median))
 
 v_traits <- v_traits_orig %>% 
   # omnivores
@@ -51,7 +50,7 @@ v_traits <- v_traits_orig %>%
 
 # Master V data
 v_data <- 
-  left_join(biomes, v_traits, by = "binomial") %>%
+  full_join(biomes, v_traits, by = c("binomial")) %>%
   # Relabel diet categories to match diet_cat_key
   mutate(diet_5cat = case_when(diet_5cat == 1 ~ 1, 
                                diet_5cat == 2 ~ 3, 
@@ -65,8 +64,8 @@ v_data <-
   # Factor biome labels
   mutate(biome_label = factor(biome_label, levels = c("Tundra", "Boreal Forests/Taiga", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Temperate\nGrasslands, Savannas & Shrublands", "Mediterranean\nForests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Montane Grasslands & Shrublands", "Tropical & Subtropical\nConiferous Forests", "Tropical & Subtropical\nDry Broadleaf Forests", "Tropical & Subtropical \nGrasslands, Savannas & Shrublands", "Tropical & Subtropical\nMoist Broadleaf Forests", "Flooded Grasslands & Savannas", "Mangroves")))
 
-terr_mammals <- filter(v_data, realm == "terrestrial", class == "Mammalia")
-terr_birds   <- filter(v_data, realm == "terrestrial", class == "Aves")
+terr_mammals <- filter(v_data, realm == "terrestrial", class == "Mammalia", !is.na(biome_label))
+terr_birds   <- filter(v_data, realm == "terrestrial", class == "Aves", !is.na(biome_label))
 
 #### Figures ####
 
@@ -74,15 +73,19 @@ terr_birds   <- filter(v_data, realm == "terrestrial", class == "Aves")
 # Figure 3 #
 
 boxplot_theme <- function(base_size = 16) {
-  theme_minimal(base_size = base_size) + 
-    theme(axis.line = element_line(colour = "black", size = 0.5, lineend = "butt"), 
-          panel.grid = element_blank(), 
-          axis.title.y = element_text(angle = 90, vjust = 2),
+  theme_classic(base_size = base_size) + 
+    theme(axis.title.y = element_text(angle = 90, vjust = 2),
           axis.title.x = element_text(vjust = -5),
           axis.text.x = element_blank(),
+          axis.text = element_text(color = "black"),
+          axis.ticks.x =  element_blank(),
+          panel.border = element_rect(color = "black", fill = NA),
+          axis.line = element_blank(),
           legend.title = element_blank(),
           legend.direction = "vertical",
-          strip.background = element_rect(fill = "grey90", colour = "white"),
+          legend.text = element_text(size = base_size*1.5),
+          strip.background = element_rect(fill = "grey90", colour = "grey90"),
+          strip.text = element_text(size = base_size),
           plot.margin = unit(c(10, 5, 10, 5), "mm")
     )
 }
@@ -105,39 +108,66 @@ shift_legend2 <- function(p) {
   reposition_legend(p, 'center', panel=names)
 }
 
+# Terrestrial mammal body size ~ diet ~ biome plot
 tm_sum <- terr_mammals %>% 
-  dplyr::group_by(biome, diet_name) %>% 
+  dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
-terr_mammals_sum <- terr_mammals %>% 
-  dplyr::left_join(tm_sum, by = c("biome", "diet_name"))
-
-# Terrestrial mammal body size ~ diet plot
-tm <- terr_mammals_sum %>% 
+tm <- terr_mammals %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10) +
-  geom_text(aes(y = 16.6, label = tm_n), size = 5) +
-  facet_wrap(~ biome_label, ncol = 5) +
-  boxplot_theme() +
+  geom_boxplot(coef = 10, color = "black") +
+  geom_text(data = tm_sum, aes(y = 16.4, label = tm_n), size = 7, fontface = "bold", show.legend = FALSE) +
+  facet_wrap(~ biome_label, ncol = 5, labeller = label_wrap_gen(width=25)) +
+  boxplot_theme(base_size = 20) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
-  labs(x = "", y = "ln Mass (g)")
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
+  coord_cartesian(ylim = c(1, 17))
 
 tm <- shift_legend2(p = tm)
 
-#save_plot('v_plot_terr_mam_colour.pdf', tm, base_width = 18, base_height = 12)
+save_plot('../figures/v_plot_terr_mam_colour.pdf', tm, base_width = 18, base_height = 12)
+
+# Terrestrial bird body size ~ diet ~ biome plot
+tb_sum <- terr_birds %>% 
+  dplyr::group_by(biome, biome_label, diet_name) %>% 
+  dplyr::count(name = "tm_n")
+
+tm <- terr_birds %>% 
+  ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
+  geom_boxplot(coef = 10, color = "black") +
+  geom_text(data = tb_sum, aes(y = 12.6, label = tm_n), size = 7, fontface = "bold", show.legend = FALSE) +
+  facet_wrap(~ biome_label, ncol = 5, labeller = label_wrap_gen(width=25)) +
+  boxplot_theme(base_size = 20) +
+  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
+  coord_cartesian(ylim = c(1, 13.2))
+
+tm <- shift_legend2(p = tm)
+
+save_plot('../figures/v_plot_terr_bird_colour.pdf', tm, base_width = 18, base_height = 12)
 
 ## Across taxa ## 
 # Figure S4 #
 
 boxplot_theme_tax <- function(base_size = 16) {
-  theme_minimal(base_size = base_size) + 
-    theme(axis.line = element_line(colour = "black", size = 0.5, lineend = "butt"), 
-          panel.grid = element_blank(), 
-          axis.title.y = element_text(angle = 90, vjust = 2),
+  theme_classic(base_size = base_size) + 
+    theme(axis.title.y = element_text(angle = 90, vjust = 2),
           axis.title.x = element_text(vjust = -5),
+          axis.text = element_text(color = "black"),
+          axis.ticks.x =  element_blank(),
+          panel.border = element_rect(color = "black", fill = NA),
+          axis.line = element_blank(),
           legend.title = element_blank(),
           legend.direction = "horizontal",
-          strip.background = element_rect(fill = "grey90", colour = "white")
+          legend.text = element_text(size = base_size*1.5),
+          strip.background = element_rect(fill = "grey90", colour = "grey90"),
+          strip.text = element_text(size = base_size)
     )
 }
 
@@ -148,90 +178,97 @@ birds <- filter(v_data, class == "Aves", realm == "terrestrial") %>%
   dplyr::mutate(tax = "Birds (non-marine)")
 
 br_sum <- birds %>% 
-  dplyr::group_by(diet_name) %>% 
+  dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "br_n")
 
-birds_sum <- birds %>% 
-  dplyr::left_join(br_sum, by = "diet_name")
-
-br <- birds_sum %>% 
+br <- birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10) +
-  geom_text(aes(y = 13, label = br_n), size = 5) +
-  lims(y = c(0, 13.2)) +
+  geom_boxplot(coef = 10, color = "black") +
+  geom_text(data = br_sum, aes(y = 12.7, label = br_n), size = 7, fontface = "bold") +
+  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_x_discrete(NULL, drop = FALSE) +
+  scale_y_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
+  coord_cartesian(ylim = c(0, 13.2)) +
   facet_wrap(~ tax) +
-  boxplot_theme_tax() +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
-  labs(x = "", y = "ln Mass (g)") +
+  boxplot_theme_tax(base_size = 20) +
   theme(legend.position = "none")
 
 # Marine birds
 
 mbirds <- filter(v_data, class == "Aves", realm == "seabird") %>% 
   dplyr::distinct(binomial, .keep_all = TRUE) %>% 
-  dplyr::mutate(tax = "Marine birds")
+  dplyr::mutate(tax = "Birds (marine)")
 
 mbr_sum <- mbirds %>% 
-  dplyr::group_by(diet_name) %>% 
+  dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "mbr_n")
 
-mbirds_sum <- mbirds %>% 
-  dplyr::left_join(mbr_sum, by = "diet_name")
-
-mbr <- mbirds_sum %>% 
+mbr <- mbirds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
-  geom_text(aes(y = 11.4, label = mbr_n), size = 5) +
-  lims(y = c(0, 11.6)) +
+  geom_text(data = mbr_sum, aes(y = 11.2, label = mbr_n), size = 7, fontface = "bold") +
+  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_x_discrete(NULL, drop = FALSE) +
+  scale_y_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
+  coord_cartesian(ylim = c(0, 11.6)) +
   facet_wrap(~ tax) +
-  boxplot_theme_tax() +
-  scale_x_discrete(drop = FALSE) +
-  scale_fill_manual(values = c("#2271B2", "#FFAC3B", "#CD022D")) +
-  labs(x = "", y = "ln Mass (g)") +
+  boxplot_theme_tax(base_size = 20) +
   theme(legend.position = "none")
 
-# marine mammals
+#terrestrial mammals
+terr_mam <- filter(v_data, class == "Mammalia", realm == "terrestrial") %>% 
+  dplyr::distinct(binomial, .keep_all = TRUE) %>% 
+  dplyr::mutate(tax = "Mammals (non-marine)")
 
-Atraits <- readRDS("v_trait.rds") %>% 
-  dplyr::mutate(ln_body_mass_median = log(body_mass_median)) %>% 
-  dplyr::mutate(diet_plant = diet_fruit + diet_nect + diet_seed + diet_planto) %>% 
-  dplyr::mutate(diet_vert = diet_vend + diet_vect + diet_vfish + diet_vunk + diet_scav) %>% 
-  dplyr::mutate(omnivore = apply(dplyr::select(v_traits_orig, diet_plant, diet_inv, diet_vert), 1, max)) %>%
-  dplyr::mutate(diet_5cat = ifelse(omnivore <=50, 4, max.col(dplyr::select(., diet_plant, diet_inv, diet_vert)))) %>% 
-  mutate(diet_5cat = case_when(diet_5cat == 1 ~ 1, 
-                               diet_5cat == 2 ~ 3, 
-                               diet_5cat == 3 ~ 4, 
-                               diet_5cat == 4 ~ 2)) %>% 
-  # Add diet labels
-  left_join(., diet_cat_key) %>% 
-  mutate(diet_name = factor(diet_name, levels = diet_cat_key$diet_name)) %>% 
-  # Remove species missing diet category
-  drop_na(diet_name)
-
-marine_mam <- dplyr::filter(Atraits, realm == "aquatic") %>% 
-  dplyr::mutate(tax = "Marine mammals")
-
-mr_sum <- marine_mam %>% 
-  dplyr::group_by(diet_name) %>% 
+tm_sum <- terr_mam %>% 
+  dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "mr_n")
 
-marine_mam_sum <- marine_mam %>% 
-  dplyr::left_join(mr_sum, by = "diet_name")
-
-mr <- marine_mam_sum %>% 
+tm <- terr_mam %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
-  geom_text(aes(y = 20.4, label = mr_n), size = 5) +
-  lims(y = c(0, 20.6)) +
+  geom_text(data = tm_sum, aes(y = 16.4, label = mr_n), size = 7, fontface = "bold") +
+  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_x_discrete(NULL, drop = FALSE) +
+  scale_y_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
+  coord_cartesian(ylim = c(0, 17)) +
   facet_wrap(~ tax) +
-  boxplot_theme_tax() +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
-  labs(x = "", y = "ln Mass (g)") +
+  boxplot_theme_tax(base_size = 20) +
+  theme(legend.position = "none")
+
+
+# marine mammals
+marine_mam <- filter(v_data, class == "Mammalia", realm == "aquatic") %>% 
+  dplyr::distinct(binomial, .keep_all = TRUE) %>% 
+  dplyr::mutate(tax = "Mammals (marine)")
+
+mr_sum <- marine_mam %>% 
+  dplyr::group_by(tax, diet_name) %>% 
+  dplyr::count(name = "mr_n")
+
+mr <- marine_mam %>% 
+  ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
+  geom_boxplot(coef = 10) +
+  geom_text(data = mr_sum, aes(y = 19.9, label = mr_n), size = 7, fontface = "bold") +
+  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_x_discrete(NULL, drop = FALSE) +
+  scale_y_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000)/1000) +
+  coord_cartesian(ylim = c(0, 20.6)) +
+  facet_wrap(~ tax) +
+  boxplot_theme_tax(base_size = 20) +
   theme(legend.position = "none")
 
 # amphibians 
 
-tr_amph_orig <- readr::read_csv("AmphiBIO_v1.csv") %>% 
+tr_amph_orig <- readr::read_csv("../data/AmphiBIO_v1.csv") %>% 
   dplyr::select(Species, Flowers:Vert, Body_mass_g, Body_size_mm) %>% 
   dplyr::mutate(plant = pmin(Flowers, Seeds, Fruits, na.rm = TRUE)) %>%
   dplyr::filter(!is.na(Body_mass_g))
@@ -253,27 +290,26 @@ tr_amph <- tr_amph_orig %>%
   dplyr::mutate(ln_body_mass = log(Body_mass_g))
 
 am_sum <- tr_amph %>% 
-  dplyr::group_by(diet_name) %>% 
+  dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "am_n")
 
-amphibian_sum <- tr_amph %>% 
-  dplyr::left_join(am_sum, by = "diet_name")
-
-am <- amphibian_sum %>% 
+am <- tr_amph %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
-  geom_text(aes(y = 11.8, label = am_n), size = 5) +
-  lims(y = c(0, 12)) +
-  facet_wrap(~ tax) +
-  boxplot_theme_tax() +
-  scale_x_discrete(drop = FALSE) +
+  geom_text(data = am_sum, aes(y = 11.8, label = am_n), size = 7, fontface = "bold") +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
-  labs(x = "", y = "ln Mass (g)") +
+  scale_x_discrete(NULL, drop = FALSE) +
+  scale_y_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
+  coord_cartesian(ylim = c(0, 12)) +
+  facet_wrap(~ tax) +
+  boxplot_theme_tax(base_size = 20) +
   theme(legend.position = "none")
 
 # reptiles
 
-tr_rep_orig <- readr::read_csv("Final IUCN data set-published (Amanda).csv") %>% 
+tr_rep_orig <- readr::read_csv("../data/Final IUCN data set-published (Amanda).csv") %>% 
   dplyr::filter(Class == "REPTILIA") %>% 
   dplyr::select(Order, Family, Genus, binomial = Sciname, starts_with("Cat"), starts_with("Diet"), starts_with("Body"))
 
@@ -296,27 +332,26 @@ tr_rep <- tr_rep_orig %>%
   dplyr::mutate(ln_body_mass = log(Body_Mass_Value))
 
 rep_sum <- tr_rep %>% 
-  dplyr::group_by(diet_name) %>% 
+  dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "rep_n")
 
-reptile_sum <- tr_rep %>% 
-  dplyr::left_join(rep_sum, by = "diet_name")
-
-rep <- reptile_sum %>% 
+rep <- tr_rep %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
-  geom_text(aes(y = 14.4, label = rep_n), size = 5) +
-  lims(y = c(0, 14.6)) +
-  facet_wrap(~ tax) +
-  boxplot_theme_tax() +
-  scale_x_discrete(drop = FALSE) +
+  geom_text(data = rep_sum, aes(y = 14.1, label = rep_n), size = 7, fontface = "bold") +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
-  labs(x = "", y = "ln Mass (g)") +
+  scale_x_discrete(NULL, drop = FALSE) +
+  scale_y_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
+  coord_cartesian(ylim = c(0, 14.6)) +
+  facet_wrap(~ tax) +
+  boxplot_theme_tax(base_size = 20) +
   theme(legend.position = "none")
 
 ## fish
 
-tr_fish_orig <- readr::read_csv("Traits V3 (fish).csv")
+tr_fish_orig <- readr::read_csv("../data/Traits V3 (fish).csv")
 
 fish_diet_cat_key <- data.frame(diet_5cat = c(1, 2, 3, 4, 5), diet_name = c("herbivore", "planktivore", "omnivore", "benthic\ncarnivore", "higher\ncarnivore"))
 
@@ -335,25 +370,30 @@ tr_fish <- tr_fish_orig %>%
   dplyr::mutate(ln_lmax = log(Lmax))
 
 fish_sum <- tr_fish %>% 
-  dplyr::group_by(diet_name) %>% 
+  dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "fish_n")
 
-fishes_sum <- tr_fish %>% 
-  dplyr::left_join(fish_sum, by = "diet_name")
-
-fish <- fishes_sum %>% 
+fish <- tr_fish %>% 
   ggplot(., aes(x = diet_name, y = ln_lmax, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
-  geom_text(aes(y = 8.4, label = fish_n), size = 5) +
-  lims(y = c(0, 8.6)) +
-  facet_wrap(~ tax) +
-  boxplot_theme_tax() +
-  scale_x_discrete(drop = FALSE) +
+  geom_text(data = fish_sum, aes(y = 8.3, label = fish_n), size = 7, fontface = "bold") +
   scale_fill_manual(values = c("#359B73", "darkseagreen1", "#2271B2", "orangered", "red"), drop = FALSE) +
-  labs(x = "", y = "ln Maximum length") +
+  scale_x_discrete(NULL, drop = FALSE) +
+  scale_y_continuous(name = "Max Length (cm)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)) +
+  coord_cartesian(ylim = c(0, 8.6)) +
+  facet_wrap(~ tax) +
+  boxplot_theme_tax(base_size = 20) +
   theme(legend.position = "none")
 
-tax <- cowplot::plot_grid(br, mbr, rep, am, mr, fish, ncol = 2, nrow = 3)
+tax <- deeptime::ggarrange2(tm, mr, br, mbr, rep, fish, ncol = 2, byrow = TRUE,
+                            labels = c("A", "B", "C", "D", "E", "F"),
+                            label.args = list(gp = grid::gpar(font = 2, cex = 2)))
 
-# Figure S4
-#save_plot("v_plots_tax.pdf", tax, base_width = 11, base_height = 8)
+# Figure 3
+save_plot("../figures/v_plots_tax.pdf", tax, base_width = 16, base_height = 12)
+
+# Figure S3
+save_plot("../figures/v_plots_tax_supp.pdf", am, base_width = 8, base_height = 4)
+
