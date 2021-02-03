@@ -4,8 +4,8 @@
 #### Set up ####
 
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon)
-pacman::p_load_gh("willgearty/deeptime")
+pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon, gtools, grImport)
+pacman::p_load_gh("willgearty/deeptime", "richfitz/vectoR")
 
 
 # Will's colour scheme
@@ -113,6 +113,9 @@ tm_sum <- terr_mammals %>%
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
+tm_p <- pairwise.wilcox.test(terr_mammals$ln_body_mass_median, terr_mammals$diet_name)
+tm_stars <- stars.pval(diag(tm_p$p.value))
+
 tm <- terr_mammals %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10, color = "black") +
@@ -135,7 +138,10 @@ tb_sum <- terr_birds %>%
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
-tm <- terr_birds %>% 
+tb_p <- pairwise.wilcox.test(terr_birds$ln_body_mass_median, terr_birds$diet_name)
+tb_stars <- stars.pval(diag(tb_p$p.value))
+
+tb <- terr_birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10, color = "black") +
   geom_text(data = tb_sum, aes(y = 12.6, label = tm_n), size = 7, fontface = "bold", show.legend = FALSE) +
@@ -148,7 +154,7 @@ tm <- terr_birds %>%
                      labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
   coord_cartesian(ylim = c(1, 13.2))
 
-tm <- shift_legend2(p = tm)
+tb <- shift_legend2(p = tb)
 
 save_plot('../figures/v_plot_terr_bird_colour.pdf', tm, base_width = 18, base_height = 12)
 
@@ -171,6 +177,36 @@ boxplot_theme_tax <- function(base_size = 16) {
     )
 }
 
+# phylopics
+uuids <- c("Mammals (non-marine)" = "62398ac0-f0c3-48f8-8455-53512a05fbc4", #Loxodonta africana
+           "Mammals (marine)" = "41a350a0-a19c-41ed-a85e-47e6b4ba7da4", #Steno bredanensis
+           "Birds (non-marine)" = "416ec8c6-0ed1-4c9f-b4a4-8c1ef6496e84", #Turnix sylvaticus
+           "Birds (marine)" = "21c50828-58d8-42df-9219-2c1b0fb57c99", #Aptenodytes patagonicus
+           "Reptile" = "83053aee-0f56-4cf3-bbfa-9207e6f13f46", #Ardeosaurus brevipes
+           "Fishes" = "7413aa3a-d736-435a-8635-0c316ff73f26", #Salmoninae
+           "Amphibian" = "4679516b-405b-444f-974d-9775876716e2" #Hyloidea
+)
+
+getPhyloPic <- function(x){
+  isexe <- Sys.which("inkscape.exe")
+  gsexe <- Sys.which("gswin64c.exe")
+  download.file(paste0("http://phylopic.org/assets/images/submissions/",x,".svg"), paste0(x,".svg"))
+  cmd <- sprintf("%s -f %s -E %s", isexe, paste0(x,".svg"), paste0(x, ".eps"))
+  ret <- system(cmd, ignore.stderr=TRUE)
+  return(vector_read_eps(paste0(x, ".eps")))
+}
+
+phylopics <- lapply(uuids, getPhyloPic)
+#make them all face to the right
+phylopics[[1]] <- flip(phylopics[[1]], horizontal = TRUE)
+phylopics[[3]] <- flip(phylopics[[3]], horizontal = TRUE)
+phylopics[[4]] <- flip(phylopics[[4]], horizontal = TRUE)
+phylopics[[5]] <- flip(phylopics[[5]], horizontal = TRUE)
+phylopics[[6]] <- flip(phylopics[[6]], horizontal = TRUE)
+phylopics[[7]] <- flip(phylopics[[7]], horizontal = TRUE)
+
+phylopics <- lapply(phylopics, pictureGrob)
+
 # birds (non-marine)
 
 birds <- filter(v_data, class == "Aves", realm == "terrestrial") %>% 
@@ -181,10 +217,15 @@ br_sum <- birds %>%
   dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "br_n")
 
+br_p <- pairwise.wilcox.test(birds$ln_body_mass_median, birds$diet_name)
+br_stars <- stars.pval(diag(br_p$p.value))
+
 br <- birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10, color = "black") +
   geom_text(data = br_sum, aes(y = 12.7, label = br_n), size = 7, fontface = "bold") +
+  annotate("text", label = br_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
+  annotation_custom(phylopics[[3]], 4, 4.6, ymin = -.25, ymax = 2.75) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
@@ -205,10 +246,15 @@ mbr_sum <- mbirds %>%
   dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "mbr_n")
 
+mbr_p <- pairwise.wilcox.test(mbirds$ln_body_mass_median, mbirds$diet_name)
+mbr_stars <- stars.pval(diag(mbr_p$p.value))
+
 mbr <- mbirds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = mbr_sum, aes(y = 11.2, label = mbr_n), size = 7, fontface = "bold") +
+  annotate("text", label = mbr_stars, x = seq(2.5, 3.5), y = 0, size = 8, colour = "black") +
+  annotation_custom(phylopics[[4]], 4, 4.6, ymin = -.25, ymax = 2.25) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
@@ -228,10 +274,15 @@ tm_sum <- terr_mam %>%
   dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "mr_n")
 
+tm_p <- pairwise.wilcox.test(terr_mam$ln_body_mass_median, terr_mam$diet_name)
+tm_stars <- stars.pval(diag(tm_p$p.value))
+
 tm <- terr_mam %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = tm_sum, aes(y = 16.4, label = mr_n), size = 7, fontface = "bold") +
+  annotate("text", label = tm_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
+  annotation_custom(phylopics[[1]], 3.9, 4.7, ymin = -.5, ymax = 2.5) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
@@ -252,10 +303,15 @@ mr_sum <- marine_mam %>%
   dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "mr_n")
 
+mr_p <- pairwise.wilcox.test(marine_mam$ln_body_mass_median, marine_mam$diet_name)
+mr_stars <- stars.pval(diag(mr_p$p.value))
+
 mr <- marine_mam %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = mr_sum, aes(y = 19.9, label = mr_n), size = 7, fontface = "bold") +
+  annotate("text", label = mr_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
+  annotation_custom(phylopics[[2]], 3.8, 4.6, ymin = -.5, ymax = 2.5) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
@@ -293,10 +349,15 @@ am_sum <- tr_amph %>%
   dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "am_n")
 
+am_p <- pairwise.wilcox.test(tr_amph$ln_body_mass, tr_amph$diet_name)
+am_stars <- stars.pval(diag(am_p$p.value))
+
 am <- tr_amph %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = am_sum, aes(y = 11.8, label = am_n), size = 7, fontface = "bold") +
+  annotate("text", label = mbr_stars, x = seq(2.5, 2.5), y = 0, size = 8, colour = "black") +
+  annotation_custom(phylopics[[7]], 4, 4.6, ymin = -.5, ymax = 2.5) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
@@ -335,10 +396,15 @@ rep_sum <- tr_rep %>%
   dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "rep_n")
 
+rep_p <- pairwise.wilcox.test(tr_rep$ln_body_mass, tr_rep$diet_name)
+rep_stars <- stars.pval(diag(rep_p$p.value))
+
 rep <- tr_rep %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = rep_sum, aes(y = 14.1, label = rep_n), size = 7, fontface = "bold") +
+  annotate("text", label = rep_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
+  annotation_custom(phylopics[[5]], 4, 4.6, ymin = -.75, ymax = 2.25) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
@@ -373,10 +439,15 @@ fish_sum <- tr_fish %>%
   dplyr::group_by(tax, diet_name) %>% 
   dplyr::count(name = "fish_n")
 
+fish_p <- pairwise.wilcox.test(tr_fish$ln_lmax, tr_fish$diet_name)
+fish_stars <- stars.pval(diag(fish_p$p.value))
+
 fish <- tr_fish %>% 
   ggplot(., aes(x = diet_name, y = ln_lmax, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = fish_sum, aes(y = 8.3, label = fish_n), size = 7, fontface = "bold") +
+  annotate("text", label = fish_stars, x = seq(1.5, 4.5), y = 0, size = 8, colour = "black") +
+  annotation_custom(phylopics[[6]], 4.8, 5.5, ymin = -1.25, ymax = 2.25) +
   scale_fill_manual(values = c("#359B73", "darkseagreen1", "#2271B2", "orangered", "red"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Max Length (cm)",
