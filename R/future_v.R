@@ -19,7 +19,7 @@ theme_set(theme_cowplot())
 
 # future V mammals #
 
-Atraits <- readRDS("..data/v_trait.rds")
+Atraits <- readRDS("../data/v_trait.rds")
 
 #[1] PlantSeed: Plant and Seeds, [2] FruiNect: Fruits and Nectar, [3] VertFishScav: Vertebrates and Fish and Carrion, [4] Invertebrate: Invertebrates, [5] Omnivore
 
@@ -32,7 +32,7 @@ mam_pres <- Atraits %>%
   dplyr::mutate(body_mass_median = log(body_mass_median)) %>% 
   dplyr::select(binomial, body_mass_median, diet_plant, diet_vert, diet_inv)
 
-phylacine <- readRDS("..data/v_phylacine_trait.rds")
+phylacine <- readRDS("../data/v_phylacine_trait.rds")
 
 phylacine <- phylacine %>%
   dplyr::mutate(body_mass_median = log(mass)) %>% 
@@ -103,7 +103,7 @@ pres_df <- pres %>%
 #ext_mam <- read.delim("..data/te_all_species.txt", header = FALSE, stringsAsFactors = FALSE) 
 
 # read heavily compressed version of above
-ext_mam <- readRDS("..data/ext_mam.rds")
+ext_mam <- readRDS("../data/ext_mam.rds")
 
 # names of extinct mammals per run
 ext_names <- lapply(2:ncol(ext_mam), function(x) {
