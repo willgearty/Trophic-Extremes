@@ -4,12 +4,12 @@
 #### Set up ####
 
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon, gtools, grImport)
-pacman::p_load_gh("willgearty/deeptime", "richfitz/vectoR")
+pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon, gtools, grImport, deeptime)
+pacman::p_load_gh("richfitz/vectoR")
 
 
 # Will's colour scheme
-colors4 <- setNames(c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), c("herbivore", "omnivore", "insectivore", "carnivore"))
+colors4 <- setNames(c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), c("herbivore", "omnivore", "invertivore", "carnivore"))
 
 ##### Data ####
 
@@ -21,7 +21,7 @@ biome_traits <-
 
 # Create lookup for biome ids
 biome_key <- tibble(biome = 1:14, biome_name = c("Tropical & Subtropical Moist Broadleaf Forests", "Tropical & Subtropical Dry Broadleaf Forests", "Tropical & Subtropical Coniferous Forests", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Boreal Forests/Taiga", "Tropical & Subtropical Grasslands, Savannas & Shrublands", "Temperate Grasslands, Savannas & Shrublands", "Flooded Grasslands & Savannas", "Montane Grasslands & Shrublands", "Tundra", "Mediterranean Forests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Mangroves"), 
-                    biome_label = c("Tropical & Subtropical\nMoist Broadleaf Forests", "Tropical & Subtropical\nDry Broadleaf Forests", "Tropical & Subtropical\nConiferous Forests", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Boreal Forests/Taiga", "Tropical & Subtropical \nGrasslands, Savannas & Shrublands", "Temperate\nGrasslands, Savannas & Shrublands", "Flooded Grasslands & Savannas", "Montane Grasslands & Shrublands", "Tundra", "Mediterranean\nForests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Mangroves"))
+                    biome_label = c("Tropical & Subtropical\nMoist Broadleaf Forests", "Tropical & Subtropical\nDry Broadleaf Forests", "Tropical & Subtropical\nConiferous Forests", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Boreal Forests/Taiga", "Tropical & Subtropical\nGrasslands, Savannas & Shrublands", "Temperate\nGrasslands, Savannas & Shrublands", "Flooded Grasslands & Savannas", "Montane Grasslands & Shrublands", "Tundra", "Mediterranean\nForests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Mangroves"))
 
 # Master biome data
 biomes <- 
@@ -62,7 +62,7 @@ v_data <-
   # Remove species missing diet category
   drop_na(diet_name) %>% 
   # Factor biome labels
-  mutate(biome_label = factor(biome_label, levels = c("Tundra", "Boreal Forests/Taiga", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Temperate\nGrasslands, Savannas & Shrublands", "Mediterranean\nForests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Montane Grasslands & Shrublands", "Tropical & Subtropical\nConiferous Forests", "Tropical & Subtropical\nDry Broadleaf Forests", "Tropical & Subtropical \nGrasslands, Savannas & Shrublands", "Tropical & Subtropical\nMoist Broadleaf Forests", "Flooded Grasslands & Savannas", "Mangroves")))
+  mutate(biome_label = factor(biome_label, levels = c("Tundra", "Boreal Forests/Taiga", "Temperate Broadleaf & Mixed Forests", "Temperate Conifer Forests", "Temperate\nGrasslands, Savannas & Shrublands", "Mediterranean\nForests, Woodlands & Scrub", "Deserts & Xeric Shrublands", "Montane Grasslands & Shrublands", "Tropical & Subtropical\nConiferous Forests", "Tropical & Subtropical\nDry Broadleaf Forests", "Tropical & Subtropical\nGrasslands, Savannas & Shrublands", "Tropical & Subtropical\nMoist Broadleaf Forests", "Flooded Grasslands & Savannas", "Mangroves")))
 
 terr_mammals <- filter(v_data, realm == "terrestrial", class == "Mammalia", !is.na(biome_label))
 terr_birds   <- filter(v_data, realm == "terrestrial", class == "Aves", !is.na(biome_label))
@@ -83,7 +83,8 @@ boxplot_theme <- function(base_size = 16) {
           axis.line = element_blank(),
           legend.title = element_blank(),
           legend.direction = "vertical",
-          legend.text = element_text(size = base_size*1.5),
+          legend.text = element_text(size = base_size*1.75),
+          legend.key.size = unit(2, "lines"),
           strip.background = element_rect(fill = "grey90", colour = "grey90"),
           strip.text = element_text(size = base_size),
           plot.margin = unit(c(10, 5, 10, 5), "mm")
@@ -113,13 +114,16 @@ tm_sum <- terr_mammals %>%
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
-tm_p <- pairwise.wilcox.test(terr_mammals$ln_body_mass_median, terr_mammals$diet_name)
-tm_stars <- stars.pval(diag(tm_p$p.value))
+tm_p <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_label)))
+tm_stars <- stars.pval(diag(tm_p$p.value))[sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))]
+tm_star_df <- data.frame(biome_label = factor(rep(levels(terr_mammals$biome_label), each = 3), levels = levels(terr_mammals$biome_label)),
+                         x = seq(1.5,3.5), y = 0, star = tm_stars)
 
 tm <- terr_mammals %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10, color = "black") +
   geom_text(data = tm_sum, aes(y = 16.4, label = tm_n), size = 7, fontface = "bold", show.legend = FALSE) +
+  geom_text(data = tm_star_df, aes(x = x, y = y, label = star), size = 8, inherit.aes = FALSE) +
   facet_wrap(~ biome_label, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
@@ -127,7 +131,7 @@ tm <- terr_mammals %>%
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
                      labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
-  coord_cartesian(ylim = c(1, 17))
+  coord_cartesian(ylim = c(0, 17))
 
 tm <- shift_legend2(p = tm)
 
@@ -138,13 +142,16 @@ tb_sum <- terr_birds %>%
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
-tb_p <- pairwise.wilcox.test(terr_birds$ln_body_mass_median, terr_birds$diet_name)
-tb_stars <- stars.pval(diag(tb_p$p.value))
+tb_p <- with(terr_birds, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_label)))
+tb_stars <- stars.pval(diag(tb_p$p.value))[sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))]
+tb_star_df <- data.frame(biome_label = factor(rep(levels(terr_birds$biome_label), each = 3), levels = levels(terr_birds$biome_label)),
+                         x = seq(1.5,3.5), y = 0, star = tb_stars)
 
 tb <- terr_birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10, color = "black") +
   geom_text(data = tb_sum, aes(y = 12.6, label = tm_n), size = 7, fontface = "bold", show.legend = FALSE) +
+  geom_text(data = tb_star_df, aes(x = x, y = y, label = star), size = 8, inherit.aes = FALSE) +
   facet_wrap(~ biome_label, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
@@ -152,11 +159,11 @@ tb <- terr_birds %>%
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
                      labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
-  coord_cartesian(ylim = c(1, 13.2))
+  coord_cartesian(ylim = c(0, 13.2))
 
 tb <- shift_legend2(p = tb)
 
-save_plot('../figures/v_plot_terr_bird_colour.pdf', tm, base_width = 18, base_height = 12)
+save_plot('../figures/v_plot_terr_bird_colour.pdf', tb, base_width = 18, base_height = 12)
 
 ## Across taxa ## 
 # Figure S4 #

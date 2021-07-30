@@ -7,10 +7,10 @@
 "herbivore","Holocene",1.36609165380237,"Salpingotulus michaelis",16.1950566920944,"Mammuthus columbi",5.63479317459144
 "herbivore","Modern",1.36609165380237,"Salpingotulus michaelis",15.1866999807287,"Loxodonta africana",5.52146091786225
 "herbivore","Future",1.36609165380237,"Salpingotulus michaelis",13.710144264512,"Giraffa camelopardalis",5.09834087451536
-"insectivore","Pleistocene",0.559615787935423,"Suncus remyi",12.2060726455302,"Pampatherium typum",2.91777073208428
-"insectivore","Holocene",0.559615787935423,"Suncus remyi",12.2060726455302,"Pampatherium typum",2.90959616308351
-"insectivore","Modern",0.559615787935423,"Suncus remyi",10.8657148380461,"Orycteropus afer",2.90142159408275
-"insectivore","Future",0.559615787935423,"Suncus remyi",10.8657148380461,"Orycteropus afer",2.77258872223978
+"invertivore","Pleistocene",0.559615787935423,"Suncus remyi",12.2060726455302,"Pampatherium typum",2.91777073208428
+"invertivore","Holocene",0.559615787935423,"Suncus remyi",12.2060726455302,"Pampatherium typum",2.90959616308351
+"invertivore","Modern",0.559615787935423,"Suncus remyi",10.8657148380461,"Orycteropus afer",2.90142159408275
+"invertivore","Future",0.559615787935423,"Suncus remyi",10.8657148380461,"Orycteropus afer",2.77258872223978
 "omnivore","Pleistocene",1.54756250871601,"Neusticomys oyapocki",12.3086292338553,"Ursus arctos",4.36586662328406
 "omnivore","Holocene",1.54756250871601,"Neusticomys oyapocki",12.3086292338553,"Ursus arctos",4.36586662328406
 "omnivore","Modern",1.54756250871601,"Neusticomys oyapocki",12.3086292338553,"Ursus arctos",4.36586662328406

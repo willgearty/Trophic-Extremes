@@ -1,4 +1,4 @@
-Order,Family,Genus_species,FAD,LAD,lnMass_g,PBDB life habit,PBDB_diet,taxon rank at which diet assignment was made,Recoded_Diet,Recoded_groups
+Order,Family,Genus_species,FAD,LAD,lnMass_g,PBDB life habit,PBDB diet,taxon rank at which diet assignment was made,Recoded_Diet,Recoded groups:Rodent/Herbiovore guild/Carnivore guild
 Carnivora,Felidae,Lynx shansius,NA,NA,9.461322147,scansorial,carnivore,genus,carnivore,carnivore guild
 Carnivora,Hyaenidae,Ictitherium ibericum,NA,NA,9.615595348,ground dwelling,carnivore,genus,carnivore,carnivore guild
 Carnivora,Hyaenidae,Thalassictis certa,11.925,11.925,9.781381475,ground dwelling,carnivore,genus,carnivore,carnivore guild
@@ -509,7 +509,7 @@ Perissodactyla,Equidae,Hipparion coelophyes,NA,NA,11.75930207,ground dwelling,br
 Perissodactyla,Equidae,Hipparion forstenae,NA,NA,11.76851241,ground dwelling,browser,genus,herbivore,herbivore guild
 Perissodactyla,Equidae,Hipparion ptychodus,NA,NA,11.87673391,ground dwelling,browser,genus,herbivore,herbivore guild
 Perissodactyla,Equidae,Hipparion platyodus,NA,NA,11.89745718,ground dwelling,browser,genus,herbivore,herbivore guild
-NA,NA,Pliohippus tehonensis tehonensis,NA,NA,12.01,ground dwelling,browser,genus,herbivore,herbivore guild
+Perissodactyla,Equidae,Pliohippus tehonensis tehonensis,NA,NA,12.01,ground dwelling,browser,genus,herbivore,herbivore guild
 Perissodactyla,Tapiridae,Tapirus telleri,NA,NA,12.03791487,amphibious,browser,genus,herbivore,herbivore guild
 Perissodactyla,Equidae,Hipparion prostylum,NA,NA,12.12771568,ground dwelling,browser,genus,herbivore,herbivore guild
 Perissodactyla,Equidae,Hipparion sarmaticum,NA,NA,12.14383378,ground dwelling,browser,genus,herbivore,herbivore guild
@@ -517,7 +517,7 @@ Perissodactyla,Equidae,Hipparion catalaunicum,10.154,10.154,12.17606997,ground d
 Perissodactyla,Equidae,Hipparion hippidiodus,6.325,4.466,12.18067514,ground dwelling,browser,genus,herbivore,herbivore guild
 Perissodactyla,Equidae,Hipparion melendezi,NA,NA,12.19679324,ground dwelling,browser,genus,herbivore,herbivore guild
 Artiodactyla,Palaeomerycidae,Palaeomeryx magnus,13.789,11.608,12.20600358,ground dwelling,browser,genus,herbivore,herbivore guild
-NA,NA,Proboscidipparion sinense,3.094,3.094,12.23133201,ground dwelling,browser,genus,herbivore,herbivore guild
+Perissodactyla,Equidae,Proboscidipparion sinense,3.094,3.094,12.23133201,ground dwelling,browser,genus,herbivore,herbivore guild
 Perissodactyla,Equidae,Hipparion dermatorhinum,NA,NA,12.24054235,ground dwelling,browser,genus,herbivore,herbivore guild
 Perissodactyla,Equidae,Hipparion platigenis,9.427,9.427,12.25435786,ground dwelling,browser,genus,herbivore,herbivore guild
 Artiodactyla,Palaeomerycidae,Palaeomeryx eminens,13.789,8.47,12.25896304,ground dwelling,browser,genus,herbivore,herbivore guild
@@ -1023,7 +1023,7 @@ Perissodactyla,Tapiridae,Tapirus merriami,2,0.01145,13.32,amphibious,browser,spe
 Artiodactyla,Giraffidae,Bohlinia attica,7.498,3.96,13.38492715,ground dwelling,browser,species,herbivore,herbivore guild
 Perissodactyla,Rhinocerotidae,Subhyracodon occidentalis,33.85,30.75,13.41851909,ground dwelling,browser,species,herbivore,herbivore guild
 Perissodactyla,Brontotheriidae,Sthenodectes priscus,44.95,44.95,13.479,ground dwelling,browser,species,herbivore,herbivore guild
-NA,NA,Hoploaceratherium tetradactylum,13.789,11.925,13.52999001,ground dwelling,browser,species,herbivore,herbivore guild
+Perissodactyla,Rhinocerotidae,Hoploaceratherium tetradactylum,13.789,11.925,13.52999001,ground dwelling,browser,species,herbivore,herbivore guild
 Perissodactyla,Rhinocerotidae,Diceratherium gregorii,24.4,23.25,13.54094153,ground dwelling,browser,species,herbivore,herbivore guild
 Perissodactyla,Rhinocerotidae,Hispanotherium matritense,16.435,8.47,13.5921598,ground dwelling,browser,species,herbivore,herbivore guild
 Perissodactyla,Amynodontidae,Metamynodon chadronensis,38.35,37.2,13.59557256,amphibious,browser,species,herbivore,herbivore guild
@@ -1207,7 +1207,7 @@ Artiodactyla,Hypertragulidae,Leptomeryx yoderi,37.85,36.7,8.92593097,ground dwel
 Artiodactyla,Hypertragulidae,Leptomeryx mammifer,37.6,35.65,9.420731004,ground dwelling,frugivore,species,herbivore,herbivore guild
 Artiodactyla,Leptomerycidae,Pronodens silberlingi,28.25,28.25,9.701436468,ground dwelling,frugivore,species,herbivore,herbivore guild
 Perissodactyla,Palaeotheriidae,Hyracotherium vasacciense,53.7,50.45,8.805428415,ground dwelling,"frugivore, folivore",species,herbivore,herbivore guild
-NA,NA,Theropithecus oswaldi,3.094,0.4535,11.47210347,arboreal,"frugivore, folivore",species,herbivore,herbivore guild
+Primates,Cercopithecidae,Theropithecus oswaldi,3.094,0.4535,11.47210347,arboreal,"frugivore, folivore",species,herbivore,herbivore guild
 Artiodactyla,Tragulidae,Dorcatherium minus,13.789,7.016,8.800480225,ground dwelling,"frugivore, grazer",species,herbivore,herbivore guild
 Artiodactyla,Tragulidae,Dorcatherium guntianum,16.435,13.2,9.210340372,ground dwelling,"frugivore, grazer",species,herbivore,herbivore guild
 Artiodactyla,Tragulidae,Dorcatherium libiensis,19.5,19.5,9.903418485,ground dwelling,"frugivore, grazer",species,herbivore,herbivore guild
@@ -1505,7 +1505,7 @@ Perissodactyla,Equidae,Merychippus gunteri,18.85,17.05,10.50991173,ground dwelli
 Artiodactyla,Cervidae,Dicrocerus elegans,14.81,11.608,10.71392844,ground dwelling,"grazer, browser",species,herbivore,herbivore guild
 Perissodactyla,Equidae,Parapliohippus carrizoensis,18.7,16.65,11.04134884,ground dwelling,"grazer, browser",species,herbivore,herbivore guild
 Artiodactyla,Capridae,Ovis canadensis,1.3,0.006,11.0415,ground dwelling,"grazer, browser",species,herbivore,herbivore guild
-NA,NA,Dama mesopotamica,1.3,0.3905,11.19056355,ground dwelling,"grazer, browser",species,herbivore,herbivore guild
+Artiodactyla,Cervidae,Dama mesopotamica,1.3,0.3905,11.19056355,ground dwelling,"grazer, browser",species,herbivore,herbivore guild
 Artiodactyla,Bovidae,Maremmia lorenzi,9.427,7.016,11.22510233,ground dwelling,"grazer, browser",species,herbivore,herbivore guild
 Perissodactyla,Equidae,Merychippus sejunctus,16.3,13.75,11.23,ground dwelling,"grazer, browser",species,herbivore,herbivore guild
 Artiodactyla,Cervidae,Croizetoceros ramosus,3.96,1.606,11.28957471,ground dwelling,"grazer, browser",species,herbivore,herbivore guild
@@ -1711,25 +1711,25 @@ Rodentia,Cricetidae,Copemys loxodon,13.1,12.2,3.3585,ground dwelling,herbivore,s
 Cimolodonta,NA,Bryceomys intermedius,98.4,98.4,3.401197382,arboreal,herbivore,species,herbivore,herbivore guild
 Cimolodonta,Microcosmodontidae,Microcosmodon rosei,57.15,56.1,3.417253781,arboreal,herbivore,species,herbivore,herbivore guild
 Multituberculata,NA,Glirodon grandis,150.6,149.9165,3.433987204,arboreal,herbivore,species,herbivore,herbivore guild
-NA,Ischyromyidae,Microparamys woodi,43.05,40.75,3.448,ground dwelling,herbivore,species,herbivore,herbivore guild
-NA,Ischyromyidae,Mattimys kalicola,53.65,50.9375,3.448,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Ischyromyidae,Microparamys woodi,43.05,40.75,3.448,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Ischyromyidae,Mattimys kalicola,53.65,50.9375,3.448,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Copemys mariae,11.75,11.7,3.45,ground dwelling,herbivore,species,herbivore,Rodentia
-Cimolodonta,NA,Cimexomys antiquus,81.35,80.275,3.469174031,arboreal,herbivore,species,herbivore,herbivore guild
+Multituberculata,NA,Cimexomys antiquus,81.35,80.275,3.469174031,arboreal,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Copemys barstowensis,14,13.8,3.4715,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Prosomys mimus,9.7,8.3,3.4725,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,Ischyromyidae,Apatosciuravus bifax,54.85,54.85,3.489,ground dwelling,herbivore,species,herbivore,herbivore guild
-NA,NA,Paciculus woodi,25.1,24.4,3.498,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Ischyromyidae,Apatosciuravus bifax,54.85,54.85,3.489,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Cricetidae,Paciculus woodi,25.1,24.4,3.498,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Eomyidae,Paradjidaumo trilophus,37.85,32.8,3.502,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,Protoptychidae,Protoptychus hatcheri,45.15,41.65,3.513948796,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Protoptychidae,Protoptychus hatcheri,45.15,41.65,3.513948796,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Mylagaulidae,Crucimys milleri,24.7,24.35,3.536,ground dwelling,herbivore,species,herbivore,Rodentia
 Cimolodonta,Microcosmodontidae,Microcosmodon arcuatus,63.3,63.3,3.538458957,arboreal,herbivore,species,herbivore,herbivore guild
-NA,Sciuravidae,Knightomys minor,55.2,52.8,3.539,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Sciuravidae,Knightomys minor,55.2,52.8,3.539,ground dwelling,herbivore,species,herbivore,herbivore guild
 Multituberculata,Eobaataridae,Sinobaatar xiei,112.525,112.525,3.555348061,arboreal,herbivore,species,herbivore,herbivore guild
-NA,Ischyromyidae,Paramys adamus,57.2,57.2,3.581,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Ischyromyidae,Paramys adamus,57.2,57.2,3.581,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Onychomys pedroensis,2.5,0.069,3.588,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Zapodidae,Megasminthus gladiofex,13.8,13.8,3.592,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Onychomys leucogaster,0.4,0.014695,3.6065,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,Ischyromyidae,Microparamys sambucus,49.75,49.75,3.628,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Ischyromyidae,Microparamys sambucus,49.75,49.75,3.628,ground dwelling,herbivore,species,herbivore,herbivore guild
 Cimolodonta,NA,Cimexomys minor,66.8,63.3,3.631912816,arboreal,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Repomys panacaensis,4.6,4,3.652,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Paronychomys tuttlei,6.85,6.85,3.653,ground dwelling,herbivore,species,herbivore,Rodentia
@@ -1738,16 +1738,16 @@ Insectivora,Apatemyidae,Apatemys uintensis,44.75,40.5,3.681334809,arboreal,herbi
 Multituberculata,Paulchoffatiidae,Kuehneodon dietrichi,151.1415,151.1415,3.688879454,arboreal,herbivore,species,herbivore,herbivore guild
 Rodentia,Simimyidae,Simimys landeri,39.75,39.75,3.701,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Lemmiscus curtatus,0.8,0.00941,3.7055,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,Sciuravidae,Sciuravus bridgeri,50.65,47.55,3.719,ground dwelling,herbivore,species,herbivore,herbivore guild
-NA,Ischyromyidae,Microparamys cheradius,57.25,53.9,3.719,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Sciuravidae,Sciuravus bridgeri,50.65,47.55,3.719,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Ischyromyidae,Microparamys cheradius,57.25,53.9,3.719,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Geringia mcgregori,29.25,24.4,3.72,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Leidymys cerasus,23.9,23.9,3.727,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Peromyscus kansasensis,3.5,3,3.734132255,ground dwelling,herbivore,species,herbivore,Rodentia
 Multituberculata,Eobaataridae,Sinobaatar fuxinensis,112.525,112.525,3.737669618,arboreal,herbivore,species,herbivore,herbivore guild
-NA,Cricetidae,Ophiomys parvus,2.8,1.4,3.76,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Cricetidae,Ophiomys parvus,2.8,1.4,3.76,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Leidymys korthi,24.7,24.7,3.774,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cylindrodontidae,Pseudocylindrodon medius,37.65,36.95,3.788,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,Sciuravidae,Knightomys senior,52.5,51.9,3.793,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Sciuravidae,Knightomys senior,52.5,51.9,3.793,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Aplodontidae,Ansomys hepburnensis,14.95,14.95,3.8,fossorial,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Goniodontomys disjunctus,11.4,9.15,3.8005,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Aplodontidae,Prosciurus parvus,33.6,32.85,3.809,fossorial,herbivore,species,herbivore,Rodentia
@@ -1761,7 +1761,7 @@ Rodentia,Cricetidae,Allophaiomys pliocaenicus,3.96,0.3,3.848,ground dwelling,her
 Lagomorpha,Ochotonidae,Oreolagus colteri,14.8,14.7,3.853,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Pipestoneomyidae,Pipestoneomys bisulcatus,37.65,35.8,3.853,ground dwelling,herbivore,species,herbivore,Rodentia
 Insectivora,Apatemyidae,Labidolemur serus,54.8,54.6,3.869,arboreal,herbivore,species,herbivore,herbivore guild
-NA,Sciuravidae,Knightomys cuspidatus,51.8,51.8,3.877,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Sciuravidae,Knightomys cuspidatus,51.8,51.8,3.877,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Sigmodon minor,5.25,1.4,3.918,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cylindrodontidae,Mysops minimus,46.45,46.45,3.92,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cylindrodontidae,Mysops parvus,48.1,46.45,3.923,ground dwelling,herbivore,species,herbivore,Rodentia
@@ -1777,16 +1777,16 @@ Rodentia,Eomyidae,Litoyoderimys lustrorum,37.35,37.3,3.968,ground dwelling,herbi
 Rodentia,Cricetidae,Paramicrotoscoptes hibbardi,11.1,11.1,3.97,ground dwelling,herbivore,species,herbivore,Rodentia
 Multituberculata,Eobaataridae,Loxaulax valdensis,138.3,127.725,3.970291914,arboreal,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Repomys arizonensis,3,3,3.988,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,Ischyromyidae,Microparamys tricus,40.5,39.75,3.993,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Ischyromyidae,Microparamys tricus,40.5,39.75,3.993,ground dwelling,herbivore,species,herbivore,herbivore guild
 Cimolodonta,Microcosmodontidae,Pentacosmodon pronus,57.7,57.7,4.007333185,arboreal,herbivore,species,herbivore,herbivore guild
-NA,Ischyromyidae,Paramys pycnus,55.2,54.7,4.016673355,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Ischyromyidae,Paramys pycnus,55.2,54.7,4.016673355,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Zapodidae,Megasminthus tiheni,16,12.45,4.026,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Allomyidae,Downsimus chadwicki,29.25,24.4,4.0335,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cylindrodontidae,Pareumys grangeri,45.45,42.85,4.047,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,NA,Sigmodon medius,NA,NA,4.051,ground dwelling,herbivore,species,herbivore,herbivore guild
-NA,Cricetidae,Ophiomys fricki,3,3,4.076314608,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Cricetidae,Sigmodon medius,NA,NA,4.051,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Cricetidae,Ophiomys fricki,3,3,4.076314608,ground dwelling,herbivore,species,herbivore,herbivore guild
 Multituberculata,Allodontidae,Psalodon marshi,150.6,150.6,4.077537444,arboreal,herbivore,species,herbivore,herbivore guild
-NA,Cricetidae,Ophiomys taylori,3.85,3.2,4.08,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Cricetidae,Ophiomys taylori,3.85,3.2,4.08,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Microtus paroperarius,1.3,0.2,4.0905,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Basirepomys pliocenicus,11.8,9.7,4.095195306,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Clethrionomys gapperi,1.3,0.006,4.0985,ground dwelling,herbivore,species,herbivore,Rodentia
@@ -1800,9 +1800,9 @@ Rodentia,Cricetidae,Pliophenacomys finneyi,3.5,3.5,4.146,ground dwelling,herbivo
 Rodentia,Cricetidae,Mictomys meltoni,0.55,0.2,4.159,ground dwelling,herbivore,species,herbivore,Rodentia
 Cimolodonta,NA,Paracimexomys priscus,81.7335,67.6,4.161247621,arboreal,herbivore,species,herbivore,herbivore guild
 Rodentia,Eutypomyidae,Janimus rhinophilus,41.55,41.55,4.163808689,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,Sciuravidae,Sciuravus altidens,44.75,44.75,4.163808689,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Sciuravidae,Sciuravus altidens,44.75,44.75,4.163808689,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Microtus ochrogaster,0.85,0.025643,4.17,ground dwelling,herbivore,species,herbivore,Rodentia
-NA,Sciuravidae,Knightomys depressus,54.9,50.1,4.173,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Sciuravidae,Knightomys depressus,54.9,50.1,4.173,ground dwelling,herbivore,species,herbivore,herbivore guild
 Insectivora,Apatemyidae,Unuchinia asaphes,59.9,59.9,4.19,arboreal,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Sigmodon hudspethensis,2.6,2.6,4.217,ground dwelling,herbivore,species,herbivore,Rodentia
 Cimolodonta,Ptilodontidae,Ptilodus gnomus,60.7165,59.85,4.219507705,arboreal,herbivore,species,herbivore,herbivore guild
@@ -1885,7 +1885,7 @@ NA,Sciuravidae,Knightomys huerfanensis,52.1,50.1,4.683,ground dwelling,herbivore
 Rodentia,Aplodontidae,Prosciurus magnus,32.8,31.4,4.685,fossorial,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Sigmodon hispidus,1.15,0.006,4.691,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Aplodontidae,Leptoromys wilsoni,32.35,32.15,4.695,fossorial,herbivore,species,herbivore,Rodentia
-NA,Cricetidae,Ophiomys magilli,4.6,3,4.710441653,ground dwelling,herbivore,species,herbivore,herbivore guild
+Rodentia,Cricetidae,Ophiomys magilli,4.6,3,4.710441653,ground dwelling,herbivore,species,herbivore,herbivore guild
 Rodentia,Cricetidae,Scottimus longiquus,33.55,33.55,4.7125,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Mictomys vetus,3,0.8,4.728,ground dwelling,herbivore,species,herbivore,Rodentia
 Rodentia,Cricetidae,Prosigmodon holocuspis,4.8,4.7,4.7325,ground dwelling,herbivore,species,herbivore,Rodentia
@@ -2877,7 +2877,7 @@ Artiodactyla,Suidae,Bunolistriodon lockharti,18.2,14.81,11.67871159,ground dwell
 Artiodactyla,Suidae,Propotamochoerus palaeochoerus,11.925,7.016,11.69482969,ground dwelling,omnivore,genus,omnivore,NA
 Artiodactyla,Suidae,Propotamochoerus provincialis,7.016,3.96,11.98265282,ground dwelling,omnivore,genus,omnivore,NA
 Artiodactyla,Suidae,Microstonyx erymanthius,8.225,7.498,12.50533964,ground dwelling,omnivore,genus,omnivore,NA
-NA,NA,Gigantopithecus blacki,0.4535,0.4535,12.85619415,ground dwelling,omnivore,genus,omnivore,NA
+Primates,Hominidae,Gigantopithecus blacki,0.4535,0.4535,12.85619415,ground dwelling,omnivore,genus,omnivore,NA
 Artiodactyla,Suidae,Tetraconodon magnus,NA,NA,13.09940659,ground dwelling,omnivore,genus,omnivore,NA
 Artiodactyla,Suidae,Kubanochoerus khinzikebirus,12.629,12.629,13.65202702,ground dwelling,omnivore,genus,omnivore,NA
 Artiodactyla,Suidae,Kubanochoerus gigas,13.2,13.2,13.78787954,ground dwelling,omnivore,genus,omnivore,NA
@@ -3203,7 +3203,7 @@ NA,Arctocyonidae,Desmatoclaenus hermaeus,63.2,61.75,9.218,ground dwelling,omnivo
 Acreodi,Triisodontidae,Eoconodon copanus,65.2,65.2,9.236,scansorial,omnivore,species,omnivore,NA
 NA,Arctocyonidae,Loxolophus stenognathus,64,64,9.401,ground dwelling,omnivore,species,omnivore,NA
 NA,Arctocyonidae,Loxolophus pentacus,64,61.75,9.615,ground dwelling,omnivore,species,omnivore,NA
-NA,NA,Pachyarmatherium leiseyi,2.3,1.55,9.643420647,ground dwelling,omnivore,species,omnivore,NA
+Cingulata,NA,Pachyarmatherium leiseyi,2.3,1.55,9.643420647,ground dwelling,omnivore,species,omnivore,NA
 NA,Arctocyonidae,Anacodon nexus,57.35,56.8,9.676,ground dwelling,omnivore,species,omnivore,NA
 NA,Arctocyonidae,Loxolophus spiekeri,63,61.75,9.816,ground dwelling,omnivore,species,omnivore,NA
 NA,Arctocyonidae,Lambertocyon gingerichi,58.35,58.35,10.10677337,ground dwelling,omnivore,species,omnivore,NA
