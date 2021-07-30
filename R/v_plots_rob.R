@@ -165,6 +165,56 @@ tb <- shift_legend2(p = tb)
 
 save_plot('../figures/v_plot_terr_bird_colour.pdf', tb, base_width = 18, base_height = 12)
 
+# Fish maximum body length ~ diet ~ biome plot
+tr_fish_orig <- readr::read_csv("../data/Traits V3 (fish).csv")
+
+fish_diet_cat_key_new <- data.frame(diet_5cat = c(1, 2, 3, 4, 5), diet_name = c("herbivore", "planktivore", "omnivore", "benthic carnivore", "higher carnivore"))
+
+tr_fish <- tr_fish_orig %>% 
+  dplyr::distinct(CURRENT_TAXONOMIC_NAME, .keep_all = TRUE) %>% 
+  dplyr::mutate(diet_5cat = case_when(TrophicGrp_1 == "Herbivore" ~ 1, 
+                                      TrophicGrp_1 == "Planktivore" ~ 2, 
+                                      TrophicGrp_1 == "Omnivore" ~ 3,
+                                      TrophicGrp_1 == "omnivore" ~ 3,
+                                      TrophicGrp_1 == "Benthic carnivore" ~ 4,
+                                      TrophicGrp_1 == "Higher carnivore" ~ 5)) %>% 
+  # Add diet labels
+  left_join(., fish_diet_cat_key_new) %>% 
+  mutate(diet_name = factor(diet_name, levels = fish_diet_cat_key_new$diet_name)) %>% 
+  dplyr::mutate(tax = "Fishes") %>% 
+  dplyr::mutate(ln_lmax = log(Lmax)) %>% 
+  # order by latitudinal position
+  dplyr::mutate(Realm = factor(Realm, levels = c("Arctic", "Southern Ocean", "Temperate Australasia", "Temperate Southern Africa", "Temperate South America", "Temperate Northern Atlantic", "Temperate Northern Pacific", "Tropical Atlantic", "Western Indo-Pacific", "Central Indo-Pacific", "Eastern Indo-Pacific", "Tropical Eastern Pacific")))
+
+fsh_sum <- tr_fish %>% 
+  dplyr::group_by(Realm, diet_name) %>% 
+  dplyr::count(name = "fsh_n")
+
+# fsh_p <- pairwise.wilcox.test(tr_fish$ln_lmax, tr_fish$diet_name)
+# fsh_stars <- stars.pval(diag(fsh_p$p.value))
+
+fsh <- tr_fish %>% 
+  ggplot(., aes(x = diet_name, y = ln_lmax, group = diet_name, fill = diet_name)) +
+  geom_boxplot(coef = 10, color = "black") +
+  geom_text(data = fsh_sum, aes(y = 8.2, label = fsh_n), size = 7, fontface = "bold", show.legend = FALSE) +
+  #annotate("text", label = fsh_stars, x = seq(1.5, 4.5), y = 0, size = 8, colour = "black") +
+  facet_wrap(~ Realm, ncol = 5, labeller = label_wrap_gen(width=25)) +
+  boxplot_theme(base_size = 20) +
+  scale_fill_manual(values = c("#359B73", "darkseagreen1", "#2271B2", "orangered", "red")) +
+  scale_x_discrete(name = NULL) +
+  scale_y_continuous(name = "Max Length (cm)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)) +
+  coord_cartesian(ylim = c(1, 8.8))
+
+# fsh <- shift_legend2(p = fsh) # doesn't work due to different panel layout
+                               
+fsh <- cowplot::ggdraw(fsh + theme(legend.position = "none")) +
+  # manually position legend
+  cowplot::draw_plot(cowplot::get_legend(fsh), 0.32, -0.09, 0.5, 0.5)
+
+cowplot::save_plot('../figures/v_plot_fish_realm_colour.pdf', fsh, base_width = 18, base_height = 12)
+                         
 ## Across taxa ## 
 # Figure S4 #
 
