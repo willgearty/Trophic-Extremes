@@ -185,8 +185,9 @@ sample_size <- mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(
   summarise(num = n())
 
 mamm_p <- with(subset(mamm_per_bin, Recoded_Diet != "invertivore"),
-               pairwise.wilcox.test(lnMass_g, interaction(Recoded_Diet, bin)))
-mamm_stars <- stars.pval(diag(mamm_p$p.value))[sort(c(seq(1, 25, 3), seq(2, 26, 3)))]
+               pairwise.wilcox.test(lnMass_g, interaction(Recoded_Diet, bin), p.adjust.method = "none"))
+# adjust the p values here since we don't need most of them
+mamm_stars <- stars.pval(p.adjust(diag(mamm_p$p.value)[sort(c(seq(1, 25, 3), seq(2, 26, 3)))]))
 
 gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(n() >= 4, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
   annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 9)) +
@@ -227,8 +228,9 @@ ggsave("../figures/Mammal Diets Boxplots.pdf", geo_plot, width = 18, height = 12
 sample_size <- mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(n() >= 4, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")) %>%
   summarise(num = n())
 
-mamm_p <- with(mamm_per_bin, pairwise.wilcox.test(lnMass_g, interaction(Recoded_Diet, bin)))
-mamm_stars <- stars.pval(diag(mamm_p$p.value))[sort(c(seq(1, 33, 4), seq(2, 34, 4), seq(3, 35, 4)))]
+mamm_p <- with(mamm_per_bin, pairwise.wilcox.test(lnMass_g, interaction(Recoded_Diet, bin), p.adjust.method = "none"))
+# adjust the p values here since we don't need most of them
+mamm_stars <- stars.pval(p.adjust(diag(mamm_p$p.value)[sort(c(seq(1, 33, 4), seq(2, 34, 4), seq(3, 35, 4)))]))
 
 gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(n() >= 4, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
   annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 9)) +
