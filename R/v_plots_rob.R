@@ -114,8 +114,11 @@ tm_sum <- terr_mammals %>%
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
-tm_p <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_label)))
-tm_stars <- stars.pval(diag(tm_p$p.value))[sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))]
+tm_p <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_label), p.adjust.method = "none"))
+# the indices of the comparisons between diets within biomes
+p_idx <- sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))
+# adjust the p-values now since we don't care about most of them
+tm_stars <- stars.pval(p.adjust(diag(tm_p$p.value)[p_idx]))
 tm_star_df <- data.frame(biome_label = factor(rep(levels(terr_mammals$biome_label), each = 3), levels = levels(terr_mammals$biome_label)),
                          x = seq(1.5,3.5), y = 0, star = tm_stars)
 
@@ -142,10 +145,13 @@ tb_sum <- terr_birds %>%
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
-tb_p <- with(terr_birds, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_label)))
-tb_stars <- stars.pval(diag(tb_p$p.value))[sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))]
+tb_p <- with(terr_birds, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_label), p.adjust.method = "none"))
+# the indices of the comparisons between diets within biomes
+p_idx <- sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))
+# adjust the p-values now since we don't care about most of them
+tb_stars <- stars.pval(p.adjust(diag(tb_p$p.value)[p_idx]))
 tb_star_df <- data.frame(biome_label = factor(rep(levels(terr_birds$biome_label), each = 3), levels = levels(terr_birds$biome_label)),
-                         x = seq(1.5,3.5), y = 0, star = tb_stars)
+                         x = seq(1.5,3.5), y = 0.5, star = tb_stars)
 
 tb <- terr_birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
@@ -168,7 +174,8 @@ save_plot('../figures/v_plot_terr_bird_colour.pdf', tb, base_width = 18, base_he
 # Fish maximum body length ~ diet ~ biome plot
 tr_fish_orig <- readr::read_csv("../data/Traits V3 (fish).csv")
 
-fish_diet_cat_key_new <- data.frame(diet_5cat = c(1, 2, 3, 4, 5), diet_name = c("herbivore", "planktivore", "omnivore", "benthic carnivore", "higher carnivore"))
+fish_diets <- c("herbivore", "planktivore", "omnivore", "benthic carnivore", "higher carnivore")
+fish_diet_cat_key_new <- data.frame(diet_5cat = c(1, 2, 3, 4, 5), diet_name = fish_diets)
 
 tr_fish <- tr_fish_orig %>% 
   dplyr::distinct(CURRENT_TAXONOMIC_NAME, .keep_all = TRUE) %>% 
@@ -190,14 +197,21 @@ fsh_sum <- tr_fish %>%
   dplyr::group_by(Realm, diet_name) %>% 
   dplyr::count(name = "fsh_n")
 
-# fsh_p <- pairwise.wilcox.test(tr_fish$ln_lmax, tr_fish$diet_name)
-# fsh_stars <- stars.pval(diag(fsh_p$p.value))
+fsh_p <- with(tr_fish, pairwise.wilcox.test(ln_lmax, interaction(diet_name, Realm), p.adjust.method = "none"))
+# get indices of comparisons between diets within realms
+realm_idx <- do.call(c, lapply(levels(tr_fish$Realm), function(realm) head(which(sub("^.*\\.","",colnames(fsh_p$p.value)) == realm), -1)))
+# adjust the p-values here because we don't need most of the comparisons
+fsh_stars <- stars.pval(p.adjust(diag(fsh_p$p.value)[idx]))
+# get diet indices with data
+diet_idx <- match(sub("\\..*$","",colnames(fsh_p$p.value)), fish_diets)
+fsh_star_df <- data.frame(Realm = factor(sub("^.*\\.","",colnames(fsh_p$p.value))[realm_idx], levels = levels(tr_fish$Realm)),
+                          x = diet_idx[realm_idx] + .5, y = 1.5, star = fsh_stars)
 
 fsh <- tr_fish %>% 
   ggplot(., aes(x = diet_name, y = ln_lmax, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10, color = "black") +
   geom_text(data = fsh_sum, aes(y = 8.2, label = fsh_n), size = 7, fontface = "bold", show.legend = FALSE) +
-  #annotate("text", label = fsh_stars, x = seq(1.5, 4.5), y = 0, size = 8, colour = "black") +
+  geom_text(data = fsh_star_df, aes(x = x, y = y, label = star), size = 8, inherit.aes = FALSE) +
   facet_wrap(~ Realm, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
   scale_fill_manual(values = c("#359B73", "darkseagreen1", "#2271B2", "orangered", "red")) +
