@@ -20,16 +20,33 @@ yr_traj_c <- readRDS("yr_traj_c.rds")
 # load: yr_0
 yr_0 <- readRDS("yr_0.rds")
 
-traj <- ggplot(yr_traj_c, aes(x = yr, y = mean, colour = diet_5cat)) +
-  facet_wrap(vars(diet_5cat), scales = "free") +
-  geom_segment(data = yr_0, aes(x = 0, xend = 500, y = med, yend = med, colour = diet_5cat), lwd = 1, lty = 2, alpha = 0.5) +
+# calculate percent change in median mass per trophic guild
+chng <- yr_traj_c %>% 
+  dplyr::left_join(dplyr::select(yr_0, diet_5cat, med), by = "diet_5cat") %>% 
+  # convert back to raw body mass
+  dplyr::mutate_at(vars(mean, low, upp, med), exp) %>% 
+  # percent change
+  dplyr::mutate(perc_med = ((mean - med)/med) * 100,
+                perc_low = ((low - med)/med) * 100,
+                perc_upp = ((upp - med)/med) * 100)
+
+# plot percent change in mass per trophic guild
+traj <- ggplot(chng, aes(x = yr, y = perc_med, colour = diet_5cat)) +
+  facet_wrap(vars(diet_5cat), nrow = 1) +
+  geom_hline(aes(yintercept = 0, colour = diet_5cat), linetype = "dashed", lwd = 1) +
   geom_path(lwd = 1) +
-  geom_ribbon(aes(ymin = low, ymax = upp, fill = diet_5cat), alpha = 0.2, colour = NA) +
+  geom_ribbon(aes(ymin = perc_low, ymax = perc_upp, fill = diet_5cat), alpha = 0.4, colour = NA) +
   scale_colour_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
-  labs(x = "Years in future", y = "Median ln Mass (g)") +
+  labs(x = "Years in future", y = "Percent change in mass") +
+  scale_x_continuous(expand = c(0, 0)) +
   theme(legend.title = element_blank(),
-        legend.position = "none")
+        legend.position = "none",
+        panel.spacing = unit(1.5, "lines"))
 
-cowplot::save_plot("traj.pdf", traj, base_height = 4, base_width = 7, dpi = 300)
+# add small space at right edge to prevent 500 year being cut off
+traj_buff <- cowplot::plot_grid(traj, NULL, nrow = 1, rel_widths = c(1, 0.015))
+
+# save plot
+cowplot::save_plot("traj.pdf", traj_buff, base_height = 4, base_width = 10, dpi = 600)
 
