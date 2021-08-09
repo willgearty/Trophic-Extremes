@@ -532,10 +532,28 @@ fish <- tr_fish %>%
 tax <- deeptime::ggarrange2(tm, mr, br, mbr, rep, fish, ncol = 2, byrow = TRUE,
                             labels = c("A", "B", "C", "D", "E", "F"),
                             label.args = list(gp = grid::gpar(font = 2, cex = 2)))
+                               
+# body mass distribution plot for invertivores and carnivores S8
+dens_comb <- ggplot(dplyr::filter(terr_mam, diet_name %in% c("invertivore", "carnivore")), aes(x = ln_body_mass_median)) +
+  geom_density(aes(fill = diet_name), alpha = 0.5, colour = NA) +
+  scale_fill_manual(values = c("#FFAC3B", "#CD022D")) +
+  scale_x_continuous(name = "Mass (kg)",
+                     breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
+                     labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000,
+                     expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 0.42), name = "Density") +
+  boxplot_theme_tax(base_size = 20) +
+  theme(axis.ticks.x = element_line(),
+        axis.title.x = element_text(vjust = 0),
+        legend.direction = "vertical")
 
 # Figure 3
 save_plot("../figures/v_plots_tax.pdf", tax, base_width = 16, base_height = 12)
 
 # Figure S3
 save_plot("../figures/v_plots_tax_supp.pdf", am, base_width = 8, base_height = 4)
+                               
+# Figure S8
+cowplot::save_plot("../figures/body_dist.pdf", dens_comb, base_width = 10, base_height = 8)
+
 
