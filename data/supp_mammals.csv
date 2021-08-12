@@ -1,0 +1,548 @@
+taxon_no,Order,Family,taxon_name,ln_mass_g,mass_source,meas_element,length_mm,width_mm,meas_source,eq_type,mass_eq,eq_source,ln_mass_g_estimate,n_occs,firstapp_max_ma,firstapp_min_ma,lastapp_max_ma,lastapp_min_ma,early_interval,late_interval,life_habit,life_habit_basis,diet,diet_basis
+212372,,,Chunnelodon alopekodes,,,m1,0.72,0.36,Ensom and Sigogneau-Russell 1998,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,-0.65673376,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+241959,,,Peramus dubius,,,m1,1.01,0.53,Davis 2012,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,0.668256651,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+81051,,,Uchkudukodon nessovi,,,m1,1.21,0.84,Archibald and Averianov 2006,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,1.839719759,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+206735,,,Peramus tenuirostris,,,m1,1.30,0.60,Davis 2012,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,1.356061097,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+81045,,,Daulestes kulbeckensis,,,m1,1.30,0.91,Archibald and Averianov 2006,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.1170339,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+177400,,,Arcantiodelphys marchandi,,,m1,1.30,1.15,Vullo et al 2009,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.54468458,1,99.6,93.5,99.6,93.5,Cenomanian,Turonian,,Metatheria,omnivore,Metatheria
+197847,,,Acristatherium yanensis,,,m1,1.30,,Hu et al 2010,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,2.44448001,1,125.45,122.46,125.45,122.46,Barremian,Aptian,scansorial,Eutheria,insectivore,Theria
+81048,,,Daulestes inobservabilis,,,m1,1.34,0.94,Archibald and Averianov 2006,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.231661022,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+204159,,,Arguimus khosbajari,,,m1,1.40,0.65,Lopatin and Averianov 2006,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,1.637694389,1,125,100.5,125,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+216467,,,Sinbadelphys schmidti,,,m1,1.40,0.75,Cifelli 2004,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,1.89913963,7,113,100.5,100.5,89.8,Albian,Turonian,,Metatheria,omnivore,Metatheria
+100743,,,Bishops whitmorei,1.91,Rich et al 2020,m1,1.40,1.20,Rich et al 2020,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.757836261,1,122.46,112.03,122.46,112.03,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+185139,,,Prokennalestes minor,,,m1,1.43,0.89,Lopatin and Averianov 2017,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.250563927,1,125,100.5,125,100.5,Aptian,Albian,scansorial,Eutheria,insectivore,Theria
+48803,,,Montanalestes keeblerorum,,,m1,1.48,0.88,Cifelli and Davis 2015,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.292709325,1,113,100.5,113,100.5,Albian,,scansorial,Eutheria,insectivore,Theria
+260766,,,Paranyctoides quadrans,,,m1,1.50,1.80,Averianov and Archibald 2013,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.624670989,1,93.5,89.3,93.5,86.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+106453,,,Ausktribosphenos nyktos,3.04,Rich et al 2020,m1,1.60,1.70,Rich et al 1997,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.638154445,1,122.46,112.03,122.46,112.03,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+57349,,,Kennalestes gobiensis,3.66,Hoffman et al 2014,m1,1.65,1.05,Kielan-Jaworowska 1969,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.814056081,2,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Kennalestes,insectivore,Kennalestes
+81053,,,Bulaklestes kezbe,,,m1,1.67,1.10,Archibald and Averianov 2006,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.921060464,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+264072,,,Sasayamamylos kawaii,,,m1,1.70,1.20,Kusuhashi et al 2013,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.112559299,1,112.03,109,112.03,109,Albian,,scansorial,Eutheria,insectivore,Theria
+137755,,,Prokennalestes trofimovi,,,m1,1.73,1.19,Lopatin and Averianov 2017,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.129230505,1,125,100.5,125,100.5,Aptian,Albian,scansorial,Eutheria,insectivore,Theria
+50932,,,Protalphadon lulli,,,m1,1.74,0.98,Eaton 2006,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.785037756,11,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+371031,,,Hovurlestes noyon,,,m1,1.75,1.20,Lopatin and Averianov 2018,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.165519529,1,125,100.5,125,100.5,Aptian,Albian,scansorial,Eutheria,insectivore,Theria
+197366,,,Endotherium niinomii,,,m1,2.00,,Wang et al 2018,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,3.698058295,1,125,100.5,125,100.5,Aptian,Albian,scansorial,Eutheria,insectivore,Theria
+140937,,,Trapalcotherium matuastensis,,,m1,2.48,2.07,Rougier et al 2009,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,4.798619695,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+346645,,,Dakotadens pertritus,,,m1,2.54,1.22,Cifelli et al 2016,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.876364295,6,105.3,93.5,105.3,93.5,Albian,Turonian,,Metatheria,omnivore,Metatheria
+213248,,,Eoungulatum kudukensis,,,m1,2.73,2.18,Archibald and Averianov 2012,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,5.06868559,4,93.5,89.3,93.5,86.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+420827,,,Magallanodon baikashkenke,,,m1,8.34,6.31,Goin et al 2020,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,9.050764377,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+216465,,,Adelodelphys muizoni,,,,,,,,,,,4,105.3,93.5,105.3,93.5,Albian,Turonian,,Metatheria,omnivore,Metatheria
+175106,,,Aegialodon dawsoni,,,,,,,,,,,2,140.2,136.4,140.2,136.4,Berriasian,Valanginian,,Aegialodon,insectivore,Aegialodon
+43786,,,Aenigmadelphys archeri,,,,,,,,,,,2,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+371742,,,Ambolestes zhoui,3.65,Bi et al 2018,,,,,,,,,1,125.45,122.46,125.45,122.46,Barremian,Aptian,scansorial,Eutheria,insectivore,Theria
+103955,,,Apistodon exiguus,,,,,,,,,,,3,85.8,83.5,83.5,70.6,Santonian,Maastrichtian,,Metatheria,omnivore,Metatheria
+319843,,,Argaliatherium robustum,,,,,,,,,,,1,113,100.5,113,100.5,Albian,,,Mammalia,insectivore,Mammaliaformes
+183890,,,Asiatherium reshetovi,,,,,,,,,,,1,83.6,72.1,83.6,72.1,Campanian,,,Metatheria,omnivore,Metatheria
+57288,,,Asioryctes nemegtensis,3.76,Hoffman et al 2014,,,,,,,,,4,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Asioryctes,insectivore,Asioryctes
+212326,,,Atlasodon monbaroni,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+140934,,,Barberenia allenensis,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+207627,,,Barberenia araujoae,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+44535,,,Bistius bondi,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+207625,,,Brandonia intermedia,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+371002,,,Brasilestes stardusti,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+319845,,,Carinalestes murensis,,,,,,,,,,,1,113,100.5,113,100.5,Albian,,,Mammalia,insectivore,Mammaliaformes
+423031,,,Cryoharamiya tarda,,,,,,,,,,,1,145,125,145,125,Berriasian,Barremian,,Mammalia,insectivore,Mammaliaformes
+346647,,,Culicolestes kielanae,,,,,,,,,,,6,105.3,93.5,105.3,93.5,Albian,Turonian,,Mammalia,insectivore,Mammaliaformes
+363076,,,Durlstodon ensomi,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,scansorial,Eutheria,insectivore,Theria
+363074,,,Durlstotherium newmani,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,scansorial,Eutheria,insectivore,Theria
+45964,,,Ectocentrocristus foxi,,,,,,,,,,,3,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+67563,,,Eomaia scansoria,3.11,Ji et al 2002,,,,,,,,,1,129.4,125,129.4,125,Barremian,,scansorial,Eomaia scansoria,insectivore,Eomaia
+67618,,,Ferugliotherium windhauseni,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+204188,,,Gobiotheriodon infinitus,,,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+160062,,,Hatcheritherium alpha,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Metatheria,omnivore,Metatheria
+213213,,,Hypomylos micros,,,,,,,,,,,1,152.1,139.8,145,139.8,Tithonian,Berriasian,,Mammalia,insectivore,Mammaliaformes
+204155,,,Hypomylos phelizoni,,,,,,,,,,,1,152.1,139.8,145,139.8,Tithonian,Berriasian,,Mammalia,insectivore,Mammaliaformes
+111054,,,Kharmerungulatum vanvaleni,,,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,scansorial,Eutheria,insectivore,Theria
+113800,,,Kielantherium gobiensis,,,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+47450,,,Kokopellia juddi,,,m1,1.97,0.95,Cifelli 1993,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.955054434,1,105.3,93.5,105.3,93.5,Albian,Turonian,,Metatheria,omnivore,Metatheria
+213210,,,Magnimus ensomi,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+212332,,,Microderson laaroussii,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+213212,,,Minimus richardfoxi,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+213234,,,Murtoilestes abramovi,,,,,,,,,,,2,130,113,130,113,Hauterivian,Aptian,scansorial,Eutheria,insectivore,Theria
+49720,,,Paleomolops langstoni,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+207615,,,Peramus minor,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+50649,,,Potamotelses aquilensis,,,,,,,,,,,1,85.8,83.5,85.8,83.5,Santonian,Campanian,,Potamotelses,insectivore,Potamotelses
+50931,,,Protalphadon foxi,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Metatheria,omnivore,Metatheria
+209845,,,Sahnitherium rangapurensis,,,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,scansorial,Eutheria,insectivore,Theria
+213929,,,Sazlestes tis,,,,,,,,,,,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+133917,,,Schadipes crypticus,,,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,,Mammalia,insectivore,Mammaliaformes
+365638,,,Sederipes goddardensis,,,,,,,,,,,1,125,113,125,113,Aptian,,,Mammalia,insectivore,Mammaliaformes
+91354,,,Sinodelphys szalayi,3.48,Luo et al 2003,,,,,,,,,1,129.4,125,129.4,125,Barremian,,scansorial,Sinodelphys,insectivore,Sinodelphys
+212349,,,Tribactonodon bonfieldi,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,scansorial,Theria,insectivore,Theria
+213199,,,Tribotherium africanum,,,,,,,,,,,2,152.1,139.8,145,139.8,Tithonian,Berriasian,,Mammalia,insectivore,Mammaliaformes
+137753,,,Ukhaatherium nessovi,,,,,,,,,,,1,83.6,72.1,83.6,72.1,Campanian,,scansorial,Eutheria,insectivore,Theria
+52754,,,Zygiocuspis goldingi,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+45521,,,Dakotadens morrowi,4.366,Smith et al 2018,,,,,,,,,3,100.5,93.9,100.5,93.9,Cenomanian,,,Metatheria,omnivore,Metatheria
+47410,,,Iugomortiferum thoringtoni,3.035,Smith et al 2018,,,,,,,,,2,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+49927,,,Paranyctoides maleficus,2.396,Smith et al 2018,,,,,,,,,2,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+49929,,,Paranyctoides sternbergi,2.331,Smith et al 2018,,,,,,,,,4,83.5,70.6,70.6,66,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+44040,,,Anchistodelphys delicatus,1.988,Smith et al 2018,,,,,,,,,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,,Metatheria,omnivore,Metatheria
+44039,,,Anchistodelphys archibaldi,1.599,Smith et al 2018,,,,,,,,,3,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+419515,,Adalatheriidae,Adalatherium hui,8.03,Krause et al 2020,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,,Mammalia,insectivore,Mammaliaformes
+137961,,Adapisoriculidae,Deccanolestes hislopi,,,m1,0.95,0.58,Prasad et al 1994,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,0.721070602,2,72.1,66,72.1,66,Maastrichtian,,arboreal,Deccanolestes,insectivore,Theria
+202470,,Adapisoriculidae,Deccanolestes narmadensis,,,m1,1.32,0.67,Prasad et al 2010,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,1.585560669,1,72.1,66,72.1,66,Maastrichtian,,arboreal,Deccanolestes,insectivore,Theria
+137962,,Adapisoriculidae,Deccanolestes robustus,,,m1,1.48,0.94,Prasad et al 1994,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.413214532,2,72.1,66,72.1,66,Maastrichtian,,arboreal,Deccanolestes,insectivore,Theria
+43923,,Alphadontidae,Alphadon perexiguus,2.114,Smith et al 2018,m1,1.49,0.75,Cifelli 1994,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,3.097306714,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Alphadon,omnivore,Alphadon
+253259,,Alphadontidae,Eoalphadon clemensi,,,m1,1.62,0.95,Eaton 2006,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,3.596567254,4,100.5,93.9,83.5,70.6,Cenomanian,Late Cretaceous,,Metatheria,omnivore,Metatheria
+43928,,Alphadontidae,Alphadon wilsoni,,,m1,1.77,0.96,Archibald 1982,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,3.751045781,3,70.6,66,70.6,66,Maastrichtian,,,Alphadon,omnivore,Alphadon
+43927,,Alphadontidae,Alphadon sahnii,,,m1,2.32,1.21,Lillegraven and McKenna 1986,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,4.534212571,6,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Alphadon,omnivore,Alphadon
+52542,,Alphadontidae,Turgidodon russelli,3.963,Smith et al 2018,m1,2.60,1.45,Hunter et al 2010,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,4.994237002,25,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Turgidodon,omnivore,Turgidodon
+52540,,Alphadontidae,Turgidodon praesagus,,,m1,2.60,1.60,Sahni 1972,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,5.147803516,11,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Turgidodon,omnivore,Turgidodon
+43849,,Alphadontidae,Albertatherium primus,,,,,,,,,,,4,86.3,83.6,85.8,83.5,Santonian,Campanian,,Metatheria,omnivore,Metatheria
+183692,,Alphadontidae,Albertatherium secundus,,,,,,,,,,,1,85.8,83.5,85.8,83.5,Santonian,Campanian,,Metatheria,omnivore,Metatheria
+253260,,Alphadontidae,Eoalphadon lillegraveni,,,,,,,,,,,2,100.5,93.9,100.5,93.9,Cenomanian,,,Metatheria,omnivore,Metatheria
+253261,,Alphadontidae,Eoalphadon woodburnei,,,,,,,,,,,2,99.6,93.5,99.6,93.5,Cenomanian,Turonian,,Metatheria,omnivore,Metatheria
+52536,,Alphadontidae,Turgidodon lillegraveni,,,,,,,,,,,3,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Turgidodon,omnivore,Turgidodon
+52541,,Alphadontidae,Turgidodon rhaister,,,,,,,,,,,18,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Turgidodon,omnivore,Turgidodon
+52629,,Alphadontidae,Varalphadon creber,,,,,,,,,,,3,85.8,83.5,85.8,83.5,Santonian,Campanian,,Metatheria,omnivore,Metatheria
+52630,,Alphadontidae,Varalphadon crebreforme,,,,,,,,,,,2,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+363918,,Alphadontidae,Varalphadon janetae,,,,,,,,,,,2,100.5,93.9,89.3,85.8,Cenomanian,Santonian,,Metatheria,omnivore,Metatheria
+52539,,Alphadontidae,Turgidodon petiminis,5.023,Smith et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Turgidodon,omnivore,Turgidodon
+52537,,Alphadontidae,Turgidodon madseni,3.494,Smith et al 2018,,,,,,,,,2,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Turgidodon,omnivore,Turgidodon
+43921,,Alphadontidae,Alphadon marshi,3.463,Smith et al 2018,,,,,,,,,30,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Alphadon,omnivore,Alphadon
+43917,,Alphadontidae,Alphadon halleyi,3.006,Smith et al 2018,,,,,,,,,27,86.3,83.6,70.6,66,Santonian,Maastrichtian,,Alphadon,omnivore,Alphadon
+52631,,Alphadontidae,Varalphadon wahweapensis,2.515,Smith et al 2018,,,,,,,,,4,86.3,83.6,83.5,70.6,Santonian,Maastrichtian,,Metatheria,omnivore,Metatheria
+43913,,Alphadontidae,Alphadon attaragos,2.472,Smith et al 2018,,,,,,,,,6,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Alphadon,omnivore,Alphadon
+43916,,Alphadontidae,Alphadon eatoni,2.41,Smith et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Alphadon,omnivore,Alphadon
+367965,,Ameghinichnidae,Catocapes angolanus,,,,,,,,,,,1,122.46,112.03,122.46,112.03,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+437404,,Ameghinichnidae,Koreasaltipes jinjuensis,,,,,,,,,,,1,113,100.5,113,100.5,Albian,,,Mammalia,insectivore,Mammaliaformes
+216769,,Amphidontidae,Acinacodus tagaricus,,,m1,1.70,0.80,Lopatin et al 2010,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,2.226585091,1,125,113,125,113,Aptian,,,Mammalia,insectivore,Mammaliaformes
+264056,,Amphilestidae,Kemchugia magna,,,,,,,,,,,1,129.4,113,129.4,113,Barremian,Aptian,ground dwelling,Amphilestidae,carnivore,Amphilestidae
+433383,,Aquiladelphidae,Scalaridelphys martini,,,m1,3.06,1.91,Cohen et al 2020,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,5.678208327,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,,Metatheria,omnivore,Metatheria
+428892,,Aquiladelphidae,Aquiladelphis analetris,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+44201,,Aquiladelphidae,Aquiladelphis incus,,,,,,,,,,,4,86.3,83.6,85.8,83.5,Santonian,Campanian,,Metatheria,omnivore,Metatheria
+82050,,Aquiladelphidae,Aquiladelphis laurae,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+44202,,Aquiladelphidae,Aquiladelphis minor,,,,,,,,,,,4,86.3,83.6,70.6,66,Santonian,Maastrichtian,,Metatheria,omnivore,Metatheria
+433382,,Aquiladelphidae,Scalaridelphys aquilana,,,,,,,,,,,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,,Metatheria,omnivore,Metatheria
+186980,,Arctocyonidae,Protungulatum coombsi,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Protungulatum,omnivore,Protungulatum
+51117,,Arctocyonidae,Protungulatum gorgun,,,,,,,,,,,1,70.6,66,66,63.3,Maastrichtian,Danian,,Protungulatum,omnivore,Protungulatum
+44411,,Arctocyonidae,Baioconodon nordicus,7.428,Smith et al 2018,,,,,,,,,1,72.1,66,66,63.3,Maastrichtian,Danian,ground dwelling,Arctocyonidae,omnivore,Arctocyonidae
+137733,,Bobolestidae,Bobolestes zenge,,,m1,0.80,1.10,Averianov and Archibald 2005,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,1.57644843,1,99.6,93.5,99.6,93.5,Cenomanian,Turonian,scansorial,Eutheria,insectivore,Theria
+207620,,Bondesiidae,Bondesius ferox,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+206740,,Dryolestidae,Amblotherium nanum,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+206741,,Dryolestidae,Amblotherium pusillum,,,,,,,,,,,2,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+57717,,Dryolestidae,Amblotherium soricinum,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+67610,,Dryolestidae,Groebertherium novasi,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+67609,,Dryolestidae,Groebertherium stipanicici,,,,,,,,,,,2,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+249190,,Dryolestidae,Lakotalestes luoi,,,,,,,,,,,2,145,136.4,140.2,125.45,Berriasian,Barremian,,Mammalia,insectivore,Mammaliaformes
+212361,,Dryolestidae,Laolestes hodsoni,,,,,,,,,,,2,140.2,136.4,140.2,136.4,Berriasian,Valanginian,,Mammalia,insectivore,Mammaliaformes
+206742,,Dryolestidae,Peraspalax talpoides,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+206743,,Dryolestidae,Phascolestes mustelula,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+46653,,Glasbiidae,Glasbius twitchelli,3.683,Smith et al 2018,m1,0.98,0.71,Williamson and Weil 2008,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,2.358198895,20,72.1,66,70.6,66,Maastrichtian,,,Glasbius,"herbivore, frugivore",Glasbius
+46652,,Glasbiidae,Glasbius intricatus,,,m1,1.00,0.70,Williamson and Weil 2008,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,2.367587087,4,70.6,66,70.6,66,Maastrichtian,,,Glasbius,"herbivore, frugivore",Glasbius
+428898,,Glasbiidae,Glasbius piceanus,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Glasbius,"herbivore, frugivore",Glasbius
+46753,,Gypsonictopidae,Gypsonictops clemensi,,,,,,,,,,,2,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Gypsonictops,"omnivore, frugivore",Gypsonictops
+46754,,Gypsonictopidae,Gypsonictops hypoconus,,,,,,,,,,,33,70.6,66,70.6,66,Maastrichtian,,,Gypsonictops,"omnivore, frugivore",Gypsonictops
+46755,,Gypsonictopidae,Gypsonictops illuminatus,4.565,Smith et al 2018,,,,,,,,,27,70.6,66,70.6,66,Maastrichtian,,,Gypsonictops,"omnivore, frugivore",Gypsonictops
+46756,,Gypsonictopidae,Gypsonictops lewisi,3.949,Smith et al 2018,,,,,,,,,11,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Gypsonictops,"omnivore, frugivore",Gypsonictops
+370749,,Hahnodontidae,Cifelliodon wahkarmoosuch,6.99,Huttenlocker et al 2018,,,,,,,,,1,130,122.46,130,122.46,Hauterivian,Aptian,,Mammalia,insectivore,Mammaliaformes
+174461,,Hahnodontidae,Denisodon moroccensis,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+63407,,Hahnodontidae,Hahnodon taqueti,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+47068,,Holoclemensiidae,Holoclemensia texana,,,m1,1.94,1.30,Davis and Cifelli 2011,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.500070438,5,122.46,109,113,100.5,Aptian,Albian,,Holoclemensia,insectivore,Holoclemensia
+47439,,Kermackiidae,Kermackia texana,,,,,,,,,,,3,122.46,109,113,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+155050,,Mozomuridae,Mozomus shikamai,,,m1,1.25,0.80,Chuankui et al 2005,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,1.81,1,122.46,109,122.46,109,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+49766,,Pappotheriidae,Pappotherium pattersoni,,,,,,,,,,,4,122.46,109,113,100.5,Aptian,Albian,,Pappotherium,insectivore,Pappotherium
+212367,,Paurodontidae,Dorsetodon haysomi,,,m1,0.65,0.42,Ensom and Sigogneau-Russell 1998,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,-0.561963925,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+381653,,Pediomyidae,Unnuakomys hutchisoni,,,m1,1.26,0.74,Eberle et al 2019,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,2.81481034,1,70.6,66,70.6,66,Maastrichtian,,,Metatheria,omnivore,Metatheria
+103962,,Pediomyidae,Leptalestes krejcii,,,m1,1.49,0.96,Lillegraven 1969,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,3.482408436,23,70.6,66,70.6,66,Maastrichtian,,,Metatheria,omnivore,Metatheria
+168382,,Pediomyidae,Leptalestes toevsi,,,m1,1.70,0.98,Hunter et al 2010,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,3.720263848,1,70.6,66,70.6,66,Maastrichtian,,,Metatheria,omnivore,Metatheria
+50063,,Pediomyidae,Pediomys elegans,3.212,Smith et al 2018,m1,1.92,1.28,Kelly 2014,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,4.326729012,34,83.5,70.6,70.6,66,Campanian,Maastrichtian,ground dwelling,Pediomys,insectivore,Pediomys
+103964,,Pediomyidae,Leptalestes cooki,,,m1,2.03,1.18,Kelly 2014,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,4.286738361,20,83.5,70.6,66,63.3,Campanian,Danian,,Metatheria,omnivore,Metatheria
+47365,,Pediomyidae,Iqualadelphis lactea,,,,,,,,,,,4,86.3,83.6,83.5,70.6,Santonian,Maastrichtian,,Metatheria,omnivore,Metatheria
+103963,,Pediomyidae,Leptalestes prokrejcii,,,,,,,,,,,5,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+426040,,Pediomyidae,Protolambda clemensi,,,,,,,,,,,6,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+426041,,Pediomyidae,Protolambda florencae,,,,,,,,,,,31,72.1,66,70.6,66,Maastrichtian,,,Metatheria,omnivore,Metatheria
+51058,,Pediomyidae,Protolambda hatcheri,,,,,,,,,,,38,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Metatheria,omnivore,Metatheria
+348240,,Pediomyidae,Protolambda mcgilli,,,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,,Metatheria,omnivore,Metatheria
+348242,,Periptychidae,Paleoungulatum hooleyi,,,m1,3.70,2.80,Kelly 2014,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,7.301335591,1,72.1,66,72.1,66,Maastrichtian,,ground dwelling,Periptychidae,herbivore,Periptychidae
+46505,,Picopsidae,Falepetrus barwini,,,,,,,,,,,2,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+50354,,Picopsidae,Picopsis pattersoni,,,,,,,,,,,1,85.8,83.5,85.8,83.5,Santonian,Campanian,,Mammalia,insectivore,Mammaliaformes
+214346,,Soricidae,Cretasorex arkhangelskyi,,,,,,,,,,,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,ground dwelling,Soricidae,omnivore,Soricidae
+106780,,Spalacotheriidae,Symmetrolestes parvus,,,m1,0.67,0.78,Tsubamoto et al 2004,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,0.669527429,1,130,113,130,113,Hauterivian,Aptian,,Mammalia,insectivore,Mammaliaformes
+212335,,Spalacotheriidae,Spalacotherium evansae,,,m1,0.75,0.65,Ensom and Sigogneau-Russell 2000,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,0.556338999,4,145,140.2,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+216679,,Spalacotheriidae,Yaverlestes gassoni,,,m1,0.83,0.76,Sweetman 2008,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,0.972286096,3,129.4,125,129.4,125,Barremian,,,Mammalia,insectivore,Mammaliaformes
+51673,,Spalacotheriidae,Spalacolestes cretulablatta,1.408,Smith et al 2018,m1,1.00,0.80,Cifelli and Madsen 1999,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,1.362722298,6,105.3,93.5,105.3,93.5,Albian,Turonian,,Mammalia,insectivore,Mammaliaformes
+249188,,Spalacotheriidae,Infernolestes rougieri,,,m1,1.25,0.71,Cifelli et al 2012,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,1.531703479,1,145,136.4,145,136.4,Berriasian,Valanginian,,Mammalia,insectivore,Mammaliaformes
+371282,,Spalacotheriidae,Lactodens sheni,,,m1,1.40,0.80,Han and Meng 2016,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,1.9104991,1,125,113,125,113,Aptian,,,Mammalia,insectivore,Mammaliaformes
+66821,,Spalacotheriidae,Spalacotherium tricuspidens,,,m1,1.60,,Cifelli and Madsen 1986,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,3.048710561,3,145,140.2,140.2,136.4,Berriasian,Valanginian,,Mammalia,insectivore,Mammaliaformes
+216665,,Spalacotheriidae,Heishanlestes changi,,,m1,1.62,1.13,Hu et al 2005a,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,2.710360077,1,125,100.5,125,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+51937,,Spalacotheriidae,Symmetrodontoides canadensis,2.463,Smith et al 2018,m1,1.80,0.60,Cifelli and Madsen 1986,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,1.851292575,2,86.3,83.6,85.8,83.5,Santonian,Campanian,,Mammalia,insectivore,Mammaliaformes
+137605,,Spalacotheriidae,Akidolestes cifelli,,,,,,,,,,,1,129.4,125,129.4,125,Barremian,,ground dwelling,Akidolestes,insectivore,Mammaliaformes
+212347,,Spalacotheriidae,Shalbaatar bakht,,,,,,,,,,,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,,Mammalia,insectivore,Mammaliaformes
+51674,,Spalacotheriidae,Spalacolestes inconcinnus,,,,,,,,,,,1,105.3,93.5,105.3,93.5,Albian,Turonian,,Mammalia,insectivore,Mammaliaformes
+51675,,Spalacotheriidae,Spalacotheridium mckennai,,,,,,,,,,,2,93.9,89.8,86.3,83.6,Turonian,Santonian,,Mammalia,insectivore,Mammaliaformes
+212345,,Spalacotheriidae,Spalacotherium henkeli,,,,,,,,,,,1,130,125.45,130,125.45,Hauterivian,Barremian,,Mammalia,insectivore,Mammaliaformes
+216770,,Spalacotheriidae,Spalacotherium hookeri,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+206728,,Spalacotheriidae,Spalacotherium taylori,,,,,,,,,,,1,140.2,136.4,140.2,136.4,Berriasian,Valanginian,,Mammalia,insectivore,Mammaliaformes
+51677,,Spalacotheriidae,Spalacotheroides bridwelli,,,,,,,,,,,1,113,100.5,113,100.5,Albian,,,Mammalia,insectivore,Mammaliaformes
+51939,,Spalacotheriidae,Symmetrodontoides oligodontos,,,,,,,,,,,4,93.9,89.8,89.8,83.6,Turonian,Santonian,,Mammalia,insectivore,Mammaliaformes
+51938,,Spalacotheriidae,Symmetrodontoides foxi,2.158,Smith et al 2018,,,,,,,,,6,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+51676,,Spalacotheriidae,Spalacotheridium noblei,0.967,Smith et al 2018,,,,,,,,,8,105.3,93.5,105.3,93.5,Albian,Turonian,,Mammalia,insectivore,Mammaliaformes
+216468,,Stagodontidae,Pariadens mckennai,,,m1,2.65,1.64,Cifelli 2004,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,5.216039176,1,105.3,93.5,105.3,93.5,Albian,Turonian,,Stagodontidae,"carnivore, durophage",Stagodontidae
+45707,,Stagodontidae,Didelphodon coyi,,,,,,,,,,,4,83.5,66,70.6,66,Campanian,Maastrichtian,aquatic,Didelphodon,durophage,Didelphodon
+45977,,Stagodontidae,Ectoconodon montanensis,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,aquatic,Didelphodon,durophage,Didelphodon
+46139,,Stagodontidae,Eodelphis browni,,,,,,,,,,,2,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Stagodontidae,"carnivore, durophage",Stagodontidae
+46140,,Stagodontidae,Eodelphis cutleri,,,,,,,,,,,4,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Stagodontidae,"carnivore, durophage",Stagodontidae
+370351,,Stagodontidae,Fumodelphodon pulveris,,,,,,,,,,,1,93.9,89.8,93.9,89.8,Turonian,,,Stagodontidae,"carnivore, durophage",Stagodontidae
+370353,,Stagodontidae,Hoodootherium praeceps,,,,,,,,,,,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,,Stagodontidae,"carnivore, durophage",Stagodontidae
+45711,,Stagodontidae,Didelphodon vorax,6.635,Smith et al 2018,,,,,,,,,66,72.1,66,70.6,66,Maastrichtian,,aquatic,Didelphodon,durophage,Didelphodon
+49997,,Stagodontidae,Pariadens kirklandi,4.22,Smith et al 2018,,,,,,,,,3,100.5,93.9,99.6,93.5,Cenomanian,Turonian,,Stagodontidae,"carnivore, durophage",Stagodontidae
+56943,,Stylinodontidae,Schowalteria clemensi,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,ground dwelling,Stylinodontidae,herbivore,Stylinodontidae
+109645,,Sudamericidae,Bharattherium bonapartei,,,m1,2.66,2.00,Prasad et al 2007,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,4.863781725,1,72.1,66,72.1,66,Maastrichtian,,,Mammalia,insectivore,Mammaliaformes
+216761,,Sudamericidae,Dakshina jederi,,,,,,,,,,,2,72.1,66,72.1,66,Maastrichtian,,,Mammalia,insectivore,Mammaliaformes
+382701,,Sudamericidae,Galulatherium jenkinsi,,,,,,,,,,,1,100.5,72.1,100.5,72.1,Cenomanian,Campanian,,Mammalia,insectivore,Mammaliaformes
+66687,,Sudamericidae,Gondwanatherium patagonicum,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+57603,,Sudamericidae,Lavanify miolaka,,,,,,,,,,,2,72.1,66,72.1,66,Maastrichtian,,,Mammalia,insectivore,Mammaliaformes
+331045,,Sudamericidae,Vintana sertichi,9.1,Hoffman et al 2014,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,,Mammalia,insectivore,Mammaliaformes
+55377,,Thereuodontidae,Thereuodon dahmani,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+212328,,Thereuodontidae,Thereuodon taraktes,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+212336,,Tinodontidae,Tinodon micron,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+141361,,Vincelestidae,Vincelestes neuquenianus,6.8,Hoffman et al 2014,,,,,,,,,1,129.4,122.46,129.4,122.46,Barremian,Aptian,ground dwelling,Vincelestes,insectivore,Mammaliaformes
+137977,,Zalambdalestidae,Kulbeckia kulbecke,,,m1,1.70,2.60,Archibald and Averianov 2003,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.145435425,5,93.5,89.3,85.8,83.5,Turonian,Campanian,ground dwelling,Zalambdalestidae,insectivore,Zalambdalestidae
+70459,,Zalambdalestidae,Zalambdalestes lechei,4.42,Hoffman et al 2014,m1,2.17,,Kielan-Jaworowska 1969,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,3.935456058,6,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Zalambdalestidae,insectivore,Zalambdalestidae
+102838,,Zalambdalestidae,Zhangolestes jilinensis,,,m1,2.18,1.65,Zan et al 2006,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,3.810003068,1,125,93.9,125,93.9,Aptian,Cenomanian,ground dwelling,Zalambdalestidae,insectivore,Zalambdalestidae
+57350,,Zalambdalestidae,Zalambdalestes grangeri,,,m1,2.31,1.91,Kielan-Jaworowska 1969,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.142523048,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Zalambdalestidae,insectivore,Zalambdalestidae
+137750,,Zalambdalestidae,Alymlestes kielanae,,,m1,2.40,2.10,Averianov and Nessov 1995,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.359137102,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Zalambdalestidae,insectivore,Zalambdalestidae
+371280,,Zalambdalestidae,Zofialestes longidens,,,m1,2.43,1.95,Fostowicz-Frelik 2016,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.258713186,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Zalambdalestidae,insectivore,Zalambdalestidae
+57289,,Zalambdalestidae,Barunlestes butleri,,,,,,,,,,,4,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Zalambdalestidae,insectivore,Zalambdalestidae
+197845,,Zhangheotheriidae,Maotherium sinensis,,,m1,0.90,1.60,Plogschties and Martin 2019,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,2.319638989,1,125.45,122.46,125.45,122.46,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+65258,,Zhangheotheriidae,Zhangheotherium quinquecuspidens,,,m1,1.50,1.00,Hu et al 1997,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,2.386097196,2,129.4,122.46,129.4,122.46,Barremian,Aptian,ground dwelling,Zhangheotherium,insectivore,Mammaliaformes
+156659,,Zhangheotheriidae,Maotherium asiaticus,4.35,Ji et al 2009,m1,1.70,1.80,Ji et al 2009,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,3.546779483,1,125.45,122.46,125.45,122.46,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+371286,,Zhangheotheriidae,Anebodon luoi,,,,,,,,,,,1,125.45,122.46,125.45,122.46,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+216648,,Zhangheotheriidae,Kiyatherium cardiodens,,,,,,,,,,,2,129.4,113,125,113,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+137736,,Zhelestidae,Sheikhdzheilia rezvyii,,,m1,0.80,1.10,Averianov and Archibald 2005,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,3.563204609,2,99.6,93.5,99.6,93.5,Cenomanian,Turonian,scansorial,Eutheria,insectivore,Theria
+137738,,Zhelestidae,Eozhelestes mangit,,,m1,1.10,1.50,Averianov and Archibald 2005,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,4.516175336,2,99.6,93.5,99.6,93.5,Cenomanian,Turonian,scansorial,Eutheria,insectivore,Theria
+217349,,Zhelestidae,Borisodon kara,,,m1,2.13,1.63,Archibald and Averianov 2012,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,5.643968224,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+137972,,Zhelestidae,Aspanlestes aptap,,,m1,2.20,1.56,Archibald and Averianov 2012,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,5.626445063,6,93.5,89.3,93.5,86.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+331085,,Zhelestidae,Mistralestes arcensis,,,m1,2.30,1.38,Tabuce et al 2013,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,5.507968815,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+217348,,Zhelestidae,Parazhelestes mynbulakensis,,,m1,2.38,1.76,Archibald and Averianov 2012,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,5.928540074,3,93.5,89.3,86.3,70.6,Turonian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+203027,,Zhelestidae,Zhelestes temirkazyk,,,m1,2.44,1.75,Archibald and Averianov 2012,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,5.957646562,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+53173,,Zhelestidae,Lainodon orueetxebarriai,,,m1,2.80,1.75,Gheerbrant and Astibia 1994,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,6.166280571,3,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+64795,,Zhelestidae,Valentinella vitrollense,,,m1,4.04,2.80,Tabuce et al 2013,"Ungulates, m1_area",ln(m) = 3.757 + 1.516 * ln(m1_area),Mendoza et al 2006,7.434609989,1,70.6,66,70.6,66,Maastrichtian,,scansorial,Eutheria,insectivore,Theria
+434778,,Zhelestidae,Azilestes ragei,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,scansorial,Eutheria,insectivore,Theria
+46581,,Zhelestidae,Gallolestes agujaensis,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+196152,,Zhelestidae,Labes garimondi,,,,,,,,,,,2,83.6,72.1,83.5,66,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+196150,,Zhelestidae,Labes quintanillensis,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,scansorial,Eutheria,insectivore,Theria
+255645,,Zhelestidae,Lainodon ragei,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+213953,,Zhelestidae,Ortalestes tostak,,,,,,,,,,,1,93.5,89.3,93.5,89.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+137740,,Zhelestidae,Oxlestes grandis,,,,,,,,,,,1,99.6,93.5,99.6,93.5,Cenomanian,Turonian,scansorial,Eutheria,insectivore,Theria
+213245,,Zhelestidae,Parazhelestes robustus,,,,,,,,,,,2,93.5,89.3,93.5,86.3,Turonian,Coniacian,scansorial,Eutheria,insectivore,Theria
+213249,,Zhelestidae,Sorlestes mifunensis,,,,,,,,,,,1,99.6,89.3,99.6,89.3,Cenomanian,Coniacian,scansorial,Eutheria,insectivore,Theria
+249249,,Zhelestidae,Zhalmouzia bazhanovi,,,,,,,,,,,1,86.3,70.6,86.3,70.6,Santonian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+46582,,Zhelestidae,Gallolestes pachymandibularis,4.259,Smith et al 2018,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+43912,,Zhelestidae,Alostera saskatchewanensis,3.935,Smith et al 2018,,,,,,,,,4,83.5,70.6,70.6,66,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+44395,,Zhelestidae,Avitotherium utahensis,3.493,Smith et al 2018,,,,,,,,,3,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,scansorial,Eutheria,insectivore,Theria
+44482,Cimolesta,Cimolestidae,Batodon tenuis,,,m1,1.30,0.75,Wood and Clemens 2001,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,1.684782609,13,70.6,66,70.6,66,Maastrichtian,,,Batodon tenuis,insectivore,Batodon tenuis
+143918,Cimolesta,Cimolestidae,Maelestes gobiensis,,,m1,1.85,1.35,Wible et al 2009,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,3.216092497,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Cimolestidae,insectivore,Cimolestidae
+331297,Cimolesta,Cimolestidae,Scollardius propalaeoryctes,,,m1,2.45,1.60,Lillegraven 1969,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,3.949997212,3,70.6,66,70.6,66,Maastrichtian,,,Scollardius propalaeoryctes,insectivore,Scollardius propalaeoryctes
+331295,Cimolesta,Cimolestidae,Ambilestes cerberoides,,,m1,3.27,2.07,Lillegraven 1969,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.839287228,8,70.6,66,66,63.3,Maastrichtian,Danian,,Cimolestidae,insectivore,Cimolestidae
+45120,Cimolesta,Cimolestidae,Cimolestes stirtoni,,,,,,,,,,,7,70.6,66,70.6,66,Maastrichtian,,,Cimolestes,"carnivore, insectivore",Cimolestes
+52109,Cimolesta,Cimolestidae,Telacodon laevis,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Cimolestidae,insectivore,Cimolestidae
+45115,Cimolesta,Cimolestidae,Cimolestes incisus,5.467,Smith et al 2018,,,,,,,,,15,70.6,66,59.2,56,Maastrichtian,Paleocene,,Cimolestes incisus,insectivore,Cimolestes incisus
+45567,Cimolesta,Palaeoryctidae,Delphodon comptus,,,,,,,,,,,5,70.6,66,70.6,66,Maastrichtian,,scansorial,Palaeoryctidae,insectivore,Palaeoryctidae
+331293,Creodonta,,Altacreodus magnus,,,m1,5.09,3.34,Lillegraven 1969,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,6.416378487,10,72.1,66,70.6,66,Maastrichtian,,,Altacreodus magnus,carnivore,Altacreodus magnus
+70457,Deltatheroida,,Deltatheroides cretacicus,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Deltatheroides,carnivore,Deltatheroides
+137970,Deltatheroida,Deltatheridiidae,Sulestes karakshi,,,m1,1.80,1.10,Averianov et al 2010,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,3.989631078,9,93.5,89.3,93.5,89.3,Turonian,Coniacian,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+319138,Deltatheroida,Deltatheridiidae,Lotheridium mengi,,,m1,3.34,1.80,Bi et al 2015,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,5.722261656,1,70.6,66,70.6,66,Maastrichtian,,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+44378,Deltatheroida,Deltatheridiidae,Atokatheridium boreni,,,,,,,,,,,1,122.46,109,122.46,109,Aptian,Albian,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+137745,Deltatheroida,Deltatheridiidae,Deltatheridium nessovi,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Deltatheridium,carnivore,Deltatheridium
+70456,Deltatheroida,Deltatheridiidae,Deltatheridium pretrituberculare,,,,,,,,,,,6,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,,Deltatheridium,carnivore,Deltatheridium
+203464,Deltatheroida,Deltatheridiidae,Hydotherium dobsoni,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+109639,Deltatheroida,Deltatheridiidae,Nanocuris improvida,,,,,,,,,,,2,72.1,66,70.6,66,Maastrichtian,,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+204005,Deltatheroida,Deltatheridiidae,Oklatheridium minax,,,,,,,,,,,2,122.46,109,113,100.5,Aptian,Albian,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+204004,Deltatheroida,Deltatheridiidae,Oklatheridium szalayi,,,,,,,,,,,2,122.46,109,113,100.5,Aptian,Albian,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+319847,Deltatheroida,Deltatheridiidae,Oklatheridium wiblei,,,,,,,,,,,2,125,100.5,113,100.5,Aptian,Albian,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+319140,Deltatheroida,Deltatheridiidae,Tsagandelta dashzevegi,,,,,,,,,,,1,100.5,83.6,100.5,83.6,Cenomanian,Santonian,,Deltatheridiidae,"carnivore, durophage",Deltatheridiidae
+242244,Dryolestida,,Crusafontia amoae,,,,,,,,,,,2,136.4,130,130,125.45,Valanginian,Barremian,,Mammalia,insectivore,Mammaliaformes
+206747,Dryolestida,,Crusafontia cuencana,,,,,,,,,,,2,130,125.45,130,125.45,Hauterivian,Barremian,,Mammalia,insectivore,Mammaliaformes
+397995,Dryolestida,,Paraungulatum rectangularis,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+397993,Dryolestida,Casamiquelidae,Alamitherium bishopi,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+207624,Dryolestida,Casamiquelidae,Casamiquelia rionegrina,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+397991,Dryolestida,Casamiquelidae,Rougietherium tricuspes,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+212378,Dryolestida,Donodontidae,Donodon prescriptoris,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+106806,Eutriconodonta,,Hakusanodon archaeus,,,m1,1.75,0.80,Rougier et al 2007,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,2.424734776,1,139.8,132.9,139.8,132.9,Valanginian,,,Mammalia,insectivore,Mammaliaformes
+239722,Eutriconodonta,,Liaoconodon hui,,,m1,2.81,,Meng et al 2011,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,4.687566847,1,125,113,125,113,Aptian,,,Mammalia,insectivore,Mammaliaformes
+289799,Eutriconodonta,,Chaoyangodens lii,,,,,,,,,,,1,129.4,125,129.4,125,Barremian,,,Mammalia,insectivore,Mammaliaformes
+208905,Eutriconodonta,,Dyskritodon amazighi,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+197843,Eutriconodonta,,Jeholodens jenkinsi,,,,,,,,,,,1,130,122.46,130,122.46,Hauterivian,Aptian,,Mammalia,insectivore,Mammaliaformes
+197849,Eutriconodonta,,Juchilestes liaoningensis,,,,,,,,,,,1,125.45,122.46,125.45,122.46,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+374106,Eutriconodonta,,Sangarotherium aquilonium,,,,,,,,,,,1,145,125,145,125,Berriasian,Barremian,,Mammalia,insectivore,Mammaliaformes
+204182,Eutriconodonta,Gobiconodontidae,Gobiconodon hoburensis,,,m1,1.50,0.90,Lopatin and Averianov 2015,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,2.860903465,3,129.4,113,125,100.5,Barremian,Albian,,Mammalia,insectivore,Mammaliaformes
+72278,Eutriconodonta,Gobiconodontidae,Gobiconodon haizhouensis,,,m1,1.72,0.94,Kusuhashi et al 2016,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,3.259163686,1,125,100.5,125,100.5,Aptian,Aptian,,Mammalia,insectivore,Mammaliaformes
+197841,Eutriconodonta,Gobiconodontidae,Gobiconodon zofiae,,,m1,2.30,0.90,Li et al 2003,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,4.104765548,1,125.45,122.46,125.45,122.46,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+140283,Eutriconodonta,Gobiconodontidae,Gobiconodon borissiaki,,,m1,2.40,,Maschenko and Lopatin 1998,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,4.228614026,3,129.4,113,125,100.5,Barremian,Albian,,Mammalia,insectivore,Mammaliaformes
+153871,Eutriconodonta,Gobiconodontidae,Gobiconodon luoianus,,,m1,3.00,,Yuan et al 2009,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,4.87796176,1,125.45,122.46,125.45,122.46,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+46675,Eutriconodonta,Gobiconodontidae,Gobiconodon ostromi,,,m1,4.25,2.05,Jenkins and Schaff 1988,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,5.89153424,3,125,100.5,125,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+146459,Eutriconodonta,Gobiconodontidae,Meemannodon lujiatunensis,,,m1,5.33,2.90,Meng et al 2005,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,6.550452103,1,125.45,122.46,125.45,122.46,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+67606,Eutriconodonta,Gobiconodontidae,Repenomamus giganticus,9.47,Hu et al 2005b,m1,7.50,4.70,Hu et al 2005b,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,7.54436779,1,125.45,122.46,125.45,122.46,Barremian,Aptian,ground dwelling,Repenomamus giganticus,carnivore,Repenomamus giganticus
+204184,Eutriconodonta,Gobiconodontidae,Gobiconodon hopsoni,,,,,,,,,,,1,145,132.9,145,132.9,Berriasian,Valanginian,,Mammalia,insectivore,Mammaliaformes
+70490,Eutriconodonta,Gobiconodontidae,Gobiconodon tomidai,,,,,,,,,,,1,125,113,125,113,Aptian,,,Mammalia,insectivore,Mammaliaformes
+57346,Eutriconodonta,Gobiconodontidae,Hangjinia chowi,,,,,,,,,,,1,145,100.5,145,100.5,Early Cretaceous,,,Mammalia,insectivore,Mammaliaformes
+67607,Eutriconodonta,Gobiconodontidae,Repenomamus robustus,8.52,Hu et al 2005b,,,,,,,,,1,125.45,122.46,125.45,122.46,Barremian,Aptian,ground dwelling,Repenomamus robustus,carnivore,Repenomamus robustus
+331039,Eutriconodonta,Gobiconodontidae,Spinolestes xenarthrosus,4.13,Martin et al 2015,,,,,,,,,1,130,125.45,130,125.45,Hauterivian,Barremian,,Mammalia,insectivore,Mammaliaformes
+65083,Eutriconodonta,Jeholodentidae,Yanoconodon allini,,,,,,,,,,,1,129.4,122.46,129.4,122.46,Barremian,Aptian,ground dwelling,Yanoconodon,insectivore,Mammaliaformes
+203406,Eutriconodonta,Triconodontidae,Triconodon mordax,,,m1,2.50,,Jäger et al 2021,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,4.34740603,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+44330,Eutriconodonta,Triconodontidae,Arundelconodon hottoni,,,m1,2.89,1.03,Cifelli et al 1999,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.802919561,1,125.45,122.46,125.45,122.46,Barremian,Aptian,,Mammalia,insectivore,Mammaliaformes
+203407,Eutriconodonta,Triconodontidae,Trioracodon ferox,,,m1,3.40,,Jäger et al 2021,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,5.242186506,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+43945,Eutriconodonta,Triconodontidae,Alticonodon lindoei,,,,,,,,,,,2,85.8,83.5,85.8,83.5,Santonian,Campanian,,Mammalia,insectivore,Mammaliaformes
+44367,Eutriconodonta,Triconodontidae,Astroconodon delicatus,,,,,,,,,,,5,105.3,93.5,105.3,93.5,Albian,Turonian,amphibious,Astroconodon,piscivore,Astroconodon
+143620,Eutriconodonta,Triconodontidae,Corviconodon montanensis,,,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+45284,Eutriconodonta,Triconodontidae,Corviconodon utahensis,,,,,,,,,,,6,105.3,93.5,105.3,93.5,Albian,Turonian,,Mammalia,insectivore,Mammaliaformes
+208907,Eutriconodonta,Triconodontidae,Ichthyoconodon jaworowskorum,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+47425,Eutriconodonta,Triconodontidae,Jugulator amplissimus,,,,,,,,,,,4,105.3,93.5,105.3,93.5,Albian,Turonian,,Mammalia,insectivore,Mammaliaformes
+216655,Eutriconodonta,Triconodontidae,Meiconodon lii,,,,,,,,,,,2,125,100.5,125,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+216656,Eutriconodonta,Triconodontidae,Meiconodon setoguchii,,,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+203408,Eutriconodonta,Triconodontidae,Trioracodon major,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+203410,Eutriconodonta,Triconodontidae,Trioracodon oweni,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+44368,Eutriconodonta,Triconodontidae,Astroconodon denisoni,2.476,Smith et al 2018,,,,,,,,,8,125,113,113,100.5,Aptian,Albian,amphibious,Astroconodon,piscivore,Astroconodon
+43737,Marsupialia,,Adinodon pattersoni,,,,,,,,,,,1,113,100.5,113,100.5,Albian,,scansorial,Marsupialia,omnivore,Marsupialia
+253246,Marsupialia,Herpetotheriidae,Nortedelphys jasoni,,,m1,2.22,1.20,Case et al 2005,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,4.452532854,7,70.6,66,70.6,66,Maastrichtian,,ground dwelling,Herpetotheriidae,omnivore,Marsupialia
+160064,Marsupialia,Herpetotheriidae,Nortedelphys magnus,,,m1,2.30,1.60,Case et al 2005,"Marsupials, m1_area",ln(m) = 2.924 + 1.56 * ln(m1_area),Gordon 2003,4.956543893,2,70.6,66,70.6,66,Maastrichtian,,ground dwelling,Herpetotheriidae,omnivore,Marsupialia
+160066,Marsupialia,Herpetotheriidae,Nortedelphys minimus,,,,,,,,,,,2,70.6,66,70.6,66,Maastrichtian,,ground dwelling,Herpetotheriidae,omnivore,Marsupialia
+216653,Marsupialia,Peradectidae,Maastrichtidelphys meurismeti,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,scansorial,Peradectidae,omnivore,Marsupialia
+206772,Meridiolestida,,Reigitherium bunodonta,,,m1,1.40,1.90,Martinelli et al 2021,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.597401826,4,83.5,66,72.1,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+207630,Meridiolestida,,Leonardus cuspidatus,,,m1,1.47,2.25,Martinelli et al 2021,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,3.995443911,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+67621,Meridiolestida,,Austrotriconodon mckennai,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+67622,Meridiolestida,,Austrotriconodon sepulvedai,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+204734,Meridiolestida,,Cronopio dentiacutus,,,,,,,,,,,1,99.6,93.5,99.6,93.5,Cenomanian,Turonian,,Mammalia,insectivore,Mammaliaformes
+435400,Meridiolestida,Mesungulatidae,Orretherium tzen,,,m1,3.12,3.64,Martinelli et al 2021,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,6.249275081,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+67612,Meridiolestida,Mesungulatidae,Mesungulatum houssayi,,,m1,3.90,3.70,Martinelli et al 2021,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,6.686828224,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+206767,Meridiolestida,Mesungulatidae,Coloniatherium cilinskii,,,m1,5.70,4.85,Martinelli et al 2021,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,7.874625795,3,72.1,66,72.1,66,Maastrichtian,,,Mammalia,insectivore,Mammaliaformes
+140932,Meridiolestida,Mesungulatidae,Mesungulatum lamarquensis,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+207629,Meridiolestida,Mesungulatidae,Quirogatherium major,,,,,,,,,,,1,83.5,66,83.5,66,Campanian,Maastrichtian,,Mammalia,insectivore,Mammaliaformes
+164354,Monotremata,,Kryoryctes cadburyi,,,,,,,,,,,1,122.46,109,122.46,109,Aptian,Albian,,Mammalia,insectivore,Mammaliaformes
+166572,Monotremata,Kollikodontidae,Kollikodon ritchiei,,,m1,5.70,4.10,Flannery et al 1995,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,7.567704902,1,99.6,93.5,99.6,93.5,Cenomanian,Turonian,,Mammalia,insectivore,Mammaliaformes
+166544,Monotremata,Ornithorhynchidae,Steropodon galmani,,,m1,7.30,4.30,Archer et al 1985,"Mammals, m1_area",ln(m) = 1.81 + 1.827 * ln(m1_area),Legendre 1986,8.106736081,1,99.6,93.5,99.6,93.5,Cenomanian,Turonian,,Ornithorhynchidae,"insectivore, herbivore",Ornithorhynchidae
+137612,Monotremata,Ornithorhynchidae,Teinolophos trusleri,,,,,,,,,,,1,122.46,112.03,122.46,112.03,Aptian,Albian,,Ornithorhynchidae,"insectivore, herbivore",Ornithorhynchidae
+47415,Multituberculata,,Janumys erebos,1.791759469,Smith et al 2018,m1,1.26,0.76,Eaton and Cifelli 2001,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,2.237367548,5,105.3,93.5,105.3,93.5,Albian,Turonian,arboreal,Multituberculata,herbivore,Multituberculata
+249185,Multituberculata,,Passumys angelli,,,m1,1.41,1.12,Cifelli et al 2012,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,2.959384019,1,145,136.4,145,136.4,Berriasian,Valanginian,arboreal,Multituberculata,herbivore,Multituberculata
+45105,Multituberculata,,Cimexomys judithae,3.182418433,Smith et al 2018,m1,1.80,,Sahni 1972,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,3.391459195,7,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+45525,Multituberculata,,Dakotamys malcolmi,3.301598691,Smith et al 2018,m1,1.88,1.09,Eaton 2009,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.335416348,5,100.5,93.9,99.6,93.5,Cenomanian,Turonian,arboreal,Multituberculata,herbivore,Multituberculata
+44721,Multituberculata,,Bryceomys intermedius,3.401197382,Smith et al 2018,m1,1.88,1.15,Eaton and Cifelli 2001,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.412756098,9,113,100.5,105.3,93.5,Albian,Turonian,arboreal,Multituberculata,herbivore,Multituberculata
+204040,Multituberculata,,Chulsanbaatar vulgaris,2.48490665,Smith et al 2018,m1,1.90,0.90,Kielan-Jaworowska 1974,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.074236976,5,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+216471,Multituberculata,,Uzbekbaatar wardi,,,m1,1.96,1.12,Averianov and Archibald 2003,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.434751638,1,93.5,86.3,93.5,86.3,Turonian,Coniacian,arboreal,Multituberculata,herbivore,Multituberculata
+44976,Multituberculata,,Cedaromys parvus,3.828641396,Smith et al 2018,m1,2.06,1.39,Eaton and Cifelli 2001,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.818297204,8,113,100.5,105.3,93.5,Albian,Turonian,arboreal,Multituberculata,herbivore,Multituberculata
+45101,Multituberculata,,Cimexomys antiquus,3.469174031,Smith et al 2018,m1,2.15,1.10,Fox 1971,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.542286742,3,85.8,83.5,83.5,70.6,Santonian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+45108,Multituberculata,,Cimexomys minor,3.631912816,Smith et al 2018,m1,2.30,1.00,Fox 1971,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.502062724,7,70.6,66,66,63.3,Maastrichtian,Danian,arboreal,Multituberculata,herbivore,Multituberculata
+44975,Multituberculata,,Cedaromys bestia,4.262679877,Smith et al 2018,m1,2.49,1.57,Eaton and Cifelli 2001,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,4.267675978,9,113,100.5,105.3,93.5,Albian,Turonian,arboreal,Multituberculata,herbivore,Multituberculata
+331090,Multituberculata,,Yubaatar zhongyuanensis,,,m1,9.20,3.58,Xu et al 2015,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,7.343712355,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+43974,Multituberculata,,Ameribaatar zofiae,,,,,,,,,,,5,105.3,93.5,105.3,93.5,Albian,Turonian,arboreal,Multituberculata,herbivore,Multituberculata
+216491,Multituberculata,,Argentodites coloniensis,,,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+265643,Multituberculata,,Argillomys marylandensis,,,,,,,,,,,1,122.46,112.03,122.46,112.03,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+358279,Multituberculata,,Baidabatyr clivosus,,,,,,,,,,,1,129.4,113,129.4,113,Barremian,Aptian,arboreal,Multituberculata,herbivore,Multituberculata
+204009,Multituberculata,,Bulganbaatar nemegtbaataroides,,,,,,,,,,,2,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+253258,Multituberculata,,Cedaromys minimus,,,,,,,,,,,1,99.6,93.5,99.6,93.5,Cenomanian,Turonian,arboreal,Multituberculata,herbivore,Multituberculata
+45103,Multituberculata,,Cimexomys gregoryi,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+216670,Multituberculata,,Iberica hahni,,,,,,,,,,,3,130,125.45,130,125.45,Hauterivian,Barremian,arboreal,Multituberculata,herbivore,Multituberculata
+49784,Multituberculata,,Paracimexomys crossi,,,,,,,,,,,1,122.46,109,122.46,109,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+49787,Multituberculata,,Paracimexomys magnus,,,,,,,,,,,2,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+137979,Multituberculata,,Uzbekbaatar kizylkumensis,,,,,,,,,,,2,93.5,89.3,93.5,89.3,Turonian,Coniacian,arboreal,Multituberculata,herbivore,Multituberculata
+52654,Multituberculata,,Viridomys orbatus,,,,,,,,,,,2,85.8,83.5,85.8,83.5,Santonian,Campanian,arboreal,Multituberculata,herbivore,Multituberculata
+204010,Multituberculata,,Nemegtbaatar gobiensis,5.365976015,Smith et al 2018,,,,,,,,,5,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Nemegtbaatar,herbivore,Nemegtbaatar
+49786,Multituberculata,,Paracimexomys magister,4.50795406,Smith et al 2018,,,,,,,,,3,85.8,83.5,85.8,83.5,Santonian,Campanian,arboreal,Multituberculata,herbivore,Multituberculata
+44720,Multituberculata,,Bryceomys hadrosus,4.430724577,Smith et al 2018,,,,,,,,,2,93.9,89.8,93.5,89.3,Turonian,Coniacian,arboreal,Multituberculata,herbivore,Multituberculata
+49789,Multituberculata,,Paracimexomys priscus,4.161247621,Smith et al 2018,,,,,,,,,11,85.8,70.6,70.6,66,Santonian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+168379,Multituberculata,,Paracimexomys propriscus,3.828641396,Smith et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+49790,Multituberculata,,Paracimexomys robisoni,3.208548269,Smith et al 2018,,,,,,,,,13,113,100.5,70.6,66,Albian,Late Cretaceous,arboreal,Multituberculata,herbivore,Multituberculata
+49788,Multituberculata,,Paracimexomys perplexus,2.944438979,Smith et al 2018,,,,,,,,,8,105.3,93.5,105.3,93.5,Albian,Turonian,arboreal,Multituberculata,herbivore,Multituberculata
+44719,Multituberculata,,Bryceomys fumosus,2.665606672,Smith et al 2018,,,,,,,,,3,93.9,89.8,93.5,89.3,Turonian,Coniacian,arboreal,Multituberculata,herbivore,Multituberculata
+209842,Multituberculata,Albionbaataridae,Albionbaatar denisae,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+216660,Multituberculata,Albionbaataridae,Kielanobaatar badaohaoensis,,,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+207526,Multituberculata,Allodontidae,Ctenacodon minor,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+204183,Multituberculata,Arginbaataridae,Arginbaatar dimitrievae,2.397895273,Smith et al 2018,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+45123,Multituberculata,Cimolodontidae,Cimolodon similis,4.750480175,Smith et al 2018,m1,3.10,1.70,Fox 1971,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,4.698758283,12,100.5,93.9,83.5,70.6,Cenomanian,Late Cretaceous,,Cimolodontidae,omnivore,Cimolodontidae
+45121,Multituberculata,Cimolodontidae,Cimolodon electus,5.148218961,Smith et al 2018,m1,3.40,1.95,Fox 1971,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,5.030109962,10,85.8,83.5,83.5,70.6,Santonian,Maastrichtian,,Cimolodontidae,omnivore,Cimolodontidae
+45122,Multituberculata,Cimolodontidae,Cimolodon nitidus,5.309692903,Smith et al 2018,m1,4.88,2.25,Fox 1971,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,5.756747979,69,83.5,70.6,70.6,66,Campanian,Maastrichtian,,Cimolodontidae,omnivore,Cimolodontidae
+387583,Multituberculata,Cimolodontidae,Cimolodon akersteni,,,,,,,,,,,1,105.3,93.5,105.3,93.5,Albian,Turonian,,Cimolodontidae,omnivore,Cimolodontidae
+209125,Multituberculata,Cimolodontidae,Cimolodon parvus,,,,,,,,,,,2,70.6,66,70.6,66,Maastrichtian,,,Cimolodontidae,omnivore,Cimolodontidae
+267478,Multituberculata,Cimolodontidae,Cimolodon peregrinus,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Cimolodontidae,omnivore,Cimolodontidae
+82051,Multituberculata,Cimolodontidae,Cimolodon wardi,4.248495242,Smith et al 2018,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Cimolodontidae,omnivore,Cimolodontidae
+45127,Multituberculata,Cimolomyidae,Cimolomys gracilis,5.842741108,Smith et al 2018,m1,4.90,2.15,Fox 1971,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,5.698513549,23,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+48076,Multituberculata,Cimolomyidae,Meniscoessus robustus,7.764466375,Smith et al 2018,m1,8.49,4.29,Kelly 2014,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,7.488924991,92,72.1,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+43873,Multituberculata,Cimolomyidae,Allacodon lentus,,,,,,,,,,,5,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+43874,Multituberculata,Cimolomyidae,Allacodon pumilus,,,,,,,,,,,2,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+204008,Multituberculata,Cimolomyidae,Buginbaatar transaltaiensis,,,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+45129,Multituberculata,Cimolomyidae,Cimolomys milliensis,,,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+45131,Multituberculata,Cimolomyidae,Cimolomys trochuus,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+48071,Multituberculata,Cimolomyidae,Meniscoessus conquistus,,,,,,,,,,,2,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+48072,Multituberculata,Cimolomyidae,Meniscoessus ferox,,,,,,,,,,,1,85.8,83.5,85.8,83.5,Santonian,Campanian,arboreal,Multituberculata,herbivore,Multituberculata
+166859,Multituberculata,Cimolomyidae,Paressonodon nelsoni,,,,,,,,,,,3,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+48077,Multituberculata,Cimolomyidae,Meniscoessus seminoensis,7.731109192,Smith et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+46330,Multituberculata,Cimolomyidae,Essonodon browni,7.539059428,Smith et al 2018,,,,,,,,,17,72.1,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+48075,Multituberculata,Cimolomyidae,Meniscoessus major,6.616053382,Smith et al 2018,,,,,,,,,17,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+48070,Multituberculata,Cimolomyidae,Meniscoessus collomensis,6.612041035,Smith et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+48074,Multituberculata,Cimolomyidae,Meniscoessus intermedius,5.994826161,Smith et al 2018,,,,,,,,,7,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+45124,Multituberculata,Cimolomyidae,Cimolomys clarki,5.562139204,Smith et al 2018,,,,,,,,,22,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,arboreal,Multituberculata,herbivore,Multituberculata
+143292,Multituberculata,Corriebaataridae,Corriebaatar marywaltersae,,,,,,,,,,,1,122.46,112.03,122.46,112.03,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+404415,Multituberculata,Djadochtatheriidae,Guibaatar castellanus,,,m1,4.07,2.35,Wible et al 2019,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,5.559023326,1,83.6,72.1,83.6,72.1,Campanian,,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+204043,Multituberculata,Djadochtatheriidae,Catopsbaatar catopsaloides,6.778784898,Smith et al 2018,m1,6.10,3.80,Kielan-Jaworowska 1974,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,6.836704522,4,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+371284,Multituberculata,Djadochtatheriidae,Mangasbaatar udanii,6.78,Rougier et al 2016,,,,,,,,,1,83.6,72.1,83.6,72.1,Campanian,,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+204035,Multituberculata,Djadochtatheriidae,Tombaatar sabuli,,,,,,,,,,,1,83.6,72.1,83.6,72.1,Campanian,,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+203446,Multituberculata,Djadochtatheriidae,Djadochtatherium matthewi,5.739792912,Smith et al 2018,,,,,,,,,2,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+57298,Multituberculata,Djadochtatheriidae,Kryptobaatar dashzevegi,4.418840608,Smith et al 2018,,,,,,,,,4,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+216658,Multituberculata,Eobaataridae,Heishanobaatar triangulus,3.17805383,Smith et al 2018,m1,1.50,1.10,Kusuhashi et al 2010,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.022683996,2,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+216673,Multituberculata,Eobaataridae,Sinobaatar fuxinensis,3.737669618,Smith et al 2018,m1,1.70,1.40,Kusuhashi et al 2010,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.551412147,2,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+216672,Multituberculata,Eobaataridae,Sinobaatar xiei,3.555348061,Smith et al 2018,m1,1.70,,Kusuhashi et al 2010,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,3.225128211,1,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+216675,Multituberculata,Eobaataridae,Liaobaatar changi,4.59511985,Smith et al 2018,m1,2.50,2.00,Kusuhashi et al 2010,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,4.622850022,1,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+208966,Multituberculata,Eobaataridae,Eobaatar hispanicus,,,,,,,,,,,2,130,125.45,130,125.45,Hauterivian,Barremian,arboreal,Multituberculata,herbivore,Multituberculata
+94198,Multituberculata,Eobaataridae,Eobaatar minor,,,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+208967,Multituberculata,Eobaataridae,Eobaatar pajaronensis,,,,,,,,,,,2,130,125.45,130,122.46,Hauterivian,Aptian,arboreal,Multituberculata,herbivore,Multituberculata
+216662,Multituberculata,Eobaataridae,Hakusanobaatar matsuoi,,,,,,,,,,,1,139.8,132.9,139.8,132.9,Valanginian,,arboreal,Multituberculata,herbivore,Multituberculata
+94159,Multituberculata,Eobaataridae,Monobaatar mimicus,,,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+203460,Multituberculata,Eobaataridae,Parendotherium herreroi,,,,,,,,,,,1,130,125.45,130,125.45,Hauterivian,Barremian,arboreal,Multituberculata,herbivore,Multituberculata
+167144,Multituberculata,Eobaataridae,Sinobaatar lingyuanensis,,,,,,,,,,,1,129.4,125,129.4,125,Barremian,,arboreal,Multituberculata,herbivore,Multituberculata
+216664,Multituberculata,Eobaataridae,Tedoribaatar reini,,,,,,,,,,,1,139.8,132.9,139.8,132.9,Valanginian,,arboreal,Multituberculata,herbivore,Multituberculata
+203438,Multituberculata,Eobaataridae,Loxaulax valdensis,3.970291914,Smith et al 2018,,,,,,,,,4,140.2,136.4,129.4,125,Berriasian,Barremian,arboreal,Multituberculata,herbivore,Multituberculata
+94197,Multituberculata,Eobaataridae,Eobaatar magnus,3.218875825,Smith et al 2018,,,,,,,,,1,125,100.5,125,100.5,Aptian,Albian,arboreal,Multituberculata,herbivore,Multituberculata
+216668,Multituberculata,Eobaataridae,Eobaatar clemensi,2.890371758,Smith et al 2018,,,,,,,,,3,129.4,125,129.4,125,Barremian,,arboreal,Multituberculata,herbivore,Multituberculata
+45174,Multituberculata,Eucosmodontidae,Clemensodon megaloba,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Eucosmodontidae,omnivore,Eucosmodontidae
+216756,Multituberculata,Haramyidae,Avashishta bacharamensis,,,,,,,,,,,1,72.1,66,72.1,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+289407,Multituberculata,Kogaionidae,Barbatodon oardaensis,,,m1,2.09,1.38,Codrea et al 2014,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.828743788,3,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+209868,Multituberculata,Kogaionidae,Kogaionon ungureanui,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+371029,Multituberculata,Kogaionidae,Litovoi tholocephalos,5.11,Csiki-Sava et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+197180,Multituberculata,Kogaionidae,Barbatodon transylvanicus,5.18178355,Smith et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+428180,Multituberculata,Neoplagiaulacidae,Filikomys minor,,,m1,1.56,0.80,Eaton 2002,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,2.619658604,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+428177,Multituberculata,Neoplagiaulacidae,Filikomys primaevus,,,m1,1.85,0.87,Eaton 2002,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,2.986814769,13,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+48346,Multituberculata,Neoplagiaulacidae,Mesodma hensleighi,2.774685879,Smith et al 2018,m1,1.95,0.85,Eaton 2002,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.029229722,18,83.5,70.6,66,63.3,Campanian,Danian,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+48344,Multituberculata,Neoplagiaulacidae,Mesodma formosa,3.49417403,Smith et al 2018,m1,2.50,1.40,Eaton 2002,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,4.108050375,36,83.5,70.6,66,63.3,Campanian,Danian,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+166857,Multituberculata,Neoplagiaulacidae,Parikimys carpenteri,3.828641396,Smith et al 2018,m1,2.51,1.15,Wilson et al 2010,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,3.82989431,3,70.6,66,70.6,66,Maastrichtian,,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+48351,Multituberculata,Neoplagiaulacidae,Mesodma thompsoni,3.976645957,Smith et al 2018,m1,2.85,1.25,Eaton 2002,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,4.133596706,42,83.5,70.6,63.3,61.7,Campanian,Danian,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+168381,Multituberculata,Neoplagiaulacidae,Nidimys occultus,4.663439094,Smith et al 2018,m1,3.46,1.67,Hunter et al 2010,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,4.831633917,1,70.6,66,70.6,66,Maastrichtian,,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+49072,Multituberculata,Neoplagiaulacidae,Neoplagiaulax burgessi,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+49969,Multituberculata,Neoplagiaulacidae,Parectypodus foxi,4.384854414,Smith et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+48349,Multituberculata,Neoplagiaulacidae,Mesodma senecta,3.954645957,Smith et al 2018,,,,,,,,,4,85.8,83.5,83.5,70.6,Santonian,Maastrichtian,,Neoplagiaulacidae,omnivore,Neoplagiaulacidae
+208943,Multituberculata,Paulchoffatiidae,Galveodon nannothus,,,,,,,,,,,2,130,125.45,130,125.45,Hauterivian,Barremian,arboreal,Multituberculata,herbivore,Multituberculata
+53330,Multituberculata,Paulchoffatiidae,Sunnyodon notleyi,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+216667,Multituberculata,Pinheirodontidae,Cantalera abadi,,,,,,,,,,,1,130,125.45,130,125.45,Hauterivian,Barremian,arboreal,Multituberculata,herbivore,Multituberculata
+53063,Multituberculata,Pinheirodontidae,Gerhardodon purbeckensis,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+204044,Multituberculata,Pinheirodontidae,Lavocatia alfambrensis,,,,,,,,,,,1,130,125.45,130,125.45,Hauterivian,Barremian,arboreal,Multituberculata,herbivore,Multituberculata
+53332,Multituberculata,Plagiaulacidae,Bolodon crassidens,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+203430,Multituberculata,Plagiaulacidae,Bolodon elongatus,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+208964,Multituberculata,Plagiaulacidae,Bolodon falconeri,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+249186,Multituberculata,Plagiaulacidae,Bolodon hydei,,,,,,,,,,,1,145,136.4,145,136.4,Berriasian,Valanginian,arboreal,Multituberculata,herbivore,Multituberculata
+208963,Multituberculata,Plagiaulacidae,Bolodon minor,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+54226,Multituberculata,Plagiaulacidae,Camptomus amplus,,,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,arboreal,Multituberculata,herbivore,Multituberculata
+203451,Multituberculata,Plagiaulacidae,Plagiaulax becklesii,,,,,,,,,,,1,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+203429,Multituberculata,Plagiaulacidae,Bolodon osborni,3.091042453,Smith et al 2018,,,,,,,,,2,145,140.2,145,140.2,Berriasian,,arboreal,Multituberculata,herbivore,Multituberculata
+47440,Multituberculata,Ptilodontidae,Kimbetohia campi,,,,,,,,,,,1,83.5,70.6,66,63.3,Campanian,Danian,arboreal,Ptilodontidae,omnivore,Ptilodontidae
+204033,Multituberculata,Sloanbaataridae,Nessovbaatar multicostatus,3.295836866,Smith et al 2018,,,,,,,,,1,83.5,70.6,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+57297,Multituberculata,Sloanbaataridae,Sloanbaatar mirabilis,3.135494216,Smith et al 2018,,,,,,,,,2,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+57299,Multituberculata,Sloanbaataridae,Kamptobaatar kuczynskii,2.564949357,Smith et al 2018,,,,,,,,,2,83.6,72.1,83.5,70.6,Campanian,Maastrichtian,ground dwelling,Djadochtatherioidea,omnivore,Djadochtatherioidea
+331074,Multituberculata,Taeniolabididae,Valenopsalis joyneri,,,,,,,,,,,1,70.6,66,66,63.3,Maastrichtian,Danian,,Taeniolabididae,herbivore,Taeniolabididae
+44722,Multituberculata,Taeniolabididae,Bubodens magnus,9.153301165,Smith et al 2018,,,,,,,,,1,70.6,66,70.6,66,Maastrichtian,,,Taeniolabididae,herbivore,Taeniolabididae
+241963,Peramura,Peramuridae,Peramuroides tenuiscus,,,m1,0.90,0.43,Davis 2012,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,0.929702685,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+241961,Peramura,Peramuridae,Kouriogenys minor,,,m1,1.15,0.54,Davis 2012,"Multituberculates, m1_area",ln(m) = 0.87 + 0.79 * (1.81 + 1.827 * (m1_area)),Wilson et al 2012,1.612262664,1,145,140.2,145,140.2,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+213201,Peramura,Peramuridae,Afriquiamus nessovi,,,,,,,,,,,1,145,139.8,145,139.8,Berriasian,,,Mammalia,insectivore,Mammaliaformes
+166836,Monotremata,Tachyglossidae,Zaglossus robusta,,,skull,165.00,,Murray 1978,"Mammals, skull_length",ln(m) = -3.83 + 3.68 * ln(skull_length),Luo et al 2001,14.95987934,2,5.333,2.588,2.588,0.0117,Pliocene,Pleistocene,,Tachyglossidae,insectivore,Tachyglossidae
+337011,Xenarthra,Myrmecophagidae,Nunezia caroloameghinoi,,,,,,,,,,,2,6.8,4,6.8,4,Messinian,Zanclean,ground dwelling,Myrmecophagidae,insectivore,Myrmecophagidae
+48923,Xenarthra,Myrmecophagidae,Myrmecophaga tridactyla,10.40426284,Gaudin et al 2018,,,,,,,,,5,4.9,1.8,0.0117,0,Pliocene,Holocene,ground dwelling,Myrmecophagidae,insectivore,Myrmecophagidae
+337007,Xenarthra,Myrmecophagidae,Neotamandua conspicua,,,,,,,,,,,1,6.8,3,6.8,3,Messinian,Pliocene,ground dwelling,Myrmecophagidae,insectivore,Myrmecophagidae
+83728,Cingulata,Dasypodidae,Zaedyus pichiy,6.884486652,Superina and Abba 2014,,,,,,,,,16,10,9,0.0117,0,Tortonian,Holocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+318402,Cingulata,Dasypodidae,Eutatus praepampaeus,,,,,,,,,,,1,6.8,4,6.8,4,Messinian,Zanclean,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+83801,Cingulata,Dasypodidae,Eutatus seguini,10.81777628,Vizcaíno and Bargo 2003,,,,,,,,,12,9,6.8,0.126,0.0117,Tortonian,Pleistocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+281440,Cingulata,Dasypodidae,Doellotatus chapadmalensis,,,,,,,,,,,9,9,6.8,3.6,2.588,Tortonian,Pliocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+282540,Cingulata,Dasypodidae,Doellotatus inornatus,,,mandible,90.00,,Vizcaíno and Bargo 1998,"Mammals, mandible length",ln(m) = -5.6712 + 2.9677 * ln(mandible_length),Foster 2009,7.682885159,30,10,9,5.333,3.6,Tortonian,Zanclean,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+388623,Cingulata,Dasypodidae,Ringueletia simpsoni,,,mandible,120.00,,Vizcaíno and Bargo 1998,"Mammals, mandible length",ln(m) = -5.6712 + 2.9677 * ln(mandible_length),Foster 2009,8.536639245,7,9,6.8,0.781,0.012,Tortonian,Pleistocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+83806,Cingulata,Dasypodidae,Chaetophractus villosus,8.393894975,PBDB,,,,,,,,,17,3.6,2.588,0.0117,0,Piacenzian,Holocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+395832,Cingulata,Dasypodidae,Paleuphractus argentinus,,,,,,,,,,,3,9,6.8,6.8,4,Tortonian,Zanclean,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+297452,Cingulata,Dasypodidae,Holozaedyus laevisculptus,,,,,,,,,,,3,6.8,4,6.8,4,Messinian,Zanclean,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+387573,Cingulata,Dasypodidae,Chorobates recens,,,skull,101.20,,Carlini and Scillato-Yané 1996,"Mammals, skull_length",ln(m) = -3.83 + 3.68 * ln(skull_length),Luo et al 2001,13.16092343,3,6.8,4,4,2.588,Messinian,Pliocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+282539,Cingulata,Dasypodidae,Chorobates villosissimus,,,,,,,,,,,27,10,9,5.333,3.6,Tortonian,Zanclean,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+379915,Cingulata,Dasypodidae,Paraeuphractus prominens,,,,,,,,,,,7,9,6.8,5.333,3,Tortonian,Pliocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+436679,Cingulata,Dasypodidae,Dasypotherium australis,,,,,,,,,,,1,6.8,4,6.8,4,Messinian,Zanclean,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+388624,Cingulata,Dasypodidae,Macroeuphractus outesi,,,skull,25.20,,Vizcaíno and De Iuliis 2003,"Mammals, skull_length",ln(m) = -3.83 + 3.68 * ln(skull_length),Luo et al 2001,8.0447859,1,4,3,4,3,Zanclean,Piacenzian,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+247974,Cingulata,Dasypodidae,Macroeuphractus retusus,,,skull,23.40,,Vizcaíno and De Iuliis 2003,"Mammals, skull_length",ln(m) = -3.83 + 3.68 * ln(skull_length),Luo et al 2001,7.772068562,4,9,6.8,4,3,Tortonian,Pliocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+68407,Cingulata,Dasypodidae,Macrochorobates scalabrinii,,,,,,,,,,,17,11.608,9,5.333,3.6,Tortonian,Zanclean,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+281441,Cingulata,Dasypodidae,Macrochorobates chapadmalensis,,,,,,,,,,,3,6.8,4,4,3,Messinian,Pliocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+294079,Cingulata,Dasypodidae,Pliodasypus vergelianus,,,,,,,,,,,1,3.6,2.588,3.6,2.588,Piacenzian,,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+161170,Cingulata,Dasypodidae,Propraopus sulcatus,,,skull,119.00,,Castro et al 2013,"Mammals, skull_length",ln(m) = -3.83 + 3.68 * ln(skull_length),Luo et al 2001,13.75717445,21,3.6,0.781,0.126,0,Piacenzian,Holocene,ground dwelling,Dasypodidae,insectivore,Dasypodidae
+234143,Pholidota,Manidae,Manis (Smutsia) gigantea,10.40426284,EOL,,,,,,,,,2,5.333,3.6,5.333,2.588,Pliocene,,scansorial,Manidae,insectivore,Manidae
+46943,,Talpidae,Hesperoscalops sewardensis,,,,,,,,,,,1,4.9,1.8,4.9,1.8,Pliocene,Calabrian,fossorial,Talpidae,insectivore,Talpidae
+46942,,Talpidae,Hesperoscalops ruficervus,,,m1,2.90,2.10,Dalquest 1983,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.667223077,1,10.3,4.9,10.3,4.9,Tortonian,Zanclean,fossorial,Talpidae,insectivore,Talpidae
+46941,,Talpidae,Hesperoscalops rexroadi,,,,,,,,,,,7,4.9,1.8,4.9,1.8,Pliocene,Calabrian,fossorial,Talpidae,insectivore,Talpidae
+46940,,Talpidae,Hesperoscalops mcgrewi,,,,,,,,,,,2,10.3,4.9,10.3,4.9,Tortonian,Zanclean,fossorial,Talpidae,insectivore,Talpidae
+46939,,Talpidae,Hesperoscalops blancoensis,,,,,,,,,,,3,4.9,1.8,4.9,1.8,Pliocene,Calabrian,fossorial,Talpidae,insectivore,Talpidae
+47509,,Talpidae,Lemoynea biradicularis,,,m1,2.20,1.65,Bown 1980,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,3.824870751,3,13.6,4.9,10.3,4.9,Serravallian,Zanclean,fossorial,Talpidae,insectivore,Talpidae
+109618,,Talpidae,Talpa neagui,,,,,,,,,,,2,5.333,2.588,5.333,2.588,Pliocene,,fossorial,Talpa,insectivore,Talpidae
+143100,,Talpidae,Talpa caeca,4.527208645,EOL,,,,,,,,,11,5.333,0.126,0.781,0.0117,Pliocene,Pleistocene,fossorial,Talpa,insectivore,Talpidae
+93649,,Talpidae,Talpa minuta,,,m1,1.79,1.17,Ziegler 2003,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,2.929449132,16,23.03,13.65,2.588,0.0117,Neogene,Pleistocene,fossorial,Talpa,insectivore,Talpidae
+54106,,Talpidae,Talpa minor,,,,,,,,,,,50,5.333,4.2,0.781,0.0117,Pliocene,Pleistocene,fossorial,Talpa,insectivore,Talpidae
+93614,,Talpidae,Talpa fossilis,,,,,,,,,,,40,8.7,5.333,0.781,0.0117,Tortonian,Pleistocene,fossorial,Talpa,insectivore,Talpidae
+376817,,Talpidae,Talpa tyrrhenica,,,,,,,,,,,5,5.333,0.126,0.781,0.0117,Pliocene,Pleistocene,fossorial,Talpa,insectivore,Talpidae
+104182,,Talpidae,Talpa europaea,,,m1,2.26,1.30,van Cleef-Roders and van den Hoek Ostende 2001,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,3.480542939,47,5.333,2.588,0.0117,0,Pliocene,Holocene,fossorial,Talpa,insectivore,Talpidae
+110090,,Talpidae,Scapanulus agrarius,,,,,,,,,,,1,4.9,4.2,4.9,4.2,Zanclean,,fossorial,Talpidae,insectivore,Talpidae
+109068,,Talpidae,Yanshuella primaeva,,,,,,,,,,,3,11.608,5.333,5.333,2.588,Tortonian,Pliocene,fossorial,Talpidae,insectivore,Talpidae
+109065,,Talpidae,Quyania chowi,,,m1,1.46,1.00,Rzebik-Kowalska 2014,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,2.342094517,3,11.608,5.333,5.333,2.588,Tortonian,Pliocene,fossorial,Talpidae,insectivore,Talpidae
+51419,,Talpidae,Scapanus latimanus,4.293195421,Verts and Carraway 2001,,,,,,,,,7,4.9,1.8,0.126,0.0117,Pliocene,Pleistocene,fossorial,Scapanus,insectivore,Talpidae
+51424,,Talpidae,Scapanus townsendii,4.953712147,Carraway et al 1993,,,,,,,,,1,4.9,1.8,4.9,1.8,Pliocene,Calabrian,fossorial,Scapanus,insectivore,Talpidae
+51422,,Talpidae,Scapanus proceridens,,,m1,2.41,1.91,Hutchison 1968,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.211516423,9,23.03,5.333,10.3,4.9,Miocene,Zanclean,fossorial,Scapanus,insectivore,Talpidae
+51418,,Talpidae,Scapanus hagermanensis,,,,,,,,,,,3,4.9,1.8,4.9,1.8,Pliocene,Calabrian,fossorial,Scapanus,insectivore,Talpidae
+51420,,Talpidae,Scapanus malatinus,,,,,,,,,,,6,4.9,1.8,1.8,0.3,Pliocene,Middle Pleistocene,fossorial,Scapanus,insectivore,Talpidae
+92120,,Talpidae,Archaeodesmana dekkersi,,,,,,,,,,,3,5.333,4.2,4.9,3.2,Zanclean,Pliocene,fossorial,Talpidae,insectivore,Talpidae
+95967,,Talpidae,Dibolia bifida,,,m1,2.71,1.99,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.469315569,3,5.333,3.2,3.2,2.588,Pliocene,,fossorial,Talpidae,insectivore,Talpidae
+92122,,Talpidae,Archaeodesmana brailloni,,,m1,2.49,1.87,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.230224018,5,5.333,3.2,3.6,2.588,Pliocene,,fossorial,Talpidae,insectivore,Talpidae
+92104,,Talpidae,Archaeodesmana baetica,,,m1,2.63,,Martín-Suárez et al 2001,"Carnivores, m1_length",ln(m) = 1.681 + 2.97 * ln(m1_length),Van Valkenburgh 1990,4.497135079,1,7.246,4.9,7.246,4.9,Messinian,Zanclean,fossorial,Talpidae,insectivore,Talpidae
+95979,,Talpidae,Galemys kormosi,,,m1,2.50,1.86,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.228019834,11,5.333,2.588,2.588,0.0117,Pliocene,Pleistocene,amphibious,Galemys,insectivore,Talpidae
+94102,,Talpidae,Galemys sulimskii,,,m1,2.65,1.92,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.374568497,1,4.2,3.2,4.2,3.2,Zanclean,Piacenzian,amphibious,Galemys,insectivore,Talpidae
+93502,,Talpidae,Desmanella amasyae,,,,,,,,,,,2,7.246,4.9,7.246,4.9,Messinian,Zanclean,fossorial,Talpidae,insectivore,Talpidae
+91924,,Talpidae,Desmanella dubia,,,m1,1.32,1.11,Crochet 1986,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,2.347882572,5,9.7,8.7,4.9,4.2,Tortonian,Zanclean,fossorial,Talpidae,insectivore,Talpidae
+92460,,Talpidae,Desmanella gardiolensis,,,m1,1.60,1.25,Crochet 1986,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,2.85444361,1,3.6,2.588,3.6,2.588,Piacenzian,,fossorial,Talpidae,insectivore,Talpidae
+46567,,Talpidae,Gaillardia thomsoni,,,,,,,,,,,2,10.3,4.9,10.3,4.9,Tortonian,Zanclean,fossorial,Talpidae,insectivore,Talpidae
+110153,,Talpidae,Parascalops fossilis,,,,,,,,,,,1,4.9,4.2,4.9,4.2,Zanclean,,fossorial,Parascalops,insectivore,Talpidae
+49154,,Talpidae,Neurotrichus columbianus,,,m1,2.07,1.32,Hutchison 1968,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,3.3624336,1,10.3,4.9,10.3,4.9,Tortonian,Zanclean,fossorial,Talpidae,insectivore,Talpidae
+335155,,Talpidae,Neurotrichus skoczeni,,,,,,,,,,,1,4.2,2.588,4.2,2.588,Pliocene,Piacenzian,fossorial,Talpidae,insectivore,Talpidae
+96010,,Talpidae,Desmana thermalis,,,m1,3.49,2.55,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,5.284800015,16,3.6,2.588,0.781,0.126,Piacenzian,Middle Pleistocene,amphibious,Desmana,insectivore,Talpidae
+92125,,Talpidae,Desmana verestchagini,,,m1,2.75,2.10,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.580760281,4,5.333,3.2,5.333,2.588,Pliocene,,amphibious,Desmana,insectivore,Talpidae
+94104,,Talpidae,Desmana inflata,,,m1,2.72,2.20,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.638637284,4,5.333,2.588,5.333,2.588,Pliocene,,amphibious,Desmana,insectivore,Talpidae
+94096,,Talpidae,Desmana nehringi,,,m1,3.09,2.39,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.981128136,11,4.9,4.2,2.588,0.781,Pliocene,Calabrian,amphibious,Desmana,insectivore,Talpidae
+94103,,Talpidae,Desmana kowalskae,,,m1,2.94,2.27,Rümke 1985,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,4.816252364,1,4.2,3.2,4.2,3.2,Zanclean,Piacenzian,amphibious,Desmana,insectivore,Talpidae
+51409,,Talpidae,Scalopus aquaticus,4.514150788,EOL,,,,,,,,,52,4.9,1.806,0.0117,0,Pliocene,Holocene,fossorial,Scalopus,insectivore,Talpidae
+165546,Tubulidentata,Orycteropodidae,Orycteropus abundulafus,,,m1,10.50,8.70,Lehmann et al 2005,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,9.075928804,1,11.608,2.588,11.608,2.588,Tortonian,Pliocene,semifossorial,Orycteropus,insectivore,Orycteropus
+166766,Tubulidentata,Orycteropodidae,Orycteropus djourabensis,,,m1,14.70,9.00,Lehmann et al 2004,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,9.678897332,3,5.333,3.6,5.333,0.0117,Pliocene,Pleistocene,semifossorial,Orycteropus,insectivore,Orycteropus
+119862,Tubulidentata,Orycteropodidae,Orycteropus afer,,,m1,11.50,7.60,Lehmann et al 2004,"Insectivores, m1_area",ln(m) = 1.726 + 1.628 * ln(m1_area),Bloch et al 1998,9.00396632,27,23.03,2.588,0.0117,0,Neogene,Holocene,semifossorial,Orycteropus,insectivore,Orycteropus
+166173,Tubulidentata,Orycteropodidae,Leptorycteropus guilielmi,,,,,,,,,,,2,11.62,7.246,11.62,2.588,Tortonian,Pliocene,ground dwelling,Orycteropodidae,insectivore,Orycteropodidae
+432081,Macroscelidea,Macroscelididae,Elephantulus brachyrhynchus,3.860729711,EOL,,,,,,,,,9,5.333,2.588,0.0117,0,Pliocene,Holocene,ground dwelling,Macroscelididae,insectivore,Macroscelididae
+432156,Macroscelidea,Macroscelididae,Elephantulus fuscus,4.060443011,Koontz and Roeper 1983,,,,,,,,,2,5.333,2.588,1.806,0.781,Pliocene,Calabrian,ground dwelling,Macroscelididae,insectivore,Macroscelididae
+432157,Macroscelidea,Macroscelididae,Macroscelides proboscideus,3.642835516,EOL,,,,,,,,,3,5.333,2.588,5.333,0.0117,Pliocene,Pleistocene,ground dwelling,Macroscelididae,insectivore,Macroscelididae
+261801,Paucituberculata,Caenolestidae,Pliolestes tripotamicus,,,,,,,,,,,3,6.8,4,5.333,3.6,Messinian,Zanclean,,Caenolestidae,insectivore,Caenolestidae
+43810,Rodentia,Castoridae,Agnotocastor montanus,6.94459664,Lovegrove and Mowoe 2013,,,,,,,,,1,30.8,20.43,30.8,20.43,Oligocene,Burdigalian,amphibious,Castoridae,browser,Castoridae
+43890,Rodentia,Allomyidae,Allomys simplicidens,4.803192504,Lovegrove and Mowoe 2013,,,,,,,,,1,30.8,20.43,30.8,20.43,Oligocene,Burdigalian,ground dwelling,Rodentia,herbivore,Rodentia
+43954,Rodentia,Allomyidae,Alwoodia magna,5.420285309,Smits 2015,,,,,,,,,3,30.8,20.43,30.8,20.43,Oligocene,Burdigalian,ground dwelling,Rodentia,herbivore,Rodentia
+44028,Primates,Palaechthonidae,Anasazia williamsoni,5.226868161,Smits 2015,,,,,,,,,1,63.3,61.7,63.3,61.7,Danian,NA,arboreal,Plesiadapiformes,"insectivore, omnivore",Plesiadapiformes
+44193,Eulipotyphla,Apternodontidae,Apternodus baladontus,4.089391125,Lovegrove and Mowoe 2013,,,,,,,,,3,40.4,33.9,37.2,33.9,Bartonian,Priabonian,scansorial,Eutheria,insectivore,Theria
+44200,Eulipotyphla,Apternodontidae,Apternodus mediaevus,4.089391125,Lovegrove and Mowoe 2013,,,,,,,,,10,37.2,33.9,37.2,33.9,Priabonian,NA,scansorial,Eutheria,insectivore,Theria
+44210,Carnivora,Canidae,Archaeocyon falkenbachi,7.658398019,Smits 2015,,,,,,,,,1,30.8,20.43,30.8,20.43,Oligocene,Burdigalian,ground dwelling,Canidae,"carnivore, omnivore",Canidae
+45016,Artiodactyla,Cervidae,Cervus canadensis,12.67573094,Reby et al 2016,,,,,,,,,25,2.588,0.126,0.0117,0,Pleistocene,Holocene,NA,Cervus,grazer,Cervus
+45587,Artiodactyla,Merycoidodontidae,Desmatochoerus hatcheri,12.01488902,Lovegrove and Mowoe 2013,,,,,,,,,2,30.8,20.43,20.43,15.97,Oligocene,Burdigalian,ground dwelling,Merycoidodontidae,herbivore,Merycoidodontidae
+46038,Panameriungulata,Hyopsodontidae,Ellipsodon inaequidens,6.421909824,Lovegrove and Mowoe 2013,,,,,,,,,6,63.3,61.7,63.3,61.7,Danian,NA,NA,Hyopsodontidae,omnivore,Hyopsodontidae
+46273,Perissodactyla,Equidae,Equus giganteus,12.89908169,Smits 2015,,,,,,,,,12,4.9,1.8,0.126,0.0117,Pliocene,Pleistocene,ground dwelling,Equus,grazer,Equus
+92546,Eulipotyphla,Plesiosoricidae,Plesiosorex soricinoides,5.074897545,Costeur et al 2012,,,,,,,,,1,22.4,20,22.4,20,Aquitanian,Burdigalian,scansorial,Eutheria,insectivore,Theria
+57925,Creodonta,Hyaenodontidae,Hyaenodon leptorhynchus,9.304746361,Sole et al 2018,,,,,,,,,15,33.9,28.4,28.4,23.03,Oligocene,NA,NA,Hyaenodon,carnivore,Hyaenodon
+47217,Artiodactyla,Hypisodontidae,Hypisodus minimus,5.576861095,Damuth 1982,,,,,,,,,16,37.2,33.9,33.3,30.8,Priabonian,Rupelian,ground dwelling,Artiodactyla,"grazer, browser",Artiodactyla
+47248,Lagomorpha,Leporidae,Hypolagus voorhiesi,6.002839337,Smits 2015,,,,,,,,,8,4.9,1.8,4.9,1.8,Pliocene,Calabrian,ground dwelling,Leporidae,"grazer, browser",Leporidae
+322043,Rodentia,Florentiamyidae,Kirkomys nebraskensis,3.067043344,Smits 2015,,,,,,,,,6,33.3,30.8,30.8,20.43,Oligocene,Burdigalian,ground dwelling,Rodentia,herbivore,Rodentia
+47533,Carnivora,Mustelidae,Leptarctus oregonensis,7.856420337,Smits 2015,,,,,,,,,7,23.03,13.6,15.97,5.333,Miocene,NA,NA,Leptarctus,omnivore,Leptarctus
+47557,Leptictida,Leptictidae,Leptictis dakotensis,6.467961526,Smits 2015,,,,,,,,,10,37.2,33.9,33.3,30.8,Priabonian,Rupelian,ground dwelling,Leptictidae,"insectivore, carnivore",Leptictidae
+47557,Leptictida,Leptictidae,Leptictis dakotensis,6.467961526,Smits 2015,,,,,,,,,10,37.2,33.9,33.3,30.8,Priabonian,Rupelian,ground dwelling,Leptictidae,"insectivore, carnivore",Leptictidae
+240060,Carnivora,,Lycophocyon hutchisoni,8.699166481,Tomiya 2011,,,,,,,,,6,46.2,40.4,40.4,37.2,Lutetian,Priabonian,ground dwelling,Carnivora,"carnivore, omnivore",Carnivora
+48297,Artiodactyla,Merycoidodontidae,Merycoides longiceps,10.94418695,Smits 2015,,,,,,,,,12,24.8,20.43,20.43,15.97,Chattian,Burdigalian,ground dwelling,Merycoidodontidae,herbivore,Merycoidodontidae
+48313,Artiodactyla,Merycoidodontidae,Merycoidodon (Otarohyus) major,11.03859294,Lovegrove and Mowoe 2013,,,,,,,,,30,33.9,33.3,30.8,20.43,Oligocene,Burdigalian,ground dwelling,Merycoidodontidae,herbivore,Merycoidodontidae
+48704,Perissodactyla,Equidae,Miohippus anceps,10.75307238,Smits 2015,,,,,,,,,1,30.8,20.43,30.8,20.43,Oligocene,Burdigalian,ground dwelling,Equidae,browser,Equidae
+289673,Rodentia,Sciuridae,Miopetaurista webbi,7.200183586,Casanovas-Vilar et al 2018,,,,,,,,,2,5.333,3.6,4.9,1.8,Pliocene,Calabrian,scansorial,Sciuridae,"granivore, frugivore",Sciuridae
+49304,Eulipotyphla,Proscalopidae,Oligoscalops galbreathi,2.707840069,Smits 2015,,,,,,,,,4,37.2,33.9,30.8,26.3,Priabonian,Oligocene,scansorial,Eutheria,insectivore,Theria
+49405,Lagomorpha,Ochotonidae,Oreolagus nevadensis,4.356490996,Smits 2015,,,,,,,,,2,15.97,13.6,15.97,13.6,Langhian,Serravallian,ground dwelling,Ochotonidae,herbivore,Ochotonidae
+49656,Lagomorpha,Leporidae,Palaeolagus haydeni,6.440330505,Lovegrove and Mowoe 2013,,,,,,,,,58,37.2,33.9,30.8,20.43,Priabonian,Burdigalian,ground dwelling,Leporidae,"grazer, browser",Leporidae
+49656,Lagomorpha,Leporidae,Palaeolagus haydeni,6.440330505,Lovegrove and Mowoe 2013,,,,,,,,,58,37.2,33.9,30.8,20.43,Priabonian,Burdigalian,ground dwelling,Leporidae,"grazer, browser",Leporidae
+49656,Lagomorpha,Leporidae,Palaeolagus haydeni,6.440330505,Lovegrove and Mowoe 2013,,,,,,,,,58,37.2,33.9,30.8,20.43,Priabonian,Burdigalian,ground dwelling,Leporidae,"grazer, browser",Leporidae
+49866,Artiodactyla,Merycoidodontidae,Paramerychyus relictus,10.77609824,Lovegrove and Mowoe 2013,,,,,,,,,4,30.8,26.3,24.8,20.43,Oligocene,Burdigalian,ground dwelling,Merycoidodontidae,herbivore,Merycoidodontidae
+50272,Rodentia,Cricetidae,Peromyscus sarmocophinus,2.889744292,Smits 2015,,,,,,,,,2,2.588,1.806,1.8,0.3,Gelasian,Middle Pleistocene,ground dwelling,Peromyscus,herbivore,Rodentia
+50377,Rodentia,Cricetidae,Pitymys mcnowni,4.743325292,Lovegrove and Mowoe 2013,,,,,,,,,2,1.8,0.3,1.8,0.3,Calabrian,Middle Pleistocene,ground dwelling,Microtus,herbivore,Rodentia
+50747,Leptictida,Leptictidae,Prodiacodon furor,4.202217795,Smits 2015,,,,,,,,,5,63.3,61.7,61.7,56.8,Danian,Thanetian,ground dwelling,Leptictidae,"insectivore, carnivore",Leptictidae
+50747,Leptictida,Leptictidae,Prodiacodon furor,4.202217795,Smits 2015,,,,,,,,,5,63.3,61.7,61.7,56.8,Danian,Thanetian,ground dwelling,Leptictidae,"insectivore, carnivore",Leptictidae
+50879,Eulipotyphla,Proscalopidae,Proscalops miocaenus,3.343353555,Smits 2015,,,,,,,,,3,33.9,33.3,30.8,26.3,Rupelian,Oligocene,scansorial,Eutheria,insectivore,Theria
+51148,Carnivora,Felidae,Pseudaelurus validus,10.1175589,Rothwell 2004,,,,,,,,,7,20.43,15.97,15.97,13.6,Burdigalian,Serravallian,NA,Pseudaelurus,carnivore,Pseudaelurus
+51662,Eulipotyphla,Soricidae,Sorex rexroadensis,2.079234339,Smits 2015,,,,,,,,,2,4.9,1.8,4.9,1.8,Pliocene,Calabrian,ground dwelling,Soricidae,omnivore,Soricidae
+51805,Carnivora,Mustelidae,Sthenictis bellus,9.180406766,Lovegrove and Mowoe 2013,,,,,,,,,1,20.43,15.97,20.43,15.97,Burdigalian,NA,scansorial,Mustelidae,"carnivore, omnivore",Mustelidae
+52439,Artiodactyla,Protoceratidae,Trigenicus profectus,10.26492434,Smits 2015,,,,,,,,,15,37.2,33.9,37.2,33.9,Priabonian,NA,ground dwelling,Protoceratidae,browser,Protoceratidae
+52543,Perissodactyla,Chalicotheriidae,Tylocephalonyx skinneri,14.34510513,Smits 2015,,,,,,,,,17,20.43,15.97,20.43,15.97,Burdigalian,NA,ground dwelling,Chalicotherioidea,browser,Chalicotherioidea
+376953,Primates,Omomyidae,Walshina esmaraldensis,4.275900518,López-Torres et al 2018,,,,,,,,,6,46.2,40.4,46.2,40.4,Lutetian,Bartonian,arboreal,Omomyidae,insectivore,Omomyidae
+176105,Carnivora,Felidae,Xenosmilus hodsonae,11.68101418,Torregrosa et al 2010,,,,,,,,,2,2.588,0.781,1.8,0.3,Gelasian,Middle Pleistocene,scansorial,Felidae,carnivore,Felidae

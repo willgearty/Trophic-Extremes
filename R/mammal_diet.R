@@ -14,37 +14,65 @@ colors8b <- c(rgb(0,0,0), rgb(34/255, 113/255, 178/255), rgb(61/255, 183/255, 23
 colors12 <- c("#9F0162", "#009F81", "#FF5AAF", "#00FCCF", "#8400CD", "#008DF9",
               "#00C2F9", "#FFB2FD", "#A40122", "#E20134", "#FF6E3A", "#FFC33B")
 
+pbdb_list <- read.csv("../data/pbdb_mammals.csv", na.strings = c("", "NA"), strip.white = TRUE)
+
 #North American Cenozoic mammals
 lyons_diet <- read.csv("../data/Lyons_BS_diet.csv", stringsAsFactors = FALSE)
-lyons_diet_clean <- lyons_diet %>%
-  filter(!is.na(Recoded_Diet), !is.na(FAD), !is.na(LAD),
-         !(PBDB.life.habit %in% c("aquatic"))) %>%
-  select(Order, Genus_species, FAD, LAD, Recoded_Diet, lnMass_g) %>%
-  mutate(Continent = "NA", Recoded_Diet = ifelse(Recoded_Diet == "insectivore", "invertivore", Recoded_Diet))
+
+# Update info based on the PBDB
+lyons_diet_merge <- merge(lyons_diet, pbdb_list, by.x = "Genus_species", by.y = "taxon_name", all.x = TRUE) %>%
+  mutate(#FAD = ifelse(!is.na(firstapp_max_ma), firstapp_max_ma, FAD),
+         #LAD = ifelse(!is.na(lastapp_min_ma), lastapp_min_ma, LAD),
+         PBDB.diet = ifelse(!is.na(diet), diet, PBDB.diet),
+         PBDB.life.habit = ifelse(!is.na(life_habit), life_habit, PBDB.life.habit),
+         Genus_species = ifelse(!is.na(accepted_name), accepted_name, Genus_species),
+         Order = ifelse(!is.na(order) & order !="NO_ORDER_SPECIFIED", order, Order),
+         Family = ifelse(!is.na(family) & family !="NO_FAMILY_SPECIFIED", family, Family))
+lyons_diet_clean <- lyons_diet_merge %>%
+  filter(!is.na(PBDB.diet), !is.na(FAD), !is.na(LAD),
+         !(PBDB.life.habit %in% c("aquatic")),
+         is.na(accepted_rank) | accepted_rank == "species") %>%
+  select(Order, Genus_species, FAD, LAD, PBDB.diet, lnMass_g) %>%
+  distinct() %>%
+  group_by(Order, Genus_species, FAD, LAD, PBDB.diet) %>%
+  summarise(lnMass_g = mean(lnMass_g), .groups = "drop") %>%
+  mutate(herb = grepl("herb|brows|frug|graz|foliv|gran", PBDB.diet, ignore.case = TRUE),
+         carn = grepl("carn|piscivore", PBDB.diet, ignore.case = TRUE),
+         insect = grepl("insect", PBDB.diet, ignore.case = TRUE)) %>%
+  mutate(omni = grepl("omni", PBDB.diet, ignore.case = TRUE) | rowSums(select(., herb, carn, insect)) > 1,
+         Continent = "NA")
+lyons_diet_clean$Recoded_Diet <- ifelse(lyons_diet_clean$omni, "omnivore", NA)
+lyons_diet_clean$Recoded_Diet[!lyons_diet_clean$omni] <- c("herbivore", "carnivore", "invertivore")[apply(lyons_diet_clean[!lyons_diet_clean$omni, c("herb", "carn", "insect")], 1, which.max)]
+
+lyons_diet_clean <- lyons_diet_clean %>%
+  select(Genus_species, Order, FAD, LAD, Recoded_Diet, lnMass_g, Continent)
 
 #MOM (Global Late Quaternary Mammals)
-mom_data <- read.csv("../data/MOM_v10.csv", stringsAsFactors = FALSE, na.strings = "", strip.white = TRUE) %>%
+mom_data <- read.csv("../data/MOM_v10.csv", stringsAsFactors = FALSE, na.strings = "", strip.white = TRUE)
+mom_data_clean <- mom_data %>%
   filter(Mass.Status == "valid", LogMass..g. > 0, is.na(TO.DO), !is.na(trophic),
-         !grepl("aquatic|marine|NA", habitat.mode, ignore.case = TRUE)) %>%
+         !grepl("^aquatic$|marine|NA", habitat.mode, ignore.case = TRUE)) %>%
   mutate(Genus_species = paste(Genus, Species),
          herb = grepl("browse|frug|graze", trophic, ignore.case = TRUE),
          carn = grepl("carn|piscivore", trophic, ignore.case = TRUE),
          insect = grepl("insect", trophic, ignore.case = TRUE)) %>%
   mutate(omni = rowSums(select(., herb, carn, insect)) > 1)
-mom_data$Recoded_Diet <- ifelse(mom_data$omni, "omnivore", NA)
-mom_data$Recoded_Diet[!mom_data$omni] <- c("herbivore", "carnivore", "invertivore")[apply(mom_data[!mom_data$omni, c("herb", "carn", "insect")], 1, which.max)]
-mom_data$FAD <- .12
-mom_data$LAD <- ifelse(mom_data$Status == "extant", 0, as.numeric(mom_data$Last.Occurance..kybp.)/1000)
-mom_data$lnMass_g <- log(as.numeric(mom_data$Combined.Mass..g.))
+mom_data_clean$Recoded_Diet <- ifelse(mom_data_clean$omni, "omnivore", NA)
+mom_data_clean$Recoded_Diet[!mom_data_clean$omni] <- c("herbivore", "carnivore", "invertivore")[apply(mom_data_clean[!mom_data_clean$omni, c("herb", "carn", "insect")], 1, which.max)]
+#assume all MOM species were around before the late Pleistocene extinction
+mom_data_clean$FAD <- 2.58
+mom_data_clean$LAD <- ifelse(mom_data_clean$Status %in% c("extant", "historical"), 0, as.numeric(mom_data_clean$Last.Occurance..kybp.)/1000)
+mom_data_clean$lnMass_g <- log(as.numeric(mom_data_clean$Combined.Mass..g.))
 
-mom_data_clean <- mom_data %>%
+mom_data_clean <- mom_data_clean %>%
   select(Genus_species, Order, FAD, LAD, Recoded_Diet, lnMass_g, Continent)
 
-#Cretaceous mammal data for this study
-cretaceous_data <- read.csv("../data/Cretaceous_mammals.csv", stringsAsFactors = FALSE, na.strings = "", strip.white = TRUE) %>%
-  filter((!is.na(ln_mass_g) & mass_source != "Body size downgrading of mammals over the late Quaternary") |
+#Supplementary mammal data collected for this study
+supp_data <- read.csv("../data/supp_mammals.csv", stringsAsFactors = FALSE, na.strings = "", strip.white = TRUE)
+supp_data_clean <- supp_data %>%
+  filter((!is.na(ln_mass_g) & mass_source != "Smith et al 2018") |
            !is.na(ln_mass_g_estimate)) %>%
-  mutate(lnMass_g = ifelse(!is.na(ln_mass_g) & mass_source != "Body size downgrading of mammals over the late Quaternary",
+  mutate(lnMass_g = ifelse(!is.na(ln_mass_g) & mass_source != "Smith et al 2018",
                            ln_mass_g, ln_mass_g_estimate)) %>%
   mutate(Genus_species = taxon_name,
          herb = grepl("browse|frug|graze", diet, ignore.case = TRUE),
@@ -52,16 +80,16 @@ cretaceous_data <- read.csv("../data/Cretaceous_mammals.csv", stringsAsFactors =
          insect = grepl("insect", diet, ignore.case = TRUE)) %>%
   mutate(omni = grepl("omni", diet, ignore.case = TRUE) | rowSums(select(., herb, carn, insect)) > 1,
          Continent = "NA") # probably want to get actual continent data later
-cretaceous_data$Recoded_Diet <- ifelse(cretaceous_data$omni, "omnivore", NA)
-cretaceous_data$Recoded_Diet[!cretaceous_data$omni] <- c("herbivore", "carnivore", "invertivore")[apply(cretaceous_data[!cretaceous_data$omni, c("herb", "carn", "insect")], 1, which.max)]
+supp_data_clean$Recoded_Diet <- ifelse(supp_data_clean$omni, "omnivore", NA)
+supp_data_clean$Recoded_Diet[!supp_data_clean$omni] <- c("herbivore", "carnivore", "invertivore")[apply(supp_data_clean[!supp_data_clean$omni, c("herb", "carn", "insect")], 1, which.max)]
 
-cretaceous_data_clean <- cretaceous_data %>%
+supp_data_clean <- supp_data_clean %>%
   select(Genus_species, Order, FAD = firstapp_max_ma, LAD = lastapp_min_ma, Recoded_Diet, lnMass_g, Continent)
 
 #Combine three datasets and clean
 mamm_diet <- rbind(cbind(lyons_diet_clean, source = "lyons"),
                    cbind(mom_data_clean, source = "mom"),
-                   cbind(cretaceous_data_clean, source = "cretaceous")) %>%
+                   cbind(supp_data_clean, source = "supp")) %>%
   #Rename out-of-date orders
   mutate(Order = revalue(Order, c("Soricomorpha" = "Eulipotyphla",
                                   "Lipotyphla" = "Eulipotyphla",
@@ -71,7 +99,7 @@ mamm_diet <- rbind(cbind(lyons_diet_clean, source = "lyons"),
   group_by(Genus_species, Continent) %>%
   summarise(Order = paste(na.omit(unique(Order)), collapse = ", "), FAD = max(FAD), LAD = min(LAD), lnMass_g = mean(lnMass_g),
             Recoded_Diet = ifelse("mom" %in% source, Recoded_Diet[source == "mom"],
-                                  ifelse("lyons" %in% source, Recoded_Diet[source == "lyons"], Recoded_Diet[source == "cretaceous"])),
+                                  ifelse("lyons" %in% source, Recoded_Diet[source == "lyons"], Recoded_Diet[source == "supp"])),
             sources = paste(source, collapse = ", "), .groups = "drop") %>%
   #order recoded diet
   mutate(Recoded_Diet = factor(Recoded_Diet, levels = c("herbivore", "omnivore", "invertivore", "carnivore")))
@@ -86,6 +114,16 @@ mamm_diet <- mamm_diet %>%
 #Get relevant subset of time scale
 time_scale <- subset(epochs, max_age < 150)
 time_scale$name <- factor(time_scale$name, levels = rev(time_scale$name))
+
+#Clean up data for saving
+mamm_diet_clean <- mamm_diet %>%
+  mutate(FAD_interval = cut(FAD, c(time_scale$max_age, 0), labels = time_scale$name),
+         LAD_interval = cut(LAD, c(time_scale$min_age, 145), right = FALSE, labels = time_scale$name)) %>%
+  select(Order, Genus_species, lnMass_g, Recoded_Diet, FAD, LAD, FAD_interval, LAD_interval, sources) %>%
+  filter(!is.na(FAD_interval), !is.na(LAD_interval)) %>%
+  arrange(Order, Genus_species)
+
+write.csv(mamm_diet_clean, "../data/mammal_fossils_compiled.csv", row.names = FALSE)
 
 #Bluish green, Orange, Reddish purple
 colors3 <- setNames(colors8b[c(5, 2, 6)], c("herbivore","omnivore","carnivore"))
@@ -132,13 +170,14 @@ n_bins <- nrow(time_scale)
 
 mamm_per_bin <- as.data.frame(matrix(NA, nrow = 0, ncol = ncol(mamm_diet) + 2, dimnames = list(c(),c(colnames(mamm_diet), "bin", "bin_mid"))))
 for(i in 1:n_bins){
-  dat <- subset(mamm_diet, LAD <= time_scale$max_age[i] & FAD >= time_scale$min_age[i])
+  dat <- subset(mamm_diet, LAD < time_scale$max_age[i] & FAD > time_scale$min_age[i])
   if(nrow(dat) > 0) {
     dat$bin <- time_scale$name[i]
     dat$bin_mid <- time_scale$age_mid[i]
     mamm_per_bin <- rbind(mamm_per_bin, dat)
   }
 }
+mamm_per_bin$bin_num <- as.numeric(mamm_per_bin$bin)
 
 #all diets together
 ggplot(mamm_per_bin, aes(x = bin, y = lnMass_g)) +
@@ -180,8 +219,7 @@ ggplot(mamm_per_bin, aes(x = bin, y = lnMass_g, fill = Recoded_Diet)) +
 ggsave("../figures/Mammal Diets Violins.pdf", device = "pdf", width = 10, height = 10)
 
 #Figure 3####
-mamm_per_bin$bin_num <- as.numeric(mamm_per_bin$bin)
-sample_size <- mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(n() >= 4, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore")) %>%
+sample_size <- mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(Recoded_Diet %in% c("herbivore", "omnivore", "carnivore")) %>%
   summarise(num = n())
 
 mamm_p <- with(subset(mamm_per_bin, Recoded_Diet != "invertivore"),
@@ -189,7 +227,7 @@ mamm_p <- with(subset(mamm_per_bin, Recoded_Diet != "invertivore"),
 # adjust the p values here since we don't need most of them
 mamm_stars <- stars.pval(p.adjust(diag(mamm_p$p.value)[sort(c(seq(1, 25, 3), seq(2, 26, 3)))]))
 
-gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(n() >= 4, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
+gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(Recoded_Diet %in% c("herbivore", "omnivore", "carnivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
   annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 9)) +
   geom_boxplot(position = position_dodge2(preserve = "single", padding = .15), width = .85) +
   geom_text(data = sample_size, aes(label = num, y = c(0,-.7,.7,0)[as.numeric(Recoded_Diet)], color = Recoded_Diet), position = position_dodge2(preserve = "single", width = .85, padding = .15), size = 6, show.legend = FALSE) +
@@ -225,14 +263,14 @@ discrete_epochs$name[8:9] <- c("Late\nCretaceous", "Early\nCretaceous")
 ggsave("../figures/Mammal Diets Boxplots.pdf", geo_plot, width = 18, height = 12)
 
 #Figure S3####
-sample_size <- mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(n() >= 4, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")) %>%
+sample_size <- mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")) %>%
   summarise(num = n())
 
 mamm_p <- with(mamm_per_bin, pairwise.wilcox.test(lnMass_g, interaction(Recoded_Diet, bin), p.adjust.method = "none"))
 # adjust the p values here since we don't need most of them
 mamm_stars <- stars.pval(p.adjust(diag(mamm_p$p.value)[sort(c(seq(1, 33, 4), seq(2, 34, 4), seq(3, 35, 4)))]))
 
-gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(n() >= 4, Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
+gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
   annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 9)) +
   geom_boxplot(position = position_dodge2(preserve = "single", padding = .15), width = .85) +
   geom_text(data = sample_size, aes(label = num, y = c(.25,-.3,-.9,.25)[as.numeric(Recoded_Diet)], color = Recoded_Diet),
