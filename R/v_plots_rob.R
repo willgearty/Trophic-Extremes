@@ -248,9 +248,9 @@ boxplot_theme_tax <- function(base_size = 16) {
 }
 
 # phylopics
-uuids <- c("Mammals (non-marine)" = "62398ac0-f0c3-48f8-8455-53512a05fbc4", #Loxodonta africana
+uuids <- c("Mammals (terrestrial)" = "62398ac0-f0c3-48f8-8455-53512a05fbc4", #Loxodonta africana
            "Mammals (marine)" = "41a350a0-a19c-41ed-a85e-47e6b4ba7da4", #Steno bredanensis
-           "Birds (non-marine)" = "416ec8c6-0ed1-4c9f-b4a4-8c1ef6496e84", #Turnix sylvaticus
+           "Birds (terrestrial)" = "416ec8c6-0ed1-4c9f-b4a4-8c1ef6496e84", #Turnix sylvaticus
            "Birds (marine)" = "21c50828-58d8-42df-9219-2c1b0fb57c99", #Aptenodytes patagonicus
            "Reptile" = "83053aee-0f56-4cf3-bbfa-9207e6f13f46", #Ardeosaurus brevipes
            "Fishes" = "7413aa3a-d736-435a-8635-0c316ff73f26", #Salmoninae
@@ -277,11 +277,11 @@ phylopics[[7]] <- flip(phylopics[[7]], horizontal = TRUE)
 
 phylopics <- lapply(phylopics, pictureGrob)
 
-# birds (non-marine)
+# birds (terrestrial)
 
 birds <- filter(v_data, class == "Aves", realm == "terrestrial") %>% 
   dplyr::distinct(binomial, .keep_all = TRUE) %>% 
-  dplyr::mutate(tax = "Birds (non-marine)")
+  dplyr::mutate(tax = "Birds (terrestrial)")
 
 br_sum <- birds %>% 
   dplyr::group_by(tax, diet_name) %>% 
@@ -338,7 +338,7 @@ mbr <- mbirds %>%
 #terrestrial mammals
 terr_mam <- filter(v_data, class == "Mammalia", realm == "terrestrial") %>% 
   dplyr::distinct(binomial, .keep_all = TRUE) %>% 
-  dplyr::mutate(tax = "Mammals (non-marine)")
+  dplyr::mutate(tax = "Mammals (terrestrial)")
 
 tm_sum <- terr_mam %>% 
   dplyr::group_by(tax, diet_name) %>% 
@@ -362,7 +362,6 @@ tm <- terr_mam %>%
   facet_wrap(~ tax) +
   boxplot_theme_tax(base_size = 20) +
   theme(legend.position = "none")
-
 
 # marine mammals
 marine_mam <- filter(v_data, class == "Mammalia", realm == "aquatic") %>% 
@@ -532,7 +531,7 @@ tax <- deeptime::ggarrange2(tm, mr, br, mbr, rep, fish, ncol = 2, byrow = TRUE,
                             labels = c("A", "B", "C", "D", "E", "F"),
                             label.args = list(gp = grid::gpar(font = 2, cex = 2)))
                                
-# Figure 3
+# Figure 2
 save_plot("../figures/v_plots_tax.pdf", tax, base_width = 16, base_height = 12)
 
 # amphibians
