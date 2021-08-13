@@ -15,24 +15,23 @@ Run `mammal_diet.R` to produce all plots and analyses.
 Run `mammal_diet.R` to produce all plots and analyses. 
 
 ## To replicate the analyses and plots presented here, the following R packages are required:
-cowplot
-deeptime
-dplyr
-ggplot2
-grImport
-gtable
-gtools
-Hmisc
-lemon
-nlme
-pacman
-plyr
-stringr
-tidyr
-tidyverse
-vectoR
-viridis
-
+cowplot  
+deeptime  
+dplyr  
+ggplot2  
+grImport  
+gtable  
+gtools  
+Hmisc  
+lemon  
+nlme  
+pacman  
+plyr  
+stringr  
+tidyr  
+tidyverse  
+vectoR  
+viridis  
 
 The vectoR package is currently only available on GitHub and will need to be installed from there to reproduce
 these analyses and plots. This can be achieved by running the following commands in your R console (ignore the first line 
