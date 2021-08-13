@@ -15,10 +15,10 @@ pacman::p_load(dplyr, ggplot2, cowplot)
 theme_set(theme_cowplot())
 
 # load: yr_traj_c
-yr_traj_c <- readRDS("yr_traj_c.rds")
+yr_traj_c <- readRDS("../data/yr_traj_c.rds")
 
 # load: yr_0
-yr_0 <- readRDS("yr_0.rds")
+yr_0 <- readRDS("../data/yr_0.rds")
 
 # calculate percent change in median mass per trophic guild
 chng <- yr_traj_c %>% 
@@ -30,6 +30,7 @@ chng <- yr_traj_c %>%
                 perc_low = ((low - med)/med) * 100,
                 perc_upp = ((upp - med)/med) * 100)
 
+# Figure 5A ####
 # plot percent change in mass per trophic guild
 traj <- ggplot(chng, aes(x = yr, y = perc_med, colour = diet_5cat)) +
   facet_wrap(vars(diet_5cat), nrow = 1) +
@@ -40,6 +41,7 @@ traj <- ggplot(chng, aes(x = yr, y = perc_med, colour = diet_5cat)) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
   labs(x = "Years in future", y = "Percent change in mass") +
   scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(limits = c(-21, 21), expand = c(0,0)) +
   theme(legend.title = element_blank(),
         legend.position = "none",
         panel.spacing = unit(1.5, "lines"))
@@ -48,5 +50,5 @@ traj <- ggplot(chng, aes(x = yr, y = perc_med, colour = diet_5cat)) +
 traj_buff <- cowplot::plot_grid(traj, NULL, nrow = 1, rel_widths = c(1, 0.015))
 
 # save plot
-cowplot::save_plot("traj.pdf", traj_buff, base_height = 4, base_width = 10, dpi = 600)
+cowplot::save_plot("../figures/traj.pdf", traj_buff, base_height = 4, base_width = 10, dpi = 600)
 

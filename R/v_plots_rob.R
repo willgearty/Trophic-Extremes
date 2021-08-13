@@ -1,17 +1,16 @@
 # title: "v_plots_rob.R"
-# author: Rob Cooke (03rcooke@gmail.com)
+# authors: Rob Cooke (03rcooke@gmail.com) and Will Gearty (willgearty@gmail.com)
 
-#### Set up ####
+# Set up ####
 
 if(!require("pacman")) install.packages("pacman")
 pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon, gtools, grImport, deeptime)
 pacman::p_load_gh("richfitz/vectoR")
 
-
 # Will's colour scheme
 colors4 <- setNames(c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), c("herbivore", "omnivore", "invertivore", "carnivore"))
 
-##### Data ####
+## Data ####
 
 # Prep biome and trait data
 biome_traits <- 
@@ -67,10 +66,7 @@ v_data <-
 terr_mammals <- filter(v_data, realm == "terrestrial", class == "Mammalia", !is.na(biome_label))
 terr_birds   <- filter(v_data, realm == "terrestrial", class == "Aves", !is.na(biome_label))
 
-#### Figures ####
-
-## Mammals across biomes ##
-# Figure 3 #
+# Figures ####
 
 boxplot_theme <- function(base_size = 16) {
   theme_classic(base_size = base_size) + 
@@ -109,7 +105,8 @@ shift_legend2 <- function(p) {
   reposition_legend(p, 'center', panel=names)
 }
 
-# Terrestrial mammal body size ~ diet ~ biome plot
+## Figure 3 ####
+## Terrestrial Mammals across biomes ##
 tm_sum <- terr_mammals %>% 
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
@@ -140,6 +137,7 @@ tm <- shift_legend2(p = tm)
 
 save_plot('../figures/v_plot_terr_mam_colour.pdf', tm, base_width = 18, base_height = 12)
 
+## Figure S1####
 # Terrestrial bird body size ~ diet ~ biome plot
 tb_sum <- terr_birds %>% 
   dplyr::group_by(biome, biome_label, diet_name) %>% 
@@ -171,6 +169,7 @@ tb <- shift_legend2(p = tb)
 
 save_plot('../figures/v_plot_terr_bird_colour.pdf', tb, base_width = 18, base_height = 12)
 
+## Figure S2 ####
 # Fish maximum body length ~ diet ~ biome plot
 tr_fish_orig <- readr::read_csv("../data/Traits V3 (fish).csv")
 
@@ -201,7 +200,7 @@ fsh_p <- with(tr_fish, pairwise.wilcox.test(ln_lmax, interaction(diet_name, Real
 # get indices of comparisons between diets within realms
 realm_idx <- do.call(c, lapply(levels(tr_fish$Realm), function(realm) head(which(sub("^.*\\.","",colnames(fsh_p$p.value)) == realm), -1)))
 # adjust the p-values here because we don't need most of the comparisons
-fsh_stars <- stars.pval(p.adjust(diag(fsh_p$p.value)[idx]))
+fsh_stars <- stars.pval(p.adjust(diag(fsh_p$p.value)[realm_idx]))
 # get diet indices with data
 diet_idx <- match(sub("\\..*$","",colnames(fsh_p$p.value)), fish_diets)
 fsh_star_df <- data.frame(Realm = factor(sub("^.*\\.","",colnames(fsh_p$p.value))[realm_idx], levels = levels(tr_fish$Realm)),
@@ -228,9 +227,9 @@ fsh <- cowplot::ggdraw(fsh + theme(legend.position = "none")) +
   cowplot::draw_plot(cowplot::get_legend(fsh), 0.32, -0.09, 0.5, 0.5)
 
 cowplot::save_plot('../figures/v_plot_fish_realm_colour.pdf', fsh, base_width = 18, base_height = 12)
-                         
-## Across taxa ## 
-# Figure S4 #
+
+## Figure 2 ####
+## Across taxa ##
 
 boxplot_theme_tax <- function(base_size = 16) {
   theme_classic(base_size = base_size) + 
@@ -533,6 +532,13 @@ tax <- deeptime::ggarrange2(tm, mr, br, mbr, rep, fish, ncol = 2, byrow = TRUE,
                             labels = c("A", "B", "C", "D", "E", "F"),
                             label.args = list(gp = grid::gpar(font = 2, cex = 2)))
                                
+# Figure 3
+save_plot("../figures/v_plots_tax.pdf", tax, base_width = 16, base_height = 12)
+
+# amphibians
+# save_plot("../figures/v_plots_tax_supp.pdf", am, base_width = 8, base_height = 4)
+                               
+## Figure S7 ####
 # body mass distribution plot for invertivores and carnivores S8
 dens_comb <- ggplot(dplyr::filter(terr_mam, diet_name %in% c("invertivore", "carnivore")), aes(x = ln_body_mass_median)) +
   geom_density(aes(fill = diet_name), alpha = 0.5, colour = NA) +
@@ -546,14 +552,6 @@ dens_comb <- ggplot(dplyr::filter(terr_mam, diet_name %in% c("invertivore", "car
   theme(axis.ticks.x = element_line(),
         axis.title.x = element_text(vjust = 0),
         legend.direction = "vertical")
-
-# Figure 3
-save_plot("../figures/v_plots_tax.pdf", tax, base_width = 16, base_height = 12)
-
-# Figure S3
-save_plot("../figures/v_plots_tax_supp.pdf", am, base_width = 8, base_height = 4)
-                               
-# Figure S8
 cowplot::save_plot("../figures/body_dist.pdf", dens_comb, base_width = 10, base_height = 8)
 
 

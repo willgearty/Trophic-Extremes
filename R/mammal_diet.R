@@ -1,3 +1,4 @@
+# author: Will Gearty (willgearty@gmail.com)
 #load and clean data####
 library(plyr)
 library(tidyverse)
