@@ -217,16 +217,16 @@ pt75$p.adjust <- p.adjust(pt75$p.value)
 pt75$stars <- stars.pval(pt75$p.adjust)
 pt90$p.adjust <- p.adjust(pt90$p.value)
 pt90$stars <- stars.pval(pt90$p.adjust)
-pt75$x <- pt90$x <- sort(c(seq(1, 9) - .25, seq(1, 9), seq(1, 9) + .25))
 
 #plot
+library(shadowtext)
 gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
   annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 9)) +
   geom_boxplot(position = position_dodge2(preserve = "single", padding = .15), width = .85) +
   geom_text(data = sample_size, aes(label = num, y = c(.25,-.3,-.9,.25)[as.numeric(Recoded_Diet)], color = Recoded_Diet),
             position = position_dodge2(preserve = "single", width = .85, padding = .15), size = 6, show.legend = FALSE) +
   annotate("text", label = mamm_stars, x = sort(c(seq(1, 9) - .25, seq(1, 9), seq(1, 9) + .25)), y = 0.75, size = 7.5, colour = "black") +
-  geom_shadowtext(data = pt90, aes(label = stars, x = x), y = 15.5, size = 7.5, colour = "white", inherit.aes = FALSE) +
+  geom_shadowtext(data = pt90, aes(label = stars), x = sort(c(seq(1, 9) - .25, seq(1, 9), seq(1, 9) + .25)), y = 15.5, size = 7.5, colour = "white", inherit.aes = FALSE) +
   #annotate("text", label = pt75$stars, x = sort(c(seq(1, 9) - .25, seq(1, 9), seq(1, 9) + .25)), y = 15.5, size = 7.5, colour = "black") +
   scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
   scale_y_continuous(name = "Mass (kg)", breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)), labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
