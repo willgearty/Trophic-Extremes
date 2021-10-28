@@ -116,12 +116,12 @@ mamm_diet_clean <- mamm_diet %>%
   filter(!is.na(FAD_interval), !is.na(LAD_interval)) %>%
   arrange(Order, Genus_species)
 
-write.csv(mamm_diet_clean, "../data/mammal_fossils_compiled.csv", row.names = FALSE)
+# uncomment this to write the supplemental file
+# write.csv(mamm_diet_clean, "../data/mammal_fossils_compiled.csv", row.names = FALSE)
 
 #plots through time####
 
 #Bluish green, Orange, Reddish purple
-colors3 <- setNames(colors8b[c(5, 2, 6)], c("herbivore","omnivore","carnivore"))
 colors4 <- setNames(c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), c("herbivore", "omnivore", "invertivore", "carnivore"))
 
 #phylopics
@@ -141,11 +141,23 @@ library(grImport)
 library(vectoR)
 getPhyloPic <- function(x){
   isexe <- Sys.which("inkscape.exe")
-  gsexe <- Sys.which("gswin64c.exe")
-  download.file(paste0("http://phylopic.org/assets/images/submissions/",x,".svg"), paste0(x,".svg"))
-  cmd <- sprintf("%s -f %s -E %s", isexe, paste0(x,".svg"), paste0(x, ".eps"))
-  ret <- system(cmd, ignore.stderr=TRUE)
-  return(vector_read_eps(paste0(x, ".eps")))
+  #gsexe <- Sys.which("gswin64c.exe")
+  if(file.exists(paste0(x,".xml"))){
+    # read xml using vectoR
+    ret_val <- vector_read_xml(paste0(x, ".xml"))
+  } else {
+    if(!file.exists(paste0(x,".svg"))){
+      download.file(paste0("http://phylopic.org/assets/images/submissions/",x,".svg"), paste0(x,".svg"))
+    }
+    # use inkscape to convert from svg to eps
+    cmd <- sprintf("%s %s -o %s", isexe, paste0(x,".svg"), paste0(x, ".eps"))
+    system(cmd, ignore.stdout = TRUE)
+    # read eps using vectoR
+    ret_val <- vector_read_eps(paste0(x, ".eps"))
+    file.remove(paste0(x, ".svg"))
+    file.remove(paste0(x, ".eps"))
+  }
+  return(ret_val)
 }
 
 phylopics <- lapply(uuids, getPhyloPic)
@@ -178,16 +190,44 @@ mamm_per_bin$bin_num <- as.numeric(mamm_per_bin$bin)
 sample_size <- mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")) %>%
   summarise(num = n())
 
+#mann-whitney tests for medians
 mamm_p <- with(mamm_per_bin, pairwise.wilcox.test(lnMass_g, interaction(Recoded_Diet, bin), p.adjust.method = "none"))
 # adjust the p values here since we don't need most of them
 mamm_stars <- stars.pval(p.adjust(diag(mamm_p$p.value)[sort(c(seq(1, 33, 4), seq(2, 34, 4), seq(3, 35, 4)))]))
 
+#permutation tests for 75th quantiles
+library(rcompanion)
+
+pt75 <- do.call(rbind, lapply(1:n_bins, function(x) {
+  df <- pairwisePercentileTest(lnMass_g ~ Recoded_Diet, data = subset(mamm_per_bin, bin_num == x),
+                               test = "percentile", tau = 0.75, r = 5000, digits = 7)[c(1,4,6), 1:2]
+  df$
+  df$bin <- levels(time_scale$name)[x]
+  df
+}))
+
+pt90 <- do.call(rbind, lapply(1:n_bins, function(x) {
+  df <- pairwisePercentileTest(lnMass_g ~ Recoded_Diet, data = subset(mamm_per_bin, bin_num == x),
+                               test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6), 1:2]
+  df$bin <- levels(time_scale$name)[x]
+  df
+}))
+# adjust p-values based on number of comparisons
+pt75$p.adjust <- p.adjust(pt75$p.value)
+pt75$stars <- stars.pval(pt75$p.adjust)
+pt90$p.adjust <- p.adjust(pt90$p.value)
+pt90$stars <- stars.pval(pt90$p.adjust)
+pt75$x <- pt90$x <- sort(c(seq(1, 9) - .25, seq(1, 9), seq(1, 9) + .25))
+
+#plot
 gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
   annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 9)) +
   geom_boxplot(position = position_dodge2(preserve = "single", padding = .15), width = .85) +
   geom_text(data = sample_size, aes(label = num, y = c(.25,-.3,-.9,.25)[as.numeric(Recoded_Diet)], color = Recoded_Diet),
             position = position_dodge2(preserve = "single", width = .85, padding = .15), size = 6, show.legend = FALSE) +
-  annotate("text", label = mamm_stars, x = sort(c(seq(1, 9) - .25, seq(1, 9), seq(1, 9) + .25)), y = .75, size = 7.5, colour = "black") +
+  annotate("text", label = mamm_stars, x = sort(c(seq(1, 9) - .25, seq(1, 9), seq(1, 9) + .25)), y = 0.75, size = 7.5, colour = "black") +
+  geom_shadowtext(data = pt90, aes(label = stars, x = x), y = 15.5, size = 7.5, colour = "white", inherit.aes = FALSE) +
+  #annotate("text", label = pt75$stars, x = sort(c(seq(1, 9) - .25, seq(1, 9), seq(1, 9) + .25)), y = 15.5, size = 7.5, colour = "black") +
   scale_x_continuous(name = "Time (Ma)", limits = c(0.5, 9.5), labels = rev(c(0, epochs$max_age[1:9])), breaks = seq(0.5, 9.5, 1), expand = c(0,0)) +
   scale_y_continuous(name = "Mass (kg)", breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)), labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)/1000) +
   coord_cartesian(ylim = c(-2,17)) +
@@ -317,7 +357,7 @@ ggplot(data = subset(diet_subsample_means, Recoded_Diet != "insectivore"), aes(x
   scale_y_continuous(name = "ln Mass (g)", lim = c(0,15)) +
   theme_classic(base_size = 16) +
   theme(axis.text = element_text(color = "black"), axis.text.x = element_text(color = "black", angle = 90, vjust = .5), axis.ticks = element_line(color = "black")) +
-  scale_color_manual(values = colors3, name = "Diet")
+  scale_color_manual(values = colors4, name = "Diet")
 ggsave("../figures/Mammal Diets Subsample Means.pdf", device = "pdf", width = 10, height = 10)
 
 #Pull out sample=20
