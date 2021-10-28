@@ -178,12 +178,12 @@ fish_diet_cat_key_new <- data.frame(diet_5cat = c(1, 2, 3, 4, 5), diet_name = fi
 
 tr_fish <- tr_fish_orig %>% 
   dplyr::distinct(CURRENT_TAXONOMIC_NAME, .keep_all = TRUE) %>% 
-  dplyr::mutate(diet_5cat = case_when(TrophicGrp_1 == "Herbivore" ~ 1, 
-                                      TrophicGrp_1 == "Planktivore" ~ 2, 
-                                      TrophicGrp_1 == "Omnivore" ~ 3,
-                                      TrophicGrp_1 == "omnivore" ~ 3,
-                                      TrophicGrp_1 == "Benthic carnivore" ~ 4,
-                                      TrophicGrp_1 == "Higher carnivore" ~ 5)) %>% 
+  dplyr::mutate(diet_5cat = case_when(TrophicGrp...6 == "Herbivore" ~ 1, 
+                                      TrophicGrp...6 == "Planktivore" ~ 2, 
+                                      TrophicGrp...6 == "Omnivore" ~ 3,
+                                      TrophicGrp...6 == "omnivore" ~ 3,
+                                      TrophicGrp...6 == "Benthic carnivore" ~ 4,
+                                      TrophicGrp...6 == "Higher carnivore" ~ 5)) %>% 
   # Add diet labels
   left_join(., fish_diet_cat_key_new) %>% 
   mutate(diet_name = factor(diet_name, levels = fish_diet_cat_key_new$diet_name)) %>% 
@@ -198,7 +198,8 @@ fsh_sum <- tr_fish %>%
 
 fsh_p <- with(tr_fish, pairwise.wilcox.test(ln_lmax, interaction(diet_name, Realm), p.adjust.method = "none"))
 # get indices of comparisons between diets within realms
-realm_idx <- do.call(c, lapply(levels(tr_fish$Realm), function(realm) head(which(sub("^.*\\.","",colnames(fsh_p$p.value)) == realm), -1)))
+# don't forget the last comparison of the last realm
+realm_idx <- c(do.call(c, lapply(levels(tr_fish$Realm), function(realm) head(which(sub("^.*\\.","",colnames(fsh_p$p.value)) == realm), -1))), 50)
 # adjust the p-values here because we don't need most of the comparisons
 fsh_stars <- stars.pval(p.adjust(diag(fsh_p$p.value)[realm_idx]))
 # get diet indices with data
