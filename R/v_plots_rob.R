@@ -4,7 +4,7 @@
 # Set up ####
 
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon, gtools, grImport, deeptime)
+pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon, gtools, grImport, deeptime, rcompanion, shadowtext)
 pacman::p_load_gh("richfitz/vectoR")
 
 # Will's colour scheme
@@ -260,11 +260,23 @@ uuids <- c("Mammals (terrestrial)" = "62398ac0-f0c3-48f8-8455-53512a05fbc4", #Lo
 
 getPhyloPic <- function(x){
   isexe <- Sys.which("inkscape.exe")
-  gsexe <- Sys.which("gswin64c.exe")
-  download.file(paste0("http://phylopic.org/assets/images/submissions/",x,".svg"), paste0(x,".svg"))
-  cmd <- sprintf("%s -f %s -E %s", isexe, paste0(x,".svg"), paste0(x, ".eps"))
-  ret <- system(cmd, ignore.stderr=TRUE)
-  return(vector_read_eps(paste0(x, ".eps")))
+  #gsexe <- Sys.which("gswin64c.exe")
+  if(file.exists(paste0(x,".xml"))){
+    # read xml using vectoR
+    ret_val <- vector_read_xml(paste0(x, ".xml"))
+  } else {
+    if(!file.exists(paste0(x,".svg"))){
+      download.file(paste0("http://phylopic.org/assets/images/submissions/",x,".svg"), paste0(x,".svg"))
+    }
+    # use inkscape to convert from svg to eps
+    cmd <- sprintf("%s %s -o %s", isexe, paste0(x,".svg"), paste0(x, ".eps"))
+    system(cmd, ignore.stdout = TRUE)
+    # read eps using vectoR
+    ret_val <- vector_read_eps(paste0(x, ".eps"))
+    file.remove(paste0(x, ".svg"))
+    file.remove(paste0(x, ".eps"))
+  }
+  return(ret_val)
 }
 
 phylopics <- lapply(uuids, getPhyloPic)
@@ -290,12 +302,16 @@ br_sum <- birds %>%
 
 br_p <- pairwise.wilcox.test(birds$ln_body_mass_median, birds$diet_name)
 br_stars <- stars.pval(diag(br_p$p.value))
+br_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = birds,
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6),]
+br_90$stars <- stars.pval(br_90$p.adjust)
 
 br <- birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10, color = "black") +
   geom_text(data = br_sum, aes(y = 12.7, label = br_n), size = 7, fontface = "bold") +
   annotate("text", label = br_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
+  geom_shadowtext(data = br_90, aes(label = stars), x = seq(1.5, 3.5), y = 11.7, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[3]], 4, 4.6, ymin = -.25, ymax = 2.75) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
@@ -319,12 +335,16 @@ mbr_sum <- mbirds %>%
 
 mbr_p <- pairwise.wilcox.test(mbirds$ln_body_mass_median, mbirds$diet_name)
 mbr_stars <- stars.pval(diag(mbr_p$p.value))
+mbr_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = mbirds,
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,3),]
+mbr_90$stars <- stars.pval(mbr_90$p.adjust)
 
 mbr <- mbirds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = mbr_sum, aes(y = 11.2, label = mbr_n), size = 7, fontface = "bold") +
   annotate("text", label = mbr_stars, x = seq(2.5, 3.5), y = 0, size = 8, colour = "black") +
+  geom_shadowtext(data = mbr_90, aes(label = stars), x = seq(2.5, 3.5), y = 10.2, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[4]], 4, 4.6, ymin = -.25, ymax = 2.25) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
@@ -347,12 +367,16 @@ tm_sum <- terr_mam %>%
 
 tm_p <- pairwise.wilcox.test(terr_mam$ln_body_mass_median, terr_mam$diet_name)
 tm_stars <- stars.pval(diag(tm_p$p.value))
+tm_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = terr_mam,
+                                 test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6),]
+tm_90$stars <- stars.pval(tm_90$p.adjust)
 
 tm <- terr_mam %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = tm_sum, aes(y = 16.4, label = mr_n), size = 7, fontface = "bold") +
   annotate("text", label = tm_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
+  geom_shadowtext(data = tm_90, aes(label = stars), x = seq(1.5, 3.5), y = 15.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[1]], 3.9, 4.7, ymin = -.5, ymax = 2.5) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
@@ -375,12 +399,16 @@ mr_sum <- marine_mam %>%
 
 mr_p <- pairwise.wilcox.test(marine_mam$ln_body_mass_median, marine_mam$diet_name)
 mr_stars <- stars.pval(diag(mr_p$p.value))
+mr_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = marine_mam,
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6),]
+mr_90$stars <- stars.pval(mr_90$p.adjust)
 
 mr <- marine_mam %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = mr_sum, aes(y = 19.9, label = mr_n), size = 7, fontface = "bold") +
   annotate("text", label = mr_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
+  geom_shadowtext(data = mr_90, aes(label = stars), x = seq(1.5, 3.5), y = 18.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[2]], 3.8, 4.6, ymin = -.5, ymax = 2.5) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
@@ -421,12 +449,16 @@ am_sum <- tr_amph %>%
 
 am_p <- pairwise.wilcox.test(tr_amph$ln_body_mass, tr_amph$diet_name)
 am_stars <- stars.pval(diag(am_p$p.value))
+am_90 <- pairwisePercentileTest(ln_body_mass ~ diet_name, data = tr_amph,
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[1,]
+am_90$stars <- stars.pval(am_90$p.adjust)
 
 am <- tr_amph %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = am_sum, aes(y = 11.8, label = am_n), size = 7, fontface = "bold") +
   annotate("text", label = mbr_stars, x = seq(2.5, 2.5), y = 0, size = 8, colour = "black") +
+  geom_shadowtext(data = am_90, aes(label = stars), x = seq(2.5, 2.5), y = 10.8, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[7]], 4, 4.6, ymin = -.5, ymax = 2.5) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
@@ -468,12 +500,16 @@ rep_sum <- tr_rep %>%
 
 rep_p <- pairwise.wilcox.test(tr_rep$ln_body_mass, tr_rep$diet_name)
 rep_stars <- stars.pval(diag(rep_p$p.value))
+rep_90 <- pairwisePercentileTest(ln_body_mass ~ diet_name, data = tr_rep,
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6),]
+rep_90$stars <- stars.pval(rep_90$p.adjust)
 
 rep <- tr_rep %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = rep_sum, aes(y = 14.1, label = rep_n), size = 7, fontface = "bold") +
   annotate("text", label = rep_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
+  geom_shadowtext(data = rep_90, aes(label = stars), x = seq(1.5, 3.5), y = 13.1, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[5]], 4, 4.6, ymin = -.75, ymax = 2.25) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
@@ -493,12 +529,12 @@ fish_diet_cat_key <- data.frame(diet_5cat = c(1, 2, 3, 4, 5), diet_name = c("her
 
 tr_fish <- tr_fish_orig %>% 
   dplyr::distinct(CURRENT_TAXONOMIC_NAME, .keep_all = TRUE) %>% 
-  dplyr::mutate(diet_5cat = case_when(TrophicGrp_1 == "Herbivore" ~ 1, 
-                                      TrophicGrp_1 == "Planktivore" ~ 2, 
-                                      TrophicGrp_1 == "Omnivore" ~ 3,
-                                      TrophicGrp_1 == "omnivore" ~ 3,
-                                      TrophicGrp_1 == "Benthic carnivore" ~ 4,
-                                      TrophicGrp_1 == "Higher carnivore" ~ 5)) %>% 
+  dplyr::mutate(diet_5cat = case_when(TrophicGrp...6 == "Herbivore" ~ 1, 
+                                      TrophicGrp...6 == "Planktivore" ~ 2, 
+                                      TrophicGrp...6 == "Omnivore" ~ 3,
+                                      TrophicGrp...6 == "omnivore" ~ 3,
+                                      TrophicGrp...6 == "Benthic carnivore" ~ 4,
+                                      TrophicGrp...6 == "Higher carnivore" ~ 5)) %>% 
   # Add diet labels
   left_join(., fish_diet_cat_key) %>% 
   mutate(diet_name = factor(diet_name, levels = fish_diet_cat_key$diet_name)) %>% 
@@ -511,12 +547,16 @@ fish_sum <- tr_fish %>%
 
 fish_p <- pairwise.wilcox.test(tr_fish$ln_lmax, tr_fish$diet_name)
 fish_stars <- stars.pval(diag(fish_p$p.value))
+fish_90 <- pairwisePercentileTest(ln_lmax ~ diet_name, data = tr_fish,
+                                 test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,5,8,10),]
+fish_90$stars <- stars.pval(fish_90$p.adjust)
 
 fish <- tr_fish %>% 
   ggplot(., aes(x = diet_name, y = ln_lmax, group = diet_name, fill = diet_name)) +
   geom_boxplot(coef = 10) +
   geom_text(data = fish_sum, aes(y = 8.3, label = fish_n), size = 7, fontface = "bold") +
   annotate("text", label = fish_stars, x = seq(1.5, 4.5), y = 0, size = 8, colour = "black") +
+  geom_shadowtext(data = fish_90, aes(label = stars), x = seq(1.5, 4.5), y = 7.5, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[6]], 4.8, 5.5, ymin = -1.25, ymax = 2.25) +
   scale_fill_manual(values = c("#359B73", "darkseagreen1", "#2271B2", "orangered", "red"), drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
