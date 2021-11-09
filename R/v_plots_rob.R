@@ -4,7 +4,7 @@
 # Set up ####
 
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(nlme, dplyr, tidyr, ggplot2, stringr, gtable, cowplot, lemon, gtools, grImport, deeptime, rcompanion, shadowtext)
+pacman::p_load(nlme, dplyr, tidyr, ggplot2, tibble, stringr, gtable, cowplot, lemon, gtools, grImport, deeptime, rcompanion, shadowtext)
 pacman::p_load_gh("richfitz/vectoR")
 
 # Will's colour scheme
@@ -111,7 +111,7 @@ tm_sum <- terr_mammals %>%
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
-tm_p <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_label), p.adjust.method = "none"))
+tm_p <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_name), p.adjust.method = "none"))
 # the indices of the comparisons between diets within biomes
 p_idx <- sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))
 # adjust the p-values now since we don't care about most of them
@@ -119,11 +119,21 @@ tm_stars <- stars.pval(p.adjust(diag(tm_p$p.value)[p_idx]))
 tm_star_df <- data.frame(biome_label = factor(rep(levels(terr_mammals$biome_label), each = 3), levels = levels(terr_mammals$biome_label)),
                          x = seq(1.5,3.5), y = 0, star = tm_stars)
 
+tm90 <- do.call(rbind, lapply(levels(terr_mammals$biome_label), function(x) {
+  df <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = subset(terr_mammals, biome_label == x),
+                               test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6), 1:2]
+  df$biome_label <- x
+  df
+}))
+tm90$p.adjust <- p.adjust(tm90$p.value)
+tm90$stars <- stars.pval(tm90$p.adjust)
+
 tm <- terr_mammals %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10, color = "black") +
+  geom_boxplot(color = "black") +
   geom_text(data = tm_sum, aes(y = 16.4, label = tm_n), size = 7, fontface = "bold", show.legend = FALSE) +
   geom_text(data = tm_star_df, aes(x = x, y = y, label = star), size = 8, inherit.aes = FALSE) +
+  geom_shadowtext(data = tm90, aes(label = stars), x = rep(seq(1.5, 3.5), 14), y = 14.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
   facet_wrap(~ biome_label, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
@@ -136,6 +146,40 @@ tm <- terr_mammals %>%
 tm <- shift_legend2(p = tm)
 
 save_plot('../figures/v_plot_terr_mam_colour.pdf', tm, base_width = 18, base_height = 12)
+
+#tests of diet among biomes
+tm_p_among <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction(biome_name, diet_name), p.adjust.method = "none"))$p.value
+tm_p_among_adjust <- tm_p_among %>%
+  as.data.frame() %>%
+  mutate(biome1 = rownames(tm_p_among)) %>%
+  pivot_longer(cols = !biome1, names_to = "biome2", values_to = "p.value") %>%
+  filter(sub("^.*[:.:]", "", biome1) == sub("^.*[:.:]", "", biome2) & !is.na(p.value)) %>%
+  mutate(diet = sub("^.*[:.:]", "", biome1), p.adjust = p.adjust(p.value)) %>%
+  mutate(biomes = paste(sub("[:.:].*$", "", biome2), sub("[:.:].*$", "", biome1), sep = " - ")) %>%
+  select(c("biomes", "diet", "p.adjust")) %>%
+  pivot_wider(names_from = diet, values_from = p.adjust) %>%
+  arrange(biomes) %>%
+  column_to_rownames(var = "biomes")
+tm_p_among_adjust <- rbind(tm_p_among_adjust, "# Significant" = colSums(tm_p_among_adjust < .05))
+write.csv(tm_p_among_adjust, "../tables/among_biome_mann_whitney.csv")
+
+tm90_among <- do.call(cbind, lapply(levels(terr_mammals$diet_name), function(x) {
+  df <- pairwisePercentileTest(ln_body_mass_median ~ biome_name, data = subset(terr_mammals, diet_name == x),
+                               test = "percentile", tau = 0.90, r = 5000, digits = 7)
+  return(setNames(as.numeric(df$p.value), sub(" = 0","",df$Comparison)))
+}))
+colnames(tm90_among) <- levels(terr_mammals$diet_name)
+tm90_among_adjust <- tm90_among %>%
+  as.data.frame() %>%
+  rownames_to_column(var = "biomes") %>%
+  pivot_longer(!biomes, names_to = "diet", values_to = "p.value") %>%
+  mutate(p.adjust = p.adjust(p.value)) %>%
+  select(c("biomes", "diet", "p.adjust")) %>%
+  pivot_wider(names_from = diet, values_from = p.adjust) %>%
+  arrange(biomes) %>%
+  column_to_rownames(var = "biomes")
+tm90_among_adjust <- rbind(tm90_among_adjust, "# Significant" = colSums(tm90_among_adjust < .05))
+write.csv(tm90_among_adjust, "../tables/among_biome_90th.csv")
 
 ## Figure S1####
 # Terrestrial bird body size ~ diet ~ biome plot
@@ -151,11 +195,21 @@ tb_stars <- stars.pval(p.adjust(diag(tb_p$p.value)[p_idx]))
 tb_star_df <- data.frame(biome_label = factor(rep(levels(terr_birds$biome_label), each = 3), levels = levels(terr_birds$biome_label)),
                          x = seq(1.5,3.5), y = 0.5, star = tb_stars)
 
+tb90 <- do.call(rbind, lapply(levels(terr_birds$biome_label), function(x) {
+  df <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = subset(terr_birds, biome_label == x),
+                               test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6), 1:2]
+  df$biome_label <- x
+  df
+}))
+tb90$p.adjust <- p.adjust(tb90$p.value)
+tb90$stars <- stars.pval(tb90$p.adjust)
+
 tb <- terr_birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10, color = "black") +
+  geom_boxplot(color = "black") +
   geom_text(data = tb_sum, aes(y = 12.6, label = tm_n), size = 7, fontface = "bold", show.legend = FALSE) +
   geom_text(data = tb_star_df, aes(x = x, y = y, label = star), size = 8, inherit.aes = FALSE) +
+  geom_shadowtext(data = tb90, aes(label = stars), x = rep(seq(1.5, 3.5), 14), y = 10.6, size = 7.5, colour = "white", inherit.aes = FALSE) +
   facet_wrap(~ biome_label, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
   scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
@@ -190,7 +244,8 @@ tr_fish <- tr_fish_orig %>%
   dplyr::mutate(tax = "Fishes") %>% 
   dplyr::mutate(ln_lmax = log(Lmax)) %>% 
   # order by latitudinal position
-  dplyr::mutate(Realm = factor(Realm, levels = c("Arctic", "Southern Ocean", "Temperate Australasia", "Temperate Southern Africa", "Temperate South America", "Temperate Northern Atlantic", "Temperate Northern Pacific", "Tropical Atlantic", "Western Indo-Pacific", "Central Indo-Pacific", "Eastern Indo-Pacific", "Tropical Eastern Pacific")))
+  dplyr::mutate(Realm = factor(Realm, levels = c("Arctic", "Southern Ocean", "Temperate Australasia", "Temperate Southern Africa", "Temperate South America", "Temperate Northern Atlantic", "Temperate Northern Pacific", "Tropical Atlantic", "Western Indo-Pacific", "Central Indo-Pacific", "Eastern Indo-Pacific", "Tropical Eastern Pacific"))) %>%
+  filter(!is.na(ln_lmax))
 
 fsh_sum <- tr_fish %>% 
   dplyr::group_by(Realm, diet_name) %>% 
@@ -205,13 +260,33 @@ fsh_stars <- stars.pval(p.adjust(diag(fsh_p$p.value)[realm_idx]))
 # get diet indices with data
 diet_idx <- match(sub("\\..*$","",colnames(fsh_p$p.value)), fish_diets)
 fsh_star_df <- data.frame(Realm = factor(sub("^.*\\.","",colnames(fsh_p$p.value))[realm_idx], levels = levels(tr_fish$Realm)),
-                          x = diet_idx[realm_idx] + .5, y = 1.5, star = fsh_stars)
+                          x = diet_idx[realm_idx] + .5, y = 1, star = fsh_stars)
+
+fsh90 <- do.call(rbind, lapply(levels(tr_fish$Realm), function(x) {
+  n_diets <- length(unique(subset(tr_fish, Realm == x)$diet_name))
+  if(n_diets >= 2){
+    df <- pairwisePercentileTest(ln_lmax ~ diet_name, data = subset(tr_fish, Realm == x),
+                               test = "percentile", tau = 0.90, r = 5000, digits = 7)[, 1:2]
+    df$Realm <- x
+    if(n_diets == 5){
+      return(df[c(1,5,8,10),])
+    } else if(n_diets == 3){
+      return(df[c(1,3),])
+    } else if(n_diets == 2){
+      return(df)
+    }
+  }
+}))
+fsh90$p.adjust <- p.adjust(fsh90$p.value)
+fsh90$stars <- stars.pval(fsh90$p.adjust)
+fsh90$x <- match(sub(" -.*$","",fsh90$Comparison), fish_diets) + .5
 
 fsh <- tr_fish %>% 
   ggplot(., aes(x = diet_name, y = ln_lmax, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10, color = "black") +
+  geom_boxplot(color = "black") +
   geom_text(data = fsh_sum, aes(y = 8.2, label = fsh_n), size = 7, fontface = "bold", show.legend = FALSE) +
   geom_text(data = fsh_star_df, aes(x = x, y = y, label = star), size = 8, inherit.aes = FALSE) +
+  geom_shadowtext(data = fsh90, aes(x = x, label = stars), y = 7.2, size = 7.5, colour = "white", inherit.aes = FALSE) +
   facet_wrap(~ Realm, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
   scale_fill_manual(values = c("#359B73", "darkseagreen1", "#2271B2", "orangered", "red")) +

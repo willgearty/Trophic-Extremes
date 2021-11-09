@@ -1,0 +1,93 @@
+"","herbivore","omnivore","invertivore","carnivore"
+"Boreal Forests/Taiga - Deserts & Xeric Shrublands",1,1,1,1
+"Boreal Forests/Taiga - Flooded Grasslands & Savannas",1,1,0.163937846402416,1
+"Boreal Forests/Taiga - Mangroves",1,1,0.590047381038661,1
+"Boreal Forests/Taiga - Mediterranean Forests, Woodlands & Scrub",1,1,0.571685634218141,1
+"Boreal Forests/Taiga - Montane Grasslands & Shrublands",1,1,0.0211415059627594,1
+"Boreal Forests/Taiga - Temperate Broadleaf & Mixed Forests",1,1,1,1
+"Boreal Forests/Taiga - Temperate Conifer Forests",1,1,1,1
+"Boreal Forests/Taiga - Temperate Grasslands, Savannas & Shrublands",1,1,1,1
+"Boreal Forests/Taiga - Tropical & Subtropical Coniferous Forests",1,1,1,1
+"Boreal Forests/Taiga - Tropical & Subtropical Dry Broadleaf Forests",1,1,0.911644253692831,1
+"Boreal Forests/Taiga - Tropical & Subtropical Grasslands, Savannas & Shrublands",1,1,0.0169386020272257,1
+"Boreal Forests/Taiga - Tropical & Subtropical Moist Broadleaf Forests",1,1,0.0143921048274939,1
+"Boreal Forests/Taiga - Tundra",1,1,1,1
+"Deserts & Xeric Shrublands - Flooded Grasslands & Savannas",1,1,1,1
+"Deserts & Xeric Shrublands - Mangroves",0.00994897397353579,1,1,1
+"Deserts & Xeric Shrublands - Mediterranean Forests, Woodlands & Scrub",1,1,1,1
+"Deserts & Xeric Shrublands - Montane Grasslands & Shrublands",0.259913213186541,1,0.0218064898897686,1
+"Deserts & Xeric Shrublands - Temperate Broadleaf & Mixed Forests",1,1,1,1
+"Deserts & Xeric Shrublands - Temperate Conifer Forests",1,1,1,1
+"Deserts & Xeric Shrublands - Temperate Grasslands, Savannas & Shrublands",1,1,1,1
+"Deserts & Xeric Shrublands - Tropical & Subtropical Coniferous Forests",1,0.42598748881381,1,1
+"Deserts & Xeric Shrublands - Tropical & Subtropical Dry Broadleaf Forests",1,0.419953315514505,1,1
+"Deserts & Xeric Shrublands - Tropical & Subtropical Grasslands, Savannas & Shrublands",0.00129295530640589,1,0.0116335633086267,1
+"Deserts & Xeric Shrublands - Tropical & Subtropical Moist Broadleaf Forests",2.36860411791697e-08,1,0.00226053969996613,1
+"Deserts & Xeric Shrublands - Tundra",1,1,0.131034507694788,1
+"Flooded Grasslands & Savannas - Mangroves",1,1,1,1
+"Flooded Grasslands & Savannas - Mediterranean Forests, Woodlands & Scrub",1,1,1,1
+"Flooded Grasslands & Savannas - Montane Grasslands & Shrublands",1,1,1,1
+"Flooded Grasslands & Savannas - Temperate Broadleaf & Mixed Forests",1,1,1,1
+"Flooded Grasslands & Savannas - Temperate Conifer Forests",1,1,0.057587269167544,1
+"Flooded Grasslands & Savannas - Temperate Grasslands, Savannas & Shrublands",1,1,1,1
+"Flooded Grasslands & Savannas - Tropical & Subtropical Coniferous Forests",1,1,0.0545787603760965,1
+"Flooded Grasslands & Savannas - Tropical & Subtropical Dry Broadleaf Forests",1,1,1,1
+"Flooded Grasslands & Savannas - Tropical & Subtropical Grasslands, Savannas & Shrublands",1,1,1,1
+"Flooded Grasslands & Savannas - Tropical & Subtropical Moist Broadleaf Forests",1,1,1,1
+"Flooded Grasslands & Savannas - Tundra",1,1,0.00216300424925542,1
+"Mangroves - Mediterranean Forests, Woodlands & Scrub",1,1,1,1
+"Mangroves - Montane Grasslands & Shrublands",1,1,1,1
+"Mangroves - Temperate Broadleaf & Mixed Forests",1,1,1,1
+"Mangroves - Temperate Conifer Forests",0.99145812613236,1,0.234743658414495,1
+"Mangroves - Temperate Grasslands, Savannas & Shrublands",0.0987042343586599,1,1,1
+"Mangroves - Tropical & Subtropical Coniferous Forests",1,1,0.194821829840778,1
+"Mangroves - Tropical & Subtropical Dry Broadleaf Forests",1,1,1,1
+"Mangroves - Tropical & Subtropical Grasslands, Savannas & Shrublands",1,1,1,1
+"Mangroves - Tropical & Subtropical Moist Broadleaf Forests",1,1,1,1
+"Mangroves - Tundra",1,1,0.012483753183195,1
+"Mediterranean Forests, Woodlands & Scrub - Montane Grasslands & Shrublands",1,1,1,1
+"Mediterranean Forests, Woodlands & Scrub - Temperate Broadleaf & Mixed Forests",1,1,1,1
+"Mediterranean Forests, Woodlands & Scrub - Temperate Conifer Forests",1,1,1,1
+"Mediterranean Forests, Woodlands & Scrub - Temperate Grasslands, Savannas & Shrublands",1,1,1,1
+"Mediterranean Forests, Woodlands & Scrub - Tropical & Subtropical Coniferous Forests",1,1,0.94298018223422,1
+"Mediterranean Forests, Woodlands & Scrub - Tropical & Subtropical Dry Broadleaf Forests",1,1,1,1
+"Mediterranean Forests, Woodlands & Scrub - Tropical & Subtropical Grasslands, Savannas & Shrublands",1,1,1,1
+"Mediterranean Forests, Woodlands & Scrub - Tropical & Subtropical Moist Broadleaf Forests",1,1,1,1
+"Mediterranean Forests, Woodlands & Scrub - Tundra",1,1,0.0078333944649491,1
+"Montane Grasslands & Shrublands - Temperate Broadleaf & Mixed Forests",1,1,0.11663169963774,1
+"Montane Grasslands & Shrublands - Temperate Conifer Forests",1,1,0.000119212876784762,1
+"Montane Grasslands & Shrublands - Temperate Grasslands, Savannas & Shrublands",1,0.784950819010351,0.38062714526042,1
+"Montane Grasslands & Shrublands - Tropical & Subtropical Coniferous Forests",1,0.29275220699493,0.000155347183551988,1
+"Montane Grasslands & Shrublands - Tropical & Subtropical Dry Broadleaf Forests",1,0.152428928971525,1,1
+"Montane Grasslands & Shrublands - Tropical & Subtropical Grasslands, Savannas & Shrublands",1,1,1,1
+"Montane Grasslands & Shrublands - Tropical & Subtropical Moist Broadleaf Forests",0.512136572932512,1,1,1
+"Montane Grasslands & Shrublands - Tundra",1,1,0.000207306638333722,1
+"Temperate Broadleaf & Mixed Forests - Temperate Conifer Forests",1,1,1,1
+"Temperate Broadleaf & Mixed Forests - Temperate Grasslands, Savannas & Shrublands",1,1,1,1
+"Temperate Broadleaf & Mixed Forests - Tropical & Subtropical Coniferous Forests",1,1,1,1
+"Temperate Broadleaf & Mixed Forests - Tropical & Subtropical Dry Broadleaf Forests",1,1,1,1
+"Temperate Broadleaf & Mixed Forests - Tropical & Subtropical Grasslands, Savannas & Shrublands",1,1,0.0569985881094346,1
+"Temperate Broadleaf & Mixed Forests - Tropical & Subtropical Moist Broadleaf Forests",1,1,0.0297074121148282,1
+"Temperate Broadleaf & Mixed Forests - Tundra",1,1,0.0433947249612521,1
+"Temperate Conifer Forests - Temperate Grasslands, Savannas & Shrublands",1,1,1,1
+"Temperate Conifer Forests - Tropical & Subtropical Coniferous Forests",1,1,1,1
+"Temperate Conifer Forests - Tropical & Subtropical Dry Broadleaf Forests",1,1,0.87921434875275,1
+"Temperate Conifer Forests - Tropical & Subtropical Grasslands, Savannas & Shrublands",0.272123326913105,1,5.99278931195918e-05,1
+"Temperate Conifer Forests - Tropical & Subtropical Moist Broadleaf Forests",0.000899330257013267,1,1.25225816086172e-05,1
+"Temperate Conifer Forests - Tundra",1,1,0.933952786711895,1
+"Temperate Grasslands, Savannas & Shrublands - Tropical & Subtropical Coniferous Forests",1,1,1,1
+"Temperate Grasslands, Savannas & Shrublands - Tropical & Subtropical Dry Broadleaf Forests",1,1,1,1
+"Temperate Grasslands, Savannas & Shrublands - Tropical & Subtropical Grasslands, Savannas & Shrublands",0.0270130864087323,0.163522526196216,0.223379027029776,1
+"Temperate Grasslands, Savannas & Shrublands - Tropical & Subtropical Moist Broadleaf Forests",3.61457646630275e-05,0.927864266607873,0.15014145983287,1
+"Temperate Grasslands, Savannas & Shrublands - Tundra",1,1,0.161058753187358,1
+"Tropical & Subtropical Coniferous Forests - Tropical & Subtropical Dry Broadleaf Forests",1,1,0.564761375980072,1
+"Tropical & Subtropical Coniferous Forests - Tropical & Subtropical Grasslands, Savannas & Shrublands",1,0.00811697307388863,6.347853121019e-05,1
+"Tropical & Subtropical Coniferous Forests - Tropical & Subtropical Moist Broadleaf Forests",0.569401519560907,0.148334883771169,1.72433277429243e-05,1
+"Tropical & Subtropical Coniferous Forests - Tundra",1,1,1,1
+"Tropical & Subtropical Dry Broadleaf Forests - Tropical & Subtropical Grasslands, Savannas & Shrublands",1,0.0026538417209313,1,1
+"Tropical & Subtropical Dry Broadleaf Forests - Tropical & Subtropical Moist Broadleaf Forests",0.33356681014958,0.0618108496839712,1,1
+"Tropical & Subtropical Dry Broadleaf Forests - Tundra",1,1,0.013019634635076,1
+"Tropical & Subtropical Grasslands, Savannas & Shrublands - Tropical & Subtropical Moist Broadleaf Forests",1,1,1,1
+"Tropical & Subtropical Grasslands, Savannas & Shrublands - Tundra",1,1,0.000144110702173749,1
+"Tropical & Subtropical Moist Broadleaf Forests - Tundra",1,1,0.000135524224365174,1
+"# Significant",6,2,21,0
