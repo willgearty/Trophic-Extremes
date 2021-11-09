@@ -116,6 +116,7 @@ tm_p <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction
 p_idx <- sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))
 # adjust the p-values now since we don't care about most of them
 tm_stars <- stars.pval(p.adjust(diag(tm_p$p.value)[p_idx]))
+tm_stars[tm_stars == "."] <- " "
 tm_star_df <- data.frame(biome_label = factor(rep(levels(terr_mammals$biome_label), each = 3), levels = levels(terr_mammals$biome_label)),
                          x = seq(1.5,3.5), y = 0, star = tm_stars)
 
@@ -127,6 +128,7 @@ tm90 <- do.call(rbind, lapply(levels(terr_mammals$biome_label), function(x) {
 }))
 tm90$p.adjust <- p.adjust(tm90$p.value)
 tm90$stars <- stars.pval(tm90$p.adjust)
+tm90$biome_label <- factor(tm90$biome_label, levels = levels(terr_mammals$biome_label))
 
 tm <- terr_mammals %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
@@ -192,6 +194,7 @@ tb_p <- with(terr_birds, pairwise.wilcox.test(ln_body_mass_median, interaction(d
 p_idx <- sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))
 # adjust the p-values now since we don't care about most of them
 tb_stars <- stars.pval(p.adjust(diag(tb_p$p.value)[p_idx]))
+tb_stars[tb_stars == "."] <- " "
 tb_star_df <- data.frame(biome_label = factor(rep(levels(terr_birds$biome_label), each = 3), levels = levels(terr_birds$biome_label)),
                          x = seq(1.5,3.5), y = 0.5, star = tb_stars)
 
@@ -203,6 +206,7 @@ tb90 <- do.call(rbind, lapply(levels(terr_birds$biome_label), function(x) {
 }))
 tb90$p.adjust <- p.adjust(tb90$p.value)
 tb90$stars <- stars.pval(tb90$p.adjust)
+tb90$biome_label <- factor(tb90$biome_label, levels = levels(terr_birds$biome_label))
 
 tb <- terr_birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
@@ -257,6 +261,7 @@ fsh_p <- with(tr_fish, pairwise.wilcox.test(ln_lmax, interaction(diet_name, Real
 realm_idx <- c(do.call(c, lapply(levels(tr_fish$Realm), function(realm) head(which(sub("^.*\\.","",colnames(fsh_p$p.value)) == realm), -1))), 50)
 # adjust the p-values here because we don't need most of the comparisons
 fsh_stars <- stars.pval(p.adjust(diag(fsh_p$p.value)[realm_idx]))
+fsh_stars[fsh_stars == "."] <- " "
 # get diet indices with data
 diet_idx <- match(sub("\\..*$","",colnames(fsh_p$p.value)), fish_diets)
 fsh_star_df <- data.frame(Realm = factor(sub("^.*\\.","",colnames(fsh_p$p.value))[realm_idx], levels = levels(tr_fish$Realm)),
@@ -280,6 +285,7 @@ fsh90 <- do.call(rbind, lapply(levels(tr_fish$Realm), function(x) {
 fsh90$p.adjust <- p.adjust(fsh90$p.value)
 fsh90$stars <- stars.pval(fsh90$p.adjust)
 fsh90$x <- match(sub(" -.*$","",fsh90$Comparison), fish_diets) + .5
+fsh90$Realm <- factor(fsh90$Realm, levels = levels(tr_fish$Realm))
 
 fsh <- tr_fish %>% 
   ggplot(., aes(x = diet_name, y = ln_lmax, group = diet_name, fill = diet_name)) +
@@ -383,7 +389,7 @@ br_90$stars <- stars.pval(br_90$p.adjust)
 
 br <- birds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10, color = "black") +
+  geom_boxplot(color = "black") +
   geom_text(data = br_sum, aes(y = 12.7, label = br_n), size = 7, fontface = "bold") +
   annotate("text", label = br_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = br_90, aes(label = stars), x = seq(1.5, 3.5), y = 11.7, size = 7.5, colour = "white", inherit.aes = FALSE) +
@@ -416,7 +422,7 @@ mbr_90$stars <- stars.pval(mbr_90$p.adjust)
 
 mbr <- mbirds %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10) +
+  geom_boxplot(color = "black") +
   geom_text(data = mbr_sum, aes(y = 11.2, label = mbr_n), size = 7, fontface = "bold") +
   annotate("text", label = mbr_stars, x = seq(2.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = mbr_90, aes(label = stars), x = seq(2.5, 3.5), y = 10.2, size = 7.5, colour = "white", inherit.aes = FALSE) +
@@ -448,7 +454,7 @@ tm_90$stars <- stars.pval(tm_90$p.adjust)
 
 tm <- terr_mam %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10) +
+  geom_boxplot(color = "black") +
   geom_text(data = tm_sum, aes(y = 16.4, label = mr_n), size = 7, fontface = "bold") +
   annotate("text", label = tm_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = tm_90, aes(label = stars), x = seq(1.5, 3.5), y = 15.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
@@ -480,7 +486,7 @@ mr_90$stars <- stars.pval(mr_90$p.adjust)
 
 mr <- marine_mam %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass_median, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10) +
+  geom_boxplot(color = "black") +
   geom_text(data = mr_sum, aes(y = 19.9, label = mr_n), size = 7, fontface = "bold") +
   annotate("text", label = mr_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = mr_90, aes(label = stars), x = seq(1.5, 3.5), y = 18.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
@@ -530,7 +536,7 @@ am_90$stars <- stars.pval(am_90$p.adjust)
 
 am <- tr_amph %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10) +
+  geom_boxplot(color = "black") +
   geom_text(data = am_sum, aes(y = 11.8, label = am_n), size = 7, fontface = "bold") +
   annotate("text", label = mbr_stars, x = seq(2.5, 2.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = am_90, aes(label = stars), x = seq(2.5, 2.5), y = 10.8, size = 7.5, colour = "white", inherit.aes = FALSE) +
@@ -581,7 +587,7 @@ rep_90$stars <- stars.pval(rep_90$p.adjust)
 
 rep <- tr_rep %>% 
   ggplot(., aes(x = diet_name, y = ln_body_mass, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10) +
+  geom_boxplot(color = "black") +
   geom_text(data = rep_sum, aes(y = 14.1, label = rep_n), size = 7, fontface = "bold") +
   annotate("text", label = rep_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = rep_90, aes(label = stars), x = seq(1.5, 3.5), y = 13.1, size = 7.5, colour = "white", inherit.aes = FALSE) +
@@ -628,7 +634,7 @@ fish_90$stars <- stars.pval(fish_90$p.adjust)
 
 fish <- tr_fish %>% 
   ggplot(., aes(x = diet_name, y = ln_lmax, group = diet_name, fill = diet_name)) +
-  geom_boxplot(coef = 10) +
+  geom_boxplot(color = "black") +
   geom_text(data = fish_sum, aes(y = 8.3, label = fish_n), size = 7, fontface = "bold") +
   annotate("text", label = fish_stars, x = seq(1.5, 4.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = fish_90, aes(label = stars), x = seq(1.5, 4.5), y = 7.5, size = 7.5, colour = "white", inherit.aes = FALSE) +
