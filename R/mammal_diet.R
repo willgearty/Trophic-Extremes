@@ -1,11 +1,12 @@
 # author: Will Gearty (willgearty@gmail.com)
 #load and clean data####
-library(plyr)
 library(tidyverse)
 library(viridis)
 library(deeptime)
 library(Hmisc)
 library(gtools)
+library(rcompanion)
+library(shadowtext)
 
 ##Data from the PBDB####
 pbdb_list <- read.csv("../data/pbdb_mammals.csv", na.strings = c("", "NA"), strip.white = TRUE)
@@ -91,10 +92,8 @@ mamm_diet <- rbind(cbind(lyons_diet_clean, source = "lyons"),
                    cbind(mom_data_clean, source = "mom"),
                    cbind(supp_data_clean, source = "supp")) %>%
   #Rename out-of-date orders
-  mutate(Order = revalue(Order, c("Soricomorpha" = "Eulipotyphla",
-                                  "Lipotyphla" = "Eulipotyphla",
-                                  "Hicanodonta" = "Cingulata",
-                                  "Xenarthra" = "Pilosa"))) %>%
+  mutate(Order = recode(Order, Soricomorpha = "Eulipotyphla", Lipotyphla = "Eulipotyphla",
+                        Hicanodonta = "Cingulata", Xenarthra = "Pilosa")) %>%
   #Summarise duplicates
   group_by(Genus_species, Continent) %>%
   summarise(Order = paste(na.omit(unique(Order)), collapse = ", "), FAD = max(FAD), LAD = min(LAD), lnMass_g = mean(lnMass_g),
@@ -194,18 +193,10 @@ sample_size <- mamm_per_bin %>% group_by(bin, bin_num, Recoded_Diet) %>% filter(
 mamm_p <- with(mamm_per_bin, pairwise.wilcox.test(lnMass_g, interaction(Recoded_Diet, bin), p.adjust.method = "none"))
 # adjust the p values here since we don't need most of them
 mamm_stars <- stars.pval(p.adjust(diag(mamm_p$p.value)[sort(c(seq(1, 33, 4), seq(2, 34, 4), seq(3, 35, 4)))]))
+#remove dots
+mamm_stars[mamm_stars == "."] <- " "
 
-#permutation tests for 75th quantiles
-library(rcompanion)
-
-pt75 <- do.call(rbind, lapply(1:n_bins, function(x) {
-  df <- pairwisePercentileTest(lnMass_g ~ Recoded_Diet, data = subset(mamm_per_bin, bin_num == x),
-                               test = "percentile", tau = 0.75, r = 5000, digits = 7)[c(1,4,6), 1:2]
-  df$
-  df$bin <- levels(time_scale$name)[x]
-  df
-}))
-
+#permutation tests for 90th quantiles
 pt90 <- do.call(rbind, lapply(1:n_bins, function(x) {
   df <- pairwisePercentileTest(lnMass_g ~ Recoded_Diet, data = subset(mamm_per_bin, bin_num == x),
                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6), 1:2]
@@ -213,13 +204,10 @@ pt90 <- do.call(rbind, lapply(1:n_bins, function(x) {
   df
 }))
 # adjust p-values based on number of comparisons
-pt75$p.adjust <- p.adjust(pt75$p.value)
-pt75$stars <- stars.pval(pt75$p.adjust)
 pt90$p.adjust <- p.adjust(pt90$p.value)
 pt90$stars <- stars.pval(pt90$p.adjust)
 
 #plot
-library(shadowtext)
 gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(Recoded_Diet %in% c("herbivore", "omnivore", "carnivore", "invertivore")), aes(x = bin_num, y = lnMass_g, fill = Recoded_Diet, group = interaction(bin, Recoded_Diet))) +
   annotate("rect", xmin = seq(0.5, 8.5, 1), xmax = seq(1.5, 9.5, 1), ymin = -Inf, ymax = Inf, fill = rep_len(c("grey90", "white"), length.out = 9)) +
   geom_boxplot(position = position_dodge2(preserve = "single", padding = .15), width = .85) +
@@ -596,7 +584,7 @@ mom_data_per_bin <- mom_data_per_bin %>%
 
 mom_stats <- mom_data_per_bin %>%
   group_by(Recoded_Diet, bin) %>%
-  dplyr::summarise(min_size = min(lnMass_g, na.rm = TRUE), which_min = Genus_species[which.min(lnMass_g)],
+  summarise(min_size = min(lnMass_g, na.rm = TRUE), which_min = Genus_species[which.min(lnMass_g)],
             max_size = max(lnMass_g, na.rm = TRUE), which_max = Genus_species[which.max(lnMass_g)],
             med_size = median(lnMass_g, na.rm = TRUE), .groups = "drop")
 write.csv(mom_stats, "../tables/mom_stats.csv", row.names = FALSE)
