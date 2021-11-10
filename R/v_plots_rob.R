@@ -111,13 +111,13 @@ tm_sum <- terr_mammals %>%
   dplyr::group_by(biome, biome_label, diet_name) %>% 
   dplyr::count(name = "tm_n")
 
-tm_p <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_name), p.adjust.method = "none"))
+tm_p <- with(terr_mammals, pairwise.wilcox.test(ln_body_mass_median, interaction(diet_name, biome_label), p.adjust.method = "none"))
 # the indices of the comparisons between diets within biomes
 p_idx <- sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))
 # adjust the p-values now since we don't care about most of them
 tm_stars <- stars.pval(p.adjust(diag(tm_p$p.value)[p_idx]))
 tm_stars[tm_stars == "."] <- " "
-tm_star_df <- data.frame(biome_label = factor(rep(levels(terr_mammals$biome_label), each = 3), levels = levels(terr_mammals$biome_label)),
+tm_star_df <- data.frame(biome_label = factor(sub("^.*[:.:]", "", colnames(tm_p$p.value)[p_idx]), levels = levels(terr_mammals$biome_label)),
                          x = seq(1.5,3.5), y = 0, star = tm_stars)
 
 tm90 <- do.call(rbind, lapply(levels(terr_mammals$biome_label), function(x) {
@@ -167,7 +167,7 @@ write.csv(tm_p_among_adjust, "../tables/among_biome_mann_whitney.csv")
 
 tm90_among <- do.call(cbind, lapply(levels(terr_mammals$diet_name), function(x) {
   df <- pairwisePercentileTest(ln_body_mass_median ~ biome_name, data = subset(terr_mammals, diet_name == x),
-                               test = "percentile", tau = 0.90, r = 5000, digits = 7)
+                               test = "percentile", tau = 0.90, r = 10000, digits = 7)
   return(setNames(as.numeric(df$p.value), sub(" = 0","",df$Comparison)))
 }))
 colnames(tm90_among) <- levels(terr_mammals$diet_name)
@@ -195,7 +195,7 @@ p_idx <- sort(c(seq(1, 55, 4), seq(2, 55, 4), seq(3, 55, 4)))
 # adjust the p-values now since we don't care about most of them
 tb_stars <- stars.pval(p.adjust(diag(tb_p$p.value)[p_idx]))
 tb_stars[tb_stars == "."] <- " "
-tb_star_df <- data.frame(biome_label = factor(rep(levels(terr_birds$biome_label), each = 3), levels = levels(terr_birds$biome_label)),
+tb_star_df <- data.frame(biome_label = factor(sub("^.*[:.:]", "", colnames(tb_p$p.value)[p_idx]), levels = levels(terr_birds$biome_label)),
                          x = seq(1.5,3.5), y = 0.5, star = tb_stars)
 
 tb90 <- do.call(rbind, lapply(levels(terr_birds$biome_label), function(x) {
