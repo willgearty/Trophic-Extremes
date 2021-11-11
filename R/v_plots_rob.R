@@ -122,7 +122,7 @@ tm_star_df <- data.frame(biome_label = factor(sub("^.*[:.:]", "", colnames(tm_p$
 
 tm90 <- do.call(rbind, lapply(levels(terr_mammals$biome_label), function(x) {
   df <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = subset(terr_mammals, biome_label == x),
-                               test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6), 1:2]
+                               test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6), 1:2]
   df$biome_label <- x
   df
 }))
@@ -167,7 +167,7 @@ write.csv(tm_p_among_adjust, "../tables/among_biome_mann_whitney.csv")
 
 tm90_among <- do.call(cbind, lapply(levels(terr_mammals$diet_name), function(x) {
   df <- pairwisePercentileTest(ln_body_mass_median ~ biome_name, data = subset(terr_mammals, diet_name == x),
-                               test = "percentile", tau = 0.90, r = 10000, digits = 7)
+                               test = "percentile", tau = 0.90, r = 100000, digits = 7, method = "holm")
   return(setNames(as.numeric(df$p.value), sub(" = 0","",df$Comparison)))
 }))
 colnames(tm90_among) <- levels(terr_mammals$diet_name)
@@ -200,7 +200,7 @@ tb_star_df <- data.frame(biome_label = factor(sub("^.*[:.:]", "", colnames(tb_p$
 
 tb90 <- do.call(rbind, lapply(levels(terr_birds$biome_label), function(x) {
   df <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = subset(terr_birds, biome_label == x),
-                               test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6), 1:2]
+                               test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6), 1:2]
   df$biome_label <- x
   df
 }))
@@ -271,7 +271,7 @@ fsh90 <- do.call(rbind, lapply(levels(tr_fish$Realm), function(x) {
   n_diets <- length(unique(subset(tr_fish, Realm == x)$diet_name))
   if(n_diets >= 2){
     df <- pairwisePercentileTest(ln_lmax ~ diet_name, data = subset(tr_fish, Realm == x),
-                               test = "percentile", tau = 0.90, r = 5000, digits = 7)[, 1:2]
+                               test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[, 1:2]
     df$Realm <- x
     if(n_diets == 5){
       return(df[c(1,5,8,10),])
@@ -384,7 +384,7 @@ br_sum <- birds %>%
 br_p <- pairwise.wilcox.test(birds$ln_body_mass_median, birds$diet_name)
 br_stars <- stars.pval(diag(br_p$p.value))
 br_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = birds,
-                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6),]
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6),]
 br_90$stars <- stars.pval(br_90$p.adjust)
 
 br <- birds %>% 
@@ -417,7 +417,7 @@ mbr_sum <- mbirds %>%
 mbr_p <- pairwise.wilcox.test(mbirds$ln_body_mass_median, mbirds$diet_name)
 mbr_stars <- stars.pval(diag(mbr_p$p.value))
 mbr_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = mbirds,
-                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,3),]
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,3),]
 mbr_90$stars <- stars.pval(mbr_90$p.adjust)
 
 mbr <- mbirds %>% 
@@ -449,7 +449,7 @@ tm_sum <- terr_mam %>%
 tm_p <- pairwise.wilcox.test(terr_mam$ln_body_mass_median, terr_mam$diet_name)
 tm_stars <- stars.pval(diag(tm_p$p.value))
 tm_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = terr_mam,
-                                 test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6),]
+                                 test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6),]
 tm_90$stars <- stars.pval(tm_90$p.adjust)
 
 tm <- terr_mam %>% 
@@ -481,7 +481,7 @@ mr_sum <- marine_mam %>%
 mr_p <- pairwise.wilcox.test(marine_mam$ln_body_mass_median, marine_mam$diet_name)
 mr_stars <- stars.pval(diag(mr_p$p.value))
 mr_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = marine_mam,
-                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6),]
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6),]
 mr_90$stars <- stars.pval(mr_90$p.adjust)
 
 mr <- marine_mam %>% 
@@ -531,7 +531,7 @@ am_sum <- tr_amph %>%
 am_p <- pairwise.wilcox.test(tr_amph$ln_body_mass, tr_amph$diet_name)
 am_stars <- stars.pval(diag(am_p$p.value))
 am_90 <- pairwisePercentileTest(ln_body_mass ~ diet_name, data = tr_amph,
-                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[1,]
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[1,]
 am_90$stars <- stars.pval(am_90$p.adjust)
 
 am <- tr_amph %>% 
@@ -582,7 +582,7 @@ rep_sum <- tr_rep %>%
 rep_p <- pairwise.wilcox.test(tr_rep$ln_body_mass, tr_rep$diet_name)
 rep_stars <- stars.pval(diag(rep_p$p.value))
 rep_90 <- pairwisePercentileTest(ln_body_mass ~ diet_name, data = tr_rep,
-                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6),]
+                                test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6),]
 rep_90$stars <- stars.pval(rep_90$p.adjust)
 
 rep <- tr_rep %>% 
@@ -629,7 +629,7 @@ fish_sum <- tr_fish %>%
 fish_p <- pairwise.wilcox.test(tr_fish$ln_lmax, tr_fish$diet_name)
 fish_stars <- stars.pval(diag(fish_p$p.value))
 fish_90 <- pairwisePercentileTest(ln_lmax ~ diet_name, data = tr_fish,
-                                 test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,5,8,10),]
+                                 test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,5,8,10),]
 fish_90$stars <- stars.pval(fish_90$p.adjust)
 
 fish <- tr_fish %>% 
