@@ -8,9 +8,10 @@
 # plyr: data manipulation
 # ggplot2: plotting
 # cowplot: plotting
+# HDInterval: credible interval
 
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(dplyr, plyr, ggplot2, cowplot)
+pacman::p_load(dplyr, plyr, ggplot2, cowplot, HDInterval)
 
 # set plotting theme
 theme_set(theme_cowplot())
@@ -143,3 +144,50 @@ fut_v <- ggplot(tem_df, aes(x = diet_5cat, fill = time)) +
   theme(legend.title = element_blank())
 
 #cowplot::save_plot("future_v.png", fut_v, base_height = 10, base_width = 8, dpi = 300)
+
+#### Trajectory ####
+
+yr_traj <- lapply(2:10001, function(x) {
+  
+  # counter
+  print(x)
+  
+  df <- ext_mam[ , c(1, x)] %>%
+  # round up to year
+  dplyr::mutate(ro_up = ceiling(.[ , 2]))
+  
+  # names of extinct mammals per run
+  ext_names <- lapply(1:500, function(n) {
+    out <- dplyr::filter(df, ro_up <= n)[ , 1]
+  })
+  
+  ext_sim <- lapply(1:500, function(n) {
+    # filter out extinct mammals per run
+    out <- dplyr::filter(pres, !binomial %in% ext_names[[n]]) %>% 
+      dplyr::group_by(diet_5cat) %>% 
+      dplyr::summarize(med = median(body_mass_median)) %>% 
+      dplyr::mutate(yr = n)
+  })
+  
+  # collapse list into dataframe
+  ext_sim <- dplyr::bind_rows(ext_sim) %>% 
+    dplyr::mutate(med_e = exp(med))
+  
+})
+
+yr_traj_c_orig <- dplyr::bind_rows(yr_traj) 
+
+yr_0 <- data.frame(diet_5cat = pres_df$diet_5cat, med = pres_df$y50, yr = rep(0, 4), med_e = exp(pres_df$y50))
+
+yr_traj_c_0 <- dplyr::bind_rows(yr_0, yr_traj_c_orig)
+
+yr_traj_c <- yr_traj_c_0 %>% 
+  dplyr::group_by(diet_5cat, yr) %>% 
+  # mean and ci
+  dplyr::summarise(mean = mean(med),
+                   low = HDInterval::hdi(med)[[1]],
+                   upp = HDInterval::hdi(med)[[2]])
+
+# save outputs
+saveRDS(yr_0, "..data/yr_0.rds")
+saveRDS(yr_traj_c, "..data/yr_traj_c.rds")
