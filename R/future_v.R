@@ -188,6 +188,74 @@ yr_traj_c <- yr_traj_c_0 %>%
                    low = HDInterval::hdi(med)[[1]],
                    upp = HDInterval::hdi(med)[[2]])
 
+yr_traj_c <- yr_traj_c_0 %>% 
+  dplyr::group_by(diet_5cat, yr) %>% 
+  # mean and ci
+  dplyr::summarise(mean = mean(med),
+                   low_ci = quantile(med, 0.025),
+                   upp_ci = quantile(med, 0.975),
+                   low_ci_50 = quantile(med, 0.25),
+                   upp_ci_50 = quantile(med, 0.75))
+
 # save outputs
 saveRDS(yr_0, "..data/yr_0.rds")
 saveRDS(yr_traj_c, "..data/yr_traj_c.rds")
+
+# 90th quantile
+
+yr_traj_90 <- lapply(2:10001, function(x) {
+  
+  # counter
+  print(x)
+  
+  df <- ext_mam[ , c(1, x)] %>%
+    # round up to year
+    dplyr::mutate(ro_up = ceiling(.[ , 2]))
+  
+  # names of extinct mammals per run
+  ext_names <- lapply(1:500, function(n) {
+    out <- dplyr::filter(df, ro_up <= n)[ , 1]
+  })
+  
+  ext_sim <- lapply(1:500, function(n) {
+    # filter out extinct mammals per run
+    out <- dplyr::filter(pres, !binomial %in% ext_names[[n]]) %>% 
+      dplyr::group_by(diet_5cat) %>% 
+      # 90th quantile
+      dplyr::summarize(quant_90 = stats::quantile(body_mass_median, 0.9)) %>% 
+      dplyr::mutate(yr = n)
+  })
+  
+  # collapse list into dataframe
+  ext_sim <- dplyr::bind_rows(ext_sim) %>% 
+    dplyr::mutate(quant_90_e = exp(quant_90))
+  
+})
+
+yr_traj_c_orig_90 <- dplyr::bind_rows(yr_traj_90) %>% 
+  dplyr::mutate(diet_5cat = dplyr::recode(diet_5cat, Herbivore = "herbivore",
+                                          Omnivore = "omnivore",
+                                          Invertivore = "invertivore",
+                                          Carnivore = "carnivore"))
+
+yr_0_90 <- data.frame(diet_5cat = pres_df$diet_5cat, quant_90 = pres_df$y90, yr = rep(0, 4), quant_90_e = exp(pres_df$y90)) %>% 
+  dplyr::mutate(diet_5cat = dplyr::recode(diet_5cat, Herbivore = "herbivore",
+                                          Omnivore = "omnivore",
+                                          Invertivore = "invertivore",
+                                          Carnivore = "carnivore"))
+
+yr_traj_c_0_90 <- dplyr::bind_rows(yr_0_90, yr_traj_c_orig_90)
+
+yr_traj_c_90 <- yr_traj_c_0_90 %>% 
+  dplyr::group_by(diet_5cat, yr) %>% 
+  # mean and ci
+  dplyr::summarise(mean = mean(quant_90),
+                   low_ci = quantile(quant_90, 0.025),
+                   upp_ci = quantile(quant_90, 0.975),
+                   low_ci_50 = quantile(quant_90, 0.25),
+                   upp_ci_50 = quantile(quant_90, 0.75))
+
+# save outputs
+saveRDS(yr_0_90, "..data/yr_0_90.rds")
+saveRDS(yr_traj_c_90, "..data/yr_traj_c_90.rds")
+
