@@ -12,7 +12,7 @@ Run `v_plots_rob.R` to produce all plots and analyses.
 Run `mammal_diet.R` to produce all plots and analyses. 
 
 ## Future analyses (main text figure 5):  
-Run `mammal_diet.R` to produce all plots and analyses. 
+Run `future_v_short.R` to produce all plots and analyses. 
 
 ## To replicate the analyses and plots presented here, the following R packages are required:
 cowplot  
