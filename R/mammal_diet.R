@@ -647,7 +647,7 @@ ggplot(mom_stats) +
                 fill = interaction(Recoded_Diet, bin)), show.legend = FALSE, color = "black", size = 1.25) +
   #geom_segment(aes(x = med_size, xend = med_size, y = diet_num - .4, yend = diet_num + .4,
   #              linetype = bin), show.legend = FALSE, color = "black", size = 1.25) +
-  geom_text(data = diet_stats, aes(x = avg, y = diet_num, label = paste0(stringr::str_to_sentence(Recoded_Diet), "s")),
+  geom_text(data = diet_stats, aes(x = avg, y = diet_num, label = paste0(Recoded_Diet, "s")),
             color = "black", size = 12, angle = 90) +
   geom_text(data = subset(diet_stats, Recoded_Diet != "omnivore"),
             aes(x = (maximum + extant_max) / 2, y = diet_num), label = "extinct", angle = 30, size = 5) +

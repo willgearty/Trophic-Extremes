@@ -27,6 +27,7 @@ lemon
 nlme  
 pacman  
 plyr  
+rcompanion  
 stringr  
 tidyr  
 tidyverse  
