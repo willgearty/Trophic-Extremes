@@ -120,8 +120,7 @@ mamm_diet_clean <- mamm_diet %>%
 
 #plots through time####
 
-#Bluish green, Orange, Reddish purple
-colors4 <- setNames(c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), c("herbivore", "omnivore", "invertivore", "carnivore"))
+colors4 <- setNames(c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025"), c("herbivore", "omnivore", "invertivore", "carnivore"))
 
 #phylopics
 uuids <- c("Early Cretaceous" = "c579200d-9773-4fe7-a4e1-274fdd5f4507", #Multituberculata
@@ -242,6 +241,7 @@ discrete_epochs <- epochs
 discrete_epochs$max_age[1:9] <- 1:9
 discrete_epochs$min_age[1:9] <- 0:8
 discrete_epochs$name[8:9] <- c("Late\nCretaceous", "Early\nCretaceous")
+
 (geo_plot <- gggeo_scale(gggeo_scale(ggplotGrob(gg), lims = c(9, 0), dat = discrete_periods, abbrv = FALSE, size = 6, skip = NULL, lwd = .75),
                          dat = discrete_epochs, abbrv = FALSE, skip = NULL, size = 5, lwd = .75, bord = c("left", "right"), height = unit(2.5, "line")))
 ggsave("../figures/Mammal Diets Boxplots with Invertivores.pdf", geo_plot, width = 18, height = 12)
@@ -295,6 +295,7 @@ ggsave("../figures/Mammal Diets Boxplots.pdf", geo_plot, width = 18, height = 12
 n_subsets <- 100 #number of replicates for each subset size
 subset_sizes <- seq(5,100,5)
 
+set.seed(1234)
 diet_subsample <- lapply(subset_sizes, function(subset_size) {
   print(subset_size)
   return(replicate(n_subsets, mamm_per_bin %>%
@@ -433,6 +434,7 @@ diets <- levels(mamm_diet$Recoded_Diet)
 n_diets <- length(diets)
 n_reps <- 1000
 
+set.seed(1234)
 diet_bootstrap <- replicate(n = n_reps,
                             mamm_per_bin %>% 
                             group_by(bin, Recoded_Diet) %>%

@@ -8,7 +8,10 @@ pacman::p_load(nlme, dplyr, tidyr, ggplot2, tibble, stringr, gtable, cowplot, le
 pacman::p_load_gh("richfitz/vectoR")
 
 # Will's colour scheme
-colors4 <- setNames(c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), c("herbivore", "omnivore", "invertivore", "carnivore"))
+colors4 <- setNames(c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025"),
+                    c("herbivore", "omnivore", "invertivore", "carnivore"))
+colors5 <- setNames(c("#359B73", "darkseagreen1", "#7d22b2", "#FFAC3B", "#ad0025"),
+                    c("herbivore", "planktivore", "omnivore", "benthic carnivore", "higher carnivore"))
 
 ## Data ####
 
@@ -120,6 +123,7 @@ tm_stars[tm_stars == "."] <- " "
 tm_star_df <- data.frame(biome_label = factor(sub("^.*[:.:]", "", colnames(tm_p$p.value)[p_idx]), levels = levels(terr_mammals$biome_label)),
                          x = seq(1.5,3.5), y = 0, star = tm_stars)
 
+set.seed(1234)
 tm90 <- do.call(rbind, lapply(levels(terr_mammals$biome_label), function(x) {
   df <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = subset(terr_mammals, biome_label == x),
                                test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6), 1:2]
@@ -138,7 +142,7 @@ tm <- terr_mammals %>%
   geom_shadowtext(data = tm90, aes(label = stars), x = rep(seq(1.5, 3.5), 14), y = 14.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
   facet_wrap(~ biome_label, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
+  scale_fill_manual(values = colors4) +
   scale_x_discrete(name = NULL) +
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
@@ -197,7 +201,7 @@ tb_stars <- stars.pval(p.adjust(diag(tb_p$p.value)[p_idx]))
 tb_stars[tb_stars == "."] <- " "
 tb_star_df <- data.frame(biome_label = factor(sub("^.*[:.:]", "", colnames(tb_p$p.value)[p_idx]), levels = levels(terr_birds$biome_label)),
                          x = seq(1.5,3.5), y = 0.5, star = tb_stars)
-
+set.seed(1234)
 tb90 <- do.call(rbind, lapply(levels(terr_birds$biome_label), function(x) {
   df <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = subset(terr_birds, biome_label == x),
                                test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6), 1:2]
@@ -216,7 +220,7 @@ tb <- terr_birds %>%
   geom_shadowtext(data = tb90, aes(label = stars), x = rep(seq(1.5, 3.5), 14), y = 10.6, size = 7.5, colour = "white", inherit.aes = FALSE) +
   facet_wrap(~ biome_label, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
+  scale_fill_manual(values = colors4) +
   scale_x_discrete(name = NULL) +
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
@@ -267,6 +271,7 @@ diet_idx <- match(sub("\\..*$","",colnames(fsh_p$p.value)), fish_diets)
 fsh_star_df <- data.frame(Realm = factor(sub("^.*\\.","",colnames(fsh_p$p.value))[realm_idx], levels = levels(tr_fish$Realm)),
                           x = diet_idx[realm_idx] + .5, y = 1, star = fsh_stars)
 
+set.seed(1234)
 fsh90 <- do.call(rbind, lapply(levels(tr_fish$Realm), function(x) {
   n_diets <- length(unique(subset(tr_fish, Realm == x)$diet_name))
   if(n_diets >= 2){
@@ -295,7 +300,7 @@ fsh <- tr_fish %>%
   geom_shadowtext(data = fsh90, aes(x = x, label = stars), y = 7.2, size = 7.5, colour = "white", inherit.aes = FALSE) +
   facet_wrap(~ Realm, ncol = 5, labeller = label_wrap_gen(width=25)) +
   boxplot_theme(base_size = 20) +
-  scale_fill_manual(values = c("#359B73", "darkseagreen1", "#2271B2", "orangered", "red")) +
+  scale_fill_manual(values = colors5) +
   scale_x_discrete(name = NULL) +
   scale_y_continuous(name = "Max Length (cm)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
@@ -383,6 +388,7 @@ br_sum <- birds %>%
 
 br_p <- pairwise.wilcox.test(birds$ln_body_mass_median, birds$diet_name)
 br_stars <- stars.pval(diag(br_p$p.value))
+set.seed(1234)
 br_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = birds,
                                 test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6),]
 br_90$stars <- stars.pval(br_90$p.adjust)
@@ -394,7 +400,7 @@ br <- birds %>%
   annotate("text", label = br_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = br_90, aes(label = stars), x = seq(1.5, 3.5), y = 11.7, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[3]], 4, 4.6, ymin = -.25, ymax = 2.75) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_fill_manual(values = colors4, drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
@@ -416,6 +422,7 @@ mbr_sum <- mbirds %>%
 
 mbr_p <- pairwise.wilcox.test(mbirds$ln_body_mass_median, mbirds$diet_name)
 mbr_stars <- stars.pval(diag(mbr_p$p.value))
+set.seed(1234)
 mbr_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = mbirds,
                                 test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,3),]
 mbr_90$stars <- stars.pval(mbr_90$p.adjust)
@@ -427,7 +434,7 @@ mbr <- mbirds %>%
   annotate("text", label = mbr_stars, x = seq(2.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = mbr_90, aes(label = stars), x = seq(2.5, 3.5), y = 10.2, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[4]], 4, 4.6, ymin = -.25, ymax = 2.25) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_fill_manual(values = colors4, drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
@@ -448,6 +455,7 @@ tm_sum <- terr_mam %>%
 
 tm_p <- pairwise.wilcox.test(terr_mam$ln_body_mass_median, terr_mam$diet_name)
 tm_stars <- stars.pval(diag(tm_p$p.value))
+set.seed(1234)
 tm_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = terr_mam,
                                  test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6),]
 tm_90$stars <- stars.pval(tm_90$p.adjust)
@@ -459,7 +467,7 @@ tm <- terr_mam %>%
   annotate("text", label = tm_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = tm_90, aes(label = stars), x = seq(1.5, 3.5), y = 15.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[1]], 3.9, 4.7, ymin = -.5, ymax = 2.5) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_fill_manual(values = colors4, drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
@@ -480,6 +488,7 @@ mr_sum <- marine_mam %>%
 
 mr_p <- pairwise.wilcox.test(marine_mam$ln_body_mass_median, marine_mam$diet_name)
 mr_stars <- stars.pval(diag(mr_p$p.value))
+set.seed(1234)
 mr_90 <- pairwisePercentileTest(ln_body_mass_median ~ diet_name, data = marine_mam,
                                 test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6),]
 mr_90$stars <- stars.pval(mr_90$p.adjust)
@@ -491,7 +500,7 @@ mr <- marine_mam %>%
   annotate("text", label = mr_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = mr_90, aes(label = stars), x = seq(1.5, 3.5), y = 18.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[2]], 3.8, 4.6, ymin = -.5, ymax = 2.5) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_fill_manual(values = colors4, drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000)),
@@ -530,6 +539,7 @@ am_sum <- tr_amph %>%
 
 am_p <- pairwise.wilcox.test(tr_amph$ln_body_mass, tr_amph$diet_name)
 am_stars <- stars.pval(diag(am_p$p.value))
+set.seed(1234)
 am_90 <- pairwisePercentileTest(ln_body_mass ~ diet_name, data = tr_amph,
                                 test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[1,]
 am_90$stars <- stars.pval(am_90$p.adjust)
@@ -541,7 +551,7 @@ am <- tr_amph %>%
   annotate("text", label = mbr_stars, x = seq(2.5, 2.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = am_90, aes(label = stars), x = seq(2.5, 2.5), y = 10.8, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[7]], 4, 4.6, ymin = -.5, ymax = 2.5) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_fill_manual(values = colors4, drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
@@ -581,6 +591,7 @@ rep_sum <- tr_rep %>%
 
 rep_p <- pairwise.wilcox.test(tr_rep$ln_body_mass, tr_rep$diet_name)
 rep_stars <- stars.pval(diag(rep_p$p.value))
+set.seed(1234)
 rep_90 <- pairwisePercentileTest(ln_body_mass ~ diet_name, data = tr_rep,
                                 test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,4,6),]
 rep_90$stars <- stars.pval(rep_90$p.adjust)
@@ -592,7 +603,7 @@ rep <- tr_rep %>%
   annotate("text", label = rep_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = rep_90, aes(label = stars), x = seq(1.5, 3.5), y = 13.1, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[5]], 4, 4.6, ymin = -.75, ymax = 2.25) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D"), drop = FALSE) +
+  scale_fill_manual(values = colors4, drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
@@ -606,7 +617,7 @@ rep <- tr_rep %>%
 
 tr_fish_orig <- readr::read_csv("../data/Traits V3 (fish).csv")
 
-fish_diet_cat_key <- data.frame(diet_5cat = c(1, 2, 3, 4, 5), diet_name = c("herbivore", "planktivore", "omnivore", "benthic\ncarnivore", "higher\ncarnivore"))
+fish_diet_cat_key <- data.frame(diet_5cat = c(1, 2, 3, 4, 5), diet_name = c("herbivore", "planktivore", "omnivore", "benthic carnivore", "higher carnivore"))
 
 tr_fish <- tr_fish_orig %>% 
   dplyr::distinct(CURRENT_TAXONOMIC_NAME, .keep_all = TRUE) %>% 
@@ -628,6 +639,7 @@ fish_sum <- tr_fish %>%
 
 fish_p <- pairwise.wilcox.test(tr_fish$ln_lmax, tr_fish$diet_name)
 fish_stars <- stars.pval(diag(fish_p$p.value))
+set.seed(1234)
 fish_90 <- pairwisePercentileTest(ln_lmax ~ diet_name, data = tr_fish,
                                  test = "percentile", tau = 0.90, r = 5000, digits = 7, method = "holm")[c(1,5,8,10),]
 fish_90$stars <- stars.pval(fish_90$p.adjust)
@@ -639,8 +651,8 @@ fish <- tr_fish %>%
   annotate("text", label = fish_stars, x = seq(1.5, 4.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = fish_90, aes(label = stars), x = seq(1.5, 4.5), y = 7.5, size = 7.5, colour = "white", inherit.aes = FALSE) +
   annotation_custom(phylopics[[6]], 4.8, 5.5, ymin = -1.25, ymax = 2.25) +
-  scale_fill_manual(values = c("#359B73", "darkseagreen1", "#2271B2", "orangered", "red"), drop = FALSE) +
-  scale_x_discrete(NULL, drop = FALSE) +
+  scale_fill_manual(values = colors5, drop = FALSE) +
+  scale_x_discrete(NULL, drop = FALSE, labels = c("herbivore", "planktivore", "omnivore", "benthic\ncarnivore", "higher\ncarnivore")) +
   scale_y_continuous(name = "Max Length (cm)",
                      breaks = log(c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)),
                      labels = c(1, 10, 100, 1000, 10000, 100000, 1000000, 10000000)) +

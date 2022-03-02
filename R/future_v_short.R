@@ -9,10 +9,12 @@
 # cowplot: plotting
 
 if(!require("pacman")) install.packages("pacman")
-pacman::p_load(dplyr, ggplot2, cowplot)
+pacman::p_load(dplyr, ggplot2, cowplot, patchwork)
 
 # set plotting theme
 theme_set(theme_cowplot())
+colors4 <- setNames(c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025"),
+                    c("herbivore", "omnivore", "invertivore", "carnivore"))
 
 #### Median ####
 
@@ -37,10 +39,10 @@ chng <- yr_traj_c %>%
 #### 90th quantile ####
 
 # load: yr_traj_c_90
-yr_traj_c_90 <- readRDS("..data/yr_traj_c_90.rds")
+yr_traj_c_90 <- readRDS("../data/yr_traj_c_90.rds")
 
 # load: yr_0_90
-yr_0_90 <- readRDS("..data/yr_0_90.rds")
+yr_0_90 <- readRDS("../data/yr_0_90.rds")
 
 chng_90 <- yr_traj_c_90 %>% 
   dplyr::left_join(dplyr::select(yr_0_90, diet_5cat, quant_90), by = "diet_5cat") %>% 
@@ -67,8 +69,8 @@ traj <- ggplot(chng, aes(x = yr, y = perc_med, colour = diet_5cat)) +
   geom_ribbon(aes(ymin = perc_low_50, ymax = perc_upp_50, fill = diet_5cat), alpha = 0.6, colour = NA) +
   scale_x_continuous(name = "Years in future", expand = c(0, 0)) +
   scale_y_continuous(name = "Percent change in median mass", limits = c(-max_val, max_val)) +
-  scale_colour_manual(values = c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025")) +
-  scale_fill_manual(values = c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025")) +
+  scale_colour_manual(values = colors4) +
+  scale_fill_manual(values = colors4) +
   theme(legend.title = element_blank(),
         legend.position = "none",
         panel.spacing = unit(1.5, "lines"))
@@ -89,8 +91,8 @@ traj_90 <- ggplot(chng_90, aes(x = yr, y = perc_med, colour = diet_5cat)) +
   geom_ribbon(aes(ymin = perc_low_50, ymax = perc_upp_50, fill = diet_5cat), alpha = 0.6, colour = NA) +
   scale_x_continuous(name = "Years in future", expand = c(0, 0)) +
   scale_y_continuous(name = expression(paste("Percent change in  ", 90^'th', " quantile mass")), limits = c(-max_val, max_val)) +
-  scale_colour_manual(values = c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025")) +
-  scale_fill_manual(values = c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025")) +
+  scale_colour_manual(values = colors4) +
+  scale_fill_manual(values = colors4) +
   theme(legend.title = element_blank(),
         legend.position = "none",
         panel.spacing = unit(1.5, "lines"),
@@ -102,5 +104,10 @@ traj_buff_90 <- cowplot::plot_grid(traj_90, NULL, nrow = 1, rel_widths = c(1, 0.
 
 # save plot
 cowplot::save_plot("../figures/fig_5B.pdf", traj_buff_90, base_height = 4, base_width = 9.1, dpi = 600)
+
+# save plot of A and B
+ggsave("../figures/fig_5AB.pdf", traj / traj_90, dpi = 600, height = 8, width = 9)
+
+
 
 
