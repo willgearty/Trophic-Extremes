@@ -67,8 +67,8 @@ traj <- ggplot(chng, aes(x = yr, y = perc_med, colour = diet_5cat)) +
   geom_ribbon(aes(ymin = perc_low_50, ymax = perc_upp_50, fill = diet_5cat), alpha = 0.6, colour = NA) +
   scale_x_continuous(name = "Years in future", expand = c(0, 0)) +
   scale_y_continuous(name = "Percent change in median mass", limits = c(-max_val, max_val)) +
-  scale_colour_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
+  scale_colour_manual(values = c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025")) +
+  scale_fill_manual(values = c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025")) +
   theme(legend.title = element_blank(),
         legend.position = "none",
         panel.spacing = unit(1.5, "lines"))
@@ -89,8 +89,8 @@ traj_90 <- ggplot(chng_90, aes(x = yr, y = perc_med, colour = diet_5cat)) +
   geom_ribbon(aes(ymin = perc_low_50, ymax = perc_upp_50, fill = diet_5cat), alpha = 0.6, colour = NA) +
   scale_x_continuous(name = "Years in future", expand = c(0, 0)) +
   scale_y_continuous(name = expression(paste("Percent change in  ", 90^'th', " quantile mass")), limits = c(-max_val, max_val)) +
-  scale_colour_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
-  scale_fill_manual(values = c("#359B73", "#2271B2", "#FFAC3B", "#CD022D")) +
+  scale_colour_manual(values = c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025")) +
+  scale_fill_manual(values = c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025")) +
   theme(legend.title = element_blank(),
         legend.position = "none",
         panel.spacing = unit(1.5, "lines"),
