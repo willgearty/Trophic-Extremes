@@ -336,10 +336,10 @@ boxplot_theme_tax <- function(base_size = 16) {
 
 # phylopics
 uuids <- c("Mammals (terrestrial)" = "62398ac0-f0c3-48f8-8455-53512a05fbc4", #Loxodonta africana
-           "Mammals (marine)" = "41a350a0-a19c-41ed-a85e-47e6b4ba7da4", #Steno bredanensis
+           "Mammals (marine)" = "d88fc903-0deb-4b78-b2fd-7c15d206d3f9", #Trichechus senegalensis
            "Birds (terrestrial)" = "416ec8c6-0ed1-4c9f-b4a4-8c1ef6496e84", #Turnix sylvaticus
            "Birds (marine)" = "21c50828-58d8-42df-9219-2c1b0fb57c99", #Aptenodytes patagonicus
-           "Reptile" = "83053aee-0f56-4cf3-bbfa-9207e6f13f46", #Ardeosaurus brevipes
+           "Reptiles" = "ce6a78bc-3ef1-4d60-ab40-113eb84c7802", #Varanus komodoensis
            "Fishes" = "7413aa3a-d736-435a-8635-0c316ff73f26", #Salmoninae
            "Amphibian" = "4679516b-405b-444f-974d-9775876716e2" #Hyloidea
 )
@@ -368,6 +368,7 @@ getPhyloPic <- function(x){
 phylopics <- lapply(uuids, getPhyloPic)
 #make them all face to the right
 phylopics[[1]] <- flip(phylopics[[1]], horizontal = TRUE)
+phylopics[[2]] <- flip(phylopics[[2]], horizontal = TRUE)
 phylopics[[3]] <- flip(phylopics[[3]], horizontal = TRUE)
 phylopics[[4]] <- flip(phylopics[[4]], horizontal = TRUE)
 phylopics[[5]] <- flip(phylopics[[5]], horizontal = TRUE)
@@ -499,7 +500,7 @@ mr <- marine_mam %>%
   geom_text(data = mr_sum, aes(y = 19.9, label = mr_n), size = 7, fontface = "bold") +
   annotate("text", label = mr_stars, x = seq(1.5, 3.5), y = 0, size = 8, colour = "black") +
   geom_shadowtext(data = mr_90, aes(label = stars), x = seq(1.5, 3.5), y = 18.4, size = 7.5, colour = "white", inherit.aes = FALSE) +
-  annotation_custom(phylopics[[2]], 3.8, 4.6, ymin = -.5, ymax = 2.5) +
+  annotation_custom(phylopics[[2]], 3.9, 4.7, ymin = -.5, ymax = 3) +
   scale_fill_manual(values = colors4, drop = FALSE) +
   scale_x_discrete(NULL, drop = FALSE) +
   scale_y_continuous(name = "Mass (kg)",

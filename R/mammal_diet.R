@@ -123,13 +123,13 @@ mamm_diet_clean <- mamm_diet %>%
 colors4 <- setNames(c("#359B73", "#7d22b2", "#FFAC3B", "#ad0025"), c("herbivore", "omnivore", "invertivore", "carnivore"))
 
 #phylopics
-uuids <- c("Early Cretaceous" = "c579200d-9773-4fe7-a4e1-274fdd5f4507", #Multituberculata
-           "Late Cretaceous" = "91324e57-b3f1-42e0-abe3-43e5bc8aa4c6", #Didelphimorphia
-           "Paleocene" = "a533b65b-ead2-4360-b613-f9f94294bf93", #Hyaenodon
+uuids <- c("Early Cretaceous" = "b8eda501-71d6-4d26-8c9e-731baedd27b2", #Sinodelphys szalayi
+           "Late Cretaceous" = "a6cb4e81-e204-42b4-b9e7-ad2ecd377305", #Adalatherium hui
+           "Paleocene" = "05a96450-6166-4dee-9805-9d460c599837", #Phenacodus
            "Eocene" = "5fe1c8ef-f7c4-47ff-9cc0-b528107fde98", #Uintatherium
            "Oligocene" = "20521c21-a8c9-4d2b-bcbd-86f63c683fe8", #Hoplophoneus
            "Miocene" = "5d4a8a6f-7564-45b0-ac31-ce2eab6f5b24", #Gomphotherium
-           "Pliocene" = "f98f3e0f-abc8-4e8f-a812-67bfe312a276", #Glyptotherium
+           "Pliocene" = "eba11ec7-30b6-4cda-bc1f-1dcc58d2c228", #Equus simplicidens
            "Pleistocene" = "cc04733f-befe-4fbc-948c-9cfd9180c90f", #Smilodon
            "Holocene" = "62398ac0-f0c3-48f8-8455-53512a05fbc4" #Loxodonta
            )
@@ -165,6 +165,7 @@ phylopics[[2]] <- flip(phylopics[[2]], horizontal = TRUE)
 phylopics[[4]] <- flip(phylopics[[4]], horizontal = TRUE)
 phylopics[[5]] <- flip(phylopics[[5]], horizontal = TRUE)
 phylopics[[6]] <- flip(phylopics[[6]], horizontal = TRUE)
+phylopics[[7]] <- flip(phylopics[[7]], horizontal = TRUE)
 phylopics[[8]] <- flip(phylopics[[8]], horizontal = TRUE)
 phylopics[[9]] <- flip(phylopics[[9]], horizontal = TRUE)
 
@@ -196,6 +197,7 @@ mamm_stars <- stars.pval(p.adjust(diag(mamm_p$p.value)[sort(c(seq(1, 33, 4), seq
 mamm_stars[mamm_stars == "."] <- " "
 
 #permutation tests for 90th quantiles
+set.seed(1234)
 pt90 <- do.call(rbind, lapply(1:n_bins, function(x) {
   df <- pairwisePercentileTest(lnMass_g ~ Recoded_Diet, data = subset(mamm_per_bin, bin_num == x),
                                test = "percentile", tau = 0.90, r = 5000, digits = 7)[c(1,4,6), 1:2]
@@ -225,9 +227,9 @@ gg <- ggplot(mamm_per_bin %>% group_by(bin, Recoded_Diet) %>% filter(Recoded_Die
         panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
         legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA),
         legend.key.size = unit(2, "lines"), legend.text = element_text(size = 24)) +
-  annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = -2.75, ymax = -1.25) +
-  annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = -2.75, ymax = -1.25) +
-  annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = -2.75, ymax = -1.25) +
+  annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = -2.65, ymax = -2.15) +
+  annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = -2.65, ymax = -1.85) +
+  annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = -2.80, ymax = -1.50) +
   annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = -2.75, ymax = -1.25) +
   annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = -2.75, ymax = -1.25) +
   annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = -2.75, ymax = -1.25) +
@@ -613,13 +615,13 @@ diet_stats$max_mech <- c("Low Quality\nPlant\nAvailability", "High Quality\nPlan
 
 #phylopics
 uuids2 <- c("Smallest Carnivore" = "20b6096e-2d6d-43c4-acda-fd74f0f91d48", #Mustela nivalis
-           "Largest Carnivore" = "8d4b7834-9dd3-4f5a-84a7-99fa159a112a", #Arctodus simus
-           "Smallest Invertivore" = "822c549b-b29b-47eb-9fe3-dc5bbb0abccb", #Soricidae
-           "Largest Invertivore" = "cad2eeb5-7827-4b3d-b406-e20864a71637", #Pampatherium
-           "Smallest Omnivore" = "81930c02-5f26-43f7-9c19-e9831e780e53", #Sigmodontinae
-           "Largest Omnivore" = "0cd82109-bb1c-4e08-ab11-c845d8a82eba", #Ursus arctos
-           "Smallest Herbivore" = "92989e35-4e68-4a2d-b3a2-191ba9da671a", #Mus
-           "Largest Herbivore" = "43d2a4af-991c-4236-8455-f62271ab73e7" #Mammuthus
+            "Largest Carnivore" = "8d4b7834-9dd3-4f5a-84a7-99fa159a112a", #Arctodus simus
+            "Smallest Invertivore" = "822c549b-b29b-47eb-9fe3-dc5bbb0abccb", #Soricidae
+            "Largest Invertivore" = "e1c1157a-6d13-49d8-9932-e4794e4fb001", #Holmesina (representing Pampatherium)
+            "Smallest Omnivore" = "81930c02-5f26-43f7-9c19-e9831e780e53", #Sigmodontinae
+            "Largest Omnivore" = "0cd82109-bb1c-4e08-ab11-c845d8a82eba", #Ursus arctos
+            "Smallest Herbivore" = "92989e35-4e68-4a2d-b3a2-191ba9da671a", #Mus
+            "Largest Herbivore" = "3866663c-e4ac-426f-b1cc-0f73955d0ed6" #Mammuthus columbi
 )
 
 phylopics2 <- lapply(uuids2, getPhyloPic)
@@ -627,6 +629,7 @@ phylopics2 <- lapply(uuids2, getPhyloPic)
 #make them all face to the right
 phylopics2[[2]] <- flip(phylopics2[[2]], horizontal = TRUE)
 phylopics2[[3]] <- flip(phylopics2[[3]], horizontal = TRUE)
+phylopics2[[4]] <- flip(phylopics2[[4]], horizontal = TRUE)
 phylopics2[[5]] <- flip(phylopics2[[5]], horizontal = TRUE)
 phylopics2[[6]] <- flip(phylopics2[[6]], horizontal = TRUE)
 #make the mouse black
@@ -635,7 +638,6 @@ phylopics2[[7]]@paths <- lapply(phylopics2[[7]]@paths,
                                   x@rgb <- "#000000"
                                   return(x)
                                 })
-phylopics2[[8]] <- flip(phylopics2[[8]], horizontal = TRUE)
 
 phylopics2 <- lapply(phylopics2, pictureGrob)
 
@@ -677,7 +679,7 @@ ggplot(mom_stats) +
   annotation_custom(phylopics2[[1]], 3.1, 3.7, ymin = 3.8, ymax = 4.2) + #3.85
   annotation_custom(phylopics2[[2]], 13.25, 14.75, ymin = 3.7, ymax = 4.3) + #13.5
   annotation_custom(phylopics2[[3]], -0.19, .41, ymin = 2.8, ymax = 3.2) + #0.560
-  annotation_custom(phylopics2[[4]], 11.85, 13.35, ymin = 2.6, ymax = 3.4) + #12.2
+  annotation_custom(phylopics2[[4]], 12.15, 13.2, ymin = 2.6, ymax = 3.4) + #12.2
   annotation_custom(phylopics2[[5]], .7, 1.4, ymin = 1.8, ymax = 2.2) + #1.55
   annotation_custom(phylopics2[[6]], 12.05, 13.55, ymin = 1.7, ymax = 2.3) + #12.3
   annotation_custom(phylopics2[[7]], 0.62, 1.22, ymin = 0.8, ymax = 1.2) + #1.37
