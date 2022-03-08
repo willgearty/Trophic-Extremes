@@ -510,9 +510,9 @@ diet_bootstrap$bin_num <- as.numeric(diet_bootstrap$bin)
           panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
           legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
     scale_fill_manual(name = NULL, values = colors4) +
-    annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = .9, ymax = 1.9) +
+    annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = 1.1, ymax = 1.4) +
+    annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = 1.1, ymax = 1.5) +
+    annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = .9, ymax = 1.8) +
     annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = .9, ymax = 1.9) +
     annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = .9, ymax = 1.9) +
     annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = .9, ymax = 1.9) +
@@ -545,15 +545,15 @@ ggsave("../figures/Mammal Diets Bootstrap Means Boxplots.pdf", geo_plot, device 
           panel.border = element_rect(color = "black", fill = NA, size = 1.5), axis.line = element_blank(),
           legend.position = c(.5,.97), legend.direction = "horizontal", legend.background = element_rect(color = NA, fill = NA)) +
     scale_color_manual(name = NULL, values = colors4) +
-    annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[7]], 6.55, 7.45, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[8]], 7.55, 8.45, ymin = .9, ymax = 1.9) +
-    annotation_custom(phylopics[[9]], 8.55, 9.45, ymin = .9, ymax = 1.9))
+   annotation_custom(phylopics[[1]], 1.45, 0.55, ymin = 1.1, ymax = 1.4) +
+   annotation_custom(phylopics[[2]], 1.55, 2.45, ymin = 1.1, ymax = 1.5) +
+   annotation_custom(phylopics[[3]], 2.55, 3.45, ymin = .9, ymax = 1.8) +
+   annotation_custom(phylopics[[4]], 3.55, 4.45, ymin = .9, ymax = 1.9) +
+   annotation_custom(phylopics[[5]], 4.55, 5.45, ymin = .9, ymax = 1.9) +
+   annotation_custom(phylopics[[6]], 5.55, 6.45, ymin = .9, ymax = 1.9) +
+   annotation_custom(phylopics[[7]], 6.55, 7.45, ymin = .9, ymax = 1.9) +
+   annotation_custom(phylopics[[8]], 7.55, 8.45, ymin = .9, ymax = 1.9) +
+   annotation_custom(phylopics[[9]], 8.55, 9.45, ymin = .9, ymax = 1.9))
 discrete_periods <- periods
 discrete_periods$max_age[1:4] <- c(2, 4, 7, 9)
 discrete_periods$min_age[1:4] <- c(0, 2, 4, 7)
