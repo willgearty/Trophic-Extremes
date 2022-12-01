@@ -1,7 +1,7 @@
 This repository contains the required R code and data files to produce most of the analyses and plots in:  
-‘Humans are disrupting a longstanding trophic-size structure in vertebrates’   
-Robert S. C. Cooke and William Gearty, Abbie S. A. Chapman, Jillian Dunic, Graham J. Edgar, Jonathan S. Lefcheck, Gil Rilov, Craig R. McClain, Rick D. Stuart-Smith, S. Kathleen Lyons, and Amanda E. Bates  
-Nature Ecology & Evolution (in revision)
+‘Anthropogenic disruptions to longstanding patterns of trophic-size structure in vertebrates’   
+Rob Cooke and William Gearty, Abbie S. A. Chapman, Jillian Dunic, Graham J. Edgar, Jonathan S. Lefcheck, Gil Rilov, Craig R. McClain, Rick D. Stuart-Smith, S. Kathleen Lyons, and Amanda E. Bates  
+Nature Ecology & Evolution (2022) https://www.nature.com/articles/s41559-022-01726-x
   
 Before running these R scripts, we suggest that you download this folder and set the `R` folder as your R working directory. Required data files should then load when called in each script, and plot files will save within the `figures` folder.
 
