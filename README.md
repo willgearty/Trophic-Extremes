@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/261262999.svg)](https://zenodo.org/badge/latestdoi/261262999)
+
 This repository contains the required R code and data files to produce most of the analyses and plots in:  
 ‘Anthropogenic disruptions to longstanding patterns of trophic-size structure in vertebrates’   
 Rob Cooke and William Gearty, Abbie S. A. Chapman, Jillian Dunic, Graham J. Edgar, Jonathan S. Lefcheck, Gil Rilov, Craig R. McClain, Rick D. Stuart-Smith, S. Kathleen Lyons, and Amanda E. Bates  
